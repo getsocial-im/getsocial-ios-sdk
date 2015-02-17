@@ -59,7 +59,7 @@ To manage the integration of the GetSocial SDK, [login to your developer account
   * [Specifying colors](#specifying-colors)
   * [Specifying images](#specifying-images)
   * [Specifying dimensions](#specifying-dimensions)
-  * [Specifying text styles](#specifying-text-style)
+  * [Specifying text styles](#specifying-text-styles)
   * [Using custom fonts](#using-custom-fonts)
   * [UI Reference Table](#ui-reference-table)
 
@@ -241,7 +241,8 @@ Showing activities for your game is quite easy
 
 
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities];
 
 ```
 
@@ -251,7 +252,8 @@ You can also pass a NSDictionary as second argument to specify additional proper
 
 
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialTitle:@"Level 1"}];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialTitle:@"Level 1"}];
 
 ```
 
@@ -269,37 +271,48 @@ Chat is integrated into your game the moment you integrate the GetSocial SDK. Ev
 
 You can link to the chat views that enable your users to view their active conversations and also start new conversations with their friends.
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeChat];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeChat];
 ```
+
 
 You can also directly open a chat conversation from user’s avatar within the game using their User ID on supported Social Providers.
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialProvider:@"facebook", kGetSocialUserID:@"0123456789"}];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialProvider:@"facebook", kGetSocialUserID:@"0123456789"}];
 ```
+
 
 
 # Smart Invites
 
 Using Smart Invites users can easily invite their friends to join and play the game. To open the smart invite view you should call:
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeSmartInvite];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeSmartInvite];
 ```
+
 
 You will see several options to invite friends, depending on what applications you have currently installed on your and which providers you enabled on the GetSocial Developer Portal.
 
 
 # Notification Center
 
-Activity feed and Chat features are incomplete without having the Notification Center  that provides in-app notifications to users when someone likes or comments on their activities or when they receive chat messages. 
+Activity feed and Chat features are incomplete without having the Notification Center that provides in-app notifications to users when someone likes or comments on their activities or when they receive chat messages. 
 
-```objectivec[[GetSocialSDK sharedInstance] open:GetSocialViewTypeNotifications];
+```objectivec
+[[GetSocialSDK sharedInstance] open:GetSocialViewTypeNotifications];
 ```
+
 
 It is highly recommended that you link this to a UI element with a notifications count badge. The SDK provides a block that allows getting count of the unread chats and activity notifications.
 
-```objectivec[[GetSocialSDK sharedInstance] setOnNotificationsChangedHandler:^(NSInteger unreadNotificationsCount, NSInteger unreadConversationsCount) {
+```objectivec
+[[GetSocialSDK sharedInstance] setOnNotificationsChangedHandler:^(NSInteger unreadNotificationsCount, NSInteger unreadConversationsCount) {
    //code to handle changes on Notifications/Conversations counts 
-}];```
+}];
+```
+
 # 
 # Push Notifications
 
@@ -312,15 +325,20 @@ You don't need to add any code to your game as GetSocial handles everything inte
 
 
 
+
 # User Authentication
 # 
 GetSocial SDK needs to integrate with the Game login to enable chat, posting activities, comments, liking activities and install attribution. 
 
 Whenever a user performs an action that requires login, the SDK calls the login request handler which allows the game to show it’s own login UI.
 # 
-```objectivec[[GetSocialSDK sharedInstance] setOnLoginRequestHandler: ^void() {
+
+```objectivec
+[[GetSocialSDK sharedInstance] setOnLoginRequestHandler: ^void() {
     // Show Game login UI
-}];```
+}];
+```
+
 # 
 # 
 # 
@@ -329,11 +347,13 @@ Whenever a user performs an action that requires login, the SDK calls the login 
 The GetSocial SDK can easily interact with the Facebook social features using one of the latest versions of the Facebook SDK.
 
 Make sure you follow the [Facebook SDK integration for iOS](https://developers.facebook.com/docs/ios/getting-started).
+
 ## User Authentication
 
 Whenever a user performs an action that requires login, the SDK calls the login request handler which allows the game to show the FB Login UI. You could use FB default UI or implement your own.
 
-```objectivec[[GetSocialSDK sharedInstance] setOnLoginRequestHandler:^{
+```objectivec
+[[GetSocialSDK sharedInstance] setOnLoginRequestHandler:^{
         [self loginWithFacebook];
 }];
 
@@ -346,11 +366,13 @@ Whenever a user performs an action that requires login, the SDK calls the login 
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                         [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
                                   }];
-}```
+}
+```
 
 If you are using the FBLoginView, you need to also implement the FBLoginViewDelegate to get the state changes and sync the GetSocialSDK.
 
-```objectivec- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
+```objectivec
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
     [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
 }
@@ -363,9 +385,11 @@ If you are using the FBLoginView, you need to also implement the FBLoginViewDele
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
     [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
-}```
+}
+```
 
 If you are not using the FBLoginView, make sure you call `[[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];` whenever you receive an update of the state of the FB active session.
+
 
 ## Smart Invites
 
@@ -378,7 +402,9 @@ GetSocialSDKFacebookInvitePlugin* fbInvitePlugin = [[GetSocialSDKFacebookInviteP
 id __weak weakSelf = self;
 fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
     
-[[GetSocialSDK sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];```
+[[GetSocialSDK sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
+```
+
 
 
 The `loginWithFacebook` method is the same you use to authenticate users with Facebook and we explained before and it is required to be able to authenticate users with Facebook before showing the invite UI.
@@ -398,9 +424,11 @@ You are able to customize the GetSocial SDK to match the look and feel of your g
 
 ## Getting the current Configuration
 
-```objectivecGetSocialSDKConfiguration* config = [GetSocialSDK sharedInstance].configuration;
+```objectivec
+GetSocialSDKConfiguration* config = [GetSocialSDK sharedInstance].configuration;
 
 ```
+
 
 
 
@@ -408,11 +436,13 @@ You are able to customize the GetSocial SDK to match the look and feel of your g
 
 ## Specifying window width and height
 
-```objectivec[config setPreferredWindowWidth:320];
+```objectivec
+[config setPreferredWindowWidth:320];
 
 [config setPreferredWindowHeight:400];
 
 ```
+
 
 
 
@@ -428,8 +458,10 @@ If you are also setting a background image, then you don’t need to specify bot
 
 The GetSocial UI can be scaled on different sized devices in 2 primary ways:
 
-* **Pixel Perfect** : The UI elements, fonts and margins do not scale depending on the size of the GetSocial UI or device screen. For instance, everything inside the GetSocial UI is the same size on an iPhone 5S, an iPhone 6 Plus or an iPad.NOTE: This is the default mode.
-* **Fixed Ratio** : The UI elements, fonts and margins scale based on the width of the GetSocial UI. For instance, on an iPad with a 600 point wide window, everything looks twice as big as it would on an iPhone with a 300 point wide window. NOTE: Since the UI scales are based on the width, if your preferred GetSocial UI window width is wider in landscape, everything would look bigger in landscape.
+* **Pixel Perfect** : The UI elements, fonts and margins do not scale depending on the size of the GetSocial UI or device screen. For instance, everything inside the GetSocial UI is the same size on an iPhone 5S, an iPhone 6 Plus or an iPad.
+NOTE: This is the default mode.
+* **Fixed Ratio** : The UI elements, fonts and margins scale based on the width of the GetSocial UI. For instance, on an iPad with a 600 point wide window, everything looks twice as big as it would on an iPhone with a 300 point wide window. 
+NOTE: Since the UI scales are based on the width, if your preferred GetSocial UI window width is wider in landscape, everything would look bigger in landscape.
 
 
 
@@ -437,7 +469,8 @@ The scale mode can be set as follows:
 
 
 
-```objectivec[config setScaleMode:GetSocialScaleModePixelPerfect];
+```objectivec
+[config setScaleMode:GetSocialScaleModePixelPerfect];
 
 [config setScaleMode:GetSocialScaleModeFixedRatio];
 
@@ -447,15 +480,18 @@ The scale mode can be set as follows:
 
 
 
+
 Irrespective of the scaling mode, the UI elements, fonts and margins can be scaled up or down by scale factor. The scale factor only affects the contents of the GetSocial UI and not it’s size.
 
 
 
-```objectivec[config setScaleFactor:2.0f];
+```objectivec
+[config setScaleFactor:2.0f];
 
 // scaleFactor 2.0 means everything will be twice as big as the default scale
 
 ```
+
 
 
 
@@ -469,21 +505,24 @@ The scale mode and factor can be used conditionally to create different styles b
 For instance, if you like the Pixel Perfect mode but the fonts and margins look too small on iPads, you can add a conditional scale factor for iPad as follows:
 
 
-
-```objectivecif ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+```objectivec
+if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 {
-    [config setScaleFactor:2.0f];
-}```
+   [config setScaleFactor:2.0f];
+}
+```
+
+
 
 ## Specifying the animation
 
 
-
 ```objectivec
-
 [[GetSocialSDK sharedInstance] setAnimationStyle:GetSocialAnimationStyleFade forElementID:Property.WINDOW];
 
 ```
+
+
 
 The available animations styles are:
 
@@ -501,14 +540,6 @@ Need a custom animation style? Please [contact us](mailto:info@getsocial.im).
 
 
 
-```objectivecGetSocialSDKConfiguration* config = [GetSocialSDK sharedInstance].configuration;
-
-```
-
-
-
-
-
 ## Specifying colors
 
 You can specify colors for backgrounds and borders. Please refer to the Property table to see which ones can be changed. 
@@ -516,8 +547,10 @@ You can specify colors for backgrounds and borders. Please refer to the Property
 
 
 ```objectivec
+[config setColor:[UIColor redColor] forElementID:Property.HEADER];
 
-[config setColor:[UIColor redColor] forElementID:Property.HEADER];```
+```
+
 
 
 
@@ -530,7 +563,6 @@ You can specify images for several elements. Please refer to the Property table 
 
 
 ```objectivec
-
 [config setImagePath:[[NSBundle mainBundle] pathForResource:@"window" ofType:@"png"] forElementID:Property.WINDOW];
 
 ```
@@ -540,18 +572,15 @@ You can specify images for several elements. Please refer to the Property table 
 You also have the option to replace the images inside the GetSocialSDK.bundle directly to avoid including the default images in your final build. If you decide to do this, make sure that you replace files with the same name, extension and resolution.
 
 
-
-
-
-
-
 If your images are located in the same folder, you can set a base path:
 
 
 
-```objectivec[config setBasePathForImages:[[NSBundle mainBundle] resourcePath]];
+```objectivec
+[config setBasePathForImages:[[NSBundle mainBundle] resourcePath]];
 
 ```
+
 
 
 
@@ -561,9 +590,11 @@ If your images are located in the same folder, you can set a base path:
 
 
 
-```objectivec[config setDimension:38 forElementID:Property.HEADER];
+```objectivec
+[config setDimension:38 forElementID:Property.HEADER];
 
 ```
+
 
 
 
@@ -573,7 +604,10 @@ If your images are located in the same folder, you can set a base path:
 
 
 
-```objectivec[config setTextStyle:[UIFont fontWithName:@"HelveticaNeue" size:26] fontColor:[UIColor blackColor] strokeColor:[UIColor whiteColor] strokeSize:5.0f strokeOffset:CGSizeMake(0, 1) forElementID:Property.HEADER];```
+```objectivec
+[config setTextStyle:[UIFont fontWithName:@"HelveticaNeue" size:26] fontColor:[UIColor blackColor] strokeColor:[UIColor whiteColor] strokeSize:5.0f strokeOffset:CGSizeMake(0, 1) forElementID:Property.HEADER];
+```
+
 
 
 
@@ -595,6 +629,7 @@ You can use custom fonts if they are correctly added as Resources in your applic
 
 
 
+
 # UI Reference Table
 
 
@@ -605,7 +640,7 @@ You can use custom fonts if they are correctly added as Resources in your applic
 | <sub>1                                    </sub>| <sub>TITLE_MARGIN_TOP                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
 | <sub>2                                    </sub>| <sub>HEADER                               </sub>| <sub>X                                    </sub>| <sub>X                                    </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
 | <sub>3                                    </sub>| <sub>FLOAT                                </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub>| <sub>                                     </sub> |
-| <sub>4                                    </sub>| <sub>HINT                                 </sub>| <sub>X                                    </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub> |
+| <sub>4                                    </sub>| <sub>HINT                                 </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub>| <sub>                                     </sub> |
 | <sub>5                                    </sub>| <sub>AVATAR_BORDER_SIZE                   </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
 | <sub>6                                    </sub>| <sub>AVATAR_BORDER_COLOR                  </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub>| <sub>                                     </sub> |
 | <sub>7                                    </sub>| <sub>AVATAR_RADIUS                        </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
