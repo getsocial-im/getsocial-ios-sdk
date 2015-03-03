@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import <GetSocialSDK/GetSocialSDK.h>
-#import "GetSocialSDKFacebookUtils.h"
-#import "GetSocialSDKFacebookInvitePlugin.h"
+#import <GetSocial/GetSocial.h>
+#import "GetSocialFacebookUtils.h"
+#import "GetSocialFacebookInvitePlugin.h"
 
 @implementation ViewController
 
@@ -18,25 +18,25 @@
     [super viewDidLoad];
     
     //Register FBInvitePlugin
-    GetSocialSDKFacebookInvitePlugin* fbInvitePlugin = [[GetSocialSDKFacebookInvitePlugin alloc] init];
+    GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
     
     id __weak weakSelf = self;
     fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
     
-    [[GetSocialSDK sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
+    [[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
     
     //Register FBInvitePlugin
-    [[GetSocialSDK sharedInstance] setOnLoginRequestHandler:^{
+    [[GetSocial sharedInstance] setOnLoginRequestHandler:^{
         [self loginWithFacebook];
     }];
 
     [self showVersionNumber];
     
     //set current user language
-    [[GetSocialSDK sharedInstance] setLanguage:@"en"];
+    [[GetSocial sharedInstance] setLanguage:@"en"];
     
     //set up the FB Login View
-    self.loginView.readPermissions = kGetSocialSDKAuthPermissionsFacebook;
+    self.loginView.readPermissions = kGetSocialAuthPermissionsFacebook;
     self.loginView.frame = CGRectMake((self.view.frame.size.width - CGRectGetWidth(self.loginView.frame)) / 2, 20, CGRectGetWidth(self.loginView.frame), CGRectGetHeight(self.loginView.frame));
     self.loginView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     self.loginView.loginBehavior = FBSessionLoginBehaviorWithFallbackToWebView;
@@ -48,7 +48,7 @@
     self.versionLabel.text = [NSString stringWithFormat:@"%@ v%@ / SDK v%@",
                               [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"],
                               [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"],
-                              [GetSocialSDK sharedInstance].sdkVersion];
+                              [GetSocial sharedInstance].sdkVersion];
     
     self.versionLabel.layer.zPosition = 999999;
 }
@@ -62,47 +62,47 @@
 
 - (IBAction)onShowActivities:(id)sender
 {
-    [[GetSocialSDK sharedInstance] open:GetSocialSDKViewTypeActivities];
+    [[GetSocial sharedInstance] open:GetSocialViewTypeActivities];
 }
 
 - (IBAction)onShowIsolatedActivities:(id)sender
 {
-    [[GetSocialSDK sharedInstance] open:GetSocialSDKViewTypeActivities withProperties:@{kGetSocialSDKActivityTags:@[@"tag1"],kGetSocialSDKActivityGroup:@"group1"}];
+    [[GetSocial sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialActivityTags:@[@"tag1"],kGetSocialActivityGroup:@"group1"}];
 }
 
 - (IBAction)onShowAllNotifications:(id)sender
 {
-    [[GetSocialSDK sharedInstance] open:GetSocialSDKViewTypeNotifications];
+    [[GetSocial sharedInstance] open:GetSocialViewTypeNotifications];
 }
 
 -(IBAction)onSmartInvite:(id)sender
 {
-    [[GetSocialSDK sharedInstance] open:GetSocialSDKViewTypeSmartInvite];
+    [[GetSocial sharedInstance] open:GetSocialViewTypeSmartInvite];
 }
 
 #pragma mark - Facebook Integration
 - (void)loginWithFacebook
 {
-    [FBSession openActiveSessionWithReadPermissions:kGetSocialSDKAuthPermissionsFacebook
+    [FBSession openActiveSessionWithReadPermissions:kGetSocialAuthPermissionsFacebook
                                        allowLoginUI:YES
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                                      [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+                                      [[GetSocialFacebookUtils sharedInstance] updateSessionState];
                                   }];
 }
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
-    [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
 {
-    [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
-    [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialSDKUserAuthState Constants Reference</title>
+	<title>GetSocialInviteFriendsStatus Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -14,7 +14,7 @@
 		<div class="container" class="hide-in-xcode">
 			
 			<h1 id="library-title">
-				<a href="../index.html">GetSocialSDK </a>
+				<a href="../index.html">GetSocial </a>
 			</h1>
 
 			<p id="developer-home">
@@ -59,13 +59,13 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialSDKUserAuthState Constants Reference</h1>
+					<h1 class="title">GetSocialInviteFriendsStatus Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<th>Declared in</th>
-	<td>GetSocialSDKAuthState.h</td>
+	<td>GetSocialConstants.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -75,11 +75,11 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">GetSocialSDKUserAuthState</h3>
+                    <h3 class="subsubtitle method-title">GetSocialInviteFriendsStatus</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Describes a authentication state of the user.</p>
+                        <p>Constants for the Invite friends listener</p>
 					</div>
 					
 					
@@ -87,15 +87,11 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, GetSocialSDKUserAuthState ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, GetSocialInviteFriendsStatus ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialSDKUserAuthStateUnidentified</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialInviteFriendsStatusSent</a> = 1,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialSDKUserAuthStateVerifying</a>,<br>
-                            
-                            &nbsp;&nbsp; <a href="">GetSocialSDKUserAuthStateVerified</a>,<br>
-                            
-                            &nbsp;&nbsp; <a href="">GetSocialSDKUserAuthStateClearing</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialInviteFriendsStatusIntent</a> = 2,<br>
                             
                             };</code>
                     
@@ -105,11 +101,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="GetSocialSDKUserAuthStateUnidentified"></a><code>GetSocialSDKUserAuthStateUnidentified</code></dt>
+                            <dt><a name="" title="GetSocialInviteFriendsStatusSent"></a><code>GetSocialInviteFriendsStatusSent</code></dt>
 <dd>
 
 
-<p>The user is not identified.</p>
+<p>Invite is sent</p>
 
 
 
@@ -117,16 +113,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialSDKUserAuthStateVerifying"></a><code>GetSocialSDKUserAuthStateVerifying</code></dt>
+                            <dt><a name="" title="GetSocialInviteFriendsStatusIntent"></a><code>GetSocialInviteFriendsStatusIntent</code></dt>
 <dd>
 
 
-<p>There is some process active trying to verify the user&rsquo;s identity.</p>
+<p>Invite is created but there is no information if it is sent</p>
 
 
 
@@ -134,41 +130,7 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKAuthState.h</code>.
-	</p>
-	
-</dd>
-                            
-                            <dt><a name="" title="GetSocialSDKUserAuthStateVerified"></a><code>GetSocialSDKUserAuthStateVerified</code></dt>
-<dd>
-
-
-<p>The user&rsquo;s identity has been successfully verified.</p>
-
-
-
-
-
-    
-	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKAuthState.h</code>.
-	</p>
-	
-</dd>
-                            
-                            <dt><a name="" title="GetSocialSDKUserAuthStateClearing"></a><code>GetSocialSDKUserAuthStateClearing</code></dt>
-<dd>
-
-
-<p>The user&rsquo;s identity is being cleared out.</p>
-
-
-
-
-
-    
-	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
@@ -185,7 +147,7 @@
                     
                     <div class="method-subsection declared-in-section">
                         <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">GetSocialSDKAuthState.h</code></p>
+                        <p><code class="declared-in-ref">GetSocialConstants.h</code></p>
                     </div>
                     
                     
@@ -195,7 +157,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-02-12</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

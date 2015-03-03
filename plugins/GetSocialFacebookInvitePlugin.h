@@ -1,14 +1,14 @@
 //
-//  GetSocialSDKFacebookInvitePlugin.h
+//  GetSocialFacebookInvitePlugin.h
 //  testapp
 //
 //  Created by Demian Denker on 17/11/14.
 //  Copyright (c) 2014 GetSocial. All rights reserved.
 //
 
-#import <GetSocialSDK/GetSocialSDKInvitePlugin.h>
+#import <GetSocial/GetSocialInvitePlugin.h>
 
-@interface GetSocialSDKFacebookInvitePlugin : GetSocialSDKInvitePlugin
+@interface GetSocialFacebookInvitePlugin : GetSocialInvitePlugin
 
 @property (nonatomic, copy) void (^authenticateUserHandler)();
 

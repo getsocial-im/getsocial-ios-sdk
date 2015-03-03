@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialSDK Class Reference</title>
+	<title>GetSocial Class Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -14,7 +14,7 @@
 		<div class="container" class="hide-in-xcode">
 			
 			<h1 id="library-title">
-				<a href="../index.html">GetSocialSDK </a>
+				<a href="../index.html">GetSocial </a>
 			</h1>
 
 			<p id="developer-home">
@@ -61,6 +61,8 @@
 		<option value="//api/name/configuration">configuration</option>
 		
 		<option value="//api/name/isGameAuthenticated">isGameAuthenticated</option>
+		
+		<option value="//api/name/isUserAuthenticated">isUserAuthenticated</option>
 		
 		<option value="//api/name/language">language</option>
 		
@@ -112,9 +114,9 @@
 		
 		<option value="//api/name/setOnLoginRequestHandler:">- setOnLoginRequestHandler:</option>
 		
-		<option value="//api/name/setOnNotificationsChangedHandler:">- setOnNotificationsChangedHandler:</option>
+		<option value="//api/name/setOnNotificationsChangeHandler:">- setOnNotificationsChangeHandler:</option>
 		
-		<option value="//api/name/setOnOpenProfileHandler:">- setOnOpenProfileHandler:</option>
+		<option value="//api/name/setOnUserAvatarClickHandler:">- setOnUserAvatarClickHandler:</option>
 		
 		<option value="//api/name/setPurchaseActivityButtonPressedHandler:">- setPurchaseActivityButtonPressedHandler:</option>
 		
@@ -139,7 +141,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialSDK Class Reference</h1>
+					<h1 class="title">GetSocial Class Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -148,7 +150,7 @@
 	<td>NSObject</td>
 </tr><tr>
 	<th>Declared in</th>
-	<td>GetSocialSDK.h</td>
+	<td>GetSocial.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -158,7 +160,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>GetSocialSDK Singleton</p>
+						<p>GetSocial Singleton</p>
 					</div>
 					
 					
@@ -169,8 +171,8 @@
 						<a title="Tasks" name="tasks"></a>
 						
 
-						
-						
+						<a title="Singleton" name="task_Singleton"></a>
+						<h2 class="task-title">Singleton</h2>
 
 						<div class="task-list">
 							<div class="section-method">
@@ -185,7 +187,7 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Gets an instance of the GetSocialSDK</p>
+				<p>Gets an instance of the GetSocial</p>
 			</div>
 			
 		    
@@ -198,7 +200,7 @@
 			
 			<div class="method-subsection return">
 				<h4 class="method-subtitle parameter-title">Return Value</h4>
-				<p>GetSocialSDK instance</p>
+				<p>GetSocial instance</p>
 			</div>
 			
 
@@ -213,13 +215,21 @@
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Properties" name="task_Properties"></a>
+						<h2 class="task-title">Properties</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/language" title="language"></a>
 	<h3 class="method-title"><code><a href="#//api/name/language">&nbsp;&nbsp;language</a></code>
 </h3>
@@ -254,7 +264,7 @@
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -277,7 +287,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GetSocialSDKUser *authenticatedUser</code></div>
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GetSocialUserIdentity *authenticatedUser</code></div>
 
 		    
 			
@@ -285,7 +295,7 @@
 			
 			<div class="method-subsection return">
 				<h4 class="method-subtitle parameter-title">Return Value</h4>
-				<p><a href="../Classes/GetSocialSDKUser.html">GetSocialSDKUser</a> instance describing the user.
+				<p>GetSocialUser instance describing the user.
 nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</p>
 			</div>
 			
@@ -301,7 +311,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -319,7 +329,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Returns the currently game authentication status</p>
+				<p>Current game authentication status</p>
 			</div>
 			
 		    
@@ -342,7 +352,48 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isUserAuthenticated" title="isUserAuthenticated"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isUserAuthenticated">&nbsp;&nbsp;isUserAuthenticated</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Current user authentication status</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL isUserAuthenticated</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -365,7 +416,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) GetSocialSDKConfiguration *configuration</code></div>
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) GetSocialConfiguration *configuration</code></div>
 
 		    
 			
@@ -383,7 +434,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -399,13 +450,46 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 
 		<div class="method-info-container">
 			
+			
+			<div class="method-subsection brief-description">
+				<p>Version of the GetSocial SDK</p>
+			</div>
+			
+		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *sdkVersion</code></div>
 
 		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Game Authentication Methods" name="task_Game Authentication Methods"></a>
+						<h2 class="task-title">Game Authentication Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/authenticateGame:success:failure:" title="authenticateGame:success:failure:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/authenticateGame:success:failure:">&ndash;&nbsp;authenticateGame:success:failure:</a></code>
 </h3>
@@ -435,6 +519,16 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 						<td><p>Key of the game</p></td>
 					</tr>
 				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Block to be executed after the game is succesfully authenticated.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Block to be executed if the game was not succesfully authenticated.</p></td>
+					</tr>
+				
 				</table>
 			</div>
 			
@@ -452,13 +546,21 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Open UI" name="task_Open UI"></a>
+						<h2 class="task-title">Open UI</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/open:" title="open:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/open:">&ndash;&nbsp;open:</a></code>
 </h3>
@@ -475,7 +577,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)open:(GetSocialSDKViewType)<em>viewType</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)open:(GetSocialViewType)<em>viewType</em></code></div>
 
 		    
 			
@@ -505,7 +607,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -523,43 +625,50 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			
 			<div class="method-subsection brief-description">
-				<ul>
-<li>Opens the given view based on the provided properties.
-*</li>
-<li>@param viewType Type of view to open</li>
-<li>@param properties Dictionary that provides information about the specific page to be opened
-*</li>
-<li>Supported Properties:</li>
-<li>kGetSocialUserID: Open GetSocialSDKViewTypeProfile, GetSocialSDKViewTypeChat for a given GetSocial User ID
-*</li>
-<li>kGetSocialInviteImage: Open GetSocialSDKViewTypeSmartInvite and set an image to be sent with the invite</li>
-<li>kGetSocialInviteText Open GetSocialSDKViewTypeSmartInvite and set a text to be sent with the invite
-*</li>
-<li>kGetSocialActivityTags: Open GetSocialSDKViewTypeActivities and set the tags to add to any activity posted there</li>
-<li>kGetSocialActivityGroup: Open GetSocialSDKViewTypeActivities and set the group to show activities for</li>
-</ul>
-
+				<p>Opens the given view based on the provided properties.</p>
 			</div>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)open:(GetSocialSDKViewType)<em>viewType</em> withProperties:(NSDictionary *)<em>properties</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)open:(GetSocialViewType)<em>viewType</em> withProperties:(NSDictionary *)<em>properties</em></code></div>
 
 		    
 			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewType</code></th>
+						<td><p>Type of view to open</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>properties</code></th>
+						<td><p>Dictionary that provides information about the specific page to be opened.</p>
 
-			
+<p>Supported properties:</p>
 
-			
-
-			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<ul>
+<ul>
+<li>kGetSocialUserID: Open GetSocialViewTypeProfile, GetSocialViewTypeChat for a given GetSocial User ID</li>
+<li>kGetSocialInviteImage: Open GetSocialViewTypeSmartInvite and set an image to be sent with the invite</li>
+<li>kGetSocialInviteText: Open GetSocialViewTypeSmartInvite and set a text to be sent with the invite</li>
+<li>kGetSocialInviteSubject: Open GetSocialViewTypeSmartInvite and set a subject to be sent with the invite</li>
+<li>kGetSocialActivityTags: Open GetSocialViewTypeActivities and set the tags to add to any activity posted there</li>
+<li>kGetSocialActivityGroup: Open GetSocialViewTypeActivities and set the group to show activities for</li>
 <li>kGetSocialSource: A string that defines the source from where GetSocial view was opened</li>
 </ul>
-
+</td>
+					</tr>
+				
+				</table>
 			</div>
+			
+
+			
+
+			
+
 			
 
 			
@@ -569,7 +678,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -610,13 +719,21 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Plugin Registration" name="task_Plugin Registration"></a>
+						<h2 class="task-title">Plugin Registration</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/registerPlugin:provider:" title="registerPlugin:provider:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/registerPlugin:provider:">&ndash;&nbsp;registerPlugin:provider:</a></code>
 </h3>
@@ -633,7 +750,7 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)registerPlugin:(GetSocialSDKPlugin *)<em>plugin</em> provider:(GetSocialSDKProvider)<em>provider</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)registerPlugin:(GetSocialPlugin *)<em>plugin</em> provider:(GetSocialProvider)<em>provider</em></code></div>
 
 		    
 			
@@ -668,13 +785,21 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="SmartInvite" name="task_SmartInvite"></a>
+						<h2 class="task-title">SmartInvite</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/setInviteFriendsBlock:" title="setInviteFriendsBlock:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/setInviteFriendsBlock:">&ndash;&nbsp;setInviteFriendsBlock:</a></code>
 </h3>
@@ -692,7 +817,7 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)setInviteFriendsBlock:(void ( ^ ) ( GetSocialSDKInviteFriendsStatus , NSInteger ))<em>completionBlock</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)setInviteFriendsBlock:(void ( ^ ) ( GetSocialInviteFriendsStatus , NSInteger ))<em>completionBlock</em></code></div>
 
 		    
 			
@@ -722,7 +847,7 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -768,7 +893,7 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -791,7 +916,7 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)inviteFriendsUsingProvider:(GetSocialSDKProvider)<em>provider</em> withProperties:(NSDictionary *)<em>properties</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)inviteFriendsUsingProvider:(GetSocialProvider)<em>provider</em> withProperties:(NSDictionary *)<em>properties</em></code></div>
 
 		    
 			
@@ -805,13 +930,17 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 					</tr>
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>inviteImage</code></th>
-						<td><p>The image to be sent with the invite. If it is nil the default image from the sandbox will be sent.</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>inviteText</code></th>
-						<td><p>The text to be sent with the invite. If it is nil the default text is sent.</p></td>
+						<th scope="row" class="argument-name"><code>properties</code></th>
+						<td><p>Dictionary that provides information about the smart invite to send</p>
+
+<p>Supported Properties:</p>
+
+<ul>
+<li>kGetSocialInviteImage: Open GetSocialViewTypeSmartInvite and set an image to be sent with the invite</li>
+<li>kGetSocialInviteText: Open GetSocialViewTypeSmartInvite and set a text to be sent with the invite</li>
+<li>kGetSocialInviteSubject: Open GetSocialViewTypeSmartInvite and set a subject to be sent with the invite</li>
+</ul>
+</td>
 					</tr>
 				
 				</table>
@@ -831,13 +960,21 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="User Authentication" name="task_User Authentication"></a>
+						<h2 class="task-title">User Authentication</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/verifyUserIdentity:provider:success:error:" title="verifyUserIdentity:provider:success:error:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/verifyUserIdentity:provider:success:error:">&ndash;&nbsp;verifyUserIdentity:provider:success:error:</a></code>
 </h3>
@@ -856,7 +993,7 @@ when the application (re)authenticates the user directly.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)verifyUserIdentity:(NSDictionary *)<em>identityInfo</em> provider:(GetSocialSDKProvider)<em>provider</em> success:(void ( ^ ) ( ))<em>success</em> error:(void ( ^ ) ( NSError *err ))<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)verifyUserIdentity:(NSDictionary *)<em>identityInfo</em> provider:(GetSocialProvider)<em>provider</em> success:(void ( ^ ) ( ))<em>success</em> error:(void ( ^ ) ( NSError *err ))<em>error</em></code></div>
 
 		    
 			
@@ -901,7 +1038,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -924,7 +1061,7 @@ when the application (re)authenticates the user directly.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)clearUserIdentityWithProvider:(GetSocialSDKProvider)<em>provider</em> complete:(void ( ^ ) ( ))<em>complete</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)clearUserIdentityWithProvider:(GetSocialProvider)<em>provider</em> complete:(void ( ^ ) ( ))<em>complete</em></code></div>
 
 		    
 			
@@ -959,13 +1096,21 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Activities" name="task_Activities"></a>
+						<h2 class="task-title">Activities</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:" title="postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:">&ndash;&nbsp;postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:</a></code>
 </h3>
@@ -1042,7 +1187,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1115,7 +1260,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1168,7 +1313,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1209,7 +1354,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1262,7 +1407,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1303,7 +1448,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1344,15 +1489,23 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
-	<a name="//api/name/setOnOpenProfileHandler:" title="setOnOpenProfileHandler:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/setOnOpenProfileHandler:">&ndash;&nbsp;setOnOpenProfileHandler:</a></code>
+</div>
+						</div>
+						
+
+						<a title="Custom Handlers" name="task_Custom Handlers"></a>
+						<h2 class="task-title">Custom Handlers</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/setOnUserAvatarClickHandler:" title="setOnUserAvatarClickHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnUserAvatarClickHandler:">&ndash;&nbsp;setOnUserAvatarClickHandler:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -1362,12 +1515,12 @@ when the application (re)authenticates the user directly.</p>
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Register a block to override GetSocial&rsquo;s User Profile. Any attempt to open a profile from anywhere in the SDK will call this block.</p>
+				<p>Register a block to override GetSocial&rsquo;s default behaviour while clicking on a user avatar. Any click on an avatar from anywhere in the SDK will call this block.</p>
 			</div>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)setOnOpenProfileHandler:(void ( ^ ) ( NSString *getSocialUserID ))<em>onOpenProfileHandler</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)setOnUserAvatarClickHandler:(BOOL ( ^ ) ( NSString *getSocialUserID ))<em>onUserAvatarClickHandler</em></code></div>
 
 		    
 			
@@ -1376,8 +1529,8 @@ when the application (re)authenticates the user directly.</p>
 				<table class="argument-def parameter-def">
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>onOpenProfileHandler</code></th>
-						<td><p>Block to be executed when a user profile with given guid is opened.</p></td>
+						<th scope="row" class="argument-name"><code>onUserAvatarClickHandler</code></th>
+						<td><p>Block to be executed when a user clicks on a user avatar, user guid will be provided. Return YES if action was handled by the game. Return NO for default GetSocial behaviour</p></td>
 					</tr>
 				
 				</table>
@@ -1397,15 +1550,15 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/setOnNotificationsChangedHandler:" title="setOnNotificationsChangedHandler:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/setOnNotificationsChangedHandler:">&ndash;&nbsp;setOnNotificationsChangedHandler:</a></code>
+	<a name="//api/name/setOnNotificationsChangeHandler:" title="setOnNotificationsChangeHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnNotificationsChangeHandler:">&ndash;&nbsp;setOnNotificationsChangeHandler:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -1420,7 +1573,7 @@ when the application (re)authenticates the user directly.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)setOnNotificationsChangedHandler:(void ( ^ ) ( NSInteger unreadNotificationsCount , NSInteger unreadConversationsCount ))<em>onNotificationsChangedHandler</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)setOnNotificationsChangeHandler:(void ( ^ ) ( NSInteger unreadNotificationsCount , NSInteger unreadConversationsCount ))<em>onNotificationsChangeHandler</em></code></div>
 
 		    
 			
@@ -1429,7 +1582,7 @@ when the application (re)authenticates the user directly.</p>
 				<table class="argument-def parameter-def">
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>onNotificationsChangedHandler</code></th>
+						<th scope="row" class="argument-name"><code>onNotificationsChangeHandler</code></th>
 						<td><p>Block to be executed when the unread notifications count changes.</p></td>
 					</tr>
 				
@@ -1450,7 +1603,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1503,13 +1656,21 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
-</div><div class="section-method">
+</div>
+						</div>
+						
+
+						<a title="Cloud Save" name="task_Cloud Save"></a>
+						<h2 class="task-title">Cloud Save</h2>
+
+						<div class="task-list">
+							<div class="section-method">
 	<a name="//api/name/saveGameState:success:failure:" title="saveGameState:success:failure:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/saveGameState:success:failure:">&ndash;&nbsp;saveGameState:success:failure:</a></code>
 </h3>
@@ -1566,7 +1727,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1624,7 +1785,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDK.h</code></p>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
 			</div>
 			
 			
@@ -1643,7 +1804,7 @@ when the application (re)authenticates the user directly.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-02-12</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

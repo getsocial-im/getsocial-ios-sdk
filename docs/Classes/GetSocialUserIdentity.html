@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialSDKUser Class Reference</title>
+	<title>GetSocialUserIdentity Class Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -14,7 +14,7 @@
 		<div class="container" class="hide-in-xcode">
 			
 			<h1 id="library-title">
-				<a href="../index.html">GetSocialSDK </a>
+				<a href="../index.html">GetSocial </a>
 			</h1>
 
 			<p id="developer-home">
@@ -58,7 +58,7 @@
 		
 		<option value="//api/name/displayName">displayName</option>
 		
-		<option value="//api/name/identifier">identifier</option>
+		<option value="//api/name/guid">guid</option>
 		
 	</optgroup>
 	
@@ -68,7 +68,7 @@
 	
 	<optgroup label="Instance Methods">
 		
-		<option value="//api/name/initWithIdentifier:displayName:">- initWithIdentifier:displayName:</option>
+		<option value="//api/name/initWithGuid:displayName:">- initWithGuid:displayName:</option>
 		
 	</optgroup>
 	
@@ -85,7 +85,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialSDKUser Class Reference</h1>
+					<h1 class="title">GetSocialUserIdentity Class Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -94,7 +94,7 @@
 	<td>NSObject</td>
 </tr><tr>
 	<th>Declared in</th>
-	<td>GetSocialSDKUser.h</td>
+	<td>GetSocialUserIdentity.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -120,8 +120,8 @@
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/initWithIdentifier:displayName:" title="initWithIdentifier:displayName:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:displayName:">&ndash;&nbsp;initWithIdentifier:displayName:</a></code>
+	<a name="//api/name/initWithGuid:displayName:" title="initWithGuid:displayName:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithGuid:displayName:">&ndash;&nbsp;initWithGuid:displayName:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -136,7 +136,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (id)initWithIdentifier:(NSString *)<em>identifier</em> displayName:(NSString *)<em>displayName</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (id)initWithGuid:(NSString *)<em>guid</em> displayName:(NSString *)<em>displayName</em></code></div>
 
 		    
 			
@@ -145,13 +145,13 @@
 				<table class="argument-def parameter-def">
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>identifier</code></th>
-						<td><p>unique <a href="#//api/name/identifier">identifier</a> of the user. Must not be nil.</p></td>
+						<th scope="row" class="argument-name"><code>displayName</code></th>
+						<td><p>can be nil.</p></td>
 					</tr>
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>displayName</code></th>
-						<td><p>can be nil.</p></td>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>unique identifier of the user. Must not be nil.</p></td>
 					</tr>
 				
 				</table>
@@ -176,15 +176,15 @@
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDKUser.h</code></p>
+				<p><code class="declared-in-ref">GetSocialUserIdentity.h</code></p>
 			</div>
 			
 			
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/identifier" title="identifier"></a>
-	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+	<a name="//api/name/guid" title="guid"></a>
+	<h3 class="method-title"><code><a href="#//api/name/guid">&nbsp;&nbsp;guid</a></code>
 </h3>
 
 	<div class="method-info">
@@ -199,7 +199,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>@property (strong, readonly) NSString *identifier</code></div>
+			<div class="method-subsection method-declaration"><code>@property (strong, readonly) NSString *guid</code></div>
 
 		    
 			
@@ -217,7 +217,7 @@
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDKUser.h</code></p>
+				<p><code class="declared-in-ref">GetSocialUserIdentity.h</code></p>
 			</div>
 			
 			
@@ -258,7 +258,7 @@
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocialSDKUser.h</code></p>
+				<p><code class="declared-in-ref">GetSocialUserIdentity.h</code></p>
 			</div>
 			
 			
@@ -277,7 +277,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-02-12</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

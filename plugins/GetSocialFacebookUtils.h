@@ -1,5 +1,5 @@
 //
-//  GetSocialSDKFacebookUtils.h
+//  GetSocialFacebookUtils.h
 //  testapp
 //
 //  Created by Demian Denker on 17/11/14.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface GetSocialSDKFacebookUtils : NSObject
+@interface GetSocialFacebookUtils : NSObject
 
 + (instancetype) sharedInstance;
 

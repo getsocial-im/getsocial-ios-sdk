@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <GetSocialSDK/GetSocialSDK.h>
+#import <GetSocial/GetSocial.h>
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate ()
@@ -23,8 +23,8 @@
     [FBLoginView class];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
-    [[GetSocialSDK sharedInstance] authenticateGame:@"4We9Uqq8SR04tNXqV10M0000000s8i7N997ga98n" success:^{
+
+    [[GetSocial sharedInstance] authenticateGame:@"4We9Uqq8SR04tNXqV10M0000000s8i7N997ga98n" success:^{
         NSLog(@"authenticateGame Succeed");
         
     } failure:^(NSError *error) {

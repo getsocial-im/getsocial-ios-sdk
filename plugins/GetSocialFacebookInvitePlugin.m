@@ -1,17 +1,17 @@
 //
-//  GetSocialSDKFacebookInvitePlugin.m
+//  GetSocialFacebookInvitePlugin.m
 //  testapp
 //
 //  Created by Demian Denker on 17/11/14.
 //  Copyright (c) 2014 GetSocial. All rights reserved.
 //
 
-#import "GetSocialSDKFacebookInvitePlugin.h"
-#import "GetSocialSDKFacebookUtils.h"
-#import <GetSocialSDK/GetSocialSDK.h>
+#import "GetSocialFacebookInvitePlugin.h"
+#import "GetSocialFacebookUtils.h"
+#import <GetSocial/GetSocial.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@implementation GetSocialSDKFacebookInvitePlugin
+@implementation GetSocialFacebookInvitePlugin
 
 - (NSDictionary*)parseURLParams:(NSString *)query {
     NSRegularExpression* arrayKeyRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\w+)\\[(\\d+)\\]" options:0 error:nil];
@@ -60,7 +60,7 @@
     return params;
 }
 
--(void) inviteFriendsWithSubject:(NSString*) subject text:(NSString*) text image:(UIImage*) image success:(GetSocialSDKInviteSuccessCallback) successCallback cancel:(GetSocialSDKCancelCallback) cancelCallback error:(GetSocialSDKErrorCallback) errorCallback
+-(void) inviteFriendsWithSubject:(NSString*) subject text:(NSString*) text image:(UIImage*) image success:(GetSocialInviteSuccessCallback) successCallback cancel:(GetSocialCancelCallback) cancelCallback error:(GetSocialErrorCallback) errorCallback
 {
     void (^inviteBlock)() = ^{
         [FBWebDialogs
@@ -86,7 +86,7 @@
                          NSDictionary* to = [urlParams valueForKey:@"to[]"];
                          
                          NSLog(@"Request ID: %@", requestID);
-                         successCallback(@{GetSocialSDKInviteInfoKeyInviteId:requestID, GetSocialSDKInviteInfoKeyInvitedUserIds:[to allValues]});
+                         successCallback(@{GetSocialInviteInfoKeyInviteId:requestID, GetSocialInviteInfoKeyInvitedUserIds:[to allValues]});
                      }
                  }
              }
@@ -95,7 +95,7 @@
     
     if( ! [[FBSession activeSession] isOpen] )
     {
-        [[GetSocialSDKFacebookUtils sharedInstance] setOnSessionOpenHandler:inviteBlock];
+        [[GetSocialFacebookUtils sharedInstance] setOnSessionOpenHandler:inviteBlock];
         
         if (self.authenticateUserHandler)
         {

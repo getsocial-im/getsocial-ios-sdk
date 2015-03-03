@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9908FA6E1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */; };
+		9908FA6F1A9B45D100F39657 /* GetSocialFacebookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */; };
 		99AD213F1A8B7AD100A46C07 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AD213E1A8B7AD100A46C07 /* FacebookSDK.framework */; };
-		99AD214A1A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AD21471A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.m */; };
-		99AD214B1A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AD21491A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.m */; };
-		99AD21501A8B81C700A46C07 /* GetSocialSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AD214D1A8B81C700A46C07 /* GetSocialSDK.framework */; };
-		99AD21511A8B81C700A46C07 /* GetSocialSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99AD214F1A8B81C700A46C07 /* GetSocialSDK.bundle */; };
 		99AD21571A8BA78900A46C07 /* getsocial.png in Resources */ = {isa = PBXBuildFile; fileRef = 99AD21561A8BA78900A46C07 /* getsocial.png */; };
 		99AD21591A8BABAB00A46C07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AD21581A8BABAB00A46C07 /* Images.xcassets */; };
+		99C03DD11AA5D8E9000A7FA0 /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */; };
+		99C03DD21AA5D8E9000A7FA0 /* GetSocial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */; };
 		99EFA4A61A78E707009FC9D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A51A78E707009FC9D7 /* main.m */; };
 		99EFA4A91A78E707009FC9D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A81A78E707009FC9D7 /* AppDelegate.m */; };
 		99EFA4AC1A78E707009FC9D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4AB1A78E707009FC9D7 /* ViewController.m */; };
@@ -36,15 +36,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9908FA6A1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = ../../plugins/GetSocialFacebookInvitePlugin.h; sourceTree = "<group>"; };
+		9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = ../../plugins/GetSocialFacebookInvitePlugin.m; sourceTree = "<group>"; };
+		9908FA6C1A9B45D100F39657 /* GetSocialFacebookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookUtils.h; path = ../../plugins/GetSocialFacebookUtils.h; sourceTree = "<group>"; };
+		9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookUtils.m; path = ../../plugins/GetSocialFacebookUtils.m; sourceTree = "<group>"; };
 		99AD213E1A8B7AD100A46C07 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = GetSocialTestApp/Vendor/FacebookSDK.framework; sourceTree = "<group>"; };
-		99AD21461A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialSDKFacebookInvitePlugin.h; path = ../../plugins/GetSocialSDKFacebookInvitePlugin.h; sourceTree = "<group>"; };
-		99AD21471A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialSDKFacebookInvitePlugin.m; path = ../../plugins/GetSocialSDKFacebookInvitePlugin.m; sourceTree = "<group>"; };
-		99AD21481A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialSDKFacebookUtils.h; path = ../../plugins/GetSocialSDKFacebookUtils.h; sourceTree = "<group>"; };
-		99AD21491A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialSDKFacebookUtils.m; path = ../../plugins/GetSocialSDKFacebookUtils.m; sourceTree = "<group>"; };
-		99AD214D1A8B81C700A46C07 /* GetSocialSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocialSDK.framework; sourceTree = "<group>"; };
-		99AD214F1A8B81C700A46C07 /* GetSocialSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocialSDK.bundle; sourceTree = "<group>"; };
 		99AD21561A8BA78900A46C07 /* getsocial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getsocial.png; sourceTree = "<group>"; };
 		99AD21581A8BABAB00A46C07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocial.framework; sourceTree = "<group>"; };
+		99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocial.bundle; sourceTree = "<group>"; };
 		99EFA4A01A78E707009FC9D7 /* GetSocialTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSocialTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99EFA4A41A78E707009FC9D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99EFA4A51A78E707009FC9D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,32 +85,32 @@
 				99EFA4E71A78EB34009FC9D7 /* Social.framework in Frameworks */,
 				99EFA4E51A78EB25009FC9D7 /* SystemConfiguration.framework in Frameworks */,
 				99EFA4E31A78EB0E009FC9D7 /* CoreTelephony.framework in Frameworks */,
+				99C03DD11AA5D8E9000A7FA0 /* GetSocial.framework in Frameworks */,
 				99EFA4E11A78EAFE009FC9D7 /* CoreLocation.framework in Frameworks */,
 				99EFA4D71A78EA7C009FC9D7 /* AudioToolbox.framework in Frameworks */,
 				99EFA4D51A78EA6A009FC9D7 /* Accelerate.framework in Frameworks */,
 				99AD213F1A8B7AD100A46C07 /* FacebookSDK.framework in Frameworks */,
 				99EFA4D31A78EA38009FC9D7 /* AVFoundation.framework in Frameworks */,
-				99AD21501A8B81C700A46C07 /* GetSocialSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99AD214C1A8B81C700A46C07 /* GetSocialSDK.embeddedframework */ = {
+		99C03DCD1AA5D8E9000A7FA0 /* GetSocial.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				99AD214D1A8B81C700A46C07 /* GetSocialSDK.framework */,
-				99AD214E1A8B81C700A46C07 /* Resources */,
+				99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */,
+				99C03DCF1AA5D8E9000A7FA0 /* Resources */,
 			);
-			name = GetSocialSDK.embeddedframework;
-			path = ../bin/GetSocialSDK.embeddedframework;
+			name = GetSocial.embeddedframework;
+			path = ../bin/GetSocial.embeddedframework;
 			sourceTree = "<group>";
 		};
-		99AD214E1A8B81C700A46C07 /* Resources */ = {
+		99C03DCF1AA5D8E9000A7FA0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				99AD214F1A8B81C700A46C07 /* GetSocialSDK.bundle */,
+				99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -136,10 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				99AD21561A8BA78900A46C07 /* getsocial.png */,
-				99AD21461A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.h */,
-				99AD21471A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.m */,
-				99AD21481A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.h */,
-				99AD21491A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.m */,
+				9908FA6A1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.h */,
+				9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */,
+				9908FA6C1A9B45D100F39657 /* GetSocialFacebookUtils.h */,
+				9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */,
 				99EFA4A71A78E707009FC9D7 /* AppDelegate.h */,
 				99EFA4A81A78E707009FC9D7 /* AppDelegate.m */,
 				99EFA4AA1A78E707009FC9D7 /* ViewController.h */,
@@ -164,7 +164,7 @@
 		99EFA4F61A78ECEA009FC9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				99AD214C1A8B81C700A46C07 /* GetSocialSDK.embeddedframework */,
+				99C03DCD1AA5D8E9000A7FA0 /* GetSocial.embeddedframework */,
 				99AD213E1A8B7AD100A46C07 /* FacebookSDK.framework */,
 				99EFA4D41A78EA6A009FC9D7 /* Accelerate.framework */,
 				99EFA4D61A78EA7C009FC9D7 /* AudioToolbox.framework */,
@@ -242,8 +242,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				99AD21571A8BA78900A46C07 /* getsocial.png in Resources */,
+				99C03DD21AA5D8E9000A7FA0 /* GetSocial.bundle in Resources */,
 				99AD21591A8BABAB00A46C07 /* Images.xcassets in Resources */,
-				99AD21511A8B81C700A46C07 /* GetSocialSDK.bundle in Resources */,
 				99EFA4AF1A78E707009FC9D7 /* Main.storyboard in Resources */,
 				99EFA4B41A78E707009FC9D7 /* LaunchScreen.xib in Resources */,
 			);
@@ -256,11 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99AD214B1A8B7D5600A46C07 /* GetSocialSDKFacebookUtils.m in Sources */,
 				99EFA4AC1A78E707009FC9D7 /* ViewController.m in Sources */,
+				9908FA6E1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m in Sources */,
 				99EFA4A91A78E707009FC9D7 /* AppDelegate.m in Sources */,
-				99AD214A1A8B7D5600A46C07 /* GetSocialSDKFacebookInvitePlugin.m in Sources */,
 				99EFA4A61A78E707009FC9D7 /* main.m in Sources */,
+				9908FA6F1A9B45D100F39657 /* GetSocialFacebookUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +303,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -342,7 +341,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -365,11 +363,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GetSocialTestApp/Vendor",
-					"$(PROJECT_DIR)/../bin/GetSocialSDK.embeddedframework",
+					"$(PROJECT_DIR)/../bin/GetSocial.embeddedframework",
+					"/Users/demiandenker/Projects/gitlab-ios-release/bin/GetSocial.embeddedframework",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = GetSocialTestApp/Info.plist;
@@ -377,7 +376,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -385,18 +383,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GetSocialTestApp/Vendor",
-					"$(PROJECT_DIR)/../bin/GetSocialSDK.embeddedframework",
+					"$(PROJECT_DIR)/../bin/GetSocial.embeddedframework",
+					"/Users/demiandenker/Projects/gitlab-ios-release/bin/GetSocial.embeddedframework",
 				);
 				INFOPLIST_FILE = GetSocialTestApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

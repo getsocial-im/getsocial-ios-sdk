@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialSDKScaleMode Constants Reference</title>
+	<title>GetSocialUserAuthState Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -14,7 +14,7 @@
 		<div class="container" class="hide-in-xcode">
 			
 			<h1 id="library-title">
-				<a href="../index.html">GetSocialSDK </a>
+				<a href="../index.html">GetSocial </a>
 			</h1>
 
 			<p id="developer-home">
@@ -59,13 +59,13 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialSDKScaleMode Constants Reference</h1>
+					<h1 class="title">GetSocialUserAuthState Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<th>Declared in</th>
-	<td>GetSocialSDKConstants.h</td>
+	<td>GetSocialAuthState.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -75,11 +75,11 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">GetSocialSDKScaleMode</h3>
+                    <h3 class="subsubtitle method-title">GetSocialUserAuthState</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Constants that define the scaling of the content of the GetSocial SDK UI</p>
+                        <p>Describes a authentication state of the user.</p>
 					</div>
 					
 					
@@ -87,11 +87,15 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, GetSocialSDKScaleMode ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, GetSocialUserAuthState ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialSDKScaleModePixelPerfect</a> = 1,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateUnidentified</a>,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialSDKScaleModeFixedRatio</a> = 2,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerifying</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerified</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateClearing</a>,<br>
                             
                             };</code>
                     
@@ -101,11 +105,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="GetSocialSDKScaleModePixelPerfect"></a><code>GetSocialSDKScaleModePixelPerfect</code></dt>
+                            <dt><a name="" title="GetSocialUserAuthStateUnidentified"></a><code>GetSocialUserAuthStateUnidentified</code></dt>
 <dd>
 
 
-<p>The GetSocial UI, fonts and margins don&rsquo;t scale based on the Social Bar width</p>
+<p>The user is not identified.</p>
 
 
 
@@ -113,16 +117,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKConstants.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialSDKScaleModeFixedRatio"></a><code>GetSocialSDKScaleModeFixedRatio</code></dt>
+                            <dt><a name="" title="GetSocialUserAuthStateVerifying"></a><code>GetSocialUserAuthStateVerifying</code></dt>
 <dd>
 
 
-<p>The GetSocial UI, fonts and margins scale based on the Social Bar width</p>
+<p>There is some process active trying to verify the user&rsquo;s identity.</p>
 
 
 
@@ -130,7 +134,41 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialSDKConstants.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="GetSocialUserAuthStateVerified"></a><code>GetSocialUserAuthStateVerified</code></dt>
+<dd>
+
+
+<p>The user&rsquo;s identity has been successfully verified.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="GetSocialUserAuthStateClearing"></a><code>GetSocialUserAuthStateClearing</code></dt>
+<dd>
+
+
+<p>The user&rsquo;s identity is being cleared out.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
 	</p>
 	
 </dd>
@@ -147,7 +185,7 @@
                     
                     <div class="method-subsection declared-in-section">
                         <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">GetSocialSDKConstants.h</code></p>
+                        <p><code class="declared-in-ref">GetSocialAuthState.h</code></p>
                     </div>
                     
                     
@@ -157,7 +195,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-02-12</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>GetSocial SDK Test App</string>
+	<string>GetSocial Test App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -34,7 +34,7 @@
 	<key>FacebookAppID</key>
 	<string>471724582959012</string>
 	<key>FacebookDisplayName</key>
-	<string>GetSocial SDK Test App</string>
+	<string>GetSocial Test App</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -1,20 +1,20 @@
 //
-//  GetSocialSDKFacebookPlugin.m
+//  GetSocialFacebookPlugin.m
 //  testapp
 //
 //  Created by Demian Denker on 17/11/14.
 //  Copyright (c) 2014 GetSocial. All rights reserved.
 //
 
-#import "GetSocialSDKFacebookUtils.h"
-#import <GetSocialSDK/GetSocialSDK.h>
+#import "GetSocialFacebookUtils.h"
+#import <GetSocial/GetSocial.h>
 
-@implementation GetSocialSDKFacebookUtils
+@implementation GetSocialFacebookUtils
 
 #pragma mark Singleton Methods
 + (instancetype) sharedInstance
 {
-    static GetSocialSDKFacebookUtils* privateSharedInstance = nil;
+    static GetSocialFacebookUtils* privateSharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         privateSharedInstance = [[self alloc] init];
@@ -55,9 +55,9 @@
                                           userId = [result objectForKey:@"id"];
                                       }
                                       
-                                      NSDictionary* info = @{kGetSocialSDKAuthInfoKeyToken:[FBSession activeSession].accessTokenData.accessToken, kGetSocialSDKAuthInfoKeyUserId:userId, kGetSocialSDKAuthInfoKeyExternalUserId:userId};
+                                      NSDictionary* info = @{kGetSocialAuthInfoKeyToken:[FBSession activeSession].accessTokenData.accessToken, kGetSocialAuthInfoKeyUserId:userId, kGetSocialAuthInfoKeyExternalUserId:userId};
                                       
-                                      [[GetSocialSDK sharedInstance] verifyUserIdentity:info provider:@"facebook" success:^{
+                                      [[GetSocial sharedInstance] verifyUserIdentity:info provider:@"facebook" success:^{
                                           NSLog(@"Game FB Auth -> GetSocial FB Token Auth successful");
                                           
                                           if (self.onSessionOpenHandler)
@@ -78,7 +78,7 @@
         }
         else
         {
-            [[GetSocialSDK sharedInstance] clearUserIdentityWithProvider:@"facebook" complete:^{
+            [[GetSocial sharedInstance] clearUserIdentityWithProvider:@"facebook" complete:^{
                 NSLog(@"Game FB Logout -> GetSocial Logout complete.");
                 
                 if (self.onSessionCloseHandler)
