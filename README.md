@@ -4,7 +4,7 @@
 
 Build and manage the community within your games with **GetSocial** .
 
-GetSocial provides the whole social layer stack that powers **engagement** , **retention** , **acquisition** and **revenue tools** .
+GetSocial provides the whole social layer stack that powers **engagement**, **retention**, **acquisition** and **revenue tools** .
 
 
 
@@ -23,7 +23,10 @@ GetSocial provides the whole social layer stack that powers **engagement** , **r
 * Localised to 12 languages
 * In-app Notification Center
 * Socially triggered push notifications
-* And more...
+* And more…
+
+
+
 
 
 
@@ -31,7 +34,7 @@ For more information on GetSocial, visit our [website](http://www.getsocial.im/)
 
 
 
-To manage the integration of the GetSocial SDK, [login to your developer account](http://developers.gramble.com).
+To manage the integration of the GetSocial SDK, [login to your developer account](https://developers.getsocial.im).
 
 
 
@@ -50,7 +53,6 @@ To manage the integration of the GetSocial SDK, [login to your developer account
 * [Integration with facebook](#integration-with-facebook)
   * [User Authentication](#user-authentication)
   * [Smart Invites](#smart-invites)
-* [Invite and install tracking](#invite-and-install-tracking)
 * [Customizing the appearance](#customizing-the-appearance)
   * [Getting the current configuration](#getting-the-current-configuration)
   * [Specifying window width and height](#specifying-window-width-and-height)
@@ -74,7 +76,7 @@ Download the GetSocial SDK from [here](https://github.com/getsocial-im/getsocial
 
 
 
-Open your game on **Xcode** and drag and drop the GetSocialSDK.embeddedframework into your project.
+Open your game on **Xcode** and drag and drop the GetSocial.embeddedframework into your project.
 
 
 
@@ -109,6 +111,8 @@ And finally just add this flag “-lstdc++” to your project's “Other Linker 
 
 
 
+
+
 ## Initialization
 
 
@@ -127,7 +131,7 @@ The best place to start would be in your AppDelegate.m.
 
 
 ```objectivec
-#import <GetSocialSDK/GetSocialSDK.h>
+#import <GetSocial/GetSocial.h>
 ```
 
 
@@ -137,7 +141,7 @@ And call the `authenticateGame:` inside `application:didFinishLaunchingWithOptio
 
 
 ```objectivec
-[[GetSocialSDK sharedInstance] authenticateGame:@"AppKey" success:^{
+[[GetSocial sharedInstance] authenticateGame:@"AppKey" success:^{
         // game authenticated
 } failure:^(NSError *error) {
         // game not authenticated
@@ -165,7 +169,6 @@ You can also register an observer to be notified every time one of our views is 
     }
 }];
 ```
-
 
 
 
@@ -217,8 +220,11 @@ We currently support the following languages:
 
 
 ```objectivec
-[[GetSocialSDK sharedInstance] setLanguage:@"en"];
+[[GetSocial sharedInstance] setLanguage:@"en"];
 ```
+
+
+
 
 
 
@@ -228,9 +234,9 @@ We currently support the following languages:
 
 Please note that you can always call this method, but the UI needs to be reloaded to reflect the changes.
 
-# 
 
-# 
+
+
 
 # Activities
 
@@ -242,7 +248,7 @@ Showing activities for your game is quite easy
 
 
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities];
+[[GetSocial sharedInstance] open:GetSocialViewTypeActivities];
 
 ```
 
@@ -253,9 +259,12 @@ You can also pass a NSDictionary as second argument to specify additional proper
 
 
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialTitle:@"Level 1"}];
+[[GetSocial sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialTitle:@"Level 1"}];
 
 ```
+
+
+
 
 
 
@@ -263,62 +272,134 @@ You can also pass a NSDictionary as second argument to specify additional proper
 
 Do you need more control on what to show on the Activity Feed or maybe have different Activity feeds per level, per clan or a custom attribute?
 
+
+
 [Contact us](mailto:info@getsocial.im) and we will show you how to do it easily.
-![image alt text](images/img_0.png)
+
+![image alt text](images/img_1.png)
+
 # Chat
 
-Chat is integrated into your game the moment you integrate the GetSocial SDK. Every time a user taps on another user’s avatar, a chat conversation is started between the two.
 
-You can link to the chat views that enable your users to view their active conversations and also start new conversations with their friends.
+
+Chat is integrated into your game the moment you integrate the GetSocial SDK. Every time a user taps on another user’s avatar, a chat conversation is started between the two
+
+
+
+You can link to the chat views that enable your users to view their active conversations and also start new conversations with their friends:
+
+
 
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeChat];
+[[GetSocial sharedInstance] open:GetSocialViewTypeChat];
+
 ```
+
+
+
+
+
+
+
 
 
 You can also directly open a chat conversation from user’s avatar within the game using their User ID on supported Social Providers.
 
+
+
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialProvider:@"facebook", kGetSocialUserID:@"0123456789"}];
+[[GetSocial sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialProvider:@"facebook", kGetSocialUserID:@"0123456789"}];
+
 ```
+
+
+
+
+
+
+
+
 
 
 
 # Smart Invites
 
+
+
 Using Smart Invites users can easily invite their friends to join and play the game. To open the smart invite view you should call:
 
+
+
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeSmartInvite];
+[[GetSocial sharedInstance] open:GetSocialViewTypeSmartInvite];
+
 ```
 
 
-You will see several options to invite friends, depending on what applications you have currently installed on your and which providers you enabled on the GetSocial Developer Portal.
+
+
+
+
+
+
+You will see several options to invite friends, depending on what applications you have currently installed on your and which providers you enabled in the [GetSocial Developer Portal](https://developers.getsocial.im).
+
+
+
 
 
 # Notification Center
 
+
+
 Activity feed and Chat features are incomplete without having the Notification Center that provides in-app notifications to users when someone likes or comments on their activities or when they receive chat messages. 
 
+
+
 ```objectivec
-[[GetSocialSDK sharedInstance] open:GetSocialViewTypeNotifications];
+[[GetSocial sharedInstance] open:GetSocialViewTypeNotifications];
+
 ```
+
+
+
+
+
+
+
+
+
 
 
 It is highly recommended that you link this to a UI element with a notifications count badge. The SDK provides a block that allows getting count of the unread chats and activity notifications.
 
+
+
 ```objectivec
-[[GetSocialSDK sharedInstance] setOnNotificationsChangedHandler:^(NSInteger unreadNotificationsCount, NSInteger unreadConversationsCount) {
+[[GetSocial sharedInstance] setOnNotificationsChangeHandler:^(NSInteger unreadNotificationsCount, NSInteger unreadConversationsCount) {
    //code to handle changes on Notifications/Conversations counts 
 }];
 ```
 
-# 
+
+
+
+
+
+
+
+
 # Push Notifications
 
-You first need to generate the right Push Notification Certificates on Apple Developer Portal and then upload them on the GetSocial Developer Portal. You upload the Development or Production Certificate and choose which one to use.
+
+
+You first need to generate the right Push Notification Certificates on Apple Developer Portal and then upload them in the [GetSocial Developer Portal](https://developers.getsocial.im). You upload the Development or Production Certificate and choose which one to use.
+
+
 
 To start sending Push Notifications to the user's device, GetSocial will ask for permissions to users the first time they log in. We ask for the Alert and Sound permissions.
+
+
 
 You don't need to add any code to your game as GetSocial handles everything internally.
 
@@ -326,88 +407,170 @@ You don't need to add any code to your game as GetSocial handles everything inte
 
 
 
+
+
+
+
+
+
 # User Authentication
-# 
+
+
+
 GetSocial SDK needs to integrate with the Game login to enable chat, posting activities, comments, liking activities and install attribution. 
 
+
+
 Whenever a user performs an action that requires login, the SDK calls the login request handler which allows the game to show it’s own login UI.
-# 
+
+
+
+
 
 ```objectivec
-[[GetSocialSDK sharedInstance] setOnLoginRequestHandler: ^void() {
+[[GetSocial sharedInstance] setOnLoginRequestHandler: ^void() {
     // Show Game login UI
 }];
 ```
 
-# 
-# 
-# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Integration with Facebook
+
+
 
 The GetSocial SDK can easily interact with the Facebook social features using one of the latest versions of the Facebook SDK.
 
+
+
 Make sure you follow the [Facebook SDK integration for iOS](https://developers.facebook.com/docs/ios/getting-started).
+
+
+
+
+
+
+
+
 
 ## User Authentication
 
+
+
 Whenever a user performs an action that requires login, the SDK calls the login request handler which allows the game to show the FB Login UI. You could use FB default UI or implement your own.
 
+
+
 ```objectivec
-[[GetSocialSDK sharedInstance] setOnLoginRequestHandler:^{
+[[GetSocial sharedInstance] setOnLoginRequestHandler:^{
         [self loginWithFacebook];
 }];
 
+
+
 - (void)loginWithFacebook
 {
-	//opens a FB session with required permissions and calls GetSocialSDKFacebookUtils on complete to 
-//sync the state also with the GetSocialSDK
-    [FBSession openActiveSessionWithReadPermissions:@["public_profile", "user_friends", "email"]
+	//opens a FB session with required permissions and calls GetSocialFacebookUtils on complete to 
+    //sync the state also with the GetSocial SDK
+
+    [FBSession openActiveSessionWithReadPermissions:@["public_profile", "user_friends"]
+
                                        allowLoginUI:YES
+
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                                        [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+
+                                        [[GetSocialFacebookUtils sharedInstance] updateSessionState];
+
                                   }];
+
 }
 ```
 
-If you are using the FBLoginView, you need to also implement the FBLoginViewDelegate to get the state changes and sync the GetSocialSDK.
+
+
+If you are using the FBLoginView, you need to also implement the FBLoginViewDelegate to get the state changes and sync the GetSocial.
+
+
 
 ```objectivec
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
-    [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
 {
-   [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+   [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
-    [[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];
+    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
 }
 ```
 
-If you are not using the FBLoginView, make sure you call `[[GetSocialSDKFacebookUtils sharedInstance] updateSessionState];` whenever you receive an update of the state of the FB active session.
+
+
+If you are not using the FBLoginView, make sure you call `[[GetSocialFacebookUtils sharedInstance] updateSessionState];` whenever you receive an update of the state of the FB active session.
+
+
+
+
+
 
 
 ## Smart Invites
 
+
+
+
 You can enable the Smart Invites for Facebook by registering our invite plugin.
+
 
 ```objectivec
 //Register FBInvitePlugin
-GetSocialSDKFacebookInvitePlugin* fbInvitePlugin = [[GetSocialSDKFacebookInvitePlugin alloc] init];
-    
+GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
+
 id __weak weakSelf = self;
-fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
-    
-[[GetSocialSDK sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
+
+fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };    
+
+[[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
 ```
 
 
 
 The `loginWithFacebook` method is the same you use to authenticate users with Facebook and we explained before and it is required to be able to authenticate users with Facebook before showing the invite UI.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -425,9 +588,12 @@ You are able to customize the GetSocial SDK to match the look and feel of your g
 ## Getting the current Configuration
 
 ```objectivec
-GetSocialSDKConfiguration* config = [GetSocialSDK sharedInstance].configuration;
+GetSocialConfiguration* config = [GetSocial sharedInstance].configuration;
 
 ```
+
+
+
 
 
 
@@ -448,9 +614,12 @@ GetSocialSDKConfiguration* config = [GetSocialSDK sharedInstance].configuration;
 
 
 
+
+
+
 If you are also setting a background image, then you don’t need to specify both values. You can specify just one of the dimensions and the other will be calculated to maintain the aspect ratio of the image.
 
-## 
+
 
 ## Scaling the content
 
@@ -472,38 +641,30 @@ The scale mode can be set as follows:
 ```objectivec
 [config setScaleMode:GetSocialScaleModePixelPerfect];
 
-[config setScaleMode:GetSocialScaleModeFixedRatio];
-
 ```
 
+or
 
+```objectivec
+[config setScaleMode:GetSocialScaleModeFixedRatio];
+```
 
 
 
 
 Irrespective of the scaling mode, the UI elements, fonts and margins can be scaled up or down by scale factor. The scale factor only affects the contents of the GetSocial UI and not it’s size.
 
-
-
 ```objectivec
 [config setScaleFactor:2.0f];
-
 // scaleFactor 2.0 means everything will be twice as big as the default scale
-
 ```
-
-
 
 
 
 
 The scale mode and factor can be used conditionally to create different styles based on your preference. 
 
-
-
-
 For instance, if you like the Pixel Perfect mode but the fonts and margins look too small on iPads, you can add a conditional scale factor for iPad as follows:
-
 
 ```objectivec
 if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
@@ -512,14 +673,10 @@ if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 }
 ```
 
-
-
 ## Specifying the animation
 
-
 ```objectivec
-[[GetSocialSDK sharedInstance] setAnimationStyle:GetSocialAnimationStyleFade forElementID:Property.WINDOW];
-
+[[GetSocial sharedInstance] setAnimationStyle:GetSocialAnimationStyleFade forElementID:Property.WINDOW];
 ```
 
 
@@ -529,6 +686,11 @@ The available animations styles are:
 * GetSocialAnimationStyleScale: Animation scales the element In and Out
 * GetSocialAnimationStyleFade: Animation fades the element In and Out
 * GetSocialAnimationStyleFadeAndScale: Animation fades and scales the element In and Out
+
+
+
+
+
 
 
 
@@ -556,6 +718,7 @@ You can specify colors for backgrounds and borders. Please refer to the Property
 
 
 
+
 ## Specifying images
 
 You can specify images for several elements. Please refer to the Property table to see which ones can be changed. 
@@ -568,8 +731,16 @@ You can specify images for several elements. Please refer to the Property table 
 ```
 
 
+You also have the option to replace the images inside the GetSocial.bundle directly to avoid including the default images in your final build. If you decide to do this, make sure that you replace files with the same name, extension and resolution.
 
-You also have the option to replace the images inside the GetSocialSDK.bundle directly to avoid including the default images in your final build. If you decide to do this, make sure that you replace files with the same name, extension and resolution.
+
+
+
+
+
+
+
+
 
 
 If your images are located in the same folder, you can set a base path:
@@ -580,6 +751,9 @@ If your images are located in the same folder, you can set a base path:
 [config setBasePathForImages:[[NSBundle mainBundle] resourcePath]];
 
 ```
+
+
+
 
 
 
@@ -600,6 +774,9 @@ If your images are located in the same folder, you can set a base path:
 
 
 
+
+
+
 ## Specifying text styles
 
 
@@ -613,11 +790,13 @@ If your images are located in the same folder, you can set a base path:
 
 
 
-## Using custom fonts
+
+
 
 
 
 You can use custom fonts if they are correctly added as Resources in your application bundle and are added to your application info.plist file.
+
 
 
 
@@ -635,7 +814,7 @@ You can use custom fonts if they are correctly added as Resources in your applic
 
 
 
-| <sub>**#**                                </sub>| <sub>**Property**                         </sub>| <sub>**TextStyle**                        </sub>| <sub>**Color**                            </sub>| <sub>**Dimension**                        </sub>| <sub>**Drawable**                         </sub> |
+| <sub>**#**                                </sub>| <sub>**Propert** **y**                    </sub>| <sub>**TextStyle**                        </sub>| <sub>**Color**                            </sub>| <sub>**Dimension**                        </sub>| <sub>**Drawable**                         </sub> |
 |--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|---------------------------------------|
 | <sub>1                                    </sub>| <sub>TITLE_MARGIN_TOP                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
 | <sub>2                                    </sub>| <sub>HEADER                               </sub>| <sub>X                                    </sub>| <sub>X                                    </sub>| <sub>X                                    </sub>| <sub>                                     </sub> |
@@ -706,79 +885,19 @@ You can use custom fonts if they are correctly added as Resources in your applic
 | <sub>67                                   </sub>| <sub>PLACEHOLDER_CHAT                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub> |
 | <sub>68                                   </sub>| <sub>PLACEHOLDER_NETWORK                  </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub> |
 | <sub>69                                   </sub>| <sub>DEFAULT_INVITE_PROVIDER              </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>X                                    </sub> |
+| <sub>70                                   </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub>| <sub>                                     </sub> |
 
 
 
-
-
-
-![image alt text](images/img_2.png)
-
-
-
-![image alt text](images/img_3.png)
 
 
 
 ![image alt text](images/img_4.png)
 
+
+
 ![image alt text](images/img_5.png)
 
-![image alt text](images/img_6.png)
-
-![image alt text](images/img_7.png)
 
 
-
-![image alt text](images/img_8.png)
-
-
-
-![image alt text](images/img_9.png)
-
-![image alt text](images/img_10.png)
-
-
-
-![image alt text](images/img_11.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Assets
-
-
-
-![image alt text](images/img_12.png)
-
-
-
-![image alt text](images/img_13.png)
-
+![image alt text]
