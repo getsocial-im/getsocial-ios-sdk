@@ -80,6 +80,11 @@
     [[GetSocial sharedInstance] open:GetSocialViewTypeSmartInvite];
 }
 
+-(IBAction)onGlobalChatRoom:(id)sender
+{
+    [[GetSocial sharedInstance] open:GetSocialViewTypeChat withProperties:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"global",@"Global Chat", nil] forKeys:[NSArray arrayWithObjects:kGetSocialRoomName,kGetSocialTitle, nil]]];
+}
+
 #pragma mark - Facebook Integration
 - (void)loginWithFacebook
 {
