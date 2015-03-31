@@ -47,6 +47,7 @@ To manage the integration of the GetSocial SDK, [login to your developer account
   * [Localization](#localization)
 * [Activities](#activities)
 * [Chat](#chat)
+  * [Chat rooms](#chat-rooms)
 * [Smart Invites](#smart-invites)
 * [Notification Center](#notification-center)
 * [Push Notifications](#push-notifications)
@@ -314,6 +315,20 @@ You can also directly open a chat conversation from user’s avatar within the g
 
 
 
+## Chat rooms
+
+Chat rooms are magical constructs where kind spirits from your community come together to chat about life, the universe, and everything. As a developer you are in full control of which users are able to participate in these rooms, and the number of rooms is unlimited.
+
+
+```objectivec
+
+NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+[properties setObject:@"roomName" forKey:kGetSocialRoomName];
+[properties setObject:@"Room Name" forKey:kGetSocialTitle];
+    
+[[GetSocial sharedInstance] open:GetSocialViewTypeChat withProperties:properties];
+
+```
 
 
 
