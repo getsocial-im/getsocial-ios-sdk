@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialPlugin Class Reference</title>
+	<title>GetSocialLeaderboard Class Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -56,27 +56,21 @@
 	
 	<optgroup label="Properties">
 		
-		<option value="//api/name/details">details</option>
+		<option value="//api/name/currentScore">currentScore</option>
 		
-		<option value="//api/name/displayOrder">displayOrder</option>
-		
-		<option value="//api/name/enabled">enabled</option>
-		
-		<option value="//api/name/imageUrl">imageUrl</option>
-		
-		<option value="//api/name/title">title</option>
+		<option value="//api/name/leaderboardMetaData">leaderboardMetaData</option>
 		
 	</optgroup>
 	
 
 	
-
-	
-	<optgroup label="Instance Methods">
+	<optgroup label="Class Methods">
 		
-		<option value="//api/name/isAvailableForDevice">- isAvailableForDevice</option>
+		<option value="//api/name/initLeaderboardFromJSON:">+ initLeaderboardFromJSON:</option>
 		
 	</optgroup>
+	
+
 	
 	
 </select>
@@ -91,7 +85,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialPlugin Class Reference</h1>
+					<h1 class="title">GetSocialLeaderboard Class Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -100,7 +94,7 @@
 	<td>NSObject</td>
 </tr><tr>
 	<th>Declared in</th>
-	<td>GetSocialPlugin.h</td>
+	<td>GetSocialLeaderboard.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -110,7 +104,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>This protocol provides the base protocol for all plugins of by the <a href="../Classes/GetSocial.html">GetSocial</a> SDK.</p>
+						<p>Describes a Leaderboard.</p>
 					</div>
 					
 					
@@ -126,8 +120,8 @@
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/title" title="title"></a>
-	<h3 class="method-title"><code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+	<a name="//api/name/leaderboardMetaData" title="leaderboardMetaData"></a>
+	<h3 class="method-title"><code><a href="#//api/name/leaderboardMetaData">&nbsp;&nbsp;leaderboardMetaData</a></code>
 </h3>
 
 	<div class="method-info">
@@ -136,14 +130,14 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id title</code></div>
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GetSocialLeaderboardMetaData *leaderboardMetaData</code></div>
 
 		    
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/details" title="details"></a>
-	<h3 class="method-title"><code><a href="#//api/name/details">&nbsp;&nbsp;details</a></code>
+	<a name="//api/name/currentScore" title="currentScore"></a>
+	<h3 class="method-title"><code><a href="#//api/name/currentScore">&nbsp;&nbsp;currentScore</a></code>
 </h3>
 
 	<div class="method-info">
@@ -152,14 +146,14 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id details</code></div>
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GetSocialLeaderboardScore *currentScore</code></div>
 
 		    
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/imageUrl" title="imageUrl"></a>
-	<h3 class="method-title"><code><a href="#//api/name/imageUrl">&nbsp;&nbsp;imageUrl</a></code>
+	<a name="//api/name/initLeaderboardFromJSON:" title="initLeaderboardFromJSON:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initLeaderboardFromJSON:">+&nbsp;initLeaderboardFromJSON:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -168,55 +162,7 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *imageUrl</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/enabled" title="enabled"></a>
-	<h3 class="method-title"><code><a href="#//api/name/enabled">&nbsp;&nbsp;enabled</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL enabled</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/displayOrder" title="displayOrder"></a>
-	<h3 class="method-title"><code><a href="#//api/name/displayOrder">&nbsp;&nbsp;displayOrder</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSInteger displayOrder</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/isAvailableForDevice" title="isAvailableForDevice"></a>
-	<h3 class="method-title"><code><a href="#//api/name/isAvailableForDevice">&ndash;&nbsp;isAvailableForDevice</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>- (BOOL)isAvailableForDevice</code></div>
+			<div class="method-subsection method-declaration"><code>+ (GetSocialLeaderboard *)initLeaderboardFromJSON:(id)<em>JSON</em></code></div>
 
 		    
 		</div>

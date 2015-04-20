@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialUserAuthState Constants Reference</title>
+	<title>GetSocialLeaderboardDirectionType Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -59,13 +59,13 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialUserAuthState Constants Reference</h1>
+					<h1 class="title">GetSocialLeaderboardDirectionType Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<th>Declared in</th>
-	<td>GetSocialAuthState.h</td>
+	<td>GetSocialConstants.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -75,11 +75,11 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">GetSocialUserAuthState</h3>
+                    <h3 class="subsubtitle method-title">GetSocialLeaderboardDirectionType</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Describes a authentication state of the user.</p>
+                        <p>Constants for the Leaderboard score direction</p>
 					</div>
 					
 					
@@ -87,15 +87,11 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, GetSocialUserAuthState ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, GetSocialLeaderboardDirectionType ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateUnidentified</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialLeaderboardDirectionTypeASC</a> = 1,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerifying</a>,<br>
-                            
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerified</a>,<br>
-                            
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateClearing</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialLeaderboardDirectionTypeDESC</a> = 2,<br>
                             
                             };</code>
                     
@@ -105,11 +101,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="GetSocialUserAuthStateUnidentified"></a><code>GetSocialUserAuthStateUnidentified</code></dt>
+                            <dt><a name="" title="GetSocialLeaderboardDirectionTypeASC"></a><code>GetSocialLeaderboardDirectionTypeASC</code></dt>
 <dd>
 
 
-<p>The user is not identified.</p>
+<p>The type is ASC</p>
 
 
 
@@ -117,16 +113,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateVerifying"></a><code>GetSocialUserAuthStateVerifying</code></dt>
+                            <dt><a name="" title="GetSocialLeaderboardDirectionTypeDESC"></a><code>GetSocialLeaderboardDirectionTypeDESC</code></dt>
 <dd>
 
 
-<p>There is some process active trying to verify the user&rsquo;s identity.</p>
+<p>The type is DESC</p>
 
 
 
@@ -134,41 +130,7 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
-	</p>
-	
-</dd>
-                            
-                            <dt><a name="" title="GetSocialUserAuthStateVerified"></a><code>GetSocialUserAuthStateVerified</code></dt>
-<dd>
-
-
-<p>The user&rsquo;s identity has been successfully verified.</p>
-
-
-
-
-
-    
-	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
-	</p>
-	
-</dd>
-                            
-                            <dt><a name="" title="GetSocialUserAuthStateClearing"></a><code>GetSocialUserAuthStateClearing</code></dt>
-<dd>
-
-
-<p>The user&rsquo;s identity is being cleared out.</p>
-
-
-
-
-
-    
-	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
@@ -185,7 +147,7 @@
                     
                     <div class="method-subsection declared-in-section">
                         <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">GetSocialAuthState.h</code></p>
+                        <p><code class="declared-in-ref">GetSocialConstants.h</code></p>
                     </div>
                     
                     

@@ -68,13 +68,17 @@
 		
 		<option value="//api/name/setAnimationStyle:forElementID:">- setAnimationStyle:forElementID:</option>
 		
+		<option value="//api/name/setAspectRatio:forElementID:">- setAspectRatio:forElementID:</option>
+		
+		<option value="//api/name/setBaseDesignWidth:">- setBaseDesignWidth:</option>
+		
 		<option value="//api/name/setBasePathForImages:">- setBasePathForImages:</option>
 		
 		<option value="//api/name/setColor:forElementID:">- setColor:forElementID:</option>
 		
-		<option value="//api/name/setDimension:disableScaling:forElementID:">- setDimension:disableScaling:forElementID:</option>
-		
 		<option value="//api/name/setDimension:forElementID:">- setDimension:forElementID:</option>
+		
+		<option value="//api/name/setDimension:prescaled:forElementID:">- setDimension:prescaled:forElementID:</option>
 		
 		<option value="//api/name/setFlag:forID:">- setFlag:forID:</option>
 		
@@ -425,8 +429,8 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/setDimension:disableScaling:forElementID:" title="setDimension:disableScaling:forElementID:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/setDimension:disableScaling:forElementID:">&ndash;&nbsp;setDimension:disableScaling:forElementID:</a></code>
+	<a name="//api/name/setDimension:prescaled:forElementID:" title="setDimension:prescaled:forElementID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setDimension:prescaled:forElementID:">&ndash;&nbsp;setDimension:prescaled:forElementID:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -441,7 +445,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)setDimension:(CGFloat)<em>dimension</em> disableScaling:(BOOL)<em>disableScaling</em> forElementID:(NSString *)<em>elementID</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)setDimension:(CGFloat)<em>dimension</em> prescaled:(BOOL)<em>prescaled</em> forElementID:(NSString *)<em>elementID</em></code></div>
 
 		    
 			
@@ -455,8 +459,66 @@
 					</tr>
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>disableScaling</code></th>
+						<th scope="row" class="argument-name"><code>prescaled</code></th>
 						<td><p>YES if scaling calculations are already done.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>elementID</code></th>
+						<td><p>The ID of the element to customise.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocialConfiguration.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setAspectRatio:forElementID:" title="setAspectRatio:forElementID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setAspectRatio:forElementID:">&ndash;&nbsp;setAspectRatio:forElementID:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Sets the aspect ratio for a specific elementID.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setAspectRatio:(CGFloat)<em>aspectRatio</em> forElementID:(NSString *)<em>elementID</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aspectRatio</code></th>
+						<td><p>The aspectRatio value.</p></td>
 					</tr>
 				
 					<tr>
@@ -1009,6 +1071,59 @@
 			
 		</div>
 	</div>
+</div><div class="section-method">
+	<a name="//api/name/setBaseDesignWidth:" title="setBaseDesignWidth:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setBaseDesignWidth:">&ndash;&nbsp;setBaseDesignWidth:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Specifies the base width of the designs for your <a href="../Classes/GetSocial.html">GetSocial</a> integration.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setBaseDesignWidth:(CGFloat)<em>baseDesignWidth</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>baseDesignWidth</code></th>
+						<td><p>The design width.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocialConfiguration.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
 </div>
 						</div>
 						
@@ -1022,7 +1137,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-04-20</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialPlugin Class Reference</title>
+	<title>GetSocialLeaderboardScore Class Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -56,25 +56,27 @@
 	
 	<optgroup label="Properties">
 		
-		<option value="//api/name/details">details</option>
+		<option value="//api/name/rank">rank</option>
 		
-		<option value="//api/name/displayOrder">displayOrder</option>
+		<option value="//api/name/user">user</option>
 		
-		<option value="//api/name/enabled">enabled</option>
-		
-		<option value="//api/name/imageUrl">imageUrl</option>
-		
-		<option value="//api/name/title">title</option>
+		<option value="//api/name/value">value</option>
 		
 	</optgroup>
 	
 
 	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/initLeaderboardScoreFromJSON:">+ initLeaderboardScoreFromJSON:</option>
+		
+	</optgroup>
+	
 
 	
 	<optgroup label="Instance Methods">
 		
-		<option value="//api/name/isAvailableForDevice">- isAvailableForDevice</option>
+		<option value="//api/name/valueWithFormat:">- valueWithFormat:</option>
 		
 	</optgroup>
 	
@@ -91,7 +93,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialPlugin Class Reference</h1>
+					<h1 class="title">GetSocialLeaderboardScore Class Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -100,7 +102,7 @@
 	<td>NSObject</td>
 </tr><tr>
 	<th>Declared in</th>
-	<td>GetSocialPlugin.h</td>
+	<td>GetSocialLeaderboardScore.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -110,7 +112,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>This protocol provides the base protocol for all plugins of by the <a href="../Classes/GetSocial.html">GetSocial</a> SDK.</p>
+						<p>Describes a Leaderboard score.</p>
 					</div>
 					
 					
@@ -126,8 +128,131 @@
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/title" title="title"></a>
-	<h3 class="method-title"><code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+	<a name="//api/name/user" title="user"></a>
+	<h3 class="method-title"><code><a href="#//api/name/user">&nbsp;&nbsp;user</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>User that has the score.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GetSocialUserIdentity *user</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocialLeaderboardScore.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/value" title="value"></a>
+	<h3 class="method-title"><code><a href="#//api/name/value">&nbsp;&nbsp;value</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The value of the score.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSInteger value</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocialLeaderboardScore.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/rank" title="rank"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rank">&nbsp;&nbsp;rank</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The rank of the <a href="#//api/name/user">user</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSInteger rank</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocialLeaderboardScore.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initLeaderboardScoreFromJSON:" title="initLeaderboardScoreFromJSON:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initLeaderboardScoreFromJSON:">+&nbsp;initLeaderboardScoreFromJSON:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -136,14 +261,14 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id title</code></div>
+			<div class="method-subsection method-declaration"><code>+ (GetSocialLeaderboardScore *)initLeaderboardScoreFromJSON:(id)<em>JSON</em></code></div>
 
 		    
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/details" title="details"></a>
-	<h3 class="method-title"><code><a href="#//api/name/details">&nbsp;&nbsp;details</a></code>
+	<a name="//api/name/valueWithFormat:" title="valueWithFormat:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/valueWithFormat:">&ndash;&nbsp;valueWithFormat:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -152,71 +277,7 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) id details</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/imageUrl" title="imageUrl"></a>
-	<h3 class="method-title"><code><a href="#//api/name/imageUrl">&nbsp;&nbsp;imageUrl</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *imageUrl</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/enabled" title="enabled"></a>
-	<h3 class="method-title"><code><a href="#//api/name/enabled">&nbsp;&nbsp;enabled</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL enabled</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/displayOrder" title="displayOrder"></a>
-	<h3 class="method-title"><code><a href="#//api/name/displayOrder">&nbsp;&nbsp;displayOrder</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSInteger displayOrder</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/isAvailableForDevice" title="isAvailableForDevice"></a>
-	<h3 class="method-title"><code><a href="#//api/name/isAvailableForDevice">&ndash;&nbsp;isAvailableForDevice</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>- (BOOL)isAvailableForDevice</code></div>
+			<div class="method-subsection method-declaration"><code>- (NSString *)valueWithFormat:(NSString *)<em>format</em></code></div>
 
 		    
 		</div>

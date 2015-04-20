@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialUserAuthState Constants Reference</title>
+	<title>GetSocialLeaderboardScoreType Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -59,13 +59,13 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialUserAuthState Constants Reference</h1>
+					<h1 class="title">GetSocialLeaderboardScoreType Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<th>Declared in</th>
-	<td>GetSocialAuthState.h</td>
+	<td>GetSocialConstants.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -75,11 +75,11 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">GetSocialUserAuthState</h3>
+                    <h3 class="subsubtitle method-title">GetSocialLeaderboardScoreType</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Describes a authentication state of the user.</p>
+                        <p>Constants for the Leaderboard score types</p>
 					</div>
 					
 					
@@ -87,15 +87,13 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, GetSocialUserAuthState ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, GetSocialLeaderboardScoreType ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateUnidentified</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialLeaderboardScoreTypeWorld</a> = 1,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerifying</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialLeaderboardScoreTypeFollowing</a> = 2,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerified</a>,<br>
-                            
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateClearing</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialLeaderboardScoreTypeOthers</a> = 3,<br>
                             
                             };</code>
                     
@@ -105,11 +103,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="GetSocialUserAuthStateUnidentified"></a><code>GetSocialUserAuthStateUnidentified</code></dt>
+                            <dt><a name="" title="GetSocialLeaderboardScoreTypeWorld"></a><code>GetSocialLeaderboardScoreTypeWorld</code></dt>
 <dd>
 
 
-<p>The user is not identified.</p>
+<p>Contains the scores of all the users</p>
 
 
 
@@ -117,16 +115,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateVerifying"></a><code>GetSocialUserAuthStateVerifying</code></dt>
+                            <dt><a name="" title="GetSocialLeaderboardScoreTypeFollowing"></a><code>GetSocialLeaderboardScoreTypeFollowing</code></dt>
 <dd>
 
 
-<p>There is some process active trying to verify the user&rsquo;s identity.</p>
+<p>Contains the scores of the users that you follow</p>
 
 
 
@@ -134,16 +132,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateVerified"></a><code>GetSocialUserAuthStateVerified</code></dt>
+                            <dt><a name="" title="GetSocialLeaderboardScoreTypeOthers"></a><code>GetSocialLeaderboardScoreTypeOthers</code></dt>
 <dd>
 
 
-<p>The user&rsquo;s identity has been successfully verified.</p>
+<p>Contains a subset of all users scores</p>
 
 
 
@@ -151,24 +149,7 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
-	</p>
-	
-</dd>
-                            
-                            <dt><a name="" title="GetSocialUserAuthStateClearing"></a><code>GetSocialUserAuthStateClearing</code></dt>
-<dd>
-
-
-<p>The user&rsquo;s identity is being cleared out.</p>
-
-
-
-
-
-    
-	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
@@ -185,7 +166,7 @@
                     
                     <div class="method-subsection declared-in-section">
                         <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">GetSocialAuthState.h</code></p>
+                        <p><code class="declared-in-ref">GetSocialConstants.h</code></p>
                     </div>
                     
                     

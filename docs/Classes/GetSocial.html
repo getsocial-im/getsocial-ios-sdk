@@ -60,6 +60,8 @@
 		
 		<option value="//api/name/configuration">configuration</option>
 		
+		<option value="//api/name/isChatEnabled">isChatEnabled</option>
+		
 		<option value="//api/name/isGameAuthenticated">isGameAuthenticated</option>
 		
 		<option value="//api/name/isUserAuthenticated">isUserAuthenticated</option>
@@ -88,6 +90,14 @@
 		
 		<option value="//api/name/close">- close</option>
 		
+		<option value="//api/name/getLeaderboard:success:failure:">- getLeaderboard:success:failure:</option>
+		
+		<option value="//api/name/getLeaderboardScores:offset:count:scoreType:success:failure:">- getLeaderboardScores:offset:count:scoreType:success:failure:</option>
+		
+		<option value="//api/name/getLeaderboards:count:success:failure:">- getLeaderboards:count:success:failure:</option>
+		
+		<option value="//api/name/getLeaderboards:success:failure:">- getLeaderboards:success:failure:</option>
+		
 		<option value="//api/name/getSavedGameStateWithSuccess:failure:">- getSavedGameStateWithSuccess:failure:</option>
 		
 		<option value="//api/name/getSupportedInviteProviders">- getSupportedInviteProviders</option>
@@ -98,9 +108,7 @@
 		
 		<option value="//api/name/open:withProperties:">- open:withProperties:</option>
 		
-		<option value="//api/name/postActivity:withImage:andTags:success:failure:">- postActivity:withImage:andTags:success:failure:</option>
-		
-		<option value="//api/name/postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:">- postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:</option>
+		<option value="//api/name/postActivity:withImage:buttonText:action:andTags:success:failure:">- postActivity:withImage:buttonText:action:andTags:success:failure:</option>
 		
 		<option value="//api/name/postScreenshot">- postScreenshot</option>
 		
@@ -112,15 +120,19 @@
 		
 		<option value="//api/name/setInviteFriendsBlock:">- setInviteFriendsBlock:</option>
 		
+		<option value="//api/name/setOnActivityActionClickHandler:">- setOnActivityActionClickHandler:</option>
+		
+		<option value="//api/name/setOnGameAvatarClickHandler:">- setOnGameAvatarClickHandler:</option>
+		
 		<option value="//api/name/setOnLoginRequestHandler:">- setOnLoginRequestHandler:</option>
 		
 		<option value="//api/name/setOnNotificationsChangeHandler:">- setOnNotificationsChangeHandler:</option>
 		
 		<option value="//api/name/setOnUserAvatarClickHandler:">- setOnUserAvatarClickHandler:</option>
 		
-		<option value="//api/name/setPurchaseActivityButtonPressedHandler:">- setPurchaseActivityButtonPressedHandler:</option>
-		
 		<option value="//api/name/setScreenshotImage:">- setScreenshotImage:</option>
+		
+		<option value="//api/name/submitLeaderboardScore:forLeaderboardID:success:failure:">- submitLeaderboardScore:forLeaderboardID:success:failure:</option>
 		
 		<option value="//api/name/takeScreenshot">- takeScreenshot</option>
 		
@@ -376,6 +388,47 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL isUserAuthenticated</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isChatEnabled" title="isChatEnabled"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isChatEnabled">&nbsp;&nbsp;isChatEnabled</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Current chat status</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL isChatEnabled</code></div>
 
 		    
 			
@@ -1112,91 +1165,8 @@ when the application (re)authenticates the user directly.</p>
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:" title="postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:">&ndash;&nbsp;postPurchaseActivity:andItemID:andItemName:andImageURL:andButtonText:andTags:</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>Posts a Purchase Activity</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>- (BOOL)postPurchaseActivity:(NSString *)<em>activityText</em> andItemID:(NSString *)<em>itemID</em> andItemName:(NSString *)<em>itemName</em> andImageURL:(NSString *)<em>imageURL</em> andButtonText:(NSString *)<em>buttonText</em> andTags:(NSArray *)<em>tags</em></code></div>
-
-		    
-			
-			<div class="method-subsection arguments-section parameters">
-				<h4 class="method-subtitle parameter-title">Parameters</h4>
-				<table class="argument-def parameter-def">
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>activityText</code></th>
-						<td><p>The text of the activity (can&rsquo;t be nil)</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>itemID</code></th>
-						<td><p>The ID of the item purchased (will be sent in the callback if someone clicks the action button, can&rsquo;t be nil)</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>itemName</code></th>
-						<td><p>The name of the item purchased (can&rsquo;t be nil, max 16 characters)</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>imageURL</code></th>
-						<td><p>The URL for the image of the item purchased. (suggested size: 48 x 48)</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>buttonText</code></th>
-						<td><p>The text for the action button dislayed in the purchase activity (max 10 characters)</p></td>
-					</tr>
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>tags</code></th>
-						<td><p>An array of strings that define all the tags for the activity.</p></td>
-					</tr>
-				
-				</table>
-			</div>
-			
-
-			
-			<div class="method-subsection return">
-				<h4 class="method-subtitle parameter-title">Return Value</h4>
-				<p>YES if valid parameters were passed, NO otherwise</p>
-			</div>
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocial.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/postActivity:withImage:andTags:success:failure:" title="postActivity:withImage:andTags:success:failure:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/postActivity:withImage:andTags:success:failure:">&ndash;&nbsp;postActivity:withImage:andTags:success:failure:</a></code>
+	<a name="//api/name/postActivity:withImage:buttonText:action:andTags:success:failure:" title="postActivity:withImage:buttonText:action:andTags:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/postActivity:withImage:buttonText:action:andTags:success:failure:">&ndash;&nbsp;postActivity:withImage:buttonText:action:andTags:success:failure:</a></code>
 </h3>
 
 	<div class="method-info">
@@ -1211,7 +1181,7 @@ when the application (re)authenticates the user directly.</p>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (void)postActivity:(NSString *)<em>activityText</em> withImage:(UIImage *)<em>image</em> andTags:(NSArray *)<em>tags</em> success:(void ( ^ ) ( ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (void)postActivity:(NSString *)<em>activityText</em> withImage:(UIImage *)<em>image</em> buttonText:(NSString *)<em>buttonText</em> action:(NSString *)<em>action</em> andTags:(NSArray *)<em>tags</em> success:(void ( ^ ) ( ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
 
 		    
 			
@@ -1230,6 +1200,16 @@ when the application (re)authenticates the user directly.</p>
 					</tr>
 				
 					<tr>
+						<th scope="row" class="argument-name"><code>buttonText</code></th>
+						<td><p>The text of the activity button, or null if no button text should be shown.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>action</code></th>
+						<td><p>The action generated on click, or null if no button or image is shown.</p></td>
+					</tr>
+				
+					<tr>
 						<th scope="row" class="argument-name"><code>tags</code></th>
 						<td><p>An array of strings that define all the tags for the activity.</p></td>
 					</tr>
@@ -1242,59 +1222,6 @@ when the application (re)authenticates the user directly.</p>
 					<tr>
 						<th scope="row" class="argument-name"><code>failure</code></th>
 						<td><p>Executed when posting the activity failed.</p></td>
-					</tr>
-				
-				</table>
-			</div>
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">GetSocial.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/setPurchaseActivityButtonPressedHandler:" title="setPurchaseActivityButtonPressedHandler:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/setPurchaseActivityButtonPressedHandler:">&ndash;&nbsp;setPurchaseActivityButtonPressedHandler:</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>Register a Handler Block for Purchase Activity. This block is executed when someone taps on the action button within a Purchase type activity. The itemID is passed as an argument.</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>- (void)setPurchaseActivityButtonPressedHandler:(void ( ^ ) ( NSString *itemID ))<em>onPurchaseActivityButtonPressed</em></code></div>
-
-		    
-			
-			<div class="method-subsection arguments-section parameters">
-				<h4 class="method-subtitle parameter-title">Parameters</h4>
-				<table class="argument-def parameter-def">
-				
-					<tr>
-						<th scope="row" class="argument-name"><code>onPurchaseActivityButtonPressed</code></th>
-						<td><p>Block to be executed if the action button is tapped</p></td>
 					</tr>
 				
 				</table>
@@ -1516,7 +1443,7 @@ when the application (re)authenticates the user directly.</p>
 			
 			
 			<div class="method-subsection brief-description">
-				<p>Register a block to override GetSocial&rsquo;s default behaviour while clicking on a user avatar. Any click on an avatar from anywhere in the SDK will call this block.</p>
+				<p>Register a block to override GetSocial&rsquo;s default behaviour when clicking on a user avatar. Any click on an avatar from anywhere in the SDK will call this block.</p>
 			</div>
 			
 		    
@@ -1532,6 +1459,59 @@ when the application (re)authenticates the user directly.</p>
 					<tr>
 						<th scope="row" class="argument-name"><code>onUserAvatarClickHandler</code></th>
 						<td><p>Block to be executed when a user clicks on a user avatar, user guid will be provided. Return YES if action was handled by the game. Return NO for default GetSocial behaviour</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setOnGameAvatarClickHandler:" title="setOnGameAvatarClickHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnGameAvatarClickHandler:">&ndash;&nbsp;setOnGameAvatarClickHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Register a block to be executed when clicking on the game avatar. Any click on the game avatar avatar from anywhere in the SDK will call this block.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setOnGameAvatarClickHandler:(BOOL ( ^ ) ( ))<em>onGameAvatarClickHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>onGameAvatarClickHandler</code></th>
+						<td><p>Block to be executed when a user clicks on the game avatar. Return YES if action was handled by the game. Return NO for default GetSocial behaviour</p></td>
 					</tr>
 				
 				</table>
@@ -1638,6 +1618,59 @@ when the application (re)authenticates the user directly.</p>
 					<tr>
 						<th scope="row" class="argument-name"><code>onLoginRequestHandler</code></th>
 						<td><p>Block to be executed to login a user.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setOnActivityActionClickHandler:" title="setOnActivityActionClickHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnActivityActionClickHandler:">&ndash;&nbsp;setOnActivityActionClickHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Register a block for handling activity action button click. This block is executed when someone clicks on the action button within a Activity. The action is passed as an argument.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setOnActivityActionClickHandler:(void ( ^ ) ( NSString *action ))<em>onActivityActionClickHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>onActivityActionClick</code></th>
+						<td><p>Block to be executed if the action button is tapped. Action contains the value defined when Activity was posted.</p></td>
 					</tr>
 				
 				</table>
@@ -1795,6 +1828,349 @@ when the application (re)authenticates the user directly.</p>
 </div>
 						</div>
 						
+
+						<a title="Leaderboards" name="task_Leaderboards"></a>
+						<h2 class="task-title">Leaderboards</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/getLeaderboard:success:failure:" title="getLeaderboard:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getLeaderboard:success:failure:">&ndash;&nbsp;getLeaderboard:success:failure:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Gets leaderboard by identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)getLeaderboard:(NSString *)<em>leaderboardID</em> success:(void ( ^ ) ( GetSocialLeaderboard *leaderboard ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>leaderboardID</code></th>
+						<td><p>The identifier of the leaderboard.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Executed with the leaderboard object when the leaderboard is retrieved successfully.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Executed when fetching the leaderboard failed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getLeaderboards:success:failure:" title="getLeaderboards:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getLeaderboards:success:failure:">&ndash;&nbsp;getLeaderboards:success:failure:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Gets leaderboards by array of identifiers.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)getLeaderboards:(NSArray *)<em>leaderboardIDs</em> success:(void ( ^ ) ( NSArray *leaderboards ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>leaderboardIDs</code></th>
+						<td><p>An array of identifiers of the leaderboard.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Executed with an array of leaderboards when the leaderboards are retrieved successfully.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Executed when fetching the leaderboards failed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getLeaderboards:count:success:failure:" title="getLeaderboards:count:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getLeaderboards:count:success:failure:">&ndash;&nbsp;getLeaderboards:count:success:failure:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Gets leaderboards page by page.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)getLeaderboards:(NSInteger)<em>offset</em> count:(NSInteger)<em>count</em> success:(void ( ^ ) ( NSArray *leaderboards ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>offset</code></th>
+						<td><p>The offset from which leaderboards will be retrieved.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>count</code></th>
+						<td><p>The count of the leaderboards. Could be less than expected if there are less leaderboards.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Executed with an array of leaderboards when the leaderboards are retrieved successfully.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Executed when fetching the leaderboard failed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getLeaderboardScores:offset:count:scoreType:success:failure:" title="getLeaderboardScores:offset:count:scoreType:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getLeaderboardScores:offset:count:scoreType:success:failure:">&ndash;&nbsp;getLeaderboardScores:offset:count:scoreType:success:failure:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Gets scores page by page.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)getLeaderboardScores:(NSString *)<em>leaderboardID</em> offset:(NSInteger)<em>offset</em> count:(NSInteger)<em>count</em> scoreType:(GetSocialLeaderboardScoreType)<em>scoreType</em> success:(void ( ^ ) ( NSArray *scores ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>offset</code></th>
+						<td><p>The offset from which scores will be retrieved.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>count</code></th>
+						<td><p>The count of the scores. Could be less than expected if there are less scores.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Executed with an array of scores when the scores are retrieved successfully.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Executed when fetching the scores failed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/submitLeaderboardScore:forLeaderboardID:success:failure:" title="submitLeaderboardScore:forLeaderboardID:success:failure:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/submitLeaderboardScore:forLeaderboardID:success:failure:">&ndash;&nbsp;submitLeaderboardScore:forLeaderboardID:success:failure:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Submits the score to a specific leaderboard.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)submitLeaderboardScore:(NSInteger)<em>score</em> forLeaderboardID:(NSString *)<em>leaderboardID</em> success:(void ( ^ ) ( NSInteger position ))<em>success</em> failure:(void ( ^ ) ( NSError *error ))<em>failure</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>score</code></th>
+						<td><p>The score to be submitted.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>leaderboardID</code></th>
+						<td><p>The id of the leaderboard on which the score will be recorded.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>success</code></th>
+						<td><p>Executed with a current position in the leaderboard.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failure</code></th>
+						<td><p>Executed when submitting the score failes.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
 					</div>
 					
 					
@@ -1805,7 +2181,7 @@ when the application (re)authenticates the user directly.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-03-03</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-04-20</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
