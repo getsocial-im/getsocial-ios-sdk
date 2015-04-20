@@ -54,8 +54,6 @@ To manage the integration of the GetSocial SDK, [login to your developer account
 * [Integration with facebook](#integration-with-facebook)
   * [User Authentication](#user-authentication)
   * [Smart Invites](#smart-invites)
-
-
 * [Customizing the appearance](#customizing-the-appearance)
   * [Getting the current configuration](#getting-the-current-configuration)
   * [Specifying window width and height](#specifying-window-width-and-height)
@@ -67,6 +65,10 @@ To manage the integration of the GetSocial SDK, [login to your developer account
   * [Specifying text styles](#specifying-text-styles)
   * [Using custom fonts](#using-custom-fonts)
   * [UI Reference Table](#ui-reference-table)
+* [Webhooks](#webhooks)
+  * [Webhook Syntax](#webhook-syntax)
+  * [Register Webhook on Dashboard](#register-webhook-on-dashboard)
+  * [Using Requestb.in to test the webhook](#using-requestbin-to-test-the-webhook)
 
 
 
