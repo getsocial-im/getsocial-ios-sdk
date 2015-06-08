@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>GetSocialUserAuthState Constants Reference</title>
+	<title>GetSocialUserGeneratedContentType Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -59,13 +59,13 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">GetSocialUserAuthState Constants Reference</h1>
+					<h1 class="title">GetSocialUserGeneratedContentType Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<th>Declared in</th>
-	<td>GetSocialAuthState.h</td>
+	<td>GetSocialConstants.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -75,11 +75,11 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">GetSocialUserAuthState</h3>
+                    <h3 class="subsubtitle method-title">GetSocialUserGeneratedContentType</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Describes a authentication state of the user.</p>
+                        <p>Constants for the User Generated Content</p>
 					</div>
 					
 					
@@ -87,15 +87,17 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, GetSocialUserAuthState ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, GetSocialUserGeneratedContentType ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateUnidentified</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserGeneratedContentTypeActivity</a> = 1,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerifying</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserGeneratedContentTypeComment</a> = 2,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateVerified</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserGeneratedContentTypePrivateChatMessage</a> = 3,<br>
                             
-                            &nbsp;&nbsp; <a href="">GetSocialUserAuthStateClearing</a>,<br>
+                            &nbsp;&nbsp; <a href="">GetSocialUserGeneratedContentTypeGroupChatMessage</a> = 4,<br>
+                            
+                            &nbsp;&nbsp; <a href="">GetSocialUserGeneratedContentTypePublicChatMessage</a> = 5,<br>
                             
                             };</code>
                     
@@ -105,11 +107,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="GetSocialUserAuthStateUnidentified"></a><code>GetSocialUserAuthStateUnidentified</code></dt>
+                            <dt><a name="" title="GetSocialUserGeneratedContentTypeActivity"></a><code>GetSocialUserGeneratedContentTypeActivity</code></dt>
 <dd>
 
 
-<p>The user is not identified.</p>
+<p>Activity</p>
 
 
 
@@ -117,16 +119,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateVerifying"></a><code>GetSocialUserAuthStateVerifying</code></dt>
+                            <dt><a name="" title="GetSocialUserGeneratedContentTypeComment"></a><code>GetSocialUserGeneratedContentTypeComment</code></dt>
 <dd>
 
 
-<p>There is some process active trying to verify the user&rsquo;s identity.</p>
+<p>Activity comment</p>
 
 
 
@@ -134,16 +136,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateVerified"></a><code>GetSocialUserAuthStateVerified</code></dt>
+                            <dt><a name="" title="GetSocialUserGeneratedContentTypePrivateChatMessage"></a><code>GetSocialUserGeneratedContentTypePrivateChatMessage</code></dt>
 <dd>
 
 
-<p>The user&rsquo;s identity has been successfully verified.</p>
+<p>Private Chat message</p>
 
 
 
@@ -151,16 +153,16 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
                             
-                            <dt><a name="" title="GetSocialUserAuthStateClearing"></a><code>GetSocialUserAuthStateClearing</code></dt>
+                            <dt><a name="" title="GetSocialUserGeneratedContentTypeGroupChatMessage"></a><code>GetSocialUserGeneratedContentTypeGroupChatMessage</code></dt>
 <dd>
 
 
-<p>The user&rsquo;s identity is being cleared out.</p>
+<p>Open room chat message</p>
 
 
 
@@ -168,7 +170,24 @@
 
     
 	<p>
-		Declared In <code class="declared-in-ref">GetSocialAuthState.h</code>.
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="GetSocialUserGeneratedContentTypePublicChatMessage"></a><code>GetSocialUserGeneratedContentTypePublicChatMessage</code></dt>
+<dd>
+
+
+<p>Open room chat message</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">GetSocialConstants.h</code>.
 	</p>
 	
 </dd>
@@ -185,7 +204,7 @@
                     
                     <div class="method-subsection declared-in-section">
                         <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">GetSocialAuthState.h</code></p>
+                        <p><code class="declared-in-ref">GetSocialConstants.h</code></p>
                     </div>
                     
                     

@@ -29,7 +29,20 @@
     [[GetSocial sharedInstance] setOnLoginRequestHandler:^{
         [self loginWithFacebook];
     }];
-
+    
+    [[GetSocial sharedInstance] setOnActivityActionClickHandler:^(NSString *action) {
+        [self showAlertWithTitle:@"Action Button Click" andText:[NSString stringWithFormat:@"%@", action]];
+    }];
+    
+    [[GetSocial sharedInstance] setOnInviteButtonClickHandler:^BOOL{
+        [self showAlertWithTitle:@"Invite Button Click" andText:@""];
+        return NO;
+    }];
+    
+    [[GetSocial sharedInstance] setOnReferralDataReceivedHandler:^(NSArray *referralData) {
+        [self showAlertWithTitle:@"Referral data received" andText:[NSString stringWithFormat:@"%@", referralData]];
+    }];
+    
     [self showVersionNumber];
     
     //set current user language
@@ -108,6 +121,14 @@
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
     [[GetSocialFacebookUtils sharedInstance] updateSessionState];
+}
+
+-(void)showAlertWithTitle:(NSString*)title andText:(NSString*)text
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:text delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alertView show];
+    
+    alertView = nil;
 }
 
 

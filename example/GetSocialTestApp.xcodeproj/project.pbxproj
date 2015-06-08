@@ -14,6 +14,7 @@
 		99AD21591A8BABAB00A46C07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AD21581A8BABAB00A46C07 /* Images.xcassets */; };
 		99C03DD11AA5D8E9000A7FA0 /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */; };
 		99C03DD21AA5D8E9000A7FA0 /* GetSocial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */; };
+		99CDC1081B0E21370088BCD1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CDC1071B0E21370088BCD1 /* AdSupport.framework */; };
 		99EFA4A61A78E707009FC9D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A51A78E707009FC9D7 /* main.m */; };
 		99EFA4A91A78E707009FC9D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A81A78E707009FC9D7 /* AppDelegate.m */; };
 		99EFA4AC1A78E707009FC9D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4AB1A78E707009FC9D7 /* ViewController.m */; };
@@ -45,6 +46,7 @@
 		99AD21581A8BABAB00A46C07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocial.framework; sourceTree = "<group>"; };
 		99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocial.bundle; sourceTree = "<group>"; };
+		99CDC1071B0E21370088BCD1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		99EFA4A01A78E707009FC9D7 /* GetSocialTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSocialTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99EFA4A41A78E707009FC9D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99EFA4A51A78E707009FC9D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99CDC1081B0E21370088BCD1 /* AdSupport.framework in Frameworks */,
 				99EFA4F51A78EC27009FC9D7 /* libresolv.dylib in Frameworks */,
 				99EFA4F31A78EC0A009FC9D7 /* libz.dylib in Frameworks */,
 				99EFA4F11A78EBAF009FC9D7 /* MobileCoreServices.framework in Frameworks */,
@@ -164,6 +167,7 @@
 		99EFA4F61A78ECEA009FC9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99CDC1071B0E21370088BCD1 /* AdSupport.framework */,
 				99C03DCD1AA5D8E9000A7FA0 /* GetSocial.embeddedframework */,
 				99AD213E1A8B7AD100A46C07 /* FacebookSDK.framework */,
 				99EFA4D41A78EA6A009FC9D7 /* Accelerate.framework */,

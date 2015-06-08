@@ -60,7 +60,7 @@
     return params;
 }
 
--(void) inviteFriendsWithSubject:(NSString*) subject text:(NSString*) text image:(UIImage*) image success:(GetSocialInviteSuccessCallback) successCallback cancel:(GetSocialCancelCallback) cancelCallback error:(GetSocialErrorCallback) errorCallback
+-(void) inviteFriendsWithSubject:(NSString*) subject text:(NSString*) text referralDataUrl:(NSString*) referralDataUrl image:(UIImage*) image success:(GetSocialInviteSuccessCallback) successCallback cancel:(GetSocialCancelCallback) cancelCallback error:(GetSocialErrorCallback) errorCallback
 {
     void (^inviteBlock)() = ^{
         [FBWebDialogs

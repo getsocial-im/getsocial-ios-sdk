@@ -124,11 +124,17 @@
 		
 		<option value="//api/name/setOnGameAvatarClickHandler:">- setOnGameAvatarClickHandler:</option>
 		
+		<option value="//api/name/setOnInviteButtonClickHandler:">- setOnInviteButtonClickHandler:</option>
+		
 		<option value="//api/name/setOnLoginRequestHandler:">- setOnLoginRequestHandler:</option>
 		
 		<option value="//api/name/setOnNotificationsChangeHandler:">- setOnNotificationsChangeHandler:</option>
 		
+		<option value="//api/name/setOnReferralDataReceivedHandler:">- setOnReferralDataReceivedHandler:</option>
+		
 		<option value="//api/name/setOnUserAvatarClickHandler:">- setOnUserAvatarClickHandler:</option>
+		
+		<option value="//api/name/setOnUserGeneratedContentHandler:">- setOnUserGeneratedContentHandler:</option>
 		
 		<option value="//api/name/setScreenshotImage:">- setScreenshotImage:</option>
 		
@@ -707,9 +713,9 @@ nil if the user hasn&rsquo;t logged with Facebook or E-mail or has logged out.</
 <li>kGetSocialInviteImage: Open GetSocialViewTypeSmartInvite and set an image to be sent with the invite</li>
 <li>kGetSocialInviteText: Open GetSocialViewTypeSmartInvite and set a text to be sent with the invite</li>
 <li>kGetSocialInviteSubject: Open GetSocialViewTypeSmartInvite and set a subject to be sent with the invite</li>
+<li>kGetSocialInviteReferralData: Open GetSocialViewTypeSmartInvite and set custom data to be sent with the invite</li>
 <li>kGetSocialActivityTags: Open GetSocialViewTypeActivities and set the tags to add to any activity posted there</li>
 <li>kGetSocialActivityGroup: Open GetSocialViewTypeActivities and set the group to show activities for</li>
-<li>kGetSocialSource: A string that defines the source from where GetSocial view was opened</li>
 <li>kGetSocialRoomName: A string that defines the unique name of the global chat room</li>
 </ul>
 </td>
@@ -990,9 +996,10 @@ The NSInteger param in the completion block shows how many invites are sent. If 
 <p>Supported Properties:</p>
 
 <ul>
-<li>kGetSocialInviteImage: Open GetSocialViewTypeSmartInvite and set an image to be sent with the invite</li>
-<li>kGetSocialInviteText: Open GetSocialViewTypeSmartInvite and set a text to be sent with the invite</li>
-<li>kGetSocialInviteSubject: Open GetSocialViewTypeSmartInvite and set a subject to be sent with the invite</li>
+<li>kGetSocialInviteImage: set an image to be sent with the invite</li>
+<li>kGetSocialInviteText: set a text to be sent with the invite</li>
+<li>kGetSocialInviteSubject: set a subject to be sent with the invite</li>
+<li>kGetSocialInviteReferralData: set custom data to be sent with the invite</li>
 </ul>
 </td>
 					</tr>
@@ -1669,8 +1676,170 @@ when the application (re)authenticates the user directly.</p>
 				<table class="argument-def parameter-def">
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>onActivityActionClick</code></th>
+						<th scope="row" class="argument-name"><code>onActivityActionClickHandler</code></th>
 						<td><p>Block to be executed if the action button is tapped. Action contains the value defined when Activity was posted.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setOnReferralDataReceivedHandler:" title="setOnReferralDataReceivedHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnReferralDataReceivedHandler:">&ndash;&nbsp;setOnReferralDataReceivedHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Register a block for handling referral data received. This block is executed when someone
+clicks on a invite link. The referralData is passed as argument.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setOnReferralDataReceivedHandler:(void ( ^ ) ( NSArray *referralData ))<em>onReferralDataReceivedHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>onReferralDataReceivedHandler</code></th>
+						<td><p>Block to be executed when the invite link is clicked.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setOnInviteButtonClickHandler:" title="setOnInviteButtonClickHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnInviteButtonClickHandler:">&ndash;&nbsp;setOnInviteButtonClickHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Register a block to override Invite action. This block is executed when someone
+clicks on a invite button.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setOnInviteButtonClickHandler:(BOOL ( ^ ) ( ))<em>onInviteButtonClickHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>onInviteButtonClickHandler</code></th>
+						<td><p>Block to be executed when the invite button is clicked. Return YES if action was handled by the game. Return NO for default GetSocial behaviour</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">GetSocial.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setOnUserGeneratedContentHandler:" title="setOnUserGeneratedContentHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setOnUserGeneratedContentHandler:">&ndash;&nbsp;setOnUserGeneratedContentHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Register a block to handle user generated content. This block is executed when a user
+sends any type of content through activities or chat.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setOnUserGeneratedContentHandler:(NSString *( ^ ) ( GetSocialUserGeneratedContentType type , NSString *content ))<em>onUserGeneratedContentHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>onUserGeneratedContentHandler</code></th>
+						<td><p>Block to be executed when the content is ready to be send. Return the approved content to send or nil if the content shouldn&rsquo;t be send.</p></td>
 					</tr>
 				
 				</table>
@@ -2053,6 +2222,11 @@ when the application (re)authenticates the user directly.</p>
 				<table class="argument-def parameter-def">
 				
 					<tr>
+						<th scope="row" class="argument-name"><code>leaderboardID</code></th>
+						<td><p>The identifier of the leaderboard.</p></td>
+					</tr>
+				
+					<tr>
 						<th scope="row" class="argument-name"><code>offset</code></th>
 						<td><p>The offset from which scores will be retrieved.</p></td>
 					</tr>
@@ -2060,6 +2234,11 @@ when the application (re)authenticates the user directly.</p>
 					<tr>
 						<th scope="row" class="argument-name"><code>count</code></th>
 						<td><p>The count of the scores. Could be less than expected if there are less scores.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>scoreType</code></th>
+						<td><p>The type of score to retrieve, check enum <a href="../Constants/GetSocialLeaderboardScoreType.html">GetSocialLeaderboardScoreType</a>.</p></td>
 					</tr>
 				
 					<tr>
@@ -2080,11 +2259,6 @@ when the application (re)authenticates the user directly.</p>
 
 			
 
-			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<p>@</p>
-			</div>
 			
 
 			
@@ -2132,7 +2306,7 @@ when the application (re)authenticates the user directly.</p>
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>leaderboardID</code></th>
-						<td><p>The id of the leaderboard on which the score will be recorded.</p></td>
+						<td><p>The identifier of the leaderboard.</p></td>
 					</tr>
 				
 					<tr>
@@ -2181,7 +2355,7 @@ when the application (re)authenticates the user directly.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-04-20</p>
+						<p class="copyright">Copyright &copy; 2015 GetSocial. All rights reserved. Updated: 2015-06-08</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

@@ -2,6 +2,19 @@
 
 ## Version History
 
+### v3.5.2
+---
+- Bug fixes
+
+### v3.5.1
+---
+- ADDED user content moderation callback
+
+### v3.5.0
+---
+- ADDED support for deeplinking
+- ADDED invite data bundling
+
 ### v3.4.0
 ---
 - Support for activities with image, button, action

@@ -47,7 +47,11 @@ To manage the integration of the GetSocial SDK, [login to your developer account
 * [Activities](#activities)
 * [Chat](#chat)
   * [Chat rooms](#chat-rooms)
+  * [Invite Friends](#invite-friends)
+* [Content Moderation](#content-moderation)
 * [Smart Invites](#smart-invites)
+  * [Referral Data](#referral-data)
+  * [Deep Linking](#deep-linking)
 * [Leaderboards](#leaderboards)
 * [Notification Center](#notification-center)
 * [Push Notifications](#push-notifications)
@@ -90,6 +94,7 @@ You need to ensure that you include in the "Link Binary with Libraries" the foll
 
 
 * Accelerate.framework
+* AdSupport.framework
 * AudioToolbox.framework
 * AVFoundation.framework
 * CoreLocation.framework
@@ -250,7 +255,6 @@ Showing activities for your game is quite easy
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeActivities];
-
 ```
 
 
@@ -261,7 +265,6 @@ You can also pass a NSDictionary as second argument to specify additional proper
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialTitle:@"Level 1"}];
-
 ```
 
 
@@ -292,13 +295,9 @@ Posted activities can include text, image, button and an action. For more inform
 
 ```objectivec
 [[GetSocial sharedInstance] postActivity:@"I have just bought an extra life" withImage:[UIImage imageNamed:@"lifepromo.png"] buttonText:@"Get one!" action:@"buy-extra-life" andTags:nil success:^{
-
                 // activity was posted successfully
-
             } failure:^(NSError *error) {
-
                 // A generic error occurred or the user was not authenticated
-
             }];
 ```
 
@@ -323,9 +322,7 @@ For handling actions in activities you will need to define a block to handle tha
 
 ```objectivec
 [[GetSocial sharedInstance] setActivityActionClickHandler:^(NSString *action) {
-
         // Custom code to handle the received action
-
 }];
 ```
 
@@ -382,7 +379,6 @@ You can enable or disable the chat functionality per country from the developer 
 
  ```objectivec
 [[GetSocial sharedInstance] isChatEnabled];
-
 ```
 
 
@@ -398,7 +394,6 @@ You can link to the chat views that enable your users to view their active conve
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeChat];
-
 ```
 
 
@@ -414,12 +409,7 @@ You can also directly open a chat conversation from user’s avatar within the g
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeActivities withProperties:@{kGetSocialProvider:@"facebook", kGetSocialUserID:@"0123456789"}];
-
 ```
-
-
-
-
 
 
 
@@ -435,18 +425,12 @@ Chat rooms are magical constructs where kind spirits from your community come to
 
 
 ```objectivec
-
-
-
 NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
 
 [properties setObject:@"roomName" forKey:kGetSocialRoomName];
-
 [properties setObject:@"Room Name" forKey:kGetSocialTitle];
 
-	
 [[GetSocial sharedInstance] open:GetSocialViewTypeChat withProperties:properties];
-
 ```
 
 
@@ -456,7 +440,50 @@ NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
 
 
 
+## Invite Friends
 
+
+
+The GetSocialSDK UI for Chat has embedded entry points to invite new friends using Smart Invites. If you want to customize or override this behaviour you can register this handler.
+
+
+
+
+```objectivec
+[[GetSocial sharedInstance] setOnInviteButtonClickHandler:^BOOL{
+// Custom code to handle the invite button click
+	return YES;
+}];
+```
+
+
+
+
+# Content Moderation
+
+To allow you to moderate the content that users generate inside your game, you can register for a callback. This callback will be called everytime a user wants to post some content to the activity feed or via chat (private, group or open rooms).
+
+Implementing this callback allows you to verify that the content adheres to your standards or modify/refuse the content if it does not.
+
+Content can be evaluated differently according the ContentType. For example, you might want to moderate messages on an Open Room, but allow any kind of messages on Private chats.
+
+```objectivec
+[[GetSocial sharedInstance] setOnUserGeneratedContentHandler:^NSString *(GetSocialUserGeneratedContentType type, NSString *content) {
+        
+        NSString* approvedContent = [content stringByReplacingOccurrencesOfString:@"SoftBadWord" withString:@"*****"];
+
+        if ([approvedContent rangeOfString:@"HardBadWord"].location != NSNotFound)
+        {
+            approvedContent = nil;
+        }
+        
+        return approvedContent;
+    }];
+```
+
+We can also enable out-of-the-box Content Moderation for your game in several languages.
+
+Please [Contact us](mailto:info@getsocial.im) if you are interested in getting more information about this service.
 
 # Smart Invites
 
@@ -468,7 +495,6 @@ Using Smart Invites users can easily invite their friends to join and play the g
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeSmartInvite];
-
 ```
 
 
@@ -481,31 +507,51 @@ You will see several options to invite friends, depending on what applications y
 
 
 
-In case you’ll decide to implement your own UI for smart invites, we expose methods to get list of supported invite providers on current device and perform invite with selected provider.
+In case you decide to implement your own UI for smart invites, we expose methods to get list of supported invite providers on current device and perform invite with a specific provider.
+
+
+
+You can also attach any custom data inside the Smart Invite. This data will be accessible by the receiver of the Smart Invite once the app is installed, if it wasn’t before, or open, if it was already on the device.
 
 
 
 ```objectivec
-
-
-NSArray *providersAsString = [GetSocial sharedInstance].getSupportedInviteProviders;
-
-    
-
 NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
 
-properties[kGetSocialInviteSubject] = @"Subject";
-
-properties[kGetSocialInviteText] = @"Text";
-
+properties[kGetSocialInviteSubject] = @"A subject";
+properties[kGetSocialInviteText] = @"A message with [APP_INVITE_URL]";
 properties[kGetSocialInviteImage] = [UIImage imageNamed:@"Image"];
+properties[kGetSocialInviteReferralData] = @{@"level":@1,@"stars":@20,@"reward":@YES,@"source":@"topRightButton"};
 
-    
+//Invite programmatically
 
-[[GetSocial sharedInstance] inviteFriendsUsingProvider:@"ProviderString" withProperties:properties];
+[[GetSocial sharedInstance] inviteFriendsUsingProvider:@"whatsapp" withProperties:properties];
+
+//Or show the UI to the user
+
+[[GetSocial sharedInstance] open:GetSocialViewTypeSmartInvite withProperties:properties];
+```
 
 
 
+
+
+
+
+
+## Referral data
+
+
+
+To retrieve the custom data embedded to the Smart Invite you need to register for a callback:
+
+
+
+
+```objectivec
+[[GetSocial sharedInstance] setOnReferralDataReceivedHandler:^(NSArray *referralData) {
+	//Process referral Data
+}];
 ```
 
 
@@ -517,21 +563,33 @@ properties[kGetSocialInviteImage] = [UIImage imageNamed:@"Image"];
 
 
 
+This callback will be called after the game is authenticated and if we match the install or open with a previous click on a Smart Invite link.
 
 
 
 
 
 
+## Deep Linking
+
+
+When a user clicks on an smart invite link, he should be redirected to the app if the app is already installed on his device. 
+
+
+
+
+Open the .plist for your project and create an array key called URL types with a single array sub-item called URL Schemes. Add a single item with “getsocial-[YOUR_APP_ID]”.
 
 
 
 
 
 
+You can find the [YOUR_APP_ID] in the App Information section of the [GetSocial Developer Portal](https://developers.getsocial.im).
 
+# 
 
-
+# 
 
 # Leaderboards
 
@@ -542,28 +600,16 @@ From the [GetSocial Developer Portal](https://developers.getsocial.im) you can c
 
 
 ```objectivec
-
-
-
 // Gets single leaderboard by ID
 - (void) getLeaderboard:(NSString*)leaderboardID success:(void (^)(GetSocialLeaderboard *leaderboard)) success failure:(void (^)(NSError* error)) failure;
 
-
-
 // Gets list of leaderboards by IDs
-
 - (void) getLeaderboards:(NSArray*)leaderboardIDs success:(void (^)(NSArray *leaderboards)) success failure:(void (^)(NSError* error)) failure;
 
-
-
 // Gets list of leaderboards by specifying the offset and the count you wish to retrieve
-
 - (void) getLeaderboards:(NSInteger)offset count:(NSInteger)count success:(void (^)(NSArray *leaderboards)) success failure:(void (^)(NSError* error)) failure;
 
-
-
 //Gets the score for a leaderboard with a specific ID
-
 - (void) getLeaderboardScores:(NSString*)leaderboardID offset:(NSInteger)offset count:(NSInteger)count scoreType:(GetSocialLeaderboardScoreType)scoreType success:(void (^)(NSArray *scores)) success failure:(void (^)(NSError* error)) failure;
 ```
 
@@ -595,19 +641,9 @@ From the SDK you can also submit a score to any leaderboard you want. The leader
 
 For more detail information about the methods, please check the reference guide.
 
+# 
 
-
-
-
-
-
-
-
-
-
-
-
-
+# 
 
 # Notification Center
 
@@ -619,7 +655,6 @@ Activity feed and Chat features are incomplete without having the In-app Notific
 
 ```objectivec
 [[GetSocial sharedInstance] open:GetSocialViewTypeNotifications];
-
 ```
 
 
@@ -637,9 +672,7 @@ It is highly recommended that you link this to a UI element with a notifications
 
 ```objectivec
 [[GetSocial sharedInstance] setOnNotificationsChangeHandler:^(NSInteger unreadNotificationsCount, NSInteger unreadConversationsCount) {
-
    //code to handle changes on Notifications/Conversations counts 
-
 }];
 ```
 
@@ -649,6 +682,10 @@ It is highly recommended that you link this to a UI element with a notifications
 
 
 
+
+# 
+
+# 
 
 # Push Notifications
 
@@ -689,9 +726,7 @@ Whenever a user performs an action that requires login, the SDK calls the login 
 
 ```objectivec
 [[GetSocial sharedInstance] setOnLoginRequestHandler: ^void() {
-
     // Show Game login UI
-
 }];
 ```
 
@@ -735,29 +770,18 @@ Whenever a user performs an action that requires login, the SDK calls the login 
 
 ```objectivec
 [[GetSocial sharedInstance] setOnLoginRequestHandler:^{
-
-        [self loginWithFacebook];
-
+	[self loginWithFacebook];
 }];
 
-
-
 - (void)loginWithFacebook
-
 {
-
 	//opens a FB session with required permissions and calls GetSocialFacebookUtils on complete to 
 
-//sync the state also with the GetSocial SDK
-
+	//sync the state also with the GetSocial SDK
     [FBSession openActiveSessionWithReadPermissions:@["public_profile", "user_friends"]
-
                                        allowLoginUI:YES
-
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-
                                         [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-
                                   }];
 
 }
@@ -771,31 +795,18 @@ If you are using the FBLoginView, you need to also implement the FBLoginViewDele
 
 ```objectivec
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
-
 {
-
     [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-
 }
-
-
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
-
 {
-
    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-
 }
 
-
-
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
-
 {
-
     [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-
 }
 ```
 
@@ -822,13 +833,9 @@ You can enable the Smart Invites for Facebook by registering our invite plugin.
 
 GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
 
-    
-
 id __weak weakSelf = self;
 
-fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
-
-    
+fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };    
 
 [[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
 ```
@@ -836,21 +843,6 @@ fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
 
 
 The `loginWithFacebook` method is the same you use to authenticate users with Facebook and we explained before and it is required to be able to authenticate users with Facebook before showing the invite UI.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -871,7 +863,6 @@ You are able to customize the GetSocial SDK to match the look and feel of your g
 
 ```objectivec
 GetSocialConfiguration* config = [GetSocial sharedInstance].configuration;
-
 ```
 
 
@@ -887,7 +878,6 @@ GetSocialConfiguration* config = [GetSocial sharedInstance].configuration;
 [config setPreferredWindowWidth:320];
 
 [config setPreferredWindowHeight:400];
-
 ```
 
 
@@ -920,7 +910,6 @@ The scale mode can be set as follows:
 
 ```objectivec
 [config setScaleMode:GetSocialScaleModePixelPerfect];
-
 ```
 
 or
@@ -987,7 +976,6 @@ You can specify colors for backgrounds and borders. Please refer to the Property
 
 ```objectivec
 [config setColor:[UIColor redColor] forElementID:Property.HEADER];
-
 ```
 
 
@@ -1003,7 +991,6 @@ You can specify images for several elements. Please refer to the Property table 
 
 ```objectivec
 [config setImagePath:[[NSBundle mainBundle] pathForResource:@"window" ofType:@"png"] forElementID:Property.WINDOW];
-
 ```
 
 You also have the option to replace the images inside the GetSocial.bundle directly to avoid including the default images in your final build. If you decide to do this, make sure that you replace files with the same name, extension and resolution.
@@ -1023,7 +1010,6 @@ If your images are located in the same folder, you can set a base path:
 
 ```objectivec
 [config setBasePathForImages:[[NSBundle mainBundle] resourcePath]];
-
 ```
 
 
@@ -1039,7 +1025,6 @@ If your images are located in the same folder, you can set a base path:
 
 ```objectivec
 [config setDimension:38 forElementID:Property.HEADER];
-
 ```
 
 
@@ -1174,7 +1159,10 @@ You can use custom fonts if they are correctly added as Resources in your applic
 
 
 
-![image alt text](images/img_6.png)![image alt text](images/img_7.png)           ![image alt text](images/img_8.png)![image alt text](images/img_9.png)
+![image alt text](images/img_6.png)
+![image alt text](images/img_7.png)           
+![image alt text](images/img_8.png)
+![image alt text](images/img_9.png)
 
 
 
@@ -1291,7 +1279,7 @@ Content-Type: application/json
 
 
 
-To register a webhook on the dashboard, open up developers.getsocial.im, login with your account and click on the ‘Webhooks’ option.
+To register a webhook on the dashboard, open up [GetSocial Developer Portal](http://developers.getsocial.im), login with your account and click on the ‘Webhooks’ option.
 
 ![image alt text](images/img_20.png)
 
@@ -1311,9 +1299,13 @@ Now you should have a dedicated URL that you can use to simulate your server.
 
 
 
-The next step is to set up your webhook with GetSocial. Navigate to the [developers dashboard](http://developers.getsocial.im) and click "Webhooks".
+The next step is to set up your webhook with GetSocial. Navigate to the [GetSocial Developer Portal](http://developers.getsocial.im) and click "Webhooks".
+
+
 
 Now you should copy your URL from RequestBin into the textfield with the label "URL" and save the changes.
+
+
 
 Now every time someone installs the app using our smart invite, the webhook you've configured on GetSocial will send a request to your RequestBin, give it a try.
 
