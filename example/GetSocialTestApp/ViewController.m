@@ -20,9 +20,6 @@
     //Register FBInvitePlugin
     GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
     
-    id __weak weakSelf = self;
-    fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };
-    
     [[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
     
     //Register FBInvitePlugin
@@ -48,12 +45,15 @@
     //set current user language
     [[GetSocial sharedInstance] setLanguage:@"en"];
     
+    //set up the FB Utils
+    [[GetSocialFacebookUtils sharedInstance] initialize];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
     //set up the FB Login View
-    self.loginView.readPermissions = kGetSocialAuthPermissionsFacebook;
-    self.loginView.frame = CGRectMake((self.view.frame.size.width - CGRectGetWidth(self.loginView.frame)) / 2, 20, CGRectGetWidth(self.loginView.frame), CGRectGetHeight(self.loginView.frame));
-    self.loginView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    self.loginView.loginBehavior = FBSessionLoginBehaviorWithFallbackToWebView;
-    self.loginView.delegate = self;
+    self.loginButton.loginBehavior = FBSDKLoginBehaviorNative;
+    self.loginButton.readPermissions = kGetSocialAuthPermissionsFacebook;
 }
 
 -(void)showVersionNumber
@@ -101,26 +101,8 @@
 #pragma mark - Facebook Integration
 - (void)loginWithFacebook
 {
-    [FBSession openActiveSessionWithReadPermissions:kGetSocialAuthPermissionsFacebook
-                                       allowLoginUI:YES
-                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                                      [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-                                  }];
-}
-
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
-{
-    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-}
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
-{
-    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
-}
-
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
-{
-    [[GetSocialFacebookUtils sharedInstance] updateSessionState];
+    FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:kGetSocialAuthPermissionsFacebook handler:nil];
 }
 
 -(void)showAlertWithTitle:(NSString*)title andText:(NSString*)text

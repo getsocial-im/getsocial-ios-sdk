@@ -2,6 +2,10 @@
 
 ## Version History
 
+### v3.5.3
+---
+- ADDED support for FB SDK 4.x tracking of smart invites
+
 ### v3.5.2
 ---
 - Bug fixes

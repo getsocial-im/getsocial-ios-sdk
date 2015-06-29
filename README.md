@@ -745,53 +745,42 @@ Whenever a user performs an action that requires login, the SDK calls the login 
 
 # Integration with Facebook
 
-
-
 The GetSocial SDK can easily interact with the Facebook social features using one of the latest versions of the Facebook SDK.
-
-
 
 Make sure you follow the [Facebook SDK integration for iOS](https://developers.facebook.com/docs/ios/getting-started).
 
 
-
-
-
-
-
-
 ## User Authentication
-
-
 
 Whenever a user performs an action that requires login, the SDK calls the login request handler which allows the game to show the FB Login UI. You could use FB default UI or implement your own.
 
+###Facebook SDK 3.x
 
+The first step to integrate Facebook with our SDK is to define how to handle an authentication request
 
 ```objectivec
 [[GetSocial sharedInstance] setOnLoginRequestHandler:^{
 	[self loginWithFacebook];
 }];
+```
 
+Where `loginWithFacebook` is the method responsible to open a new Facebook Session:
+
+```objectivec
 - (void)loginWithFacebook
 {
+	//Example of FB login code
 	//opens a FB session with required permissions and calls GetSocialFacebookUtils on complete to 
-
 	//sync the state also with the GetSocial SDK
-    [FBSession openActiveSessionWithReadPermissions:@["public_profile", "user_friends"]
+    [FBSession openActiveSessionWithReadPermissions:kGetSocialAuthPermissionsFacebook
                                        allowLoginUI:YES
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                         [[GetSocialFacebookUtils sharedInstance] updateSessionState];
                                   }];
-
 }
 ```
 
-
-
-If you are using the FBLoginView, you need to also implement the FBLoginViewDelegate to get the state changes and sync the GetSocial.
-
-
+If you are using the `FBLoginView`, you need to also implement the `FBLoginViewDelegate` to get the state changes and sync the GetSocial.
 
 ```objectivec
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
@@ -810,48 +799,67 @@ If you are using the FBLoginView, you need to also implement the FBLoginViewDele
 }
 ```
 
-
-
 If you are not using the FBLoginView, make sure you call `[[GetSocialFacebookUtils sharedInstance] updateSessionState];` whenever you receive an update of the state of the FB active session.
 
+###Facebook SDK 4.x
 
+Calling this line will start tracking changes on the FB Access Token to make sure GetSocial SDK is always in sync with it.
 
+```objectivec
+[[GetSocialFacebookUtils sharedInstance] initialize];
+```
 
+You also need to define how to authenticate an user on your app
 
+```objectivec
+[[GetSocial sharedInstance] setOnLoginRequestHandler:^{
+	[self loginWithFacebook];
+}];
+```
+
+Where `loginWithFacebook` is the method responsible to open a new Facebook Session:
+
+```objectivec
+- (void)loginWithFacebook
+{
+	//Example of FB login code
+	//opens a FB session with required permissions 
+	FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:kGetSocialAuthPermissionsFacebook handler:nil];
+}
+```
 
 ## Smart Invites
 
-
-
-
 You can enable the Smart Invites for Facebook by registering our invite plugin.
 
+###Facebook SDK 3.x
+
+You can find the full implementation of our plugin in 'plugins/facebook-v3.x' folder.
 
 ```objectivec
-
-//Register FBInvitePlugin
-
-GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
+GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];  
+[[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
 
 id __weak weakSelf = self;
-
-fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };    
-
-[[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
+fbInvitePlugin.authenticateUserHandler = ^{ [weakSelf loginWithFacebook]; };  
 ```
 
-
+For Facebook SDK 3.x you need to add these lines in order to authenticate with Facebook before sending the Smart Invite.
 
 The `loginWithFacebook` method is the same you use to authenticate users with Facebook and we explained before and it is required to be able to authenticate users with Facebook before showing the invite UI.
 
 
+###Facebook SDK 4.x
 
+You can find the full implementation of our plugin in 'plugins/facebook-v4.x' folder.
 
+```objectivec
+GetSocialFacebookInvitePlugin* fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];  
+[[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:@"facebook"];
+```
 
-
-
-
-
+Please nothe that with the Facebook SDK v4.x the app needs to be approved by Facebook to be able to see the invites sent. Only administrators, developers and testers are authorized to receive invites if the app is not approved.
 
 # Customizing the appearance
 

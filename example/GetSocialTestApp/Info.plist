@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb471724582959012</string>
+				<string>fb1470803889832802</string>
 			</array>
 		</dict>
 		<dict>
@@ -40,7 +40,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>FacebookAppID</key>
-	<string>471724582959012</string>
+	<string>1470803889832802</string>
 	<key>FacebookDisplayName</key>
 	<string>GetSocial Test App</string>
 	<key>LSRequiresIPhoneOS</key>
