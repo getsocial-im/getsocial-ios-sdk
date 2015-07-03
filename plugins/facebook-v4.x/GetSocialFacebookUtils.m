@@ -18,7 +18,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         privateSharedInstance = [[self alloc] init];
-        privateSharedInstance.accessToken = nil;
     });
     return privateSharedInstance;
 }
@@ -28,6 +27,8 @@
     self = [super init];
     if (self)
     {
+        self.accessToken = nil;
+        
         if ([FBSDKAccessToken currentAccessToken])
         {
             [self updateSessionState];
@@ -52,21 +53,28 @@
 {
     if ([FBSDKAccessToken currentAccessToken])
     {
-        if (self.accessToken == [FBSDKAccessToken currentAccessToken])
-        {
-            return;
-        }
-        else
+        if (self.accessToken != [FBSDKAccessToken currentAccessToken])
         {
             self.accessToken = [FBSDKAccessToken currentAccessToken];
             
-            NSDictionary* info = @{kGetSocialAuthInfoKeyToken:self.accessToken.tokenString, kGetSocialAuthInfoKeyUserId:self.accessToken.userID, kGetSocialAuthInfoKeyExternalUserId:self.accessToken.userID};
-            
-            [[GetSocial sharedInstance] verifyUserIdentity:info provider:@"facebook" success:^{
-                NSLog(@"Game FB Auth -> GetSocial FB Token Auth successful");
-            } error:^(NSError *err) {
-                NSLog(@"Game FB Auth -> GetSocial FB Token Auth error:%@",[err localizedDescription]);
-            }];
+            if (self.accessToken.userID == nil)
+            {
+                [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+                 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                     if (!error && result[@"id"]!=nil)
+                     {
+                         [self verifyUserIdentityWithToken:self.accessToken.tokenString andUserId:result[@"id"]];
+                     }
+                     else
+                     {
+                         NSLog(@"Game FB Auth failed (no user Id available)");
+                     }
+                 }];
+            }
+            else
+            {
+                [self verifyUserIdentityWithToken:self.accessToken.tokenString andUserId:self.accessToken.userID];
+            }
         }
     }
     else
@@ -75,6 +83,17 @@
             NSLog(@"Game FB Logout -> GetSocial Logout complete.");
         }];
     }
+}
+
+- (void) verifyUserIdentityWithToken:(NSString*) token andUserId:(NSString*) userId
+{
+    NSDictionary* info = @{kGetSocialAuthInfoKeyToken:token, kGetSocialAuthInfoKeyUserId:userId, kGetSocialAuthInfoKeyExternalUserId:userId};
+    
+    [[GetSocial sharedInstance] verifyUserIdentity:info provider:@"facebook" success:^{
+        NSLog(@"Game FB Auth -> GetSocial FB Token Auth successful");
+    } error:^(NSError *err) {
+        NSLog(@"Game FB Auth -> GetSocial FB Token Auth error:%@",[err localizedDescription]);
+    }];
 }
 
 @end
