@@ -1,10 +1,14 @@
 # GetSocial SDK for iOS
 
 ## Version History
+
+### v3.5.5
+---
+- FIXED crash when clearing identity and verifying a new identity right away 
+
 ### v3.5.4
 ---
 - FIXED Chat Bubble maximum width calculation
-
 
 ### v3.5.3
 
