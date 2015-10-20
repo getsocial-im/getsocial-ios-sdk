@@ -1,17 +1,14 @@
-//
-//  AppDelegate.h
-//  GetSocialTestApp
-//
-//  Created by Demian Denker on 28/01/15.
-//  Copyright (c) 2015 GetSocial. All rights reserved.
-//
+/**
+ * Author: Demian Denker
+ *
+ * Published under the MIT License (MIT)
+ * Copyright: (c) 2015 GetSocial B.V.
+ */
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder<UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-
+@property(strong, nonatomic) UIWindow *window;
 
 @end
-

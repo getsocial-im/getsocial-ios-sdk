@@ -7,230 +7,386 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9908FA6E1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */; };
-		9908FA6F1A9B45D100F39657 /* GetSocialFacebookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */; };
-		99AD21571A8BA78900A46C07 /* getsocial.png in Resources */ = {isa = PBXBuildFile; fileRef = 99AD21561A8BA78900A46C07 /* getsocial.png */; };
-		99AD21591A8BABAB00A46C07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AD21581A8BABAB00A46C07 /* Images.xcassets */; };
-		99BABBC81B3C23AF00DD3E4A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BABBC51B3C23AF00DD3E4A /* FBSDKCoreKit.framework */; };
-		99BABBC91B3C23AF00DD3E4A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BABBC61B3C23AF00DD3E4A /* FBSDKLoginKit.framework */; };
-		99BABBD41B3D872D00DD3E4A /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BABBD31B3D872D00DD3E4A /* FBSDKShareKit.framework */; };
-		99C03DD11AA5D8E9000A7FA0 /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */; };
-		99C03DD21AA5D8E9000A7FA0 /* GetSocial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */; };
-		99CDC1081B0E21370088BCD1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CDC1071B0E21370088BCD1 /* AdSupport.framework */; };
-		99EFA4A61A78E707009FC9D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A51A78E707009FC9D7 /* main.m */; };
-		99EFA4A91A78E707009FC9D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4A81A78E707009FC9D7 /* AppDelegate.m */; };
-		99EFA4AC1A78E707009FC9D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EFA4AB1A78E707009FC9D7 /* ViewController.m */; };
-		99EFA4AF1A78E707009FC9D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99EFA4AD1A78E707009FC9D7 /* Main.storyboard */; };
-		99EFA4B41A78E707009FC9D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99EFA4B21A78E707009FC9D7 /* LaunchScreen.xib */; };
-		99EFA4D31A78EA38009FC9D7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4D21A78EA38009FC9D7 /* AVFoundation.framework */; };
-		99EFA4D51A78EA6A009FC9D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4D41A78EA6A009FC9D7 /* Accelerate.framework */; };
-		99EFA4D71A78EA7C009FC9D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4D61A78EA7C009FC9D7 /* AudioToolbox.framework */; };
-		99EFA4E11A78EAFE009FC9D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4E01A78EAFE009FC9D7 /* CoreLocation.framework */; };
-		99EFA4E31A78EB0E009FC9D7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4E21A78EB0E009FC9D7 /* CoreTelephony.framework */; };
-		99EFA4E51A78EB25009FC9D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4E41A78EB25009FC9D7 /* SystemConfiguration.framework */; };
-		99EFA4E71A78EB34009FC9D7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4E61A78EB34009FC9D7 /* Social.framework */; };
-		99EFA4E91A78EB45009FC9D7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4E81A78EB45009FC9D7 /* MessageUI.framework */; };
-		99EFA4EB1A78EB5D009FC9D7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4EA1A78EB5D009FC9D7 /* libsqlite3.dylib */; };
-		99EFA4ED1A78EB61009FC9D7 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4EC1A78EB61009FC9D7 /* libxml2.dylib */; };
-		99EFA4EF1A78EB96009FC9D7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4EE1A78EB96009FC9D7 /* CoreMedia.framework */; };
-		99EFA4F11A78EBAF009FC9D7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4F01A78EBAF009FC9D7 /* MobileCoreServices.framework */; };
-		99EFA4F31A78EC0A009FC9D7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4F21A78EC0A009FC9D7 /* libz.dylib */; };
-		99EFA4F51A78EC27009FC9D7 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EFA4F41A78EC27009FC9D7 /* libresolv.dylib */; };
+		990BC5B01AF24E07003A0B96 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990BC5AD1AF24E07003A0B96 /* UIBAlertView.m */; };
+		990CFDE61BAA173E008872CA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD731BA9C350008872CA /* Accelerate.framework */; };
+		990CFDE71BAA173E008872CA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD711BA9C31C008872CA /* Social.framework */; };
+		990CFDE81BAA173E008872CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD6F1BA9C2F6008872CA /* MessageUI.framework */; };
+		990CFDE91BAA173E008872CA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FBC18129DC600B9A6B5 /* MobileCoreServices.framework */; };
+		990CFDEA1BAA173E008872CA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD6D1BA9C2CF008872CA /* CoreTelephony.framework */; };
+		990CFDEB1BAA173E008872CA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD6B1BA9C2B9008872CA /* CoreLocation.framework */; };
+		990CFDEC1BAA173E008872CA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAB21A9B4D7300F39657 /* CoreMedia.framework */; };
+		990CFDED1BAA173E008872CA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAB01A9B4D5900F39657 /* AudioToolbox.framework */; };
+		990CFDEE1BAA173E008872CA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAA91A9B4C7800F39657 /* AVFoundation.framework */; };
+		990CFDF01BAA173E008872CA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990BC5B71AF265D6003A0B96 /* AdSupport.framework */; };
+		990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A617EB064500F65204 /* UIKit.framework */; };
+		990CFDF41BAA173E008872CA /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A02EC6190FECAD00324CC7 /* libresolv.dylib */; };
+		990CFDF51BAA173E008872CA /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A02EC4190FECA600324CC7 /* libiconv.dylib */; };
+		990CFDF61BAA173E008872CA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A02EBD190FEC9600324CC7 /* libxml2.dylib */; };
+		990CFDF71BAA173E008872CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F429AFF618CE57690005AEC8 /* libz.dylib */; };
+		990CFDF81BAA173E008872CA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AD6CFE18BF313400B1F342 /* libsqlite3.dylib */; };
+		990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */; };
+		990CFDFC1BAA173E008872CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A217EB064500F65204 /* Foundation.framework */; };
+		991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */; };
+		99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */; };
+		9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923991BB2EEAD0010D481 /* UserViewController.m */; settings = {ASSET_TAGS = (); }; };
+		992923A51BB411A00010D481 /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923A21BB411A00010D481 /* MenuTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9942F9171A70F9C200FCC91B /* Launch Screen.xib */; };
+		995AC1D61BB06955006424DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1D31BB06955006424DF /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
+		995AC1E11BB15218006424DF /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1DE1BB15218006424DF /* MainNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		995AC1E61BB1568E006424DF /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1E31BB1568E006424DF /* MenuTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		995AC1EB1BB15C95006424DF /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1E81BB15C95006424DF /* MenuItem.m */; settings = {ASSET_TAGS = (); }; };
+		998B71EE1BB95CB800325DAF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EB1BB95CB800325DAF /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		998B71EF1BB95CB800325DAF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		998B71F01BB95CB800325DAF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71ED1BB95CB800325DAF /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		998B74BD1BBA8C7000325DAF /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B74B61BBA8C7000325DAF /* GetSocial.framework */; settings = {ASSET_TAGS = (); }; };
+		998B74BE1BBA8C7000325DAF /* GetSocial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 998B74B81BBA8C7000325DAF /* GetSocial.bundle */; settings = {ASSET_TAGS = (); }; };
+		998B74BF1BBA8C7000325DAF /* GetSocialChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B74BA1BBA8C7000325DAF /* GetSocialChat.framework */; settings = {ASSET_TAGS = (); }; };
+		998B74C01BBA8C7000325DAF /* GetSocialChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 998B74BC1BBA8C7000325DAF /* GetSocialChat.bundle */; settings = {ASSET_TAGS = (); }; };
+		99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */; settings = {ASSET_TAGS = (); }; };
+		99B68F171BB18FC500E1F252 /* UserIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B68F141BB18FC500E1F252 /* UserIdentityViewController.m */; settings = {ASSET_TAGS = (); }; };
+		99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 99C086961BB92F4200C706DD /* defaultAvatar.png */; settings = {ASSET_TAGS = (); }; };
+		99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 99EB87FD1AB7611600357E60 /* activityImageWithButton.png */; };
+		99F26AEB19A65BE5006D3B1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 995D99B217EB064500F65204 /* AppDelegate.m */; };
+		99F26AF419A65BE5006D3B1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 995D99AE17EB064500F65204 /* main.m */; };
+		99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 995D99BD17EB064500F65204 /* Images.xcassets */; };
+		99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 995D99B417EB064500F65204 /* Main.storyboard */; };
+		99F3E7DE1AB2006400033238 /* getsocial.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7DB1AB2006400033238 /* getsocial.png */; };
+		99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7E41AB205C400033238 /* activityCallToActionButtonNormal.png */; };
+		99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7E51AB205C400033238 /* activityCallToActionButtonPressed.png */; };
+		99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7ED1AB31DC100033238 /* activityImageWithAction.png */; };
+		99F3E8011AB32CA900033238 /* activityImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7FE1AB32CA900033238 /* activityImage.png */; };
+		99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 99F772E51BBAA96A00A4CD69 /* LICENSE */; settings = {ASSET_TAGS = (); }; };
+		99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9908FA6A1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = "../../plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.h"; sourceTree = "<group>"; };
-		9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = "../../plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.m"; sourceTree = "<group>"; };
-		9908FA6C1A9B45D100F39657 /* GetSocialFacebookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookUtils.h; path = "../../plugins/facebook-v4.x/GetSocialFacebookUtils.h"; sourceTree = "<group>"; };
-		9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookUtils.m; path = "../../plugins/facebook-v4.x/GetSocialFacebookUtils.m"; sourceTree = "<group>"; };
-		99AD21561A8BA78900A46C07 /* getsocial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getsocial.png; sourceTree = "<group>"; };
-		99AD21581A8BABAB00A46C07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		99BABBC51B3C23AF00DD3E4A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = GetSocialTestApp/Vendor/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		99BABBC61B3C23AF00DD3E4A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = GetSocialTestApp/Vendor/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		99BABBD31B3D872D00DD3E4A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = GetSocialTestApp/Vendor/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocial.framework; sourceTree = "<group>"; };
-		99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocial.bundle; sourceTree = "<group>"; };
-		99CDC1071B0E21370088BCD1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		99EFA4A01A78E707009FC9D7 /* GetSocialTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSocialTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		99EFA4A41A78E707009FC9D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		99EFA4A51A78E707009FC9D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		99EFA4A71A78E707009FC9D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		99EFA4A81A78E707009FC9D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		99EFA4AA1A78E707009FC9D7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		99EFA4AB1A78E707009FC9D7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		99EFA4AE1A78E707009FC9D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		99EFA4B31A78E707009FC9D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		99EFA4D21A78EA38009FC9D7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		99EFA4D41A78EA6A009FC9D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		99EFA4D61A78EA7C009FC9D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		99EFA4E01A78EAFE009FC9D7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		99EFA4E21A78EB0E009FC9D7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		99EFA4E41A78EB25009FC9D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		99EFA4E61A78EB34009FC9D7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		99EFA4E81A78EB45009FC9D7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		99EFA4EA1A78EB5D009FC9D7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		99EFA4EC1A78EB61009FC9D7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		99EFA4EE1A78EB96009FC9D7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		99EFA4F01A78EBAF009FC9D7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		99EFA4F21A78EC0A009FC9D7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		99EFA4F41A78EC27009FC9D7 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		46A02EBD190FEC9600324CC7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		46A02EC4190FECA600324CC7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		46A02EC6190FECAD00324CC7 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		9908FAA91A9B4C7800F39657 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9908FAAB1A9B4CA100F39657 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		9908FAAE1A9B4D3900F39657 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		9908FAB01A9B4D5900F39657 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9908FAB21A9B4D7300F39657 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		990BC5AC1AF24E07003A0B96 /* UIBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBAlertView.h; sourceTree = "<group>"; };
+		990BC5AD1AF24E07003A0B96 /* UIBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBAlertView.m; sourceTree = "<group>"; };
+		990BC5B71AF265D6003A0B96 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		990CFD6B1BA9C2B9008872CA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		990CFD6D1BA9C2CF008872CA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		990CFD6F1BA9C2F6008872CA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		990CFD711BA9C31C008872CA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		990CFD731BA9C350008872CA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSmartInviteViewController.h; sourceTree = "<group>"; };
+		991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSmartInviteViewController.m; sourceTree = "<group>"; };
+		99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = "Plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.h"; sourceTree = "<group>"; };
+		99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = "Plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.m"; sourceTree = "<group>"; };
+		992923981BB2EEAD0010D481 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		992923991BB2EEAD0010D481 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		992923A11BB411A00010D481 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
+		992923A21BB411A00010D481 /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
+		9942F9171A70F9C200FCC91B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		995AC1D21BB06955006424DF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		995AC1D31BB06955006424DF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		995AC1DD1BB15218006424DF /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		995AC1DE1BB15218006424DF /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		995AC1E21BB1568E006424DF /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
+		995AC1E31BB1568E006424DF /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
+		995AC1E71BB15C95006424DF /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		995AC1E81BB15C95006424DF /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		995D99A217EB064500F65204 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		995D99A417EB064500F65204 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		995D99A617EB064500F65204 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		995D99AA17EB064500F65204 /* testapp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "testapp-Info.plist"; sourceTree = "<group>"; };
+		995D99AE17EB064500F65204 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		995D99B017EB064500F65204 /* testapp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testapp-Prefix.pch"; sourceTree = "<group>"; };
+		995D99B117EB064500F65204 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		995D99B217EB064500F65204 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		995D99BD17EB064500F65204 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		995D99DF17EB2B1600F65204 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		998298D7181C2BFF0028113B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		998B71EB1BB95CB800325DAF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = GetSocialTestApp/Vendor/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = GetSocialTestApp/Vendor/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		998B71ED1BB95CB800325DAF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = GetSocialTestApp/Vendor/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		998B74B61BBA8C7000325DAF /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocial.framework; sourceTree = "<group>"; };
+		998B74B81BBA8C7000325DAF /* GetSocial.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocial.bundle; sourceTree = "<group>"; };
+		998B74BA1BBA8C7000325DAF /* GetSocialChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocialChat.framework; sourceTree = "<group>"; };
+		998B74BC1BBA8C7000325DAF /* GetSocialChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocialChat.bundle; sourceTree = "<group>"; };
+		99ABE3C21BCE7E8A00296F50 /* UserIdentityUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityUtils.h; sourceTree = "<group>"; };
+		99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentityUtils.m; sourceTree = "<group>"; };
+		99AD885C18098AC000F1F346 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		99B68F131BB18FC500E1F252 /* UserIdentityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityViewController.h; sourceTree = "<group>"; };
+		99B68F141BB18FC500E1F252 /* UserIdentityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentityViewController.m; sourceTree = "<group>"; };
+		99BF2FBC18129DC600B9A6B5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		99C086941BB92EE500C706DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		99C086961BB92F4200C706DD /* defaultAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultAvatar.png; path = Resources/defaultAvatar.png; sourceTree = "<group>"; };
+		99EB87FD1AB7611600357E60 /* activityImageWithButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImageWithButton.png; path = Resources/activityImageWithButton.png; sourceTree = "<group>"; };
+		99F26B2519A65BE5006D3B1A /* GetSocialTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSocialTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99F3E7DB1AB2006400033238 /* getsocial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getsocial.png; path = Resources/getsocial.png; sourceTree = "<group>"; };
+		99F3E7E41AB205C400033238 /* activityCallToActionButtonNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityCallToActionButtonNormal.png; path = Resources/activityCallToActionButtonNormal.png; sourceTree = "<group>"; };
+		99F3E7E51AB205C400033238 /* activityCallToActionButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityCallToActionButtonPressed.png; path = Resources/activityCallToActionButtonPressed.png; sourceTree = "<group>"; };
+		99F3E7ED1AB31DC100033238 /* activityImageWithAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImageWithAction.png; path = Resources/activityImageWithAction.png; sourceTree = "<group>"; };
+		99F3E7FE1AB32CA900033238 /* activityImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImage.png; path = Resources/activityImage.png; sourceTree = "<group>"; };
+		99F772E51BBAA96A00A4CD69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		99FE1A7C1BB2A82100EF576A /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		F429AFF618CE57690005AEC8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F4AD6CFE18BF313400B1F342 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		99EFA49D1A78E707009FC9D7 /* Frameworks */ = {
+		99F26B0719A65BE5006D3B1A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99CDC1081B0E21370088BCD1 /* AdSupport.framework in Frameworks */,
-				99EFA4F51A78EC27009FC9D7 /* libresolv.dylib in Frameworks */,
-				99BABBC91B3C23AF00DD3E4A /* FBSDKLoginKit.framework in Frameworks */,
-				99BABBC81B3C23AF00DD3E4A /* FBSDKCoreKit.framework in Frameworks */,
-				99EFA4F31A78EC0A009FC9D7 /* libz.dylib in Frameworks */,
-				99EFA4F11A78EBAF009FC9D7 /* MobileCoreServices.framework in Frameworks */,
-				99EFA4EF1A78EB96009FC9D7 /* CoreMedia.framework in Frameworks */,
-				99EFA4ED1A78EB61009FC9D7 /* libxml2.dylib in Frameworks */,
-				99EFA4EB1A78EB5D009FC9D7 /* libsqlite3.dylib in Frameworks */,
-				99EFA4E91A78EB45009FC9D7 /* MessageUI.framework in Frameworks */,
-				99EFA4E71A78EB34009FC9D7 /* Social.framework in Frameworks */,
-				99EFA4E51A78EB25009FC9D7 /* SystemConfiguration.framework in Frameworks */,
-				99BABBD41B3D872D00DD3E4A /* FBSDKShareKit.framework in Frameworks */,
-				99EFA4E31A78EB0E009FC9D7 /* CoreTelephony.framework in Frameworks */,
-				99C03DD11AA5D8E9000A7FA0 /* GetSocial.framework in Frameworks */,
-				99EFA4E11A78EAFE009FC9D7 /* CoreLocation.framework in Frameworks */,
-				99EFA4D71A78EA7C009FC9D7 /* AudioToolbox.framework in Frameworks */,
-				99EFA4D51A78EA6A009FC9D7 /* Accelerate.framework in Frameworks */,
-				99EFA4D31A78EA38009FC9D7 /* AVFoundation.framework in Frameworks */,
+				990CFDE61BAA173E008872CA /* Accelerate.framework in Frameworks */,
+				990CFDE71BAA173E008872CA /* Social.framework in Frameworks */,
+				998B71EE1BB95CB800325DAF /* FBSDKCoreKit.framework in Frameworks */,
+				990CFDE81BAA173E008872CA /* MessageUI.framework in Frameworks */,
+				990CFDE91BAA173E008872CA /* MobileCoreServices.framework in Frameworks */,
+				998B74BF1BBA8C7000325DAF /* GetSocialChat.framework in Frameworks */,
+				998B71F01BB95CB800325DAF /* FBSDKShareKit.framework in Frameworks */,
+				990CFDEA1BAA173E008872CA /* CoreTelephony.framework in Frameworks */,
+				998B71EF1BB95CB800325DAF /* FBSDKLoginKit.framework in Frameworks */,
+				990CFDEB1BAA173E008872CA /* CoreLocation.framework in Frameworks */,
+				990CFDEC1BAA173E008872CA /* CoreMedia.framework in Frameworks */,
+				990CFDED1BAA173E008872CA /* AudioToolbox.framework in Frameworks */,
+				990CFDEE1BAA173E008872CA /* AVFoundation.framework in Frameworks */,
+				990CFDF01BAA173E008872CA /* AdSupport.framework in Frameworks */,
+				990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */,
+				998B74BD1BBA8C7000325DAF /* GetSocial.framework in Frameworks */,
+				990CFDF41BAA173E008872CA /* libresolv.dylib in Frameworks */,
+				990CFDF51BAA173E008872CA /* libiconv.dylib in Frameworks */,
+				990CFDF61BAA173E008872CA /* libxml2.dylib in Frameworks */,
+				990CFDF71BAA173E008872CA /* libz.dylib in Frameworks */,
+				990CFDF81BAA173E008872CA /* libsqlite3.dylib in Frameworks */,
+				990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */,
+				990CFDFC1BAA173E008872CA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99C03DCD1AA5D8E9000A7FA0 /* GetSocial.embeddedframework */ = {
+		2563FAEF1A6E859E006E0448 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				99C03DCE1AA5D8E9000A7FA0 /* GetSocial.framework */,
-				99C03DCF1AA5D8E9000A7FA0 /* Resources */,
+				99F3E7DB1AB2006400033238 /* getsocial.png */,
+				99F3E7FE1AB32CA900033238 /* activityImage.png */,
+				99EB87FD1AB7611600357E60 /* activityImageWithButton.png */,
+				99F3E7ED1AB31DC100033238 /* activityImageWithAction.png */,
+				99F3E7E41AB205C400033238 /* activityCallToActionButtonNormal.png */,
+				99F3E7E51AB205C400033238 /* activityCallToActionButtonPressed.png */,
+				99C086961BB92F4200C706DD /* defaultAvatar.png */,
 			);
-			name = GetSocial.embeddedframework;
-			path = ../bin/GetSocial.embeddedframework;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		99C03DCF1AA5D8E9000A7FA0 /* Resources */ = {
+		994F498B1B15F057007B4494 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				99C03DD01AA5D8E9000A7FA0 /* GetSocial.bundle */,
+				99ABE3C21BCE7E8A00296F50 /* UserIdentityUtils.h */,
+				99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */,
+				990BC5AC1AF24E07003A0B96 /* UIBAlertView.h */,
+				990BC5AD1AF24E07003A0B96 /* UIBAlertView.m */,
 			);
-			path = Resources;
+			name = Utils;
 			sourceTree = "<group>";
 		};
-		99EFA4971A78E707009FC9D7 = {
+		995D999617EB064500F65204 = {
 			isa = PBXGroup;
 			children = (
-				99EFA4F61A78ECEA009FC9D7 /* Frameworks */,
-				99EFA4A21A78E707009FC9D7 /* GetSocialTestApp */,
-				99EFA4A11A78E707009FC9D7 /* Products */,
+				995D99A817EB064500F65204 /* GetSocialTestApp */,
+				995D99A117EB064500F65204 /* Frameworks */,
+				995D99A017EB064500F65204 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		99EFA4A11A78E707009FC9D7 /* Products */ = {
+		995D99A017EB064500F65204 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				99EFA4A01A78E707009FC9D7 /* GetSocialTestApp.app */,
+				99F26B2519A65BE5006D3B1A /* GetSocialTestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		99EFA4A21A78E707009FC9D7 /* GetSocialTestApp */ = {
+		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				99AD21561A8BA78900A46C07 /* getsocial.png */,
-				9908FA6A1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.h */,
-				9908FA6B1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m */,
-				9908FA6C1A9B45D100F39657 /* GetSocialFacebookUtils.h */,
-				9908FA6D1A9B45D100F39657 /* GetSocialFacebookUtils.m */,
-				99EFA4A71A78E707009FC9D7 /* AppDelegate.h */,
-				99EFA4A81A78E707009FC9D7 /* AppDelegate.m */,
-				99EFA4AA1A78E707009FC9D7 /* ViewController.h */,
-				99EFA4AB1A78E707009FC9D7 /* ViewController.m */,
-				99AD21581A8BABAB00A46C07 /* Images.xcassets */,
-				99EFA4AD1A78E707009FC9D7 /* Main.storyboard */,
-				99EFA4B21A78E707009FC9D7 /* LaunchScreen.xib */,
-				99EFA4A31A78E707009FC9D7 /* Supporting Files */,
+				998B71EB1BB95CB800325DAF /* FBSDKCoreKit.framework */,
+				998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */,
+				998B71ED1BB95CB800325DAF /* FBSDKShareKit.framework */,
+				990CFD731BA9C350008872CA /* Accelerate.framework */,
+				990BC5B71AF265D6003A0B96 /* AdSupport.framework */,
+				9908FAB01A9B4D5900F39657 /* AudioToolbox.framework */,
+				9908FAAB1A9B4CA100F39657 /* AudioUnit.framework */,
+				9908FAA91A9B4C7800F39657 /* AVFoundation.framework */,
+				9908FAAE1A9B4D3900F39657 /* CoreAudio.framework */,
+				995D99DF17EB2B1600F65204 /* CoreFoundation.framework */,
+				995D99A417EB064500F65204 /* CoreGraphics.framework */,
+				990CFD6B1BA9C2B9008872CA /* CoreLocation.framework */,
+				9908FAB21A9B4D7300F39657 /* CoreMedia.framework */,
+				990CFD6D1BA9C2CF008872CA /* CoreTelephony.framework */,
+				995D99A217EB064500F65204 /* Foundation.framework */,
+				46A02EC4190FECA600324CC7 /* libiconv.dylib */,
+				46A02EC6190FECAD00324CC7 /* libresolv.dylib */,
+				F4AD6CFE18BF313400B1F342 /* libsqlite3.dylib */,
+				46A02EBD190FEC9600324CC7 /* libxml2.dylib */,
+				F429AFF618CE57690005AEC8 /* libz.dylib */,
+				990CFD6F1BA9C2F6008872CA /* MessageUI.framework */,
+				99BF2FBC18129DC600B9A6B5 /* MobileCoreServices.framework */,
+				99AD885C18098AC000F1F346 /* QuartzCore.framework */,
+				998298D7181C2BFF0028113B /* Security.framework */,
+				990CFD711BA9C31C008872CA /* Social.framework */,
+				99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */,
+				995D99A617EB064500F65204 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		995D99A817EB064500F65204 /* GetSocialTestApp */ = {
+			isa = PBXGroup;
+			children = (
+				99F772E51BBAA96A00A4CD69 /* LICENSE */,
+				998B74C11BBA8C7900325DAF /* GetSocial */,
+				99FE1A821BB2B2FF00EF576A /* Facebook */,
+				995D99B117EB064500F65204 /* AppDelegate.h */,
+				995D99B217EB064500F65204 /* AppDelegate.m */,
+				995D99BD17EB064500F65204 /* Images.xcassets */,
+				9942F9171A70F9C200FCC91B /* Launch Screen.xib */,
+				2563FAEF1A6E859E006E0448 /* Resources */,
+				995D99A917EB064500F65204 /* Supporting Files */,
+				994F498B1B15F057007B4494 /* Utils */,
+				99FE1A811BB2B2EC00EF576A /* Views */,
 			);
 			path = GetSocialTestApp;
 			sourceTree = "<group>";
 		};
-		99EFA4A31A78E707009FC9D7 /* Supporting Files */ = {
+		995D99A917EB064500F65204 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				99EFA4A41A78E707009FC9D7 /* Info.plist */,
-				99EFA4A51A78E707009FC9D7 /* main.m */,
+				995D99AA17EB064500F65204 /* testapp-Info.plist */,
+				995D99AE17EB064500F65204 /* main.m */,
+				995D99B017EB064500F65204 /* testapp-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		99EFA4F61A78ECEA009FC9D7 /* Frameworks */ = {
+		998B74B51BBA8C7000325DAF /* GetSocial.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				99BABBD31B3D872D00DD3E4A /* FBSDKShareKit.framework */,
-				99BABBC51B3C23AF00DD3E4A /* FBSDKCoreKit.framework */,
-				99BABBC61B3C23AF00DD3E4A /* FBSDKLoginKit.framework */,
-				99CDC1071B0E21370088BCD1 /* AdSupport.framework */,
-				99C03DCD1AA5D8E9000A7FA0 /* GetSocial.embeddedframework */,
-				99EFA4D41A78EA6A009FC9D7 /* Accelerate.framework */,
-				99EFA4D61A78EA7C009FC9D7 /* AudioToolbox.framework */,
-				99EFA4D21A78EA38009FC9D7 /* AVFoundation.framework */,
-				99EFA4E01A78EAFE009FC9D7 /* CoreLocation.framework */,
-				99EFA4EE1A78EB96009FC9D7 /* CoreMedia.framework */,
-				99EFA4E21A78EB0E009FC9D7 /* CoreTelephony.framework */,
-				99EFA4F41A78EC27009FC9D7 /* libresolv.dylib */,
-				99EFA4EA1A78EB5D009FC9D7 /* libsqlite3.dylib */,
-				99EFA4EC1A78EB61009FC9D7 /* libxml2.dylib */,
-				99EFA4F21A78EC0A009FC9D7 /* libz.dylib */,
-				99EFA4E81A78EB45009FC9D7 /* MessageUI.framework */,
-				99EFA4F01A78EBAF009FC9D7 /* MobileCoreServices.framework */,
-				99EFA4E61A78EB34009FC9D7 /* Social.framework */,
-				99EFA4E41A78EB25009FC9D7 /* SystemConfiguration.framework */,
+				998B74B61BBA8C7000325DAF /* GetSocial.framework */,
+				998B74B71BBA8C7000325DAF /* Resources */,
 			);
-			name = Frameworks;
+			name = GetSocial.embeddedframework;
+			path = ../../bin/GetSocial.embeddedframework;
+			sourceTree = "<group>";
+		};
+		998B74B71BBA8C7000325DAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				998B74B81BBA8C7000325DAF /* GetSocial.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		998B74B91BBA8C7000325DAF /* GetSocialChat.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				998B74BA1BBA8C7000325DAF /* GetSocialChat.framework */,
+				998B74BB1BBA8C7000325DAF /* Resources */,
+			);
+			name = GetSocialChat.embeddedframework;
+			path = ../../bin/GetSocialChat.embeddedframework;
+			sourceTree = "<group>";
+		};
+		998B74BB1BBA8C7000325DAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				998B74BC1BBA8C7000325DAF /* GetSocialChat.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		998B74C11BBA8C7900325DAF /* GetSocial */ = {
+			isa = PBXGroup;
+			children = (
+				998B74B51BBA8C7000325DAF /* GetSocial.embeddedframework */,
+				998B74B91BBA8C7000325DAF /* GetSocialChat.embeddedframework */,
+			);
+			name = GetSocial;
+			sourceTree = "<group>";
+		};
+		99FE1A811BB2B2EC00EF576A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				995AC1E71BB15C95006424DF /* MenuItem.h */,
+				995AC1E81BB15C95006424DF /* MenuItem.m */,
+				995D99B417EB064500F65204 /* Main.storyboard */,
+				991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */,
+				991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */,
+				995AC1D21BB06955006424DF /* MainViewController.h */,
+				995AC1D31BB06955006424DF /* MainViewController.m */,
+				995AC1DD1BB15218006424DF /* MainNavigationController.h */,
+				995AC1DE1BB15218006424DF /* MainNavigationController.m */,
+				995AC1E21BB1568E006424DF /* MenuTableViewController.h */,
+				995AC1E31BB1568E006424DF /* MenuTableViewController.m */,
+				99B68F131BB18FC500E1F252 /* UserIdentityViewController.h */,
+				99B68F141BB18FC500E1F252 /* UserIdentityViewController.m */,
+				99FE1A7C1BB2A82100EF576A /* ConsoleViewController.h */,
+				99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */,
+				992923981BB2EEAD0010D481 /* UserViewController.h */,
+				992923991BB2EEAD0010D481 /* UserViewController.m */,
+				992923A11BB411A00010D481 /* MenuTableViewCell.h */,
+				992923A21BB411A00010D481 /* MenuTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		99FE1A821BB2B2FF00EF576A /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */,
+				99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */,
+			);
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		99EFA49F1A78E707009FC9D7 /* GetSocialTestApp */ = {
+		99F26AD019A65BE5006D3B1A /* GetSocialTestApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99EFA4C31A78E707009FC9D7 /* Build configuration list for PBXNativeTarget "GetSocialTestApp" */;
+			buildConfigurationList = 99F26B2119A65BE5006D3B1A /* Build configuration list for PBXNativeTarget "GetSocialTestApp" */;
 			buildPhases = (
-				99EFA49C1A78E707009FC9D7 /* Sources */,
-				99EFA49D1A78E707009FC9D7 /* Frameworks */,
-				99EFA49E1A78E707009FC9D7 /* Resources */,
+				99F26AD219A65BE5006D3B1A /* Sources */,
+				99F26B0719A65BE5006D3B1A /* Frameworks */,
+				99F26B1719A65BE5006D3B1A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = GetSocialTestApp;
-			productName = GetSocialTestApp;
-			productReference = 99EFA4A01A78E707009FC9D7 /* GetSocialTestApp.app */;
+			productName = testapp;
+			productReference = 99F26B2519A65BE5006D3B1A /* GetSocialTestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		99EFA4981A78E707009FC9D7 /* Project object */ = {
+		995D999717EB064500F65204 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = GetSocial;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = GrambleWorld;
 				TargetAttributes = {
-					99EFA49F1A78E707009FC9D7 = {
-						CreatedOnToolsVersion = 6.1.1;
+					99F26AD019A65BE5006D3B1A = {
+						DevelopmentTeam = MPDNQL6523;
 					};
 				};
 			};
-			buildConfigurationList = 99EFA49B1A78E707009FC9D7 /* Build configuration list for PBXProject "GetSocialTestApp" */;
+			buildConfigurationList = 995D999A17EB064500F65204 /* Build configuration list for PBXProject "GetSocialTestApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -238,67 +394,76 @@
 				en,
 				Base,
 			);
-			mainGroup = 99EFA4971A78E707009FC9D7;
-			productRefGroup = 99EFA4A11A78E707009FC9D7 /* Products */;
+			mainGroup = 995D999617EB064500F65204;
+			productRefGroup = 995D99A017EB064500F65204 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				99EFA49F1A78E707009FC9D7 /* GetSocialTestApp */,
+				99F26AD019A65BE5006D3B1A /* GetSocialTestApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		99EFA49E1A78E707009FC9D7 /* Resources */ = {
+		99F26B1719A65BE5006D3B1A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99AD21571A8BA78900A46C07 /* getsocial.png in Resources */,
-				99C03DD21AA5D8E9000A7FA0 /* GetSocial.bundle in Resources */,
-				99AD21591A8BABAB00A46C07 /* Images.xcassets in Resources */,
-				99EFA4AF1A78E707009FC9D7 /* Main.storyboard in Resources */,
-				99EFA4B41A78E707009FC9D7 /* LaunchScreen.xib in Resources */,
+				998B74BE1BBA8C7000325DAF /* GetSocial.bundle in Resources */,
+				998B74C01BBA8C7000325DAF /* GetSocialChat.bundle in Resources */,
+				99F3E7DE1AB2006400033238 /* getsocial.png in Resources */,
+				99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */,
+				99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */,
+				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
+				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
+				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
+				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,
+				99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */,
+				99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */,
+				99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */,
+				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		99EFA49C1A78E707009FC9D7 /* Sources */ = {
+		99F26AD219A65BE5006D3B1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99EFA4AC1A78E707009FC9D7 /* ViewController.m in Sources */,
-				9908FA6E1A9B45D100F39657 /* GetSocialFacebookInvitePlugin.m in Sources */,
-				99EFA4A91A78E707009FC9D7 /* AppDelegate.m in Sources */,
-				99EFA4A61A78E707009FC9D7 /* main.m in Sources */,
-				9908FA6F1A9B45D100F39657 /* GetSocialFacebookUtils.m in Sources */,
+				995AC1E61BB1568E006424DF /* MenuTableViewController.m in Sources */,
+				99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */,
+				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
+				99F26AEB19A65BE5006D3B1A /* AppDelegate.m in Sources */,
+				9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */,
+				99F26AF419A65BE5006D3B1A /* main.m in Sources */,
+				995AC1D61BB06955006424DF /* MainViewController.m in Sources */,
+				99B68F171BB18FC500E1F252 /* UserIdentityViewController.m in Sources */,
+				995AC1EB1BB15C95006424DF /* MenuItem.m in Sources */,
+				990BC5B01AF24E07003A0B96 /* UIBAlertView.m in Sources */,
+				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
+				995AC1E11BB15218006424DF /* MainNavigationController.m in Sources */,
+				992923A51BB411A00010D481 /* MenuTableViewCell.m in Sources */,
+				991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		99EFA4AD1A78E707009FC9D7 /* Main.storyboard */ = {
+		995D99B417EB064500F65204 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				99EFA4AE1A78E707009FC9D7 /* Base */,
+				99C086941BB92EE500C706DD /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		99EFA4B21A78E707009FC9D7 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				99EFA4B31A78E707009FC9D7 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		99EFA4C11A78E707009FC9D7 /* Debug */ = {
+		99404754196F09FD00F1B441 /* master */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -313,10 +478,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -325,113 +489,65 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = master;
+		};
+		99F26B2419A65BE5006D3B1A /* master */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/GetSocialTestApp/Vendor/**",
+					"$(inherited)",
+				);
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GetSocialTestApp/testapp-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = "GetSocialTestApp/testapp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		99EFA4C21A78E707009FC9D7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				OTHER_LDFLAGS = (
+					"-lstdc++",
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = im.getsocial.testapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
 			};
-			name = Release;
-		};
-		99EFA4C41A78E707009FC9D7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GetSocialTestApp/Vendor",
-					"$(PROJECT_DIR)/../bin/GetSocial.embeddedframework",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = GetSocialTestApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-lstdc++";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		99EFA4C51A78E707009FC9D7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GetSocialTestApp/Vendor",
-					"$(PROJECT_DIR)/../bin/GetSocial.embeddedframework",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = GetSocialTestApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-lstdc++";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
+			name = master;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		99EFA49B1A78E707009FC9D7 /* Build configuration list for PBXProject "GetSocialTestApp" */ = {
+		995D999A17EB064500F65204 /* Build configuration list for PBXProject "GetSocialTestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99EFA4C11A78E707009FC9D7 /* Debug */,
-				99EFA4C21A78E707009FC9D7 /* Release */,
+				99404754196F09FD00F1B441 /* master */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = master;
 		};
-		99EFA4C31A78E707009FC9D7 /* Build configuration list for PBXNativeTarget "GetSocialTestApp" */ = {
+		99F26B2119A65BE5006D3B1A /* Build configuration list for PBXNativeTarget "GetSocialTestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99EFA4C41A78E707009FC9D7 /* Debug */,
-				99EFA4C51A78E707009FC9D7 /* Release */,
+				99F26B2419A65BE5006D3B1A /* master */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = master;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 99EFA4981A78E707009FC9D7 /* Project object */;
+	rootObject = 995D999717EB064500F65204 /* Project object */;
 }
