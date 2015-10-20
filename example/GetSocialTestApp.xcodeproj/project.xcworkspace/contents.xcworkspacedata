@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:GetSocialTestApp.xcodeproj">
+      location = "self:testapp.xcodeproj">
    </FileRef>
 </Workspace>
