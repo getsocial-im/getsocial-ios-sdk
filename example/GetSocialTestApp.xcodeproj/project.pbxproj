@@ -43,6 +43,7 @@
 		998B74BF1BBA8C7000325DAF /* GetSocialChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B74BA1BBA8C7000325DAF /* GetSocialChat.framework */; settings = {ASSET_TAGS = (); }; };
 		998B74C01BBA8C7000325DAF /* GetSocialChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 998B74BC1BBA8C7000325DAF /* GetSocialChat.bundle */; settings = {ASSET_TAGS = (); }; };
 		99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */; settings = {ASSET_TAGS = (); }; };
+		99ABE3CC1BCEBC8600296F50 /* GetSocialTestApp.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 99ABE3C81BCE8EA000296F50 /* GetSocialTestApp.entitlements */; settings = {ASSET_TAGS = (); }; };
 		99B68F171BB18FC500E1F252 /* UserIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B68F141BB18FC500E1F252 /* UserIdentityViewController.m */; settings = {ASSET_TAGS = (); }; };
 		99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 99C086961BB92F4200C706DD /* defaultAvatar.png */; settings = {ASSET_TAGS = (); }; };
 		99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 99EB87FD1AB7611600357E60 /* activityImageWithButton.png */; };
@@ -78,8 +79,8 @@
 		990CFD731BA9C350008872CA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSmartInviteViewController.h; sourceTree = "<group>"; };
 		991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSmartInviteViewController.m; sourceTree = "<group>"; };
-		99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = "Plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.h"; sourceTree = "<group>"; };
-		99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = "Plugins/facebook-v4.x/GetSocialFacebookInvitePlugin.m"; sourceTree = "<group>"; };
+		99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = Plugins/GetSocialFacebookInvitePlugin.h; sourceTree = "<group>"; };
+		99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = Plugins/GetSocialFacebookInvitePlugin.m; sourceTree = "<group>"; };
 		992923981BB2EEAD0010D481 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		992923991BB2EEAD0010D481 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		992923A11BB411A00010D481 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		998B74BC1BBA8C7000325DAF /* GetSocialChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GetSocialChat.bundle; sourceTree = "<group>"; };
 		99ABE3C21BCE7E8A00296F50 /* UserIdentityUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityUtils.h; sourceTree = "<group>"; };
 		99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentityUtils.m; sourceTree = "<group>"; };
+		99ABE3C81BCE8EA000296F50 /* GetSocialTestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GetSocialTestApp.entitlements; sourceTree = "<group>"; };
 		99AD885C18098AC000F1F346 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		99B68F131BB18FC500E1F252 /* UserIdentityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityViewController.h; sourceTree = "<group>"; };
 		99B68F141BB18FC500E1F252 /* UserIdentityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentityViewController.m; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		995D99A817EB064500F65204 /* GetSocialTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				99ABE3C81BCE8EA000296F50 /* GetSocialTestApp.entitlements */,
 				99F772E51BBAA96A00A4CD69 /* LICENSE */,
 				998B74C11BBA8C7900325DAF /* GetSocial */,
 				99FE1A821BB2B2FF00EF576A /* Facebook */,
@@ -383,6 +386,11 @@
 				TargetAttributes = {
 					99F26AD019A65BE5006D3B1A = {
 						DevelopmentTeam = MPDNQL6523;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -414,6 +422,7 @@
 				99F3E7DE1AB2006400033238 /* getsocial.png in Resources */,
 				99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */,
 				99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */,
+				99ABE3CC1BCEBC8600296F50 /* GetSocialTestApp.entitlements in Resources */,
 				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
 				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
 				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
@@ -504,10 +513,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GetSocialTestApp/GetSocialTestApp.entitlements;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/GetSocialTestApp/Vendor/**",
 					"$(inherited)",
+					"$(SRCROOT)/../bin/**",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

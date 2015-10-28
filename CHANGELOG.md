@@ -1,7 +1,18 @@
-#GetSocial SDK for iOS
+# GetSocial iOS SDK
+
 ## Version History
 
+### v4.0.1
+
++ ADDED support for iOS 9 Universal Links for Smart Invites
++ ADDED `GetSocialAnimationStyleNone` as an option for animation-style to disable all animations
+
+---
+
 ### v4.0.0
+
+Release v4.0.0 brings a lot of new features, improvements and few breaking changes. The most notable are:
+
 + ADDED source param to the onUserAvatarClickHandler
 + ADDED functionality to get an external provider ID by getSocial ID
 + ADDED modularization, `Core` (Activity Feed, Notifications, Smart Invites) and `Chat` modules. [Learn more...](http://docs.getsocial.im/#upgrade-guide)
@@ -22,26 +33,31 @@
 ---
 
 ### v3.5.4
+
 + FIXED Chat Bubble maximum width calculation
 
 ---
 
 ### v3.5.3
+
 + ADDED support for FB SDK 4.x tracking of smart invites 
 
 ---
 
 ### v3.5.2
+
 + Bug fixes
 
 ---
 
 ### v3.5.1
+
 + ADDED user content moderation callback
 
 ---
 
 ### v3.5.0
+
 + ADDED ReferralData on SmartInvites
 + ADDED onReferralDataReceivedHandler
 + ADDED onInviteButtonClickHandler
@@ -51,6 +67,7 @@
 ---
 
 ### v3.4.0
+
 + ADDED support for activities with image, button, action
 + ADDED onGameAvatarClick handler
 + ADDED onActivityActionClick handler
@@ -59,11 +76,13 @@
 ---
 
 ### v3.3.0
+
 + ADDED Global Chat Room
 
 ---
 
 ### v3.2.0
+
 + ADDED Save State functionality
 + ADDED auto integration of push notification by intercepting AppDelegate methods
 + REMOVED the need of a id and key to authenticate. Now, only key is required
@@ -79,7 +98,8 @@
 
 ---
 
-### v2.7.0 - Released - 30th Sep 2014
+### v2.7.0
+
 + FIXED issue with Whatsapp invite
 + FIXED orientation issues for iOS8
 + FIXED problems while signing up with email
@@ -97,7 +117,8 @@
 
 ---
 
-### v2.5.0 - Released - 22nd Ago 2014
+### v2.5.0
+
 + FIXED Navigation bugs
 + FIXED #27 SB handle is not correctly shown on iPad
 + FIXED #28 Minor problem with Invite Friends button on Leaderboards and Profile
@@ -127,7 +148,7 @@
 
 ---
 
-### v1.4.1 - Released - 30th June 2014
+### v1.4.1
 + FIXED bug flickering avatar
 + IMPROVED UI of user profiles
 + IMPROVED hiding post input fields in activities when you are scrolling
@@ -142,7 +163,7 @@
 
 ---
 
-### v1.4.0 - Released - 27th May 2014
+### v1.4.0
 + ADDED Chat one-on-one which includes:
   + Chat history
   + Chat List aka List of Conversations
@@ -160,11 +181,13 @@
 ---
 
 ### v1.0.2
+
 + ADDED openSocialBar and closeSocialBar methods
 
 ---
 
 ### v1.0.1
+
 + FIXED auto refresh activity indicator
 + ADDED method to allow developers to change the offset of the handle
 + ADDED method to allow developers to change the background color of the handle
@@ -174,4 +197,5 @@
 ---
 
 ### v1.0
+
 + Initial Version
