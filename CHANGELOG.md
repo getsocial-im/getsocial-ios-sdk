@@ -2,6 +2,14 @@
 
 ## Version History
 
+
+### v4.0.2
+
++ ADDED 5 new languages: Icelandic, Korean, Japanese, Chinese Simplified, Chinese Traditional
++ FIXED crash on start on iOS 7
+
+---
+
 ### v4.0.1
 
 + ADDED support for iOS 9 Universal Links for Smart Invites

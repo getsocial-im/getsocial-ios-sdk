@@ -387,7 +387,12 @@
             @"pt" : @"Portuguese",
             @"ru" : @"Russian",
             @"sv" : @"Swedish",
-            @"tr" : @"Turkish"
+            @"tr" : @"Turkish",
+            @"is" : @"Icelandic",
+            @"ja" : @"Japanese",
+            @"ko" : @"Korean",
+            @"zh-Hans" : @"Chinese Simplified",
+            @"zh-Hant" : @"Chinese Traditional"
         };
 
         NSArray *sortedLanguages = [[availableLanguages allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -1027,7 +1032,14 @@
 
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
-    [alert textFieldAtIndex:0].text = [[NSUserDefaults standardUserDefaults] objectForKey:@"GetSocialUIConfigurationCustomURL"];
+    NSString *savedCustomUrlUI = [[NSUserDefaults standardUserDefaults] objectForKey:@"GetSocialUIConfigurationCustomURL"];
+    
+    if (!savedCustomUrlUI)
+    {
+        savedCustomUrlUI = @"https://downloads.getsocial.im/all/default.json";
+    }
+    
+    [alert textFieldAtIndex:0].text = savedCustomUrlUI;
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
 
