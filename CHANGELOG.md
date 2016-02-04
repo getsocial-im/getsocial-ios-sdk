@@ -2,6 +2,11 @@
 
 ## Version History
 
+### v4.0.3
+
++ FIXED User chat messages displayed incorrectly in pressed state
+
+---
 
 ### v4.0.2
 
