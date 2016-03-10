@@ -14,19 +14,6 @@
  *	limitations under the License.
  */
 
-#import <UIKit/UIKit.h>
+#import "Constants.h"
 
-typedef NS_ENUM(NSUInteger, LogLevel)
-{
-    LogLevelInfo,
-    LogLevelWarning,
-    LogLevelError,
-};
-
-@interface ConsoleViewController : UIViewController
-
-+ (instancetype)sharedController;
-
-- (void)log:(LogLevel)level message:(NSString *)message context:(NSString*)context;
-
-@end
+NSString *const UserWasUpdatedNotification = @"UserWasUpdatedNotification";

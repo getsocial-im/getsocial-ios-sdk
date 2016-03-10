@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="e9s-A7-iTQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="e9s-A7-iTQ">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -64,26 +63,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="uXw-nT-Pyz">
-                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                <rect key="frame" x="0.0" y="2" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uXw-nT-Pyz" secondAttribute="height" multiplier="1:1" id="5oC-a2-sGL"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="DisplayName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="anC-WH-Uop">
-                                <rect key="frame" x="52" y="0.0" width="268" height="20.5"/>
+                                <rect key="frame" x="48" y="0.0" width="272" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Identities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jci-cF-7yg">
-                                <rect key="frame" x="52" y="20" width="268" height="17"/>
+                                <rect key="frame" x="48" y="20" width="272" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="uXw-nT-Pyz" firstAttribute="top" secondItem="Zth-kq-Bik" secondAttribute="bottom" id="2qw-TC-WaA"/>
+                            <constraint firstItem="uXw-nT-Pyz" firstAttribute="top" secondItem="Zth-kq-Bik" secondAttribute="bottom" constant="2" id="2qw-TC-WaA"/>
                             <constraint firstItem="anC-WH-Uop" firstAttribute="top" secondItem="Zth-kq-Bik" secondAttribute="bottom" id="4e8-VW-x0G"/>
                             <constraint firstItem="Jci-cF-7yg" firstAttribute="top" secondItem="anC-WH-Uop" secondAttribute="bottom" id="Clc-aV-bbs"/>
                             <constraint firstItem="anC-WH-Uop" firstAttribute="leading" secondItem="Jci-cF-7yg" secondAttribute="leading" id="Edg-R9-eGV"/>
@@ -92,7 +91,7 @@
                             <constraint firstItem="uXw-nT-Pyz" firstAttribute="leading" secondItem="ck3-8P-Lm6" secondAttribute="leading" id="gC3-J9-Tfp"/>
                             <constraint firstAttribute="trailing" secondItem="Jci-cF-7yg" secondAttribute="trailing" id="wiN-6z-e9v"/>
                             <constraint firstItem="Jci-cF-7yg" firstAttribute="trailing" secondItem="anC-WH-Uop" secondAttribute="trailing" id="yDZ-WO-hkC"/>
-                            <constraint firstItem="uXw-nT-Pyz" firstAttribute="bottom" secondItem="2L5-xP-SMM" secondAttribute="top" id="ydk-oM-gKT"/>
+                            <constraint firstItem="uXw-nT-Pyz" firstAttribute="bottom" secondItem="2L5-xP-SMM" secondAttribute="top" constant="-2" id="ydk-oM-gKT"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

@@ -2,8 +2,24 @@
 
 ## Version History
 
+### v5.0.0
+
++ IMPROVED Chat module with a complete refactor
++ IMPROVED network communications
++ ADDED presence details
++ ADDED sticky activity at the top
++ ADDED `GetSocialCurrentUser` object 
++ ADDED methods to set `DisplayName` and `AvatarUrl` for the current user
++ ADDED methods to add/remove identities for the current user with conflict support
++ ADDED methods to reset the current user
++ ADDED `OnUserActionPerformHandler` to intercept all user interactions
++ ADDED support for BitCode
+
+---
+
 ### v4.0.3
 
++ ADDED `ACTIVITY_COMMENT_BG_COLOR` property to configure comments background color
 + FIXED User chat messages displayed incorrectly in pressed state
 
 ---
@@ -31,11 +47,11 @@ Release v4.0.0 brings a lot of new features, improvements and few breaking chang
 + ADDED modularization, `Core` (Activity Feed, Notifications, Smart Invites) and `Chat` modules. [Learn more...](http://docs.getsocial.im/#upgrade-guide)
 + ADDED support for Facebook SDK v4.x [Learn more...](http://docs.getsocial.im/#integration-with-facebook)
 + ADDED support for App in Like list
-+ ADDED support for App as sender of notifications 
++ ADDED support for App as sender of notifications
 + ADDED friends list view. [Learn more...](http://docs.getsocial.im/#friends-list)
 + ADDED support for linking multiple user accounts. [Learn more...](http://docs.getsocial.im/#adding-identity-info)
 + ADDED setOnUserIdentityUpdatedHandler that will be invoked on login/logout add/remove IdentityInfo
-+ REPLACED generic `openXyz` view method with sophisticated builders API. To obtain view builder call `createXyzView()`. 
++ REPLACED generic `openXyz` view method with sophisticated builders API. To obtain view builder call `createXyzView()`.
 + IMPROVED UI configuration system. Now all UI properties can be customized via JSON configuration file. [Learn more...](http://docs.getsocial.im/ui-customization/#developers-guide)
 + IMPROVED most of the `GetSocial` methods to more meaningful names (e.g. `authenticateGame(...)` => `init(...)`, `verifyUserIdentity(...)` => `login(...)`, etc.). [Learn more...](http://docs.getsocial.im/#upgrade-guide)
 + IMPROVED internal queue management
@@ -53,7 +69,7 @@ Release v4.0.0 brings a lot of new features, improvements and few breaking chang
 
 ### v3.5.3
 
-+ ADDED support for FB SDK 4.x tracking of smart invites 
++ ADDED support for FB SDK 4.x tracking of smart invites
 
 ---
 
@@ -154,8 +170,8 @@ Release v4.0.0 brings a lot of new features, improvements and few breaking chang
   + Redesigned posting UI
 + ADDED Post Purchase Activity feature
   + Post a purchase activity with custom text, image, item ID, item name and image URL
-  + Register a callback for the action where user presses action button on a purchase 
-  + Settings toggle that allows the user to post the purchase activities anonymously 
+  + Register a callback for the action where user presses action button on a purchase
+  + Settings toggle that allows the user to post the purchase activities anonymously
 + ADDED User cache
 + ADDED Welcome Page
 

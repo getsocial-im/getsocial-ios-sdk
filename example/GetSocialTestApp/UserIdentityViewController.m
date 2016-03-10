@@ -1,10 +1,20 @@
-/**
- * Author: Demian Denker
+/*
+ *    	Copyright 2015-2016 GetSocial B.V.
  *
- * Published under the MIT License (MIT)
- * Copyright: (c) 2015 GetSocial B.V.
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *    	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
  */
 
+#import "Constants.h"
 #import "UserIdentityViewController.h"
 
 @interface UserIdentityViewController ()
@@ -21,14 +31,15 @@
 {
     [super viewDidLoad];
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:GetSocialUserIdentityUpdatedNotification
+    [[NSNotificationCenter defaultCenter] addObserverForName:UserWasUpdatedNotification
                                                       object:nil
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
-
-                                                      [self updateUserDetails];
+                                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                                          [self updateUserDetails];
+                                                      });
                                                   }];
-    
+
     [self updateUserDetails];
 }
 
@@ -39,20 +50,27 @@
 
 - (void)updateUserDetails
 {
-    GetSocialUserIdentity *userIdentity = [GetSocial sharedInstance].loggedInUser;
+    GetSocialCurrentUser *user = [GetSocial sharedInstance].currentUser;
 
-    if (userIdentity)
+    if (user)
     {
         __block NSString *identities = @"";
-        
-        [userIdentity.identities enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            identities = [identities stringByAppendingFormat:@"%@, ", key];
-        }];
 
-        identities = [identities stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@", "]];
+        if (!user.isAnonymous)
+        {
+            [user.identities enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+                identities = [identities stringByAppendingFormat:@"%@, ", obj];
+            }];
+
+            identities = [identities stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@", "]];
+        }
+        else
+        {
+            identities = @"Anonymous";
+        }
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSURL *url = [NSURL URLWithString:userIdentity.avatarUrl];
+            NSURL *url = [NSURL URLWithString:user.avatarUrl];
 
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *image = [UIImage imageWithData:data];
@@ -64,12 +82,13 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:^{
                                     [self.avatarImageView setImage:image];
-                                    self.displayNameLabel.text = userIdentity.displayName;
-                                    self.identitiesLabel.text = identities;
                                 }
                                 completion:nil];
             });
         });
+
+        self.displayNameLabel.text = user.displayName;
+        self.identitiesLabel.text = identities;
     }
     else
     {
@@ -77,13 +96,14 @@
                           duration:.5f
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:^{
-                            self.displayNameLabel.text = @"User not logged in";
                             self.avatarImageView.image = [UIImage imageNamed:@"defaultAvatar"];
-                            self.identitiesLabel.text = @"";
+
                         }
                         completion:nil];
+
+        self.displayNameLabel.text = @"<No user>";
+        self.identitiesLabel.text = @"";
     }
 }
-
 
 @end

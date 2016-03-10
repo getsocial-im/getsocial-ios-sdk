@@ -1,14 +1,24 @@
-/**
- * Author: Demian Denker
+/*
+ *    	Copyright 2015-2016 GetSocial B.V.
  *
- * Published under the MIT License (MIT)
- * Copyright: (c) 2015 GetSocial B.V.
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *    	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
  */
 
-#import "MainViewController.h"
-#import "MainNavigationController.h"
-#import "MenuItem.h"
 #import "ConsoleViewController.h"
+#import "Constants.h"
+#import "MainNavigationController.h"
+#import "MainViewController.h"
+#import "MenuItem.h"
 #import "UIBAlertView.h"
 #import "UserIdentityUtils.h"
 
@@ -41,13 +51,15 @@
           showAlert:bShowAlert                                            \
         showConsole:bShowConsole]
 
+NSString *const kCustomProvider = @"custom";
+
 @interface MainViewController ()
 
 @property(nonatomic, strong) ConsoleViewController *consoleViewController;
 @property(nonatomic, strong) ParentMenuItem *uiCustomizationMenu;
 @property(nonatomic, strong) ParentMenuItem *chatMenu;
 @property(nonatomic, strong) ParentMenuItem *languageMenu;
-@property(nonatomic, strong) ParentMenuItem *notificationCenterMenu;
+@property(nonatomic, strong) MenuItem *notificationCenterMenu;
 
 @end
 
@@ -60,27 +72,6 @@
     [self updateVersionInfo];
 
     [self log:LogLevelInfo context:nil message:self.versionLabel.text showAlert:NO showConsole:NO];
-    
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-        [self loginWithFacebookWithToken:[FBSDKAccessToken currentAccessToken].tokenString userId:[FBSDKAccessToken currentAccessToken].userID success:nil failure:nil];
-    }
-
-    // Register OnLoginRequestHandler
-    [[GetSocial sharedInstance] setOnLoginRequestHandler:^{
-        [[GetSocial sharedInstance] closeView:YES];
-        [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-            
-            if (!error && !result.isCancelled)
-            {
-                [self loginWithFacebookWithToken:result.token.tokenString userId:result.token.userID success:^{
-                    [[GetSocial sharedInstance] restoreView];
-                } failure:^(NSError *err) {
-                    [[GetSocial sharedInstance] restoreView];
-                }];
-            }
-        }];
-    }];
 
     [[GetSocial sharedInstance] setOnReferralDataReceivedHandler:^(NSArray *referralData) {
         GSLogInfo(YES, NO, @"Referral data received: %@.", referralData);
@@ -95,14 +86,12 @@
         [self updateUnreadConversationsCount];
         GSLogInfo(NO, NO, @"Chat Unread conversation count changed to %zd,", unreadNotificationsCount);
     }];
-    
-    [[GetSocial sharedInstance] setOnUserIdentityUpdatedHandler:^(GetSocialUserIdentity *userIdentity) {
-        GSLogInfo(NO, NO, @"User Identity was updated.");
-    }];
-    
+
     // Register FBInvitePlugin
     GetSocialFacebookInvitePlugin *fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
     [[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:kGetSocialProviderFacebook];
+
+    [self allowAnonymousUsersToInteract:NO];
 }
 
 - (void)updateUnreadConversationsCount
@@ -132,27 +121,27 @@
     {
         self.menu = [NSMutableArray array];
 
-        // User Authentication Menu
-        ParentMenuItem *userAuthenticationMenu = [MenuItem parentMenuItemWithTitle:@"User Authentication"];
+        // User Management Menu
+        ParentMenuItem *userAuthenticationMenu = [MenuItem parentMenuItemWithTitle:@"User Management"];
 
-        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Log in with Facebook"
+        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Change user display name"
                                                                           action:^{
-                                                                              [self loginWithFacebook];
+                                                                              [self changeUserDisplayName];
                                                                           }]];
 
-        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Log in with Generic provider"
+        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Change user avatar"
                                                                           action:^{
-                                                                              [self loginWithGenericProvider];
+                                                                              [self changeUserAvatar];
                                                                           }]];
 
         [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Add Facebook user identity"
                                                                           action:^{
-                                                                              [self addFBUserIdentity];
+                                                                              [self addFBUserIdentityWithSuccess:nil failure:nil];
                                                                           }]];
 
         [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Add Custom user identity"
                                                                           action:^{
-                                                                              [self addCustomUserIdentity];
+                                                                              [self addCustomUserIdentityWithSuccess:nil failure:nil];
                                                                           }]];
 
         [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Remove Facebook user identity"
@@ -165,9 +154,9 @@
                                                                               [self removeCustomUserIdentity];
                                                                           }]];
 
-        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Log out"
+        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Reset user"
                                                                           action:^{
-                                                                              [self logout];
+                                                                              [self resetUser];
                                                                           }]];
 
         [self.menu addObject:userAuthenticationMenu];
@@ -194,10 +183,14 @@
                                                           [self postActivity:@"Text" withImage:nil buttonText:nil action:nil andTags:nil];
                                                       }]];
 
-        [postActivitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:
-                                                     @"Post Image" action:^{
-                                [self postActivity:nil withImage:[UIImage imageNamed:@"activityImage.png"] buttonText:nil action:nil andTags:nil];
-                            }]];
+        [postActivitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post Image"
+                                                                      action:^{
+                                                                          [self postActivity:nil
+                                                                                   withImage:[UIImage imageNamed:@"activityImage.png"]
+                                                                                  buttonText:nil
+                                                                                      action:nil
+                                                                                     andTags:nil];
+                                                                      }]];
 
         [postActivitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post Text + Image"
                                                                       action:^{
@@ -279,12 +272,10 @@
         [self.menu addObject:self.chatMenu];
 
         // Notification Center Menu
-        self.notificationCenterMenu = [MenuItem parentMenuItemWithTitle:@"Notification Center"];
-
-        [self.notificationCenterMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Open"
-                                                                               action:^{
-                                                                                   [self openNotificationCenter];
-                                                                               }]];
+        self.notificationCenterMenu = [MenuItem actionableMenuItemWithTitle:@"Notification Center"
+                                                                     action:^{
+                                                                         [self openNotificationCenter];
+                                                                     }];
 
         [self.menu addObject:self.notificationCenterMenu];
 
@@ -336,9 +327,14 @@
                                                                         [self getFirst5Leaderboards];
                                                                     }]];
 
-        [leaderboardsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Get first 5 scores from Leaderboard 1"
+        [leaderboardsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Get first 5 scores from Leaderboard 1 (world)"
                                                                     action:^{
                                                                         [self getFirst5ScoresFromLeaderboard1];
+                                                                    }]];
+
+        [leaderboardsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Get first 5 scores from Leaderboard 1 (following)"
+                                                                    action:^{
+                                                                        [self getFirst5ScoresFromfollowingFromLeaderboard1];
                                                                     }]];
 
         [leaderboardsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Submit score to Leaderboard 1"
@@ -396,7 +392,7 @@
         };
 
         NSArray *sortedLanguages = [[availableLanguages allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [obj1 localizedCaseInsensitiveCompare:obj2];
+            return [availableLanguages[obj1] localizedCaseInsensitiveCompare:availableLanguages[obj2]];
         }];
 
         for (NSString *key in sortedLanguages)
@@ -410,7 +406,13 @@
 
         [settingsMenu addSubmenu:self.languageMenu];
 
-        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"Enable User Generated Content Handler"
+        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"Allow anonymous users to interact"
+                                                            isChecked:NO
+                                                               action:^BOOL(BOOL isChecked) {
+                                                                   return [self allowAnonymousUsersToInteract:isChecked];
+                                                               }]];
+
+        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"User generated content handler"
                                                             isChecked:NO
                                                                action:^BOOL(BOOL isChecked) {
                                                                    return [self enableUserGeneratedContentHandler:isChecked];
@@ -446,199 +448,298 @@
 
 #pragma mark - Authentication
 
-- (void)loginWithFacebook
+- (void)changeUserDisplayName
 {
-    [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:@"User Display Name"
+                                                      message:@"Enter the new Display Name"
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@[ @"Ok" ]];
 
-        if (!error && !result.isCancelled)
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+
+    [alert textFieldAtIndex:0].text = [UserIdentityUtils randomDisplayName];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+
+        if (!didCancel)
         {
-            [self loginWithFacebookWithToken:result.token.tokenString userId:result.token.userID success:nil failure:nil];
+            NSString *displayName = [alert textFieldAtIndex:0].text;
+
+            [[GetSocial sharedInstance]
+                    .currentUser setDisplayName:displayName
+                success:^{
+                    GSLogInfo(YES, NO, @"User display name was changed to %@", displayName);
+                    [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+                }
+                failure:^(NSError *error) {
+                    GSLogError(YES, NO, @"Cannot change user display name to %@. Reason %@", displayName, [error localizedDescription]);
+                }];
         }
     }];
 }
 
+- (void)changeUserAvatar
+{
+    NSString *avatarUrl = [UserIdentityUtils randomAvatarUrl];
+
+    [[GetSocial sharedInstance]
+            .currentUser setAvatarUrl:avatarUrl
+        success:^{
+            GSLogInfo(YES, NO, @"User avatar was changed to %@", avatarUrl);
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+        }
+        failure:^(NSError *error) {
+            GSLogError(YES, NO, @"Cannot change avatar to %@. Reason %@", avatarUrl, [error localizedDescription]);
+        }];
+}
+
 - (void)loginWithFacebookWithToken:(NSString *)token userId:(NSString *)userId success:(void (^)())success failure:(void (^)(NSError *))failure
 {
-    GetSocialIdentityInfo *info = [GetSocialIdentityInfo identityInfoWithProvider:kGetSocialProviderFacebook token:token userId:userId];
-
-    [[GetSocial sharedInstance] loginWithInfo:info
-        success:^{
-            GSLogInfo(NO, NO, @"App FB Auth -> GetSocial log in.");
-
+    GetSocialUserIdentity *identity = [GetSocialUserIdentity identityWithProvider:kGetSocialProviderFacebook token:token];
+    GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+    [currentUser addUserIdentity:identity
+        complete:^(GetSocialAddIdentityResult result) {
+            GSLogInfo(NO, NO, @"App FB Auth -> GetSocial Add FB User Identity result: %@", [self userIdentityResultString:result]);
             if (success)
             {
                 success();
             }
         }
-        failure:^(NSError *err) {
-            GSLogError(YES, NO, @"App FB Auth -> GetSocial log in failed: %@.", [err localizedDescription]);
-
+        failure:^(NSError *error) {
+            GSLogError(YES, NO, @"App FB Auth -> GetSocial Add FB User Identity failed: %@.", [error localizedDescription]);
             if (failure)
             {
-                failure(err);
+                failure(error);
             }
-        }];
+        }
+        conflict:nil];
 }
 
 - (void)loginWithFacebookWithHandler:(FBSDKLoginManagerRequestTokenHandler)handler
 {
-    FBSDKLoginManager *login = [FBSDKLoginManager new];
-    [login logInWithReadPermissions:kGetSocialAuthPermissionsFacebook fromViewController:self handler:handler];
+    [[FBSDKLoginManager new] logInWithReadPermissions:kGetSocialAuthPermissionsFacebook fromViewController:self handler:handler];
 }
 
-- (void)loginWithGenericProvider
+- (void)addFBUserIdentityWithSuccess:(void (^)())success failure:(void (^)())failure
 {
-    NSString* userId = [UserIdentityUtils installationIdWithSuffix:@"L"];
-    
-    GetSocialIdentityInfo *info = [GetSocialIdentityInfo identityInfoWithProvider:kGetSocialProviderGeneric
-                                                                           userId:userId
-                                                                      displayName:[UserIdentityUtils displayNameForUserId:userId]
-                                                                        avatarUrl:[UserIdentityUtils avatarUrlForUserId:userId]];
+    GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
 
-
-    [[GetSocial sharedInstance] loginWithInfo:info
-        success:^{
-            GSLogInfo(NO, NO, @"User %@ (%@) logged in using Provider %@", info.displayName, info.userId, info.provider);
-        }
-        failure:^(NSError *err) {
-            GSLogInfo(YES, NO, @"Failed to login user %@ (%@) with Provider %@. Reason: %@", info.displayName, info.userId, info.provider,
-                      [err localizedDescription]);
-        }];
-}
-
-- (void)addFBUserIdentity
-{
-    if ([GetSocial sharedInstance].isUserLoggedIn)
+    if (![currentUser userIdForProvider:kGetSocialProviderFacebook])
     {
-        if (![[GetSocial sharedInstance].loggedInUser idForProvider:kGetSocialProviderFacebook])
-        {
-            [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
 
-                if (!error && !result.isCancelled)
-                {
-                    GetSocialIdentityInfo *info = [GetSocialIdentityInfo identityInfoWithProvider:kGetSocialProviderFacebook
-                                                                                            token:result.token.tokenString
-                                                                                           userId:result.token.userID];
+            if (!error && !result.isCancelled)
+            {
+                GetSocialUserIdentity *identity = [GetSocialUserIdentity facebookIdentityWithToken:result.token.tokenString];
 
-                    [[GetSocial sharedInstance] addUserIdentityInfo:info
-                        success:^{
-                            GSLogInfo(NO, NO, @"App FB Auth -> GetSocial FB User Identity added.");
+                [currentUser addUserIdentity:identity
+                    complete:^(GetSocialAddIdentityResult result) {
+                        GSLogInfo(YES, NO, @"App FB Auth -> GetSocial Add FB User Identity result: %@", [self userIdentityResultString:result]);
+
+                        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+
+                        if (success)
+                        {
+                            success();
                         }
-                        failure:^(NSError *err) {
-                            GSLogError(YES, NO, @"App FB Auth -> GetSocial FB User Identity added failed: %@.", [err localizedDescription]);
-                        }];
-                }
 
-            }];
-        }
-        else
-        {
-            GSLogInfo(YES, NO, @"User is already logged in with Facebook.");
-        }
+                    }
+                    failure:^(NSError *error) {
+                        GSLogError(YES, NO, @"App FB Auth -> GetSocial Add FB User Identity failed: %@.", [error localizedDescription]);
+
+                        if (failure)
+                        {
+                            failure();
+                        }
+
+                    }
+                    conflict:^(GetSocialUser *currentUser, GetSocialUser *remoteUser,
+                               void (^resolve)(GetSocialAddIdentityConflictResolutionStrategy strategy)) {
+
+                        [self showAlertViewToResolveIdentityConflictWithCurrentUser:currentUser
+                                                                         remoteUser:remoteUser
+                                                                            resolve:^(GetSocialAddIdentityConflictResolutionStrategy strategy) {
+
+                                                                                if (strategy == GetSocialAddIdentityResultConflictResolvedWithCurrent)
+                                                                                {
+                                                                                    FBSDKLoginManager *loginManager = [FBSDKLoginManager new];
+                                                                                    [loginManager logOut];
+                                                                                }
+
+                                                                                resolve(strategy);
+                                                                            }];
+
+                    }];
+            }
+            else
+            {
+                if (failure)
+                {
+                    failure();
+                }
+            }
+
+        }];
     }
     else
     {
-        GSLogWarning(YES, NO, @"User is not logged in.", nil);
+        GSLogInfo(YES, NO, @"User has already a Facebook identity.");
     }
 }
 
 - (void)removeFBUserIdentity
 {
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-        FBSDKLoginManager *login = [FBSDKLoginManager new];
-        [login logOut];
+    [[FBSDKLoginManager new] logOut];
 
-        if ([GetSocial sharedInstance].isUserLoggedIn)
-        {
-            if ([[GetSocial sharedInstance].loggedInUser idForProvider:kGetSocialProviderFacebook])
-            {
-                [[GetSocial sharedInstance] removeUserIdentityInfoForProvider:kGetSocialProviderFacebook
-                    success:^{
-                        GSLogInfo(YES, NO, @"UserIdentity removed for Provider %@.", kGetSocialProviderFacebook);
-                    }
-                    failure:^(NSError *err) {
-                        GSLogError(YES, NO, @"Failed to remove UserIdentity for Provider %@.", kGetSocialProviderFacebook);
-                    }];
-            }
-            else
-            {
-                GSLogWarning(YES, NO, @"User doesn't have UserIdentity for Provider %@.", kGetSocialProviderFacebook);
-            }
-        }
-        else
-        {
-            GSLogWarning(YES, NO, @"User is not logged in.", nil);
-        }
-    }
-    else
+    GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+    if ([currentUser userIdForProvider:kGetSocialProviderFacebook])
     {
-        GSLogWarning(YES, NO, @"User is not logged in with FB.", nil);
-    }
-}
-
-- (void)addCustomUserIdentity
-{
-    if ([GetSocial sharedInstance].isUserLoggedIn)
-    {
-        NSString* userId = [UserIdentityUtils installationIdWithSuffix:@"A"];
-        
-        GetSocialIdentityInfo *info = [GetSocialIdentityInfo identityInfoWithProvider:@"getsocial"
-                                                                               userId:userId
-                                                                          displayName:[UserIdentityUtils displayNameForUserId:userId]
-                                                                            avatarUrl:[UserIdentityUtils avatarUrlForUserId:userId]];
-        
-        [[GetSocial sharedInstance] addUserIdentityInfo:info
+        [currentUser removeUserIdentityForProvider:kGetSocialProviderFacebook
             success:^{
-                GSLogInfo(YES, NO, @"UserIdentity added %@ for Provider %@", info.userId, @"getsocial");
+
+                GSLogInfo(YES, NO, @"UserIdentity removed for Provider %@.", kGetSocialProviderFacebook);
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
             }
-            failure:^(NSError *err) {
-                GSLogError(YES, NO, @"Failed to add UserIdentity %@ for Provider %@", info.userId, @"getsocial");
+            failure:^(NSError *error) {
+                GSLogError(YES, NO, @"Failed to remove UserIdentity for Provider %@, error: %@", kGetSocialProviderFacebook,
+                           [error localizedDescription]);
             }];
     }
     else
     {
-        GSLogWarning(YES, NO, @"User is not logged in.", nil);
+        GSLogWarning(YES, NO, @"User doesn't have UserIdentity for Provider %@.", kGetSocialProviderFacebook);
     }
+}
+
+- (void)addCustomUserIdentityWithSuccess:(void (^)())success failure:(void (^)())failure
+{
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:@"Add Custom User identity"
+                                                      message:@"Enter UserId and Token"
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@[ @"Ok" ]];
+
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+
+    [alert textFieldAtIndex:0].placeholder = @"UserId";
+    [alert textFieldAtIndex:1].placeholder = @"Token";
+
+    [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+
+        if (!didCancel)
+        {
+            NSString *userId = [alert textFieldAtIndex:0].text;
+            NSString *token = [alert textFieldAtIndex:1].text;
+
+            if (![userId isEqualToString:@""] && ![token isEqualToString:@""])
+            {
+                GetSocialUserIdentity *identity = [GetSocialUserIdentity identityWithProvider:kCustomProvider userId:userId token:token];
+
+                GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+                [currentUser addUserIdentity:identity
+                    complete:^(GetSocialAddIdentityResult result) {
+                        GSLogInfo(YES, NO, @"User identity added %@ for Provider '%@', result: %@", userId, kCustomProvider,
+                                  [self userIdentityResultString:result]);
+                        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+
+                        if (success)
+                        {
+                            success();
+                        }
+
+                    }
+                    failure:^(NSError *error) {
+                        GSLogError(YES, NO, @"Failed to add user identity %@ for Provider '%@', error: %@", userId, kCustomProvider,
+                                   [error localizedDescription]);
+
+                        if (failure)
+                        {
+                            failure();
+                        }
+                    }
+                    conflict:^(GetSocialUser *currentUser, GetSocialUser *remoteUser,
+                               void (^resolve)(GetSocialAddIdentityConflictResolutionStrategy strategy)) {
+
+                        [self showAlertViewToResolveIdentityConflictWithCurrentUser:currentUser
+                                                                         remoteUser:remoteUser
+                                                                            resolve:^(GetSocialAddIdentityConflictResolutionStrategy strategy) {
+                                                                                resolve(strategy);
+                                                                            }];
+
+                    }];
+            }
+        }
+        else
+        {
+            if (failure)
+            {
+                failure();
+            }
+        }
+    }];
 }
 
 - (void)removeCustomUserIdentity
 {
-    if ([GetSocial sharedInstance].isUserLoggedIn)
+    GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+    if ([currentUser userIdForProvider:kCustomProvider])
     {
-        if ([[GetSocial sharedInstance].loggedInUser idForProvider:@"getsocial"])
-        {
-            [[GetSocial sharedInstance] removeUserIdentityInfoForProvider:@"getsocial"
-                success:^{
-                    GSLogInfo(YES, NO, @"UserIdentity removed for Provider %@", @"getsocial");
-                }
-                failure:^(NSError *err) {
-                    GSLogError(YES, NO, @"Failed to remove UserIdentity for Provider %@", @"getsocial");
-                }];
-        }
-        else
-        {
-            GSLogWarning(YES, NO, @"User doesn't have UserIdentity for Provider %@", @"getsocial");
-        }
+        [currentUser removeUserIdentityForProvider:kCustomProvider
+            success:^{
+                GSLogInfo(YES, NO, @"User identity removed for Provider '%@'", kCustomProvider);
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+            }
+            failure:^(NSError *error) {
+                GSLogError(YES, NO, @"Failed to remove user identity for Provider '%@', error: %@", kCustomProvider, [error localizedDescription]);
+            }];
     }
     else
     {
-        GSLogWarning(YES, NO, @"User is not logged in.", nil);
+        GSLogWarning(YES, NO, @"User doesn't have user identity for Provider '%@'", kCustomProvider);
     }
 }
 
-- (void)logout
+- (void)resetUser
 {
-    if ([GetSocial sharedInstance].isUserLoggedIn)
-    {
-        [[GetSocial sharedInstance] logoutWithComplete:^{
-            GSLogInfo(NO, NO, @"Log out completed.", nil);
+    [[GetSocial sharedInstance]
+            .currentUser resetWithSuccess:^{
+        GSLogWarning(YES, NO, @"User was reset.", nil);
+
+        // log out from FB
+        [[FBSDKLoginManager new] logOut];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+    }
+        failure:^(NSError *error) {
+            GSLogError(YES, NO, @"Couldn't reset user. Reason %@", [error localizedDescription]);
         }];
-    }
-    else
-    {
-        GSLogWarning(YES, NO, @"User is not logged in.", nil);
-    }
+}
+
+- (void)showAlertViewToResolveIdentityConflictWithCurrentUser:(GetSocialUser *)currentUser
+                                                   remoteUser:(GetSocialUser *)remoteUser
+                                                      resolve:(void (^)(GetSocialAddIdentityConflictResolutionStrategy strategy))resolve
+{
+    UIBAlertView *alert =
+        [[UIBAlertView alloc] initWithTitle:@"Conflict"
+                                    message:@"The new identity is already linked to another user. Which one do you want to continue using?"
+                          cancelButtonTitle:[NSString stringWithFormat:@"%@ (Current)", currentUser.displayName]
+                          otherButtonTitles:@[ [NSString stringWithFormat:@"%@ (Remote)", remoteUser.displayName] ]];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (resolve)
+        {
+            if (didCancel)
+            {
+                resolve(GetSocialAddIdentityConflictResolutionStrategyCurrent);
+                GSLogInfo(NO, NO, @"Identity conflict was resolve with current user");
+            }
+            else
+            {
+                resolve(GetSocialAddIdentityConflictResolutionStrategyRemote);
+                GSLogInfo(NO, NO, @"Identity conflict was resolve with remote user");
+            }
+        }
+    }];
 }
 
 #pragma mark - Activities
@@ -707,7 +808,7 @@
 - (void)openFriendList
 {
     GetSocialUserListViewBuilder *viewBuilder =
-        [[GetSocial sharedInstance] createUserListViewWithDismissHandler:^(GetSocialUserIdentity *user, BOOL didCancel) {
+        [[GetSocial sharedInstance] createUserListViewWithDismissHandler:^(GetSocialUser *user, BOOL didCancel) {
             if (!didCancel)
             {
                 GSLogInfo(YES, NO, @"User %@ (%@) was selected.", user.displayName, user.guid);
@@ -841,6 +942,38 @@
         }];
 }
 
+- (void)getFirst5ScoresFromfollowingFromLeaderboard1
+{
+    [[GetSocial sharedInstance] leaderboardScores:@"leaderboard_one"
+        offset:0
+        count:5
+        scoreType:GetSocialLeaderboardScoreTypeFollowing
+        success:^(NSArray *scores) {
+
+            if (scores.count > 0)
+            {
+                NSMutableString *responseString = [NSMutableString string];
+
+                for (GetSocialLeaderboardScore *score in scores)
+                {
+                    [responseString appendFormat:@"#%zd %@: %zd.\n", score.rank, score.user.displayName, score.value];
+                }
+
+                GSLogInfo(NO, YES, responseString, nil);
+            }
+            else
+            {
+                GSLogInfo(YES, NO, @"There are no scores on Leaderboard 1.", nil);
+            }
+
+        }
+        failure:^(NSError *error) {
+
+            GSLogError(YES, NO, @"Cannot get scores. Reason %@", [error localizedDescription]);
+
+        }];
+}
+
 - (void)submitScoreToLeaderboard:(NSString *)leaderboardId withTitle:(NSString *)leaderboardTitle
 {
     NSInteger rndValue = 1 + arc4random() % (1000 - 1);  // generate random number between 1 and 1000
@@ -853,7 +986,6 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
     [alert textFieldAtIndex:0].text = [NSString stringWithFormat:@"%zd", rndValue];
-    //[[alert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
@@ -861,7 +993,7 @@
             NSString *score = [alert textFieldAtIndex:0].text;
 
             [[GetSocial sharedInstance] submitLeaderboardScore:[score integerValue]
-                forLeaderboardID:leaderboardId
+                forLeaderboardId:leaderboardId
                 success:^(NSInteger position) {
 
                     GSLogInfo(YES, NO, @"Score %zd submitted on %@. Now on rank %zd", rndValue, leaderboardId, position);
@@ -907,41 +1039,106 @@
     return YES;
 }
 
-- (BOOL)enableUserGeneratedContentHandler:(BOOL)isChecked
+- (BOOL)allowAnonymousUsersToInteract:(BOOL)isChecked
 {
-    if (isChecked)
+    if (!isChecked)
     {
-        [[GetSocial sharedInstance] setOnUserGeneratedContentHandler:^NSString *(GetSocialUserGeneratedContentType type, NSString *content) {
+        [[GetSocial sharedInstance] setOnActionPerformHandler:^(GetSocialAction action, void (^finalize)(BOOL shouldPerformAction)) {
 
-            NSString *contentType;
+            BOOL allowAnonymousAction = YES;
 
-            switch (type)
+            switch (action)
             {
-                case GetSocialUserGeneratedContentTypeActivity:
-                    contentType = @"Activity";
-                    break;
-
-                case GetSocialUserGeneratedContentTypeComment:
-                    contentType = @"Comment";
-                    break;
-
-                case GetSocialUserGeneratedContentTypeGroupChatMessage:
-                    contentType = @"GroupChatMessage";
-                    break;
-
-                case GetSocialUserGeneratedContentTypePrivateChatMessage:
-                    contentType = @"PrivateChatMessage";
-                    break;
-
-                case GetSocialUserGeneratedContentTypePublicChatMessage:
-                    contentType = @"PublicChatMessage";
+                case GetSocialActionLikeActivity:
+                case GetSocialActionLikeComment:
+                case GetSocialActionPostActivity:
+                case GetSocialActionPostComment:
+                case GetSocialActionSendPrivateChatMessage:
+                case GetSocialActionSendPublicChatMessage:
+                    allowAnonymousAction = NO;
                     break;
 
                 default:
                     break;
             }
 
-            GSLogInfo(NO, NO, @"User Content (%@) was generated \"%@\".", contentType, content);
+            if ([GetSocial sharedInstance].currentUser.isAnonymous && !allowAnonymousAction)
+            {
+                NSString *actionString = [self actionString:action];
+
+                GSLogInfo(NO, NO, @"Requesting to add identity for action: %@.", actionString);
+
+                UIBAlertView *alert =
+                    [[UIBAlertView alloc] initWithTitle:@"Anonymous user"
+                                                message:[NSString stringWithFormat:@"You need to add an identity to %@", actionString]
+                                      cancelButtonTitle:@"Cancel"
+                                      otherButtonTitles:@[ @"Facebook", @"Custom" ]];
+
+                [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+
+                    if (didCancel)
+                    {
+                        GSLogInfo(NO, NO, @"Request to add identity for action: %@ was cancelled.", actionString);
+
+                        finalize(NO);
+                        return;
+                    }
+
+                    switch (selectedIndex)
+                    {
+                        case 1:
+                        {
+                            GSLogInfo(NO, NO, @"Adding FB identity to continue with action: %@.", actionString);
+                            [[GetSocial sharedInstance] closeView:YES];
+                            [self addFBUserIdentityWithSuccess:^{
+                                [[GetSocial sharedInstance] restoreView];
+                                finalize(YES);
+                            }
+                                failure:^{
+                                    [[GetSocial sharedInstance] restoreView];
+                                    finalize(NO);
+                                }];
+
+                            break;
+                        }
+                        case 2:
+                        {
+                            GSLogInfo(NO, NO, @"Adding Custom identity to continue with action: %@.", actionString);
+                            [self addCustomUserIdentityWithSuccess:^{
+                                finalize(YES);
+                            }
+                                failure:^{
+                                    finalize(NO);
+                                }];
+
+                            break;
+                        }
+                    }
+                }];
+            }
+            else
+            {
+                finalize(YES);
+            }
+        }];
+
+        GSLogInfo(NO, NO, @"Perform action handler was set.");
+    }
+    else
+    {
+        [[GetSocial sharedInstance] setOnActionPerformHandler:nil];
+        GSLogInfo(NO, NO, @"Perform action handler was removed.");
+    }
+    return YES;
+}
+
+- (BOOL)enableUserGeneratedContentHandler:(BOOL)isChecked
+{
+    if (isChecked)
+    {
+        [[GetSocial sharedInstance] setOnUserGeneratedContentHandler:^NSString *(GetSocialContentSource source, NSString *content) {
+
+            GSLogInfo(NO, NO, @"User Content (%@) was generated \"%@\".", [self sourceString:source], content);
 
             return [NSString stringWithFormat:@"%@ (verified 👮)", content];
         }];
@@ -960,7 +1157,7 @@
 {
     if (isChecked)
     {
-        [[GetSocial sharedInstance] setOnUserAvatarClickHandler:^BOOL(GetSocialUserIdentity *user, GetSocialSourceView source) {
+        [[GetSocial sharedInstance] setOnUserAvatarClickHandler:^BOOL(GetSocialUser *user, GetSocialSourceView source) {
             GSLogInfo(YES, NO, @"Click on user avatar %@ (%@).", user.displayName, user.guid);
             return YES;
         }];
@@ -1010,6 +1207,99 @@
     return YES;
 }
 
+- (NSString *)actionString:(GetSocialAction)action
+{
+    switch (action)
+    {
+        case GetSocialActionOpenActivities:
+            return @"Open Activities";
+            break;
+        case GetSocialActionOpenActivityDetails:
+            return @"Open Activity";
+            break;
+        case GetSocialActionPostActivity:
+            return @"Post Activity";
+            break;
+        case GetSocialActionPostComment:
+            return @"Post Comment";
+            break;
+        case GetSocialActionLikeActivity:
+            return @"Like Activity";
+            break;
+        case GetSocialActionLikeComment:
+            return @"Like Comment";
+            break;
+        case GetSocialActionOpenFriendsList:
+            return @"Open Friends List";
+            break;
+        case GetSocialActionOpenNotifications:
+            return @"Open Notifications";
+            break;
+        case GetSocialActionOpenChatList:
+            return @"Open Chat List";
+            break;
+        case GetSocialActionOpenPrivateChat:
+            return @"Open Private Chat";
+            break;
+        case GetSocialActionOpenPublicChat:
+            return @"Open Public Chat";
+            break;
+        case GetSocialActionSendPrivateChatMessage:
+            return @"Send Private Chat Message";
+            break;
+        case GetSocialActionSendPublicChatMessage:
+            return @"Send Public Chat Message";
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (NSString *)sourceString:(GetSocialContentSource)source
+{
+    switch (source)
+    {
+        case GetSocialContentSourceActivity:
+            return @"Activity";
+            break;
+        case GetSocialContentSourceComment:
+            return @"Comment";
+            break;
+        case GetSocialContentSourcePrivateChatMessage:
+            return @"Private Chat Message";
+            break;
+        case GetSocialContentSourcePublicChatMessage:
+            return @"Public Chat Message";
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (NSString *)userIdentityResultString:(GetSocialAddIdentityResult)result
+{
+    switch (result)
+    {
+        case GetSocialAddIdentityResultIdentityAdded:
+            return @"Identity Added";
+            break;
+
+        case GetSocialAddIdentityResultConflictResolvedWithCurrent:
+            return @"Conflict Resolved with Current";
+            break;
+
+        case GetSocialAddIdentityResultConflictResolvedWithRemote:
+            return @"Conflict Resolved with Remote";
+            break;
+
+        default:
+            return @"";
+            break;
+    }
+}
+
 #pragma mark - UI Customization
 
 - (BOOL)loadDefaultUI
@@ -1033,12 +1323,12 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
     NSString *savedCustomUrlUI = [[NSUserDefaults standardUserDefaults] objectForKey:@"GetSocialUIConfigurationCustomURL"];
-    
+
     if (!savedCustomUrlUI)
     {
         savedCustomUrlUI = @"https://downloads.getsocial.im/all/default.json";
     }
-    
+
     [alert textFieldAtIndex:0].text = savedCustomUrlUI;
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
@@ -1091,9 +1381,10 @@
 {
     [[GetSocial sharedInstance] savedStateWithSuccess:^(NSString *state) {
         GSLogInfo(YES, NO, @"Saved State retrieved: %@.", state);
-    } failure:^(NSError *error) {
-        GSLogInfo(YES, NO, @"Failed to retrieve Saved State. Reason: %@.", [error localizedDescription]);
-    }];
+    }
+        failure:^(NSError *error) {
+            GSLogInfo(YES, NO, @"Failed to retrieve Saved State. Reason: %@.", [error localizedDescription]);
+        }];
 }
 
 #pragma mark - Console
