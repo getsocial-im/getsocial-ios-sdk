@@ -154,7 +154,7 @@ NSString *const kCustomProvider = @"custom";
                                                                               [self removeCustomUserIdentity];
                                                                           }]];
 
-        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Reset user"
+        [userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Reset current user"
                                                                           action:^{
                                                                               [self resetUser];
                                                                           }]];
@@ -175,7 +175,7 @@ NSString *const kCustomProvider = @"custom";
                                                                   }]];
 
         // Post Activities
-        ParentMenuItem *postActivitiesMenu = [MenuItem parentMenuItemWithTitle:@"Post Activities"];
+        ParentMenuItem *postActivitiesMenu = [MenuItem parentMenuItemWithTitle:@"Post Activity"];
 
         [postActivitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post Text"
@@ -259,12 +259,12 @@ NSString *const kCustomProvider = @"custom";
         // Chat Menu
         self.chatMenu = [MenuItem parentMenuItemWithTitle:@"Chat"];
 
-        [self.chatMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Open global chat"
+        [self.chatMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Open Global Chat"
                                                                  action:^{
                                                                      [self openGlobalChat];
                                                                  }]];
 
-        [self.chatMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Open conversation list"
+        [self.chatMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Open Conversation List"
                                                                  action:^{
                                                                      [self openChatList];
                                                                  }]];
@@ -280,7 +280,7 @@ NSString *const kCustomProvider = @"custom";
         [self.menu addObject:self.notificationCenterMenu];
 
         // Friends Menu
-        ActionableMenuItem *friendsMenu = [MenuItem actionableMenuItemWithTitle:@"Friend List"
+        ActionableMenuItem *friendsMenu = [MenuItem actionableMenuItemWithTitle:@"Friends List"
                                                                          action:^{
                                                                              [self openFriendList];
                                                                          }];
@@ -440,6 +440,12 @@ NSString *const kCustomProvider = @"custom";
                                                             isChecked:NO
                                                                action:^BOOL(BOOL isChecked) {
                                                                    return [self enableActivityClickCustomBehaviour:isChecked];
+                                                               }]];
+
+        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"Window state custom behaviour"
+                                                            isChecked:NO
+                                                               action:^BOOL(BOOL isChecked) {
+                                                                   return [self enableWindowStateCustomBehaviour:isChecked];
                                                                }]];
 
         [self.menu addObject:settingsMenu];
@@ -1022,6 +1028,23 @@ NSString *const kCustomProvider = @"custom";
 
 #pragma mark - Custom Handlers
 
+- (BOOL)enableWindowStateCustomBehaviour:(BOOL)isChecked
+{
+    if (isChecked)
+    {
+        [[GetSocial sharedInstance] setOnWindowStateChangedHandler:^(BOOL isOpen) {
+            GSLogInfo(YES, NO, @"Window is now %@.", isOpen ? @"open" : @"close");
+        }];
+        GSLogInfo(NO, NO, @"Window state custom behaviour was set.");
+    }
+    else
+    {
+        [[GetSocial sharedInstance] setOnWindowStateChangedHandler:nil];
+        GSLogInfo(NO, NO, @"Window state custom behaviour was removed.");
+    }
+    return YES;
+}
+
 - (BOOL)enableActivityClickCustomBehaviour:(BOOL)isChecked
 {
     if (isChecked)
@@ -1045,6 +1068,9 @@ NSString *const kCustomProvider = @"custom";
     {
         [[GetSocial sharedInstance] setOnActionPerformHandler:^(GetSocialAction action, void (^finalize)(BOOL shouldPerformAction)) {
 
+            NSString *actionString = [self actionString:action];
+            GSLogInfo(NO, NO, @"Performing action: %@.", actionString);
+
             BOOL allowAnonymousAction = YES;
 
             switch (action)
@@ -1064,8 +1090,6 @@ NSString *const kCustomProvider = @"custom";
 
             if ([GetSocial sharedInstance].currentUser.isAnonymous && !allowAnonymousAction)
             {
-                NSString *actionString = [self actionString:action];
-
                 GSLogInfo(NO, NO, @"Requesting to add identity for action: %@.", actionString);
 
                 UIBAlertView *alert =
@@ -1126,7 +1150,14 @@ NSString *const kCustomProvider = @"custom";
     }
     else
     {
-        [[GetSocial sharedInstance] setOnActionPerformHandler:nil];
+        [[GetSocial sharedInstance] setOnActionPerformHandler:^(GetSocialAction action, void (^finalize)(BOOL shouldPerformAction)) {
+            NSString *actionString = [self actionString:action];
+
+            GSLogInfo(NO, NO, @"Performing action: %@.", actionString);
+            finalize(YES);
+
+        }];
+
         GSLogInfo(NO, NO, @"Perform action handler was removed.");
     }
     return YES;
@@ -1231,6 +1262,9 @@ NSString *const kCustomProvider = @"custom";
             break;
         case GetSocialActionOpenFriendsList:
             return @"Open Friends List";
+            break;
+        case GetSocialActionOpenSmartInvites:
+            return @"Open Smart Invites";
             break;
         case GetSocialActionOpenNotifications:
             return @"Open Notifications";

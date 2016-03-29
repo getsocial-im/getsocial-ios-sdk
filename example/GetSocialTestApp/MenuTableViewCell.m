@@ -40,7 +40,7 @@
 - (void)updateCell
 {
     self.textLabel.text = self.menuItem.title;
-    
+
     if (self.menuItem.detail)
     {
         self.detailTextLabel.text = self.menuItem.detail;
@@ -49,7 +49,7 @@
     {
         self.detailTextLabel.text = @"";
     }
-    
+
     self.accessoryType = UITableViewCellAccessoryNone;
 
     switch (self.menuItem.type)
@@ -92,6 +92,11 @@
         default:
             break;
     }
+
+    self.textLabel.accessibilityIdentifier = self.menuItem.title;
+    self.detailTextLabel.accessibilityIdentifier = self.menuItem.detail;
+
+    [self setNeedsLayout];
 }
 
 @end

@@ -2,6 +2,17 @@
 
 ## Version History
 
+### v5.0.1
+
++ IMPROVED SDK initialization with poor internet connectivity
++ ADDED no connection placeholders when needed
++ ADDED `GetSocialActionOpenSmartInvites` as `GetSocialAction` to use on `OnUserActionPerformHandler`
++ ADDED loading indicators on Activities and Chat views
++ ADDED `OnWindowStateChangedHandler` to be notified when any GetSocial SDK view is opened/closed
++ FIXED issue generating an incorrect unread notification number
+
+---
+
 ### v5.0.0
 
 + IMPROVED Chat module with a complete refactor
