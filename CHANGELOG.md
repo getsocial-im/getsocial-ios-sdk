@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.0.2
+
++ FIX handling of received push notifications
+
+---
+
 ### v5.0.1
 
 + IMPROVED SDK initialization with poor internet connectivity
