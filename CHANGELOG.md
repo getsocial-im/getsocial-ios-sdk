@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.0.3
+
++ FIX handling of font size issue if set programmatically
+
+---
+
 ### v5.0.2
 
 + FIX handling of received push notifications
