@@ -2,6 +2,13 @@
 
 ## Version History
 
+### v5.0.4
+
++ ADDED option to delay registering for Push Notifications
++ ADDED support for delay SDK initialization
+
+---
+
 ### v5.0.3
 
 + FIX handling of font size issue if set programmatically

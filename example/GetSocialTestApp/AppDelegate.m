@@ -27,29 +27,29 @@
 {
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *key = [info objectForKey:@"GetSocialAppKey"];
-
+    
     if (key && [key length] > 0)
     {
         [[GetSocial sharedInstance] initWithKey:key
-            success:^{
-
-                [[ConsoleViewController sharedController] log:LogLevelInfo message:@"GetSocial Initialization Succeeded." context:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
-            }
-            failure:^(NSError *error) {
-
-                [[ConsoleViewController sharedController]
-                        log:LogLevelError
-                    message:[NSString stringWithFormat:@"GetSocial Initialization Failed. Reason: %@.", [error localizedDescription]]
-                    context:nil];
-
-            }];
+                                        success:^{
+                                            
+                                            [[ConsoleViewController sharedController] log:LogLevelInfo message:@"GetSocial Initialization Succeeded." context:nil];
+                                            [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+                                        }
+                                        failure:^(NSError *error) {
+                                            
+                                            [[ConsoleViewController sharedController]
+                                             log:LogLevelError
+                                             message:[NSString stringWithFormat:@"GetSocial Initialization Failed. Reason: %@.", [error localizedDescription]]
+                                             context:nil];
+                                            
+                                        }];
     }
     else
     {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Missing GetSocial AppKey on the info.plist" userInfo:nil];
     }
-
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

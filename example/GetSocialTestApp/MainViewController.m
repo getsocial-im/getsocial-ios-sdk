@@ -448,6 +448,11 @@ NSString *const kCustomProvider = @"custom";
                                                                    return [self enableWindowStateCustomBehaviour:isChecked];
                                                                }]];
 
+        [settingsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Register for Push Notifications"
+                                                                action:^{
+                                                                    [self registerForPushNotifications];
+                                                                }]];
+
         [self.menu addObject:settingsMenu];
     }
 }
@@ -793,6 +798,11 @@ NSString *const kCustomProvider = @"custom";
 {
     GetSocialNotificationsViewBuilder *viewBuilder = [[GetSocial sharedInstance] createNotificationsView];
     [viewBuilder show];
+}
+
+- (void)registerForPushNotifications
+{
+    [[GetSocial sharedInstance] registerForPushNotifications];
 }
 
 #pragma mark - Smart Invites
