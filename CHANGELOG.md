@@ -2,6 +2,10 @@
 
 ## Version History
 
+### v5.0.5
+
++ FIX unresponsive window after opening animation
+
 ### v5.0.4
 
 + ADDED option to delay registering for Push Notifications
