@@ -2,9 +2,17 @@
 
 ## Version History
 
+### v5.0.6
+
++ FIX multiple invitation view can be opened
+
+---
+
 ### v5.0.5
 
 + FIX unresponsive window after opening animation
+
+---
 
 ### v5.0.4
 
