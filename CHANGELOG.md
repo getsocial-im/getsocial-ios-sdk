@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.0.7
+
++ FIXED bugs in Analytics
+
+---
+
 ### v5.0.6
 
 + FIX multiple invitation view can be opened
