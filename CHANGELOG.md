@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.0.8
+
++ CHANGED Now registering for push notifications on iOS is **ENABLED** by default. Call `[GetSocial sharedInstance].disableAutoRegistrationForPushNotifications = YES;` before initializing the SDK to avoid automatic registration of push notifications on GetSocial initialization.
+
+---
+
 ### v5.0.7
 
 + FIXED bugs in Analytics
