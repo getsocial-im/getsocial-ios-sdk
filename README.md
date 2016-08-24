@@ -23,7 +23,7 @@ Documentation and reference guide are available at [docs.getsocial.im](http://do
 
 For more information on GetSocial, visit our [website](http://www.getsocial.im/) or [contact us](mailto:info@getsocial.im).
 
-To manage the integration of the GetSocial SDK, login to the [GetSocial Developer Portal](https://developers.getsocial.im).
+To manage the integration of the GetSocial SDK, login to the [GetSocial Dashboard](https://developers.getsocial.im).
 
 ## License
 

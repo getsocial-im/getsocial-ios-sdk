@@ -2,6 +2,16 @@
 
 ## Version History
 
+### v5.1.0
+
++ ADDED Chat API to use custom Chat views
++ ADDED native share option to Smart Invites
++ ADDED Facebook Messanger as Smart Invites provider
++ FIXED blurry button images on non-retina display 
++ FIXED status bar overlaps GetSocial SDK views
+
+---
+
 ### v5.0.9
 
 + IMPROVED SDK network communications to GetSocial services
@@ -199,7 +209,7 @@ Release v4.0.0 brings a lot of new features, improvements and few breaking chang
 + ADDED Invite friends via SMS, Email & Whatsapp
 + ADDED Push Notifications with support to open specific Activities, Profiles or Chat
 + FIXED Leaderboard Time Format
-+ FIXED Create a chat group when the user has no followings
++ FIXED Create a chat group when the user has no following
 + FIXED Quickly tapping on Connect to Facebook causes issues
 + FIXED Loading indication position is incorrect when you open a image on a Full Screen
 + FIXED Flush the operation queue twice in a row

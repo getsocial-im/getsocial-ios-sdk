@@ -27,18 +27,6 @@
 
 @implementation GetSocialFBMessengerInvitePlugin
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self)
-    {
-        self.title = @"Facebook Messenger";
-        self.imageUrl = @"https://scontent-ams3-1.xx.fbcdn.net/hphotos-xfa1/t39.2365-6/11057099_383365451847896_1818480781_n.png";
-        self.details = @"GetSocial Smart Invite Plugin for Facebook Messenger";
-    }
-    return self;
-}
-
 - (void)inviteFriendsWithSubject:(NSString *)subject
                             text:(NSString *)text
                  referralDataUrl:(NSString *)referralDataUrl
@@ -64,7 +52,7 @@
 {
     // check if FB Messenger is installed
     BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb-messenger-api://"]];
-    return installed;
+    return self.enabled && installed;
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results

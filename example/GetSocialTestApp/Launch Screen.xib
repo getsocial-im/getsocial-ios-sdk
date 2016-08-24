@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,16 +10,19 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreenBg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Juq-gt-D0o">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016 GetSocial BV. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439.5" width="441" height="20.5"/>
+                    <rect key="frame" x="20" y="439" width="441" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact">
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="getSocialLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="U0g-sf-s7j">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="getSocialLogoFullColorBlackBgIOS.png" translatesAutoresizingMaskIntoConstraints="NO" id="U0g-sf-s7j">
                     <rect key="frame" x="115" y="115" width="250" height="250"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="250" id="FzA-SF-fgZ"/>
@@ -27,12 +30,15 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.13725490196078433" green="0.56862745098039214" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="Juq-gt-D0o" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4GB-J0-xdw"/>
+                <constraint firstItem="Juq-gt-D0o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7pL-n2-14G"/>
+                <constraint firstAttribute="trailing" secondItem="Juq-gt-D0o" secondAttribute="trailing" id="9ee-OT-TgJ"/>
                 <constraint firstItem="U0g-sf-s7j" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HNb-as-cDF"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="bottom" secondItem="Juq-gt-D0o" secondAttribute="bottom" id="bvp-F0-LW2"/>
                 <constraint firstItem="U0g-sf-s7j" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hcf-gy-js0"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -41,6 +47,7 @@
         </view>
     </objects>
     <resources>
-        <image name="getSocialLogo.png" width="1020" height="280"/>
+        <image name="getSocialLogoFullColorBlackBgIOS.png" width="720" height="200"/>
+        <image name="splashscreenBg.jpg" width="1266" height="2232"/>
     </resources>
 </document>

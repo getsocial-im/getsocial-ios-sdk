@@ -14,7 +14,11 @@
  *	limitations under the License.
  */
 
-#import "Constants.h"
+#import <GetSocial/GetSocial.h>
+#import <UIKit/UIKit.h>
 
-NSString *const UserWasUpdatedNotification = @"UserWasUpdatedNotification";
-NSString *const GetSocialWasInitializedNotification = @"GetSocialWasInitializedNotification";
+@interface UsersListTableViewController : UITableViewController
+
+@property(nonatomic, strong) NSArray<GetSocialUser *> *users;
+
+@end

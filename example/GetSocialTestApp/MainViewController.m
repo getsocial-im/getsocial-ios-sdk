@@ -21,10 +21,12 @@
 #import "MenuItem.h"
 #import "UIBAlertView.h"
 #import "UserIdentityUtils.h"
+#import "UsersListTableViewController.h"
 
 #import <GetSocial/GetSocial.h>
 #import <GetSocialChat/GetSocialChat.h>
 
+#import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -60,6 +62,8 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) ParentMenuItem *chatMenu;
 @property(nonatomic, strong) ParentMenuItem *languageMenu;
 @property(nonatomic, strong) MenuItem *notificationCenterMenu;
+@property(nonatomic, strong) void (^onUnreadPublicRoomsCountChangeHandler)(NSInteger unreadConversationsCount);
+@property(nonatomic, strong) void (^onUnreadPrivateRoomsCountChangeHandler)(NSInteger unreadConversationsCount);
 
 @end
 
@@ -82,21 +86,46 @@ NSString *const kCustomProvider = @"custom";
         GSLogInfo(NO, NO, @"Unread Notification count changed to %zd.", unreadNotificationsCount);
     }];
 
-    [[GetSocialChat sharedInstance] setOnChatNotificationsChangeHandler:^(NSInteger unreadNotificationsCount) {
-        [self updateUnreadConversationsCount];
-        GSLogInfo(NO, NO, @"Chat Unread conversation count changed to %zd,", unreadNotificationsCount);
-    }];
+    __weak MainViewController *weakSelf = self;
+
+    self.onUnreadPublicRoomsCountChangeHandler = ^(NSInteger unreadPublicRoomsCount) {
+        [weakSelf updateUnreadConversationsCount];
+
+        [weakSelf log:LogLevelInfo
+                context:@"onUnreadPublicRoomsCountChangeHandler"
+                message:[NSString stringWithFormat:@"Chat unread public conversation count changed to %zd,", unreadPublicRoomsCount]
+              showAlert:NO
+            showConsole:NO];
+    };
+
+    self.onUnreadPrivateRoomsCountChangeHandler = ^(NSInteger unreadPrivateRoomsCount) {
+        [weakSelf updateUnreadConversationsCount];
+        [weakSelf log:LogLevelInfo
+                context:@"onUnreadPublicRoomsCountChangeHandler"
+                message:[NSString stringWithFormat:@"Chat unread private conversation count changed to %zd,", unreadPrivateRoomsCount]
+              showAlert:NO
+            showConsole:NO];
+    };
+
+    [[GetSocialChat sharedInstance] addOnUnreadRoomsCountChangeHandler:self.onUnreadPublicRoomsCountChangeHandler
+                                onUnreadPrivateRoomsCountChangeHandler:self.onUnreadPrivateRoomsCountChangeHandler];
 
     // Register FBInvitePlugin
     GetSocialFacebookInvitePlugin *fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
     [[GetSocial sharedInstance] registerPlugin:fbInvitePlugin provider:kGetSocialProviderFacebook];
+
+    // Register FB Messenger Invite Plugin
+    GetSocialFBMessengerInvitePlugin *fbMessengerPlugin = [[GetSocialFBMessengerInvitePlugin alloc] init];
+    [[GetSocial sharedInstance] registerPlugin:fbMessengerPlugin provider:kGetSocialProviderFacebookMessenger];
 
     [self allowAnonymousUsersToInteract:NO];
 }
 
 - (void)updateUnreadConversationsCount
 {
-    self.chatMenu.detail = [NSString stringWithFormat:@"Unread conversations: %zd", [GetSocialChat sharedInstance].unreadConversationsCount];
+    self.chatMenu.detail =
+        [NSString stringWithFormat:@"Unread conversations: Public (%zd) - Private (%zd)", [GetSocialChat sharedInstance].unreadPublicRoomsCount,
+                                   [GetSocialChat sharedInstance].unreadPrivateRoomsCount];
 }
 
 - (void)updateUnreadNotificationsCount
@@ -117,6 +146,8 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)loadMenu
 {
+    [[GetSocial sharedInstance] usersWithProvider:nil userIds:nil success:nil failure:nil];
+
     if (!self.menu)
     {
         self.menu = [NSMutableArray array];
@@ -366,39 +397,30 @@ NSString *const kCustomProvider = @"custom";
         // Settings Menu
         ParentMenuItem *settingsMenu = [MenuItem parentMenuItemWithTitle:@"Settings"];
 
-        NSString *currentLanguage = [GetSocial sharedInstance].language;
-
         self.languageMenu = [MenuItem parentMenuItemWithTitle:@"Change Language"];
-        self.languageMenu.detail = [NSString stringWithFormat:@"Current language: %@", currentLanguage];
 
-        NSDictionary *availableLanguages = @{
-            @"da" : @"Danish",
-            @"de" : @"German",
-            @"en" : @"English",
-            @"es" : @"Spanish",
-            @"fr" : @"French",
-            @"it" : @"Italian",
-            @"nb" : @"Norwegian",
-            @"nl" : @"Dutch",
-            @"pt" : @"Portuguese",
-            @"ru" : @"Russian",
-            @"sv" : @"Swedish",
-            @"tr" : @"Turkish",
-            @"is" : @"Icelandic",
-            @"ja" : @"Japanese",
-            @"ko" : @"Korean",
-            @"zh-Hans" : @"Chinese Simplified",
-            @"zh-Hant" : @"Chinese Traditional"
-        };
+        if ([GetSocial sharedInstance].isInitialized)
+        {
+            [self updateLanguage];
+        }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] addObserverForName:GetSocialWasInitializedNotification
+                                                              object:nil
+                                                               queue:nil
+                                                          usingBlock:^(NSNotification *_Nonnull note) {
+                                                              [self updateLanguage];
+                                                          }];
+        }
 
-        NSArray *sortedLanguages = [[availableLanguages allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [availableLanguages[obj1] localizedCaseInsensitiveCompare:availableLanguages[obj2]];
+        NSArray *sortedLanguages = [[[self languages] allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [[self languages][obj1] localizedCaseInsensitiveCompare:[self languages][obj2]];
         }];
 
         for (NSString *key in sortedLanguages)
         {
-            [self.languageMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:availableLanguages[key]
-                                                                            isChecked:[currentLanguage isEqualToString:key]
+            [self.languageMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:[self languages][key]
+                                                                            isChecked:NO
                                                                                action:^BOOL(BOOL isChecked) {
                                                                                    return [self changeLanguage:key];
                                                                                }]];
@@ -819,6 +841,31 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
+- (void)requestProviderUserIdWithTitle:(NSString *)title dismissHandler:(void (^)(NSString *provider, NSString *userId, BOOL didCancel))handler
+{
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:title
+                                                      message:@"Enter Provider and UserId of the user to check"
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@[ @"Ok" ]];
+
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+
+    [alert textFieldAtIndex:0].placeholder = @"Provider";
+    [alert textFieldAtIndex:0].text = kGetSocialProviderFacebook;
+    [alert textFieldAtIndex:1].placeholder = @"UserId";
+    [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+
+        NSString *provider = [alert textFieldAtIndex:0].text;
+        NSString *userId = [alert textFieldAtIndex:1].text;
+
+        if (handler)
+        {
+            handler(provider, userId, didCancel);
+        }
+    }];
+}
+
 #pragma mark - Friends
 
 - (void)openFriendList
@@ -1030,10 +1077,44 @@ NSString *const kCustomProvider = @"custom";
 {
     [[GetSocial sharedInstance] setLanguage:language];
 
-    self.languageMenu.detail = [NSString stringWithFormat:@"Current language: %@", language];
+    [self updateLanguage];
 
     GSLogInfo(NO, NO, @"Language changed to: %@.", language);
     return YES;
+}
+
+- (void)updateLanguage
+{
+    NSString *currentLanguage = [GetSocial sharedInstance].language;
+    self.languageMenu.detail = [NSString stringWithFormat:@"Current language: %@", [self languages][currentLanguage]];
+}
+
+- (NSDictionary *)languages
+{
+    return @{
+        @"da" : @"Danish",
+        @"de" : @"German",
+        @"en" : @"English",
+        @"es" : @"Spanish",
+        @"fr" : @"French",
+        @"it" : @"Italian",
+        @"nb" : @"Norwegian",
+        @"nl" : @"Dutch",
+        @"pt" : @"Portuguese",
+        @"ru" : @"Russian",
+        @"sv" : @"Swedish",
+        @"tr" : @"Turkish",
+        @"is" : @"Icelandic",
+        @"ja" : @"Japanese",
+        @"ko" : @"Korean",
+        @"zh-Hans" : @"Chinese Simplified",
+        @"zh-Hant" : @"Chinese Traditional",
+        @"id" : @"Indonesian",
+        @"ms" : @"Malay",
+        @"pt-br" : @"Portuguese (Brazil)",
+        @"tl" : @"Filipino",
+        @"vi" : @"Vietnamese"
+    };
 }
 
 #pragma mark - Custom Handlers
@@ -1491,6 +1572,12 @@ NSString *const kCustomProvider = @"custom";
 {
     self.mainNavigationController = [segue destinationViewController];
     self.mainNavigationController.menu = self.menu;
+}
+
+- (void)dealloc
+{
+    [[GetSocialChat sharedInstance] removeOnUnreadRoomsCountChangeHandler:self.onUnreadPublicRoomsCountChangeHandler
+                                   onUnreadPrivateRoomsCountChangeHandler:self.onUnreadPrivateRoomsCountChangeHandler];
 }
 
 @end

@@ -18,5 +18,6 @@
 #define Constants_h
 
 extern NSString *const UserWasUpdatedNotification;
+extern NSString *const GetSocialWasInitializedNotification;
 
 #endif

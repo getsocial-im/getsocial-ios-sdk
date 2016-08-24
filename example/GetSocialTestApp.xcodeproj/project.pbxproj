@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56B2BF701CAAC5710020B6FC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B2BF6F1CAAC5710020B6FC /* Reachability.m */; };
+		7A42534B1D5DDF35007B9B47 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A4253491D5DDF35007B9B47 /* getSocialLogoFullColorBlackBgIOS.png */; };
+		7A42534C1D5DDF35007B9B47 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A42534A1D5DDF35007B9B47 /* splashscreenBg.jpg */; };
 		990BC5B01AF24E07003A0B96 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 990BC5AD1AF24E07003A0B96 /* UIBAlertView.m */; };
 		990CFDE71BAA173E008872CA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD711BA9C31C008872CA /* Social.framework */; };
 		990CFDE81BAA173E008872CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990CFD6F1BA9C2F6008872CA /* MessageUI.framework */; };
@@ -24,7 +27,6 @@
 		9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923991BB2EEAD0010D481 /* UserViewController.m */; };
 		992923A51BB411A00010D481 /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923A21BB411A00010D481 /* MenuTableViewCell.m */; };
 		9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9942F9171A70F9C200FCC91B /* Launch Screen.xib */; };
-		994503D91C7DB59D00545D87 /* getSocialLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 994503D81C7DB59D00545D87 /* getSocialLogo.png */; };
 		995AC1D61BB06955006424DF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1D31BB06955006424DF /* MainViewController.m */; };
 		995AC1E11BB15218006424DF /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1DE1BB15218006424DF /* MainNavigationController.m */; };
 		995AC1E61BB1568E006424DF /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995AC1E31BB1568E006424DF /* MenuTableViewController.m */; };
@@ -59,10 +61,16 @@
 		99F3E8011AB32CA900033238 /* activityImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7FE1AB32CA900033238 /* activityImage.png */; };
 		99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 99F772E51BBAA96A00A4CD69 /* LICENSE */; };
 		99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */; };
+		BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */; };
 		BC2561C51C74C2DD00D224C0 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		BC6DBD281C999D650049A31D /* UsersListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6DBD271C999D650049A31D /* UsersListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56B2BF6E1CAAC5710020B6FC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		56B2BF6F1CAAC5710020B6FC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7A4253491D5DDF35007B9B47 /* getSocialLogoFullColorBlackBgIOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogoFullColorBlackBgIOS.png; path = Resources/getSocialLogoFullColorBlackBgIOS.png; sourceTree = "<group>"; };
+		7A42534A1D5DDF35007B9B47 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		9908FAA91A9B4C7800F39657 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		990BC5AC1AF24E07003A0B96 /* UIBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBAlertView.h; sourceTree = "<group>"; };
 		990BC5AD1AF24E07003A0B96 /* UIBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBAlertView.m; sourceTree = "<group>"; };
@@ -81,7 +89,6 @@
 		992923A11BB411A00010D481 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MenuTableViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		992923A21BB411A00010D481 /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
 		9942F9171A70F9C200FCC91B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
-		994503D81C7DB59D00545D87 /* getSocialLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogo.png; path = Resources/getSocialLogo.png; sourceTree = "<group>"; };
 		995AC1D21BB06955006424DF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MainViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		995AC1D31BB06955006424DF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		995AC1DD1BB15218006424DF /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
@@ -132,6 +139,10 @@
 		99F772E51BBAA96A00A4CD69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		99FE1A7C1BB2A82100EF576A /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ConsoleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsoleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFBMessengerInvitePlugin.m; path = Plugins/GetSocialFBMessengerInvitePlugin.m; sourceTree = "<group>"; };
+		BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFBMessengerInvitePlugin.h; path = Plugins/GetSocialFBMessengerInvitePlugin.h; sourceTree = "<group>"; };
+		BC6DBD261C999D650049A31D /* UsersListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersListTableViewController.h; sourceTree = "<group>"; };
+		BC6DBD271C999D650049A31D /* UsersListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersListTableViewController.m; sourceTree = "<group>"; };
 		F4AD6CFE18BF313400B1F342 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.tbd"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -172,7 +183,8 @@
 		2563FAEF1A6E859E006E0448 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				994503D81C7DB59D00545D87 /* getSocialLogo.png */,
+				7A4253491D5DDF35007B9B47 /* getSocialLogoFullColorBlackBgIOS.png */,
+				7A42534A1D5DDF35007B9B47 /* splashscreenBg.jpg */,
 				99F3E7FE1AB32CA900033238 /* activityImage.png */,
 				99EB87FD1AB7611600357E60 /* activityImageWithButton.png */,
 				99F3E7ED1AB31DC100033238 /* activityImageWithAction.png */,
@@ -186,6 +198,8 @@
 		994F498B1B15F057007B4494 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				56B2BF6E1CAAC5710020B6FC /* Reachability.h */,
+				56B2BF6F1CAAC5710020B6FC /* Reachability.m */,
 				99ABE3C21BCE7E8A00296F50 /* UserIdentityUtils.h */,
 				99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */,
 				990BC5AC1AF24E07003A0B96 /* UIBAlertView.h */,
@@ -338,6 +352,8 @@
 				992923991BB2EEAD0010D481 /* UserViewController.m */,
 				992923A11BB411A00010D481 /* MenuTableViewCell.h */,
 				992923A21BB411A00010D481 /* MenuTableViewCell.m */,
+				BC6DBD261C999D650049A31D /* UsersListTableViewController.h */,
+				BC6DBD271C999D650049A31D /* UsersListTableViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -347,6 +363,8 @@
 			children = (
 				99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */,
 				99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */,
+				BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */,
+				BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */,
 			);
 			name = Facebook;
 			sourceTree = "<group>";
@@ -414,14 +432,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				998B74BE1BBA8C7000325DAF /* GetSocial.bundle in Resources */,
+				7A42534C1D5DDF35007B9B47 /* splashscreenBg.jpg in Resources */,
 				998B74C01BBA8C7000325DAF /* GetSocialChat.bundle in Resources */,
 				99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */,
 				99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */,
 				99ABE3CC1BCEBC8600296F50 /* GetSocialTestApp.entitlements in Resources */,
 				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
+				7A42534B1D5DDF35007B9B47 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
 				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
 				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
-				994503D91C7DB59D00545D87 /* getSocialLogo.png in Resources */,
 				BC2561C51C74C2DD00D224C0 /* (null) in Resources */,
 				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,
 				99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */,
@@ -441,6 +460,7 @@
 				995AC1E61BB1568E006424DF /* MenuTableViewController.m in Sources */,
 				99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */,
 				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
+				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
 				99F26AEB19A65BE5006D3B1A /* AppDelegate.m in Sources */,
 				9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */,
 				998876151C6D487C0071A436 /* Constants.m in Sources */,
@@ -452,6 +472,8 @@
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
 				995AC1E11BB15218006424DF /* MainNavigationController.m in Sources */,
 				992923A51BB411A00010D481 /* MenuTableViewCell.m in Sources */,
+				BC6DBD281C999D650049A31D /* UsersListTableViewController.m in Sources */,
+				56B2BF701CAAC5710020B6FC /* Reachability.m in Sources */,
 				991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
