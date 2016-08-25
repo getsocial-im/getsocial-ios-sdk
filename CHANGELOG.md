@@ -7,6 +7,7 @@
 + ADDED Chat API to use custom Chat views
 + ADDED native share option to Smart Invites
 + ADDED Facebook Messanger as Smart Invites provider
++ ADDED Indonesian, Tagalog, Malay, Brazilian Portuguese and Vietnamese localization
 + FIXED blurry button images on non-retina display 
 + FIXED status bar overlaps GetSocial SDK views
 
