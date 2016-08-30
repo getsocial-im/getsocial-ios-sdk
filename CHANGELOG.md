@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.1.1
+
++ ADDED calls to inviteFriendBlock also on cancel and error when supported (twitter/sms/email)
+
+---
+
 ### v5.1.0
 
 + ADDED Chat API to use custom Chat views

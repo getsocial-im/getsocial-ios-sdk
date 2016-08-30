@@ -88,6 +88,10 @@ NSString *const kCustomProvider = @"custom";
 
     __weak MainViewController *weakSelf = self;
 
+    [[GetSocial sharedInstance] setInviteFriendsBlock:^(GetSocialInviteFriendsStatus status, NSInteger count) {
+        GSLogInfo(NO, NO, @"Invite status: %zd (%zd).", status, count);
+    }];
+
     self.onUnreadPublicRoomsCountChangeHandler = ^(NSInteger unreadPublicRoomsCount) {
         [weakSelf updateUnreadConversationsCount];
 
