@@ -3,6 +3,12 @@
 ## Version History
 
 
+### v5.1.3
+
++ FIXED UI became unresponsive after inviting using `inviteUsingProvider`
+
+---
+
 ### v5.1.2
 
 + FIXED status bar appearing even if the app hide it

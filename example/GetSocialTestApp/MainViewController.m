@@ -289,10 +289,11 @@ NSString *const kCustomProvider = @"custom";
                                                                         [self openCustomizedSmartInvite];
                                                                     }]];
 
-        [smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Invite via Email"
+        [smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Invite without UI"
                                                                     action:^{
-                                                                        [self inviteViaEmail];
+                                                                        [self inviteWithoutUI];
                                                                     }]];
+
 
         [self.menu addObject:smartInvitesMenu];
 
@@ -875,10 +876,22 @@ NSString *const kCustomProvider = @"custom";
     }];
 }
 
-- (void)inviteViaEmail
+- (void)inviteWithoutUI
 {
-    [[GetSocial sharedInstance] inviteFriendsUsingProvider:@"email" withProperties:nil];
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:@"Smart Invite"
+                                                      message:@"Choose provider"
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:[[GetSocial sharedInstance] getSupportedInviteProviders]];
+    
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+
+        if (!didCancel)
+        {
+             [[GetSocial sharedInstance] inviteFriendsUsingProvider:selectedTitle withProperties:nil];
+        }
+    }];
 }
+
 
 #pragma mark - Friends
 
