@@ -289,6 +289,11 @@ NSString *const kCustomProvider = @"custom";
                                                                         [self openCustomizedSmartInvite];
                                                                     }]];
 
+        [smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Invite via Email"
+                                                                    action:^{
+                                                                        [self inviteViaEmail];
+                                                                    }]];
+
         [self.menu addObject:smartInvitesMenu];
 
         // Chat Menu
@@ -868,6 +873,11 @@ NSString *const kCustomProvider = @"custom";
             handler(provider, userId, didCancel);
         }
     }];
+}
+
+- (void)inviteViaEmail
+{
+    [[GetSocial sharedInstance] inviteFriendsUsingProvider:@"email" withProperties:nil];
 }
 
 #pragma mark - Friends

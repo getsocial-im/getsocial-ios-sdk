@@ -2,6 +2,14 @@
 
 ## Version History
 
+
+### v5.1.2
+
++ FIXED status bar appearing even if the app hide it
++ FIXED UI became unresponsive after inviting using `inviteUsingProvider`
+
+---
+
 ### v5.1.1
 
 + ADDED calls to inviteFriendBlock also on cancel and error when supported (twitter/sms/email)
