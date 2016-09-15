@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.1.4
+
++ CHANGED connection to SSL
++ FIXED custom title for Smart Invites view
+
+---
 
 ### v5.1.3
 
