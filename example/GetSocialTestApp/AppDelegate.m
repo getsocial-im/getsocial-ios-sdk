@@ -14,13 +14,13 @@
  *	limitations under the License.
  */
 
-#import <GetSocial/GetSocial.h>
 #import "AppDelegate.h"
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import "Reachability.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <GetSocial/GetSocial.h>
 
 @interface AppDelegate ()
 
@@ -80,7 +80,7 @@
 
                     [[ConsoleViewController sharedController] log:LogLevelInfo message:@"GetSocial Initialization Succeeded." context:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
-                    
+
                     [[NSNotificationCenter defaultCenter] postNotificationName:GetSocialWasInitializedNotification object:nil];
                 }
                 failure:^(NSError *error) {

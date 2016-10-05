@@ -14,6 +14,7 @@
  *	limitations under the License.
  */
 
+#import "AppDelegate.h"
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import "MainNavigationController.h"
@@ -293,7 +294,6 @@ NSString *const kCustomProvider = @"custom";
                                                                     action:^{
                                                                         [self inviteWithoutUI];
                                                                     }]];
-
 
         [self.menu addObject:smartInvitesMenu];
 
@@ -882,16 +882,15 @@ NSString *const kCustomProvider = @"custom";
                                                       message:@"Choose provider"
                                             cancelButtonTitle:@"Cancel"
                                             otherButtonTitles:[[GetSocial sharedInstance] getSupportedInviteProviders]];
-    
+
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
 
         if (!didCancel)
         {
-             [[GetSocial sharedInstance] inviteFriendsUsingProvider:selectedTitle withProperties:nil];
+            [[GetSocial sharedInstance] inviteFriendsUsingProvider:selectedTitle withProperties:nil];
         }
     }];
 }
-
 
 #pragma mark - Friends
 

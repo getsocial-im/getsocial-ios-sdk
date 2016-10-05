@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.1.5
+
++ FIXED Facebook Smart Invites showing a blank browser on iOS 10
++ FIXED Chat issue when connecting to a public room
++ FIXED Supported orientations issue
+
 ### v5.1.4
 
 + CHANGED connection to SSL
