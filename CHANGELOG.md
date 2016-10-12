@@ -2,11 +2,20 @@
 
 ## Version History
 
+### v5.1.6
+
++ FIXED Modal Window issue on iOS10
++ FIXED Orientation issue when building with Xcode 8
+
+---
+
 ### v5.1.5
 
 + FIXED Facebook Smart Invites showing a blank browser on iOS 10
 + FIXED Chat issue when connecting to a public room
 + FIXED Supported orientations issue
+
+---
 
 ### v5.1.4
 
