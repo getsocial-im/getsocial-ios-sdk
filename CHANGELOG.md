@@ -2,6 +2,13 @@
 
 ## Version History
 
+### v5.1.7
+
++ FIXED issue with native share on iOS7
++ FIXED sharing content on FB Messenger
+
+---
+
 ### v5.1.6
 
 + FIXED Modal Window issue on iOS10

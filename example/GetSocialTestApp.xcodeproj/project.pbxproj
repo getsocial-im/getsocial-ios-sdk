@@ -132,7 +132,7 @@
 		99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		99C086941BB92EE500C706DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99C086961BB92F4200C706DD /* defaultAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultAvatar.png; path = Resources/defaultAvatar.png; sourceTree = "<group>"; };
-		99DDAF1A1D78688F009D9AED /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = FacebookSDK; };
+		99DDAF1A1D78688F009D9AED /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; path = FBSDKMessengerShareKit.framework; sourceTree = FacebookSDK; };
 		99DDAF1C1D78699F009D9AED /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		99EB87FD1AB7611600357E60 /* activityImageWithButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImageWithButton.png; path = Resources/activityImageWithButton.png; sourceTree = "<group>"; };
 		99F26B2519A65BE5006D3B1A /* GetSocialTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSocialTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
