@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.1.8
+
++ FIXED issue with landscape mode on iOS8
+
+---
+
 ### v5.1.7
 
 + FIXED issue with native share on iOS7
