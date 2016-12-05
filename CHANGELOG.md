@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.1.9
+
++ FIXED issue with landscape mode on iOS7
+
+---
+
 ### v5.1.8
 
 + FIXED issue with landscape mode on iOS8
