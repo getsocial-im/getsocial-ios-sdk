@@ -2,6 +2,13 @@
 
 ## Version History
 
+### v5.2.0
+
++ ADDED KakaoTalk invite plugin
++ ADDED Social graph
+
+---
+
 ### v5.1.9
 
 + FIXED issue with landscape mode on iOS7

@@ -36,6 +36,14 @@
 				<string>getsocial-s8i7N997ga98n</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao4d436485d41336a82c47d0142682b4d7</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>5.0.0</string>
@@ -45,6 +53,8 @@
 	<string>GetSocial SDK</string>
 	<key>GetSocialAppKey</key>
 	<string>4We9Uqq8SR04tNXqV10M0000000s8i7N997ga98n</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>4d436485d41336a82c47d0142682b4d7</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -57,6 +67,12 @@
 		<string>fbshareextension</string>
 		<string>line</string>
 		<string>whatsapp</string>
+		<string>kakao4d436485d41336a82c47d0142682b4d7</string>
+		<string>kakaolink</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaotalk-4.5.0</string>
+		<string>kakaostory-2.9.0</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -86,6 +102,34 @@
 				<true/>
 			</dict>
 			<key>fbcdn.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>kakao.co.kr</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>kakao.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>kakaocdn.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>kakaocorp.com</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>

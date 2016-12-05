@@ -23,6 +23,7 @@
 #import "UIBAlertView.h"
 #import "UserIdentityUtils.h"
 #import "UsersListTableViewController.h"
+#import "GetSocialKakaoTalkInvitePlugin.h"
 
 #import <GetSocial/GetSocial.h>
 #import <GetSocialChat/GetSocialChat.h>
@@ -32,6 +33,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 
 #define GSLogInfo(bShowAlert, bShowConsole, sMessage, ...)                \
     [self log:LogLevelInfo                                                \
@@ -122,6 +124,10 @@ NSString *const kCustomProvider = @"custom";
     // Register FB Messenger Invite Plugin
     GetSocialFBMessengerInvitePlugin *fbMessengerPlugin = [[GetSocialFBMessengerInvitePlugin alloc] init];
     [[GetSocial sharedInstance] registerPlugin:fbMessengerPlugin provider:kGetSocialProviderFacebookMessenger];
+    
+    //Register KakaoTalk Invite Plugin
+    GetSocialKakaoTalkInvitePlugin *kakaoPlugin = [[GetSocialKakaoTalkInvitePlugin alloc] init];
+    [[GetSocial sharedInstance] registerPlugin:kakaoPlugin provider:kGetSocialProviderKakao];
 
     [self allowAnonymousUsersToInteract:NO];
 }
@@ -146,7 +152,7 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)updateVersionInfo
 {
-    self.versionLabel.text = [NSString stringWithFormat:@"GetSocial iOS Test App\nSDK v%@", [GetSocial sharedInstance].sdkVersion];
+    self.versionLabel.text = [NSString stringWithFormat:@"GetSocial iOS Test App\nSDK v%@ - API v%@", [GetSocial sharedInstance].sdkVersion, [GetSocial sharedInstance].apiVersion];
 }
 
 - (void)loadMenu
@@ -320,14 +326,6 @@ NSString *const kCustomProvider = @"custom";
 
         [self.menu addObject:self.notificationCenterMenu];
 
-        // Friends Menu
-        ActionableMenuItem *friendsMenu = [MenuItem actionableMenuItemWithTitle:@"Friends List"
-                                                                         action:^{
-                                                                             [self openFriendList];
-                                                                         }];
-
-        [self.menu addObject:friendsMenu];
-
         // UI Customization Menu
         self.uiCustomizationMenu = [MenuItem parentMenuItemWithTitle:@"UI Customization"];
         self.uiCustomizationMenu.detail = @"Current UI: Default";
@@ -403,6 +401,21 @@ NSString *const kCustomProvider = @"custom";
                                                                  }]];
 
         [self.menu addObject:cloudSaveMenu];
+        
+        // Following/Followers Save Menu
+        ParentMenuItem *followingFollowers = [MenuItem parentMenuItemWithTitle:@"Following/Followers"];
+        
+        [followingFollowers addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Following List"
+                                                                      action:^{
+                                                                          [self openFollowingList];
+                                                                      }]];
+        
+        [followingFollowers addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Followers List"
+                                                                      action:^{
+                                                                          [self openFollowersList];
+                                                                      }]];
+
+        [self.menu addObject:followingFollowers];
 
         // Settings Menu
         ParentMenuItem *settingsMenu = [MenuItem parentMenuItemWithTitle:@"Settings"];
@@ -450,7 +463,7 @@ NSString *const kCustomProvider = @"custom";
                                                                    return [self enableUserGeneratedContentHandler:isChecked];
                                                                }]];
 
-        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"Custom user avatar click behaviour"
+        [settingsMenu addSubmenu:[MenuItem checkableMenuItemWithTitle:@"User avatar click custom behaviour"
                                                             isChecked:NO
                                                                action:^BOOL(BOOL isChecked) {
                                                                    return [self enableUserAvatarClickCustomBehaviour:isChecked];
@@ -892,15 +905,15 @@ NSString *const kCustomProvider = @"custom";
     }];
 }
 
-#pragma mark - Friends
+#pragma mark - Following
 
-- (void)openFriendList
+- (void)openFollowingList
 {
     GetSocialUserListViewBuilder *viewBuilder =
-        [[GetSocial sharedInstance] createUserListViewWithDismissHandler:^(GetSocialUser *user, BOOL didCancel) {
+    [[GetSocial sharedInstance] createUserListViewWithType:GetSocialUserListFollowingType dismissHandler:^(GetSocialUser *user, BOOL didCancel) {
             if (!didCancel)
             {
-                GSLogInfo(YES, NO, @"User %@ (%@) was selected.", user.displayName, user.guid);
+                [self showAlertFriendClick:user];
             }
             else
             {
@@ -910,6 +923,25 @@ NSString *const kCustomProvider = @"custom";
     viewBuilder.title = @"Friends";
     [viewBuilder show];
 }
+
+- (void)openFollowersList
+{
+    GetSocialUserListViewBuilder *viewBuilder =
+    [[GetSocial sharedInstance] createUserListViewWithType:GetSocialUserListFollowersType dismissHandler:^(GetSocialUser *user, BOOL didCancel) {
+        if (!didCancel)
+        {
+            GSLogInfo(YES, NO, @"User %@ (%@) was clicked.", user.displayName, user.guid);
+        }
+        else
+        {
+            GSLogInfo(YES, NO, @"Followers list closed", nil);
+        }
+    }];
+    viewBuilder.title = @"Followers";
+    viewBuilder.showInviteButton = NO;
+    [viewBuilder show];
+}
+
 
 #pragma mark - Chat
 
@@ -1306,10 +1338,10 @@ NSString *const kCustomProvider = @"custom";
     if (isChecked)
     {
         [[GetSocial sharedInstance] setOnUserAvatarClickHandler:^BOOL(GetSocialUser *user, GetSocialSourceView source) {
-            GSLogInfo(YES, NO, @"Click on user avatar %@ (%@).", user.displayName, user.guid);
+            
+            [self showAlertAvatarClick:user];
             return YES;
         }];
-        GSLogInfo(NO, NO, @"User avatar click custom behaviour was set.");
     }
     else
     {
@@ -1590,6 +1622,85 @@ NSString *const kCustomProvider = @"custom";
 
     alertView = nil;
 }
+
+-(void)showAlertAvatarClick:(GetSocialUser *)user
+{
+    UIBAlertView *alert =
+    [[UIBAlertView alloc] initWithTitle:@"Avatar clicked"
+                                message:@"Choose option"
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@[ @"Follow user", @"Open chat" ]];
+    
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        
+        if (didCancel)
+        {
+            return;
+        }
+        
+        switch (selectedIndex)
+        {
+            case 1:
+            {
+                GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+                if(currentUser)
+                {
+                    [currentUser followUser:user success:^{
+                        GSLogInfo(YES, NO, @"Following user %@ (%@).", user.displayName, user.guid);
+                    } failure:^(NSError *error) {
+                        GSLogInfo(YES, NO, @"Following user error %@ .", [error description]);
+                    }];
+                }
+                break;
+            }
+            case 2:
+            {
+                [[[GetSocialChat sharedInstance] createChatViewForUser:user] show];
+                break;
+            }
+        }
+    }];
+}
+
+-(void)showAlertFriendClick:(GetSocialUser *)user
+{
+    UIBAlertView *alert =
+    [[UIBAlertView alloc] initWithTitle:@"Friend clicked"
+                                message:@"Choose option"
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@[ @"Unfollow user", @"Open chat" ]];
+    
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        
+        if (didCancel)
+        {
+            return;
+        }
+        
+        switch (selectedIndex)
+        {
+            case 1:
+            {
+                GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
+                if(currentUser)
+                {
+                    [currentUser unfollowUser:user success:^{
+                        GSLogInfo(YES, NO, @"User %@ (%@) was unfollowed.", user.displayName, user.guid);
+                    } failure:^(NSError *error) {
+                        GSLogInfo(YES, NO, @"Unfollowing user error");
+                    }];
+                }
+                break;
+            }
+            case 2:
+            {
+                [[[GetSocialChat sharedInstance] createChatViewForUser:user] show];
+                break;
+            }
+        }
+    }];
+}
+
 
 #pragma mark - Navigation
 
