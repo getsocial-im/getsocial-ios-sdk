@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.2.1
+
++ IMPROVED network communications
+
+---
+
 ### v5.2.0
 
 + ADDED KakaoTalk invite plugin
