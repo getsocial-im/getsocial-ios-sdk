@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.2.2
+
++ FIXED issue that prevented forwarding Universal Links callbacks to main AppDelegate
+
+---
+
 ### v5.2.1
 
 + IMPROVED network communications

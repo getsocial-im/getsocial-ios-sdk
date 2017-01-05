@@ -57,6 +57,11 @@
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+    return YES;
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSDKAppEvents activateApp];
