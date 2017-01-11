@@ -1263,14 +1263,17 @@ NSString *const kCustomProvider = @"custom";
                         {
                             GSLogInfo(NO, NO, @"Adding FB identity to continue with action: %@.", actionString);
                             [[GetSocial sharedInstance] closeView:YES];
-                            [self addFBUserIdentityWithSuccess:^{
-                                [[GetSocial sharedInstance] restoreView];
-                                finalize(YES);
-                            }
-                                failure:^{
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                                [self addFBUserIdentityWithSuccess:^{
                                     [[GetSocial sharedInstance] restoreView];
-                                    finalize(NO);
-                                }];
+                                    finalize(YES);
+                                }
+                                                           failure:^{
+                                                               [[GetSocial sharedInstance] restoreView];
+                                                               finalize(NO);
+                                                           }];
+                            });
 
                             break;
                         }

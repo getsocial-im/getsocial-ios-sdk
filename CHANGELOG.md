@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.2.3
+
++ FIXED issue that blocked receiving chat messages after reconnecting
+
+---
+
 ### v5.2.2
 
 + FIXED issue that prevented forwarding Universal Links callbacks to main AppDelegate
