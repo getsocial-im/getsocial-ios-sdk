@@ -2,6 +2,15 @@
 
 ## Version History
 
+### v5.3.0
+
++ ADDED Polish and Ukrainian localizations
++ FIXED issue that prevented auto configuration of Chinese languages
++ FIXED window resizing issue on iPad on iOS 10, if device is in landscape mode
++ REMOVED the need to add `NSPhotoLibraryUsageDescription` in the `info.plist`
+
+---
+
 ### v5.2.3
 
 + FIXED issue that blocked receiving chat messages after reconnecting

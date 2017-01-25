@@ -317,14 +317,17 @@ NSString *const kCustomProvider = @"custom";
                                                                  }]];
 
         [self.menu addObject:self.chatMenu];
+        [self updateUnreadConversationsCount];
 
         // Notification Center Menu
         self.notificationCenterMenu = [MenuItem actionableMenuItemWithTitle:@"Notification Center"
                                                                      action:^{
                                                                          [self openNotificationCenter];
                                                                      }];
-
+        
+        
         [self.menu addObject:self.notificationCenterMenu];
+        [self updateUnreadNotificationsCount];
 
         // UI Customization Menu
         self.uiCustomizationMenu = [MenuItem parentMenuItemWithTitle:@"UI Customization"];
@@ -955,7 +958,6 @@ NSString *const kCustomProvider = @"custom";
 - (void)openChatList
 {
     GetSocialChatListViewBuilder *viewBuilder = [[GetSocialChat sharedInstance] createChatListView];
-    viewBuilder.title = @"Chats";
     [viewBuilder show];
 }
 
@@ -1155,23 +1157,25 @@ NSString *const kCustomProvider = @"custom";
         @"en" : @"English",
         @"es" : @"Spanish",
         @"fr" : @"French",
-        @"it" : @"Italian",
-        @"nb" : @"Norwegian",
-        @"nl" : @"Dutch",
-        @"pt" : @"Portuguese",
-        @"ru" : @"Russian",
-        @"sv" : @"Swedish",
-        @"tr" : @"Turkish",
+        @"id" : @"Indonesian",
         @"is" : @"Icelandic",
+        @"it" : @"Italian",
         @"ja" : @"Japanese",
         @"ko" : @"Korean",
+        @"ms" : @"Malay",
+        @"nb" : @"Norwegian",
+        @"nl" : @"Dutch",
+        @"pl" : @"Polish",
+        @"pt" : @"Portuguese",
+        @"pt-br" : @"Portuguese (Brazil)",
+        @"ru" : @"Russian",
+        @"sv" : @"Swedish",
+        @"tl" : @"Filipino",
+        @"tr" : @"Turkish",
+        @"uk" : @"Ukrainian",
+        @"vi" : @"Vietnamese",
         @"zh-Hans" : @"Chinese Simplified",
         @"zh-Hant" : @"Chinese Traditional",
-        @"id" : @"Indonesian",
-        @"ms" : @"Malay",
-        @"pt-br" : @"Portuguese (Brazil)",
-        @"tl" : @"Filipino",
-        @"vi" : @"Vietnamese"
     };
 }
 
