@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.3.2
+
++ FIXED memory issue with image cache
+
+---
+
 ### v5.3.1
 
 + FIXED orientation change now reflects application's settings

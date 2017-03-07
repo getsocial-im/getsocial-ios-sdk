@@ -1644,12 +1644,12 @@ NSString *const kCustomProvider = @"custom";
         {
             return;
         }
-        
+
+        GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
         switch (selectedIndex)
         {
             case 1:
             {
-                GetSocialCurrentUser *currentUser = [GetSocial sharedInstance].currentUser;
                 if(currentUser)
                 {
                     [currentUser followUser:user success:^{
@@ -1662,6 +1662,11 @@ NSString *const kCustomProvider = @"custom";
             }
             case 2:
             {
+                if (user && [user.guid isEqualToString:currentUser.guid])
+                {
+                    GSLogWarning(YES, NO, @"Can not open chat with yourself !");
+                    return;
+                }
                 [[[GetSocialChat sharedInstance] createChatViewForUser:user] show];
                 break;
             }
