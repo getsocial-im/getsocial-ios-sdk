@@ -2,6 +2,12 @@
 
 ## Version History
 
+### v5.3.3
+
++ FIXED memory issues
+
+---
+
 ### v5.3.2
 
 + FIXED memory issue with image cache
