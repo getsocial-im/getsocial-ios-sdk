@@ -1,30 +1,27 @@
-# GetSocial iOS SDK
+# GetSocial iOS SDK 
 
-Build and manage the community within your apps with **GetSocial**.
+## Overview
+GetSocial in-app social network is a strong marketing platform that supports the entire user lifecycle. No need to go to different providers for different services . With full stack solutions by GetSocial, you get it all. We made it incredibly easy to seamlessly blend user acquisition and social engagement into your app.
 
-GetSocial provides the whole social layer stack that powers **engagement**, **retention**, **acquisition** and **revenue tools**.
+Learn more about GetSocial at [getsocial.im](http://getsocial.im).
 
-**Features Include:**
+## Getting Started
 
-* Fully customizable UI
-* Player-to-player chat
-* Developer-to-player communication
-* Group Chats
-* Segmented and Global Activity Feeds
-* Community Management
-* Player Feedback and support
-* Smart invites and tracking
-* Localisation to 17 languages
-* In-app Notification Center
-* Socially triggered push notifications
-* And more...
+Follow the Getting Started guide for iOS at: [docs.getsocial.im/guides/getting-started/ios/](http://docs.getsocial.im/guides/getting-started/ios/).
 
-Documentation and reference guide are available at [docs.getsocial.im](http://docs.getsocial.im/).
+GetSocial iOS SDK Reference can be found at:
 
-For more information on GetSocial, visit our [website](http://www.getsocial.im/) or [contact us](mailto:info@getsocial.im).
+- Core API: [docs.getsocial.im/reference/ios-core/](http://docs.getsocial.im/reference/ios-core/); 
+- UI API: [docs.getsocial.im/reference/ios-ui/](http://docs.getsocial.im/reference/ios-ui/).
 
-To manage the integration of the GetSocial SDK, login to the [GetSocial Dashboard](https://developers.getsocial.im).
+## Repo Structure
 
-## License
+This repository contains all you need to start working with GetSocial:
 
-Example project is published under the [Apache 2.0](https://github.com/getsocial-im/getsocial-ios-sdk/blob/master/LICENSE) 
+- GetSocial iOS SDK dynamic frameworks in the `bin/` folder.
+- Example application that showcase all GetSocial features in `example/` folder.
+- GetSocial Invite Channel plugins in `plugins/` folder. 
+
+## Licence
+
+Example app and GetSocial Invite Channel plugins are distributed under [Apache 2](https://choosealicense.com/licenses/apache-2.0/) license. GetSocial Android SDK is distributed under the [commercial licence](https://www.getsocial.im/legal/).

@@ -1,50 +1,65 @@
-# GetSocial iOS SDK
+# GetSocial Android SDK
 
 ## Version History
 
+### v6.0.0
+
+We have released version 6.0 of our SDK, codename Sangria.  This is a major update that brings a lot of improvements and new features.
+
+**New:**
+
++ Data API. With GetSocial's Data API developers can now access the data layer of all our features breaking dependency on our UI and giving them more flexibility.
++ Dynamic Activity feeds. Developers can now create activity feeds on the fly. They can have a feed per clan, per fraction, per geo, or even level specific.
++ Sticky activities are now Announcements. Developers can now post multiple announcements (announcements are always pinned on top) expiring at different time periods. All their announcements are accessible from one convenient location and can be rescheduled even after they expire.
++ Auto-initialization. Integration just got easier, SDK will automatically initialize with your app, no need to take care of that.
+
+Learn more about new features in brand new GetSocial Documentation: http://docs.getsocial.im
+
+**Updated:**
+
++ Simplified API. We, at GetSocial, strive to provide the best integration experience. To achive this we had to rework our public API from scratch, it become easier to use and understand. It won't be possible without breaking changes, GetSocial SKD version 6 is not backward compatible with SDK version 5.
+
+**Removed:**
+
++ GetSocial Chat is no longer a part of GetSocial services. All customers using Chat via SDK v5 and v4 can continue usage as usual.
+
+---
+
+
 ### v5.3.3
 
-+ FIXED memory issues
++ FIXED Now custom avatar click listener will be invoked on all avatar clicks. 
 
 ---
 
 ### v5.3.2
 
-+ FIXED memory issue with image cache
++ FIXED NullPointerException when null onWindowStateChangeListener was set and window opened. 
 
 ---
 
 ### v5.3.1
 
-+ FIXED orientation change now reflects application's settings
++ ADDED onInviteFriendsFailure(InviteFriendsException exception) callback to InviteFriendsListener. Now friend invitation will fail if Smart Invite Url was not retrieved. 
 
 ---
 
 ### v5.3.0
 
 + ADDED Polish and Ukrainian localizations
-+ FIXED issue that prevented auto configuration of Chinese languages
-+ FIXED window resizing issue on iPad on iOS 10, if device is in landscape mode
-+ REMOVED the need to add `NSPhotoLibraryUsageDescription` in the `info.plist`
-+ FIXED orientation change now reflects application's settings
-
----
-
-### v5.2.3
-
-+ FIXED issue that blocked receiving chat messages after reconnecting
++ FIXED Proguard rules to decrease methods count
 
 ---
 
 ### v5.2.2
 
-+ FIXED issue that prevented forwarding Universal Links callbacks to main AppDelegate
++ FIXED Compile warnings Ignoring InnerClasses attribute...
 
 ---
 
 ### v5.2.1
 
-+ IMPROVED network communications
++ FIXED Send chat message after adding an identity
 
 ---
 
@@ -55,170 +70,182 @@
 
 ---
 
-### v5.1.9
-
-+ FIXED issue with landscape mode on iOS7
-
----
-
-### v5.1.8
-
-+ FIXED issue with landscape mode on iOS8
-
----
-
-### v5.1.7
-
-+ FIXED issue with native share on iOS7
-+ FIXED sharing content on FB Messenger
-
----
-
-### v5.1.6
-
-+ FIXED Modal Window issue on iOS10
-+ FIXED Orientation issue when building with Xcode 8
-
----
-
 ### v5.1.5
 
-+ FIXED Facebook Smart Invites showing a blank browser on iOS 10
-+ FIXED Chat issue when connecting to a public room
-+ FIXED Supported orientations issue
++ FIXED RejectedExecutionException in communication layer
 
 ---
 
 ### v5.1.4
 
-+ CHANGED connection to SSL
-+ FIXED custom title for Smart Invites view
++ FIXED UI bugs
 
 ---
 
 ### v5.1.3
 
-+ FIXED UI became unresponsive after inviting using `inviteUsingProvider`
++ FIXED Send chat message or activity post on Enter button click
++ FIXED GetSocial window size calculation on Android N
++ FIXED OnReferralDataReceivedListener not been called
 
 ---
 
 ### v5.1.2
 
-+ FIXED status bar appearing even if the app hide it
-+ FIXED UI became unresponsive after inviting using `inviteUsingProvider`
++ FIXED Crash when attempting disconnect while connecting 
 
 ---
 
 ### v5.1.1
 
-+ ADDED calls to inviteFriendBlock also on cancel and error when supported (twitter/sms/email)
++ FIXED corner case NullPointerException when receiving referral data from Facebook
+
 
 ---
 
 ### v5.1.0
 
-+ ADDED Chat API to use custom Chat views
-+ ADDED native share option to Smart Invites
-+ ADDED Facebook Messanger as Smart Invites provider
++ ADDED Chat API to build custom chat views
++ ADDED system share provider to Smart Invites
++ ADDED Facebook Messenger as Smart Invites provider
 + ADDED Indonesian, Tagalog, Malay, Brazilian Portuguese and Vietnamese localization
-+ FIXED blurry button images on non-retina display 
-+ FIXED status bar overlaps GetSocial SDK views
++ REMOVED dependency on io.reactivex:rxandroid and io.reactivex:rxjava
++ DEPRECATED method `GetSocial.getCurrentUser().getIdentities()`, use `GetSocial.getCurrentUser().getAllIdentities()` instead
++ DEPRECATED interface `UpdateUserInfoObserver`, use `OperationVoidCallback` instead
++ DEPRECATED method `GetSocialChat.setOnUnreadConversationsCountChangedListener(...)`, use `GetSocialChat.addOnUnreadRoomsCountChangedListener(...)` instead
++ DEPRECATED method `GetSocialChat.getUnreadConversationsCount(...)`, use `GetSocialChat.getUnreadPrivateRoomsCount()` and `GetSocialChat.getUnreadPublicRoomsCount()` instead
+
+
+---
+
+### v5.0.10
+
++ REDUCED SDK method count
++ REMOVED dependency on `io.reactivex:rxandroid` and `io.reactivex:rxjava`
++ FIXED sending invites from background thread with image attachment
+
 
 ---
 
 ### v5.0.9
 
-+ IMPROVED SDK network communications to GetSocial services
++ FIXED Bug in Analytics
 
 ---
 
 ### v5.0.8
 
-+ CHANGED Now registering for push notifications on iOS is **ENABLED** by default. Call `[GetSocial sharedInstance].disableAutoRegistrationForPushNotifications = YES;` before initializing the SDK to avoid automatic registration of push notifications on GetSocial initialization.
++ FIXED Bug in save state
 
 ---
 
 ### v5.0.7
 
-+ FIXED bugs in Analytics
++ FIXED Bugs in Analytics
+
 
 ---
 
 ### v5.0.6
 
-+ FIX multiple invitation view can be opened
++ ADDED support for delay SDK initialization
+
+
 
 ---
 
 ### v5.0.5
 
-+ FIX unresponsive window after opening animation
++ FIXED Incorrect font scaling when setting text style programmatically through UI config transaction
 
 ---
 
 ### v5.0.4
 
-+ ADDED option to delay registering for Push Notifications
-+ ADDED support for delay SDK initialization
++ FIXED bugs related to init from multiple threads
 
 ---
 
 ### v5.0.3
 
-+ FIX handling of font size issue if set programmatically
++ FIXED Duplicate resources issue during build
 
 ---
 
 ### v5.0.2
 
-+ FIX handling of received push notifications
++ FIXED Chat notification crash
 
 ---
 
 ### v5.0.1
 
++ IMPROVED image loading, memory management and caching
 + IMPROVED SDK initialization with poor internet connectivity
-+ ADDED no connection placeholders when needed
-+ ADDED `GetSocialActionOpenSmartInvites` as `GetSocialAction` to use on `OnUserActionPerformHandler`
-+ ADDED loading indicators on Activities and Chat views
-+ ADDED `OnWindowStateChangedHandler` to be notified when any GetSocial SDK view is opened/closed
-+ FIXED issue generating an incorrect unread notification number
++ IMPROVED offline support
++ IMPROVED support for shared libraries
++ FIXED counters
++ FIXED Occasional connectivity issues with Unity
++ REDUCED SDK method count
+
+
+
 
 ---
 
 ### v5.0.0
 
-+ IMPROVED Chat module with a complete refactor
-+ IMPROVED network communications
-+ ADDED presence details
-+ ADDED sticky activity at the top
-+ ADDED `GetSocialCurrentUser` object 
++ ADDED `GetSocialCurrentUser` object
 + ADDED methods to set `DisplayName` and `AvatarUrl` for the current user
 + ADDED methods to add/remove identities for the current user with conflict support
 + ADDED methods to reset the current user
 + ADDED `OnUserActionPerformHandler` to intercept all user interactions
-+ ADDED support for BitCode
++ ADDED CoreProperty.HEADER_PADDING_TOP and CoreProperty.HEADER_PADDING_BOTTOM
++ DEPRECATED CoreProperty.TITLE_MARGIN_TOP (use CoreProperty.HEADER_PADDING_TOP instead)
++ ADDED `CoreProperty.ACTIVITY_COMMENT_BG_COLOR` property to configure comments background color
++ REMOVED `WRITE_EXTERNAL_STORAGE` permission
++ IMPROVED UI scaling in landscape mode
++ FIXED app install and smart invite sent analytics being reported incorrectly
++ FIXED UI Overlay image not being displayed
++ FIXED styling for popup dialogs in chat list and chat views
++ FIXED smart invites not working when user is logged out and device has no internet connection
++ FIXED `window.overlay-image` UI configuration property not working
+
+
+
+---
+
+### v4.0.4
+
++ FIXED `GetSocial.getSupportedInviteProviders()` method call returning 0 providers when invoked from `GetSocial.init() onSuccess()` callback
 
 ---
 
 ### v4.0.3
 
-+ ADDED `ACTIVITY_COMMENT_BG_COLOR` property to configure comments background color
-+ FIXED User chat messages displayed incorrectly in pressed state
++ ADDED 5 new languages: Icelandic, Korean, Japanese, Chinese Simplified, Chinese Traditional
+
++ IMPROVED invite flow via email. Now SDK shows only email clients
++ FIXED issue with being not possible to install two apps with GetSocial SDK v4.0.2 integrated
++ FIXED property `ACTIVITY_ACTION_BUTTON_TEXT_Y_OFFSET_NORMAL` and `ACTIVITY_ACTION_BUTTON_TEXT_Y_OFFSET_PRESSED` behaviour
+
+
 
 ---
 
 ### v4.0.2
 
-+ ADDED 5 new languages: Icelandic, Korean, Japanese, Chinese Simplified, Chinese Traditional
-+ FIXED crash on start on iOS 7
++ ADDED ability to load json configuration file from absolute path
++ ADDED ability to specify absolute path as a base assets path from the code
++ IMPROVED behaviour of attached images on some Smart Invite providers
++ FIXED null pointer exception when opening chat view from notification on application cold start
 
 ---
 
 ### v4.0.1
 
-+ ADDED support for iOS 9 Universal Links for Smart Invites
-+ ADDED `GetSocialAnimationStyleNone` as an option for animation-style to disable all animations
++ ADDED option to disable animations to prevent crashes due to Hardware Acceleration on Kindle devices
++ IMPROVED install attribution for latest Facebook SDK 4.7
 
 ---
 
@@ -226,28 +253,37 @@
 
 Release v4.0.0 brings a lot of new features, improvements and few breaking changes. The most notable are:
 
-+ ADDED source param to the onUserAvatarClickHandler
-+ ADDED functionality to get an external provider ID by getSocial ID
-+ ADDED modularization, `Core` (Activity Feed, Notifications, Smart Invites) and `Chat` modules. [Learn more...](http://docs.getsocial.im/#upgrade-guide)
-+ ADDED support for Facebook SDK v4.x [Learn more...](http://docs.getsocial.im/#integration-with-facebook)
-+ ADDED support for App in Like list
-+ ADDED support for App as sender of notifications
-+ ADDED friends list view. [Learn more...](http://docs.getsocial.im/#friends-list)
-+ ADDED support for linking multiple user accounts. [Learn more...](http://docs.getsocial.im/#adding-identity-info)
-+ ADDED setOnUserIdentityUpdatedHandler that will be invoked on login/logout add/remove IdentityInfo
-+ REPLACED generic `openXyz` view method with sophisticated builders API. To obtain view builder call `createXyzView()`.
-+ IMPROVED UI configuration system. Now all UI properties can be customized via JSON configuration file. [Learn more...](http://docs.getsocial.im/ui-customization/#developers-guide)
-+ IMPROVED most of the `GetSocial` methods to more meaningful names (e.g. `authenticateGame(...)` => `init(...)`, `verifyUserIdentity(...)` => `login(...)`, etc.). [Learn more...](http://docs.getsocial.im/#upgrade-guide)
-+ IMPROVED internal queue management
-+ IMPROVED internal notifications management
-+ FIXED bug affecting FB Login and Invites return to app with a cold start
-+ FIXED bug affecting Unity 5 apps hiding GetSocial SDK UI after becoming inactive 
++ Integration guide and reference migrated to [docs.getsocial.im](http://docs.getsocial.im).
++ Now GetSocial is split into `Core` (Activity Feed, Notifications, Smart Invites) and `Chat` modules. [Learn more about migration from version 3.x.](http://docs.getsocial.im/#upgrade-guide)
++ New UI configuration system. Now all UI properties can be customized via JSON configuration file. [Learn more...](http://docs.getsocial.im/ui-customization/#developers-guide)
++ Big part of `GetSocial` methods were refactored to more meaningful names (e.g. `authenticateGame(...)` => `init(...)`, `verifyUserIdentity(...)` => `login(...)`, etc.)/
++ Added support for linking multiple user accounts. [Learn more...](http://docs.getsocial.im/#adding-identity-info)
++ Replaced generic `open(...)` view method with sophisticated builders API. To obtain view builder call `createXxxView()`.
++ Added friends list view. [Learn more...](http://docs.getsocial.im/#friends-list)
++ Added support for Facebook SDK v4.x. [Learn more...](http://docs.getsocial.im/#integration-with-facebook)
++ Now users can receive notifications about likes and comments from application account.
+
+
+
+
+
+---
+
+### v3.5.6
+
++ FIXED issue with Cache.getInstance returned null when authenticating game.
+
+---
+
+### v3.5.5
+
++ Bug fixes
 
 ---
 
 ### v3.5.4
 
-+ FIXED Chat Bubble maximum width calculation
++ Bug fixes
 
 ---
 
@@ -271,144 +307,40 @@ Release v4.0.0 brings a lot of new features, improvements and few breaking chang
 
 ### v3.5.0
 
-+ ADDED ReferralData on SmartInvites
-+ ADDED onReferralDataReceivedHandler
-+ ADDED onInviteButtonClickHandler
 + ADDED support for deeplinking
-+ ADDED onUserGeneratedContentHandler for moderation purposes
++ ADDED invite data bundling
 
 ---
 
 ### v3.4.0
 
-+ ADDED support for activities with image, button, action
-+ ADDED onGameAvatarClick handler
-+ ADDED onActivityActionClick handler
-+ ADDED Leaderboard data exposed to developer
++ Support for activities with image, button, action
++ onGameAvatarClick handler
++ onActivityActionClick handler
++ Leaderboard data exposed to developer
++ Chat Kill switch
 
 ---
 
 ### v3.3.0
 
-+ ADDED Global Chat Room
++ Global Chat Room
 
 ---
 
 ### v3.2.0
 
-+ ADDED Save State functionality
-+ ADDED auto integration of push notification by intercepting AppDelegate methods
-+ REMOVED the need of a id and key to authenticate. Now, only key is required
-+ ADDED ability to post activity with tags and retrieve activities per group
-+ ADDED Kakao and Kik invite providers
-+ ADDED onLoginRequestHandler to override the login
-+ IMPROVED PushNotification code
-+ IMPROVED UI experience
-+ IMPROVED analytics management
-+ ADDED smart invite view
-+ ADDED installation tracking
-+ ADDED activities filtering by group
++ Updated chat engine
++ Small improvements
 
 ---
 
-### v2.7.0
+### v3.1.1
 
-+ FIXED issue with Whatsapp invite
-+ FIXED orientation issues for iOS8
-+ FIXED problems while signing up with email
-+ ADDED support for new API with HTTPS protocol
-+ ADDED Ability to take Screenshot and exposed a method for the developers to post a screenshot
-+ ADDED Images in Chat
-+ ADDED Localization in Spanish
-+ ADDED Invite friends via SMS, Email & Whatsapp
-+ ADDED Push Notifications with support to open specific Activities, Profiles or Chat
-+ FIXED Leaderboard Time Format
-+ FIXED Create a chat group when the user has no following
-+ FIXED Quickly tapping on Connect to Facebook causes issues
-+ FIXED Loading indication position is incorrect when you open a image on a Full Screen
-+ FIXED Flush the operation queue twice in a row
++ Small bug fixes
 
 ---
 
-### v2.5.0
+### v3.1.0
 
-+ FIXED Navigation bugs
-+ FIXED #27 SB handle is not correctly shown on iPad
-+ FIXED #28 Minor problem with Invite Friends button on Leaderboards and Profile
-+ FIXED #17 Login with Email doesn't work when there is no FB plugin register
-+ FIXED #24 Alignment issue within activities page
-+ FIXED #26 FB Invite button appears even if there is no plugin registered
-+ ADDED authentication plugins with facebook support
-+ ADDED facebook invite plugin
-+ IMPROVED UI by making all table cell margins/styles the same
-+ FIXED achievements resize text glitch
-+ FIXED error message if username has spaces in it
-+ FIXED auto-capitalize/auto-correct behaviour in Login/Signup/Post
-+ ADDED a max length for username (16) during signup
-+ IMPROVED UI of activities/comments
-+ ADDED set social bar in Modal mode
-+ ADDED download custom picture for the Social bar handle
-+ ADDED Group chat
-+ IMPROVED Activities
-  + Added ability to post images and screenshots
-  + Redesigned posting UI
-+ ADDED Post Purchase Activity feature
-  + Post a purchase activity with custom text, image, item ID, item name and image URL
-  + Register a callback for the action where user presses action button on a purchase
-  + Settings toggle that allows the user to post the purchase activities anonymously
-+ ADDED User cache
-+ ADDED Welcome Page
-
----
-
-### v1.4.1
-+ FIXED bug flickering avatar
-+ IMPROVED UI of user profiles
-+ IMPROVED hiding post input fields in activities when you are scrolling
-+ ADDED the ability to see the list of following/followers users
-+ ADDED the ability to see the list of users who liked an activity
-+ ADDED the ability to upload a new avatar from the user's profile
-+ ADDED queueing of Leaderboard/Achievement operations if the user is logged out
-+ ADDED avatar caching on device
-+ FIXED bug showing incorrectly the height of the activities
-+ FIXED bug showing negative timestamps and 60m instead of 1h, 24h instead of 1d, etc
-+ FIXED notification icons persisting after logout.
-
----
-
-### v1.4.0
-+ ADDED Chat one-on-one which includes:
-  + Chat history
-  + Chat List aka List of Conversations
-  + Chat notification on top header
-  + Option to block Users for Chat
-+ IMPROVED Setting social bar handle position (similar to Android)
-+ IMPROVED Hiding social bar handle (similar to Android)
-+ IMPROVED UI of User avatars (i.e circular)
-+ IMPROVED UI of Menu
-+ IMPROVED UI of Achievements & Leaderboards margins
-+ IMPROVED UI of Registration and login pages (better Error Handling)
-+ FIXED bug that showed negative ‘like’ count
-+ REMOVED 'You' and 'Trending' tabs from Activity view
-
----
-
-### v1.0.2
-
-+ ADDED openSocialBar and closeSocialBar methods
-
----
-
-### v1.0.1
-
-+ FIXED auto refresh activity indicator
-+ ADDED method to allow developers to change the offset of the handle
-+ ADDED method to allow developers to change the background color of the handle
-+ ADDED New size, icon, default color and default position of the handle
-+ REMOVED not visible activities on memory warning
-
----
-
-### v1.0
-
-+ Initial Version
++ Initial GetSocial version

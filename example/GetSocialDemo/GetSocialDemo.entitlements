@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>production</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:getsocialdemosdk6.testing.gsc.im</string>
+		<string>applinks:getsocialdemosdk6.gsc.im</string>
+		<string>applinks:getsocialdemosdk6-gsalt.testing.gsc.im</string>
+		<string>applinks:getsocialdemosdk6-gsalt.gsc.im</string>
+	</array>
+</dict>
+</plist>
