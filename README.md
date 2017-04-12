@@ -24,4 +24,4 @@ This repository contains all you need to start working with GetSocial:
 
 ## Licence
 
-Example app and GetSocial Invite Channel plugins are distributed under [Apache 2](https://choosealicense.com/licenses/apache-2.0/) license. GetSocial Android SDK is distributed under the [commercial licence](https://www.getsocial.im/legal/).
+Example app and GetSocial Invite Channel plugins are distributed under [Apache 2](https://choosealicense.com/licenses/apache-2.0/) license. GetSocial iOS SDK is distributed under the [commercial licence](https://www.getsocial.im/legal/).
