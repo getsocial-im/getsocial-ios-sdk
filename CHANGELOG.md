@@ -2,6 +2,10 @@
 
 ## Version History
 
+### v6.0.1
+
++ Fixed crash when app started in landscape mode.
+
 ### v6.0.0
 
 We have released version 6.0 of our SDK, codename Sangria.  This is a major update that brings a lot of improvements and new features.

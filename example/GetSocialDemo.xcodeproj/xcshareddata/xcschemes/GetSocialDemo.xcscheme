@@ -14,62 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC4AD54C1E0ABC0C00B2C637"
-               BuildableName = "GetSocialRelease"
-               BlueprintName = "GetSocialRelease"
-               ReferencedContainer = "container:../../ios-library/GetSocial.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC8FF8D51E152624000AFAEF"
-               BuildableName = "GetSocialDocs"
-               BlueprintName = "GetSocialDocs"
-               ReferencedContainer = "container:../../ios-library/GetSocial.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC4AD5921E0ADCF300B2C637"
-               BuildableName = "GetSocialUIRelease"
-               BlueprintName = "GetSocialUIRelease"
-               ReferencedContainer = "container:../../ios-ui/GetSocialUI.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BC8FF8DB1E16B8FC000AFAEF"
-               BuildableName = "GetSocialUIDocs"
-               BlueprintName = "GetSocialUIDocs"
-               ReferencedContainer = "container:../../ios-ui/GetSocialUI.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "99F26AD019A65BE5006D3B1A"
                BuildableName = "GetSocialDemo.app"
                BlueprintName = "GetSocialDemo"

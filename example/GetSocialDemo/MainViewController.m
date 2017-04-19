@@ -501,12 +501,12 @@ NSString *const kCustomProvider = @"custom";
     UISimpleAlertViewController *alert =
             [[UISimpleAlertViewController alloc] initWithTitle:@"Conflict"
                                         message:@"The new identity is already linked to another user. Which one do you want to continue using?"
-                              cancelButtonTitle:[NSString stringWithFormat:@"%@ (Current)", [GetSocialUser userId]]
-                              otherButtonTitles:@[[NSString stringWithFormat:@"%@ (Remote)", [conflictUser userId]]]];
+                              cancelButtonTitle:[NSString stringWithFormat:@"%@ (Remote)", [conflictUser userId]]
+                              otherButtonTitles:@[[NSString stringWithFormat:@"%@ (Current)", [GetSocialUser userId]]]];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
-            BOOL switchUser = !didCancel;
+            BOOL switchUser = didCancel;
             if (conflictResolution)
             {
                 conflictResolution(switchUser);
