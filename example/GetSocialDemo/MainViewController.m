@@ -228,6 +228,11 @@ NSString *const kCustomProvider = @"custom";
             [activityFeedView setActionListener:^(NSString *action, GetSocialActivityPost *post) {
                 GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
             }];
+            [activityFeedView setHandlerForViewOpen:^() {
+                NSLog(@"Global feed is opened");
+            }                                 close:^() {
+                NSLog(@"Global feed is closed");
+            }];
             [activityFeedView show];
         }]];
 

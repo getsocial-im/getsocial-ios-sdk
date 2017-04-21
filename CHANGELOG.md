@@ -2,9 +2,25 @@
 
 ## Version History
 
+### v6.0.2
+
+**New:**
+
++ Added `setHandlerForViewOpen:close:` method to all GetSocial Views. Now you can subscribe to GetSocial View lifecycle events.
+
+**Fixed:**
+
++ Fix issue with empty Smart Invite text if it was updated from Dashboard.
+
+---
+
+
 ### v6.0.1
 
 + Fixed crash when app started in landscape mode.
+
+---
+
 
 ### v6.0.0
 
