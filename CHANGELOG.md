@@ -1,6 +1,17 @@
-# GetSocial Android SDK
+# GetSocial iOS SDK Changelog
 
 ## Version History
+
+### v6.0.3
+
+**Fixed:**:
++ Now `setWindowTitle:` works for all GetSocial windows.
++ Fixed issue when SDK do not initialize after changing GetSocial App Id.
+
+
+
+
+---
 
 ### v6.0.2
 
