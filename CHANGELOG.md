@@ -2,6 +2,26 @@
 
 ## Version History
 
+### v6.1.0
+
+**Fixed**:
++ Ukrainian and Russian localization for plural nouns.
++ Analytics crash on concurent list modification.
++ Action buttons background issue in landscape mode.
++ GetSocial Views stack is not cleared on iOS 8 devices.
++ No empty view in case there are no activities yet.
+
+**Added**:
++ Added `User Properties` functionality. Now you can store some custom properties for each user. More info in [documentation](http://docs.getsocial.im/guides/user-management/ios/get-set-user-properties/).
++ Added `GetSocialUIActionHandler`, you can set it with `setUiActionHandler:` method on any of `GetSocialUIView.h` chidren. All possible actions you can find in `GetSocialUIActionType` enum in `GetSocialUIPublicConstants.h`. More info in [documentation](http://docs.getsocial.im/guides/ui-framework/ios/#ui-user-actions-handling).
+
+
+
+**Changed**:
++ Method `setActionListener:` in `GetSocialUIActivityFeedView` became `setActionButtonHandler:`, type alias `ActivityButtonActionListener` now is `ActivityButtonActionHandler`. 
+
+---
+
 ### v6.0.3
 
 **Fixed:**:

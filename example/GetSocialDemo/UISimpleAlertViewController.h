@@ -20,10 +20,10 @@ typedef void (^UISimpleAlertViewControllerDismissedHandler)(NSInteger selectedIn
 
 @interface UISimpleAlertViewController : NSObject
 
-- (id)initWithTitle:(NSString *)aTitle
-            message:(NSString *)aMessage
-  cancelButtonTitle:(NSString *)aCancelTitle
-  otherButtonTitles:(NSArray *)otherTitles;
+- (instancetype)initWithTitle:(NSString *)aTitle
+                      message:(NSString *)aMessage
+            cancelButtonTitle:(NSString *)aCancelTitle
+            otherButtonTitles:(NSArray *)otherTitles;
 
 - (void)addTextFieldWithPlaceholder:(NSString*)placeholder defaultText:(NSString*)defaultText isSecure:(BOOL)isSecure;
 - (NSString*)contentOfTextFieldAtIndex:(NSInteger)index;

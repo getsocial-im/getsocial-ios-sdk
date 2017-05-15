@@ -167,6 +167,16 @@ NSString *const kCustomProvider = @"custom";
                                                                                    [self changeUserAvatar];
                                                                                }]];
 
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Set User Property"
+                                                                               action:^{
+                                                                                   [self setProperty];
+                                                                               }]];
+
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Get User Property"
+                                                                               action:^{
+                                                                                   [self getProperty];
+                                                                               }]];
+
         [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Add Facebook user identity"
                                                                                action:^{
                                                                                    [self addFBUserIdentityWithSuccess:nil failure:nil];
@@ -225,20 +235,34 @@ NSString *const kCustomProvider = @"custom";
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed" action:^{
             GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
-            [activityFeedView setActionListener:^(NSString *action, GetSocialActivityPost *post) {
-                GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
+            [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
+                GSLogInfo(YES, NO, @"Activity Feed button clicked, actionType: %@", action);
             }];
             [activityFeedView setHandlerForViewOpen:^() {
                 NSLog(@"Global feed is opened");
             }                                 close:^() {
                 NSLog(@"Global feed is closed");
             }];
+            [activityFeedView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
+                switch (actionType) {
+                    case GetSocialUIActionLikeActivity:
+                    case GetSocialUIActionLikeComment:
+                    case GetSocialUIActionPostActivity:
+                    case GetSocialUIActionPostComment:
+                        if ([GetSocialUser isAnonymous]) {
+                            [self showAlertToChooseAuthorizationOptionToPerform:pendingAction];
+                            break;
+                        }
+                    default:
+                        pendingAction();
+                }
+            }];
             [activityFeedView show];
         }]];
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Custom Activity Feed (DemoFeed)" action:^{
             GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createActivityFeedView:@"DemoFeed"];
-            [activityFeedView setActionListener:^(NSString *action, GetSocialActivityPost *post) {
+            [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
                 GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
             }];
             [activityFeedView show];
@@ -320,6 +344,37 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
+- (void)showAlertToChooseAuthorizationOptionToPerform:(GetSocialUIPendingAction)pendingUiAction
+{
+    UISimpleAlertViewController *authorizationChooser = [[UISimpleAlertViewController alloc] initWithTitle:@"Authorize to perform an action"
+                                                                                                   message:@"Choose authorization option"
+                                                                                         cancelButtonTitle:@"Cancel"
+                                                                                         otherButtonTitles:@[@"Facebook", @"Custom"]];
+    [authorizationChooser showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (didCancel)
+        {
+            GSLogInfo(YES, NO, @"Can not perform action for anonymous user");
+        } else
+        {
+            if (selectedIndex == 0) {
+                [GetSocialUI closeView:YES];
+                [self addFBUserIdentityWithSuccess:^{
+                    [GetSocialUI restoreView];
+                    pendingUiAction();
+                } failure:^{
+                    [GetSocialUI restoreView];
+                    GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
+                }];
+            } else if (selectedIndex == 1)
+            {
+                [self addCustomUserIdentityWithSuccess:pendingUiAction failure:^{
+                    GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
+                }];
+            }
+        }
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController ];
+}
+
 #pragma mark - Authentication
 
 - (FBSDKLoginManager *)facebookSdkManager
@@ -335,7 +390,9 @@ NSString *const kCustomProvider = @"custom";
 - (void)loginWithFacebookWithHandler:(FBSDKLoginManagerRequestTokenHandler)handler
 {
     
-    [self.facebookSdkManager logInWithReadPermissions:@[@"email", @"user_friends"] fromViewController:self handler:handler];
+    [self.facebookSdkManager logInWithReadPermissions:@[@"email", @"user_friends", @"public_profile"]
+                                   fromViewController:[UIApplication sharedApplication].keyWindow.rootViewController
+                                              handler:handler];
 }
 
 - (void)changeUserAvatar
@@ -349,6 +406,55 @@ NSString *const kCustomProvider = @"custom";
         [self hideActivityIndicator];
         GSLogError(YES, NO, @"Error changing user avatar: %@", error.description);
     }];
+}
+
+- (void)setProperty
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Set User Property"
+                                                                                    message:@"Enter key and value"
+                                                                          cancelButtonTitle:@"Cancel"
+                                                                          otherButtonTitles:@[@"Ok"]];
+
+    [alert addTextFieldWithPlaceholder:@"Key" defaultText:nil isSecure:NO];
+    [alert addTextFieldWithPlaceholder:@"Value" defaultText:nil isSecure:NO];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel) {
+            [self showActivityIndicator];
+            NSString *key = [alert contentOfTextFieldAtIndex:0];
+            NSString *value = [alert contentOfTextFieldAtIndex:1];
+            [GetSocialUser setPublicPropertyValue:value
+                                           forKey:key
+                                          success:^{
+                                              [self hideActivityIndicator];
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+                                              GSLogInfo(YES, NO, @"User property was successfully set");
+                                          } failure:^(NSError *error) {
+                        [self hideActivityIndicator];
+                        GSLogError(YES, NO, @"Error changing user property: %@", error.description);
+            }];
+        }
+    } onViewController:self];
+}
+
+- (void)getProperty
+{
+
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Get User Property"
+                                                                                    message:@"Enter key"
+                                                                          cancelButtonTitle:@"Cancel"
+                                                                          otherButtonTitles:@[@"Ok"]];
+
+    [alert addTextFieldWithPlaceholder:nil defaultText:nil isSecure:NO];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel) {
+            NSString *key = [alert contentOfTextFieldAtIndex:0];
+
+            NSString *value = [GetSocialUser publicPropertyValueForKey:key];
+            [self showAlertWithText:[NSString stringWithFormat:@"%@ = %@", key, value] ];
+        }
+    } onViewController:self];
 }
 
 - (void)changeDisplayName
@@ -381,11 +487,15 @@ NSString *const kCustomProvider = @"custom";
     NSDictionary *authIdentities = [GetSocialUser authIdentities];
     if (!authIdentities[GetSocial_AuthIdentityProviderId_Facebook])
     {
+        [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
         [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *loginError) {
             if (!loginError && !result.isCancelled)
             {
                 [self addIdentity:[GetSocialAuthIdentity facebookIdentityWithAccessToken:result.token.tokenString]
-                          success:success
+                          success:^{
+                              [self setFacebookDisplayName];
+                              ExecuteBlock(success);
+                          }
                           failure:failure];
             }
         }];
@@ -393,6 +503,17 @@ NSString *const kCustomProvider = @"custom";
     {
         GSLogInfo(YES, NO, @"User has already a Facebook identity.");
     }
+}
+
+- (void)setFacebookDisplayName
+{
+    FBSDKProfile *profile = [FBSDKProfile currentProfile];
+    NSString *displayName = [NSString stringWithFormat:@"%@ %@", profile.firstName, profile.lastName];
+    [GetSocialUser setDisplayName:displayName success:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+    } failure:^(NSError *error) {
+        GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.description);
+    }];
 }
 
 - (void)removeFBUserIdentity
@@ -436,7 +557,7 @@ NSString *const kCustomProvider = @"custom";
 
             [self addIdentity:identity success:success failure:failure];
         }
-    } onViewController:self];
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
 - (void)removeCustomUserIdentity
@@ -516,7 +637,7 @@ NSString *const kCustomProvider = @"custom";
             {
                 conflictResolution(switchUser);
             }
-        } onViewController:self];
+        } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
     });
 }
 
@@ -577,7 +698,7 @@ NSString *const kCustomProvider = @"custom";
             NSString *selectedProviderId = [[channels objectAtIndex:selectedIndex] channelId];
             [self performSelector:@selector(callSendInviteWithProviderId:) withObject:selectedProviderId afterDelay:.5f];
         }
-    } onViewController:self];
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
 - (void)callSendInviteWithProviderId:(NSString *)providerId

@@ -15,6 +15,7 @@
  */
 
 #import <GetSocial/GetSocial.h>
+#import <GetSocial/GetSocialUser.h>
 #import "Constants.h"
 #import "UserIdentityViewController.h"
 #import "UserViewController.h"

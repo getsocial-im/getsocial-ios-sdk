@@ -28,10 +28,10 @@
 
 #pragma mark - Public (Initialization)
 
-- (id)initWithTitle:(NSString *)aTitle
-            message:(NSString *)aMessage
-  cancelButtonTitle:(NSString *)aCancelTitle
-  otherButtonTitles:(NSArray *)otherTitles
+- (instancetype)initWithTitle:(NSString *)aTitle
+                      message:(NSString *)aMessage
+            cancelButtonTitle:(NSString *)aCancelTitle
+            otherButtonTitles:(NSArray *)otherTitles
 {
     self = [super init];
     if (self)
@@ -63,6 +63,7 @@
 - (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler onViewController:(UIViewController*)viewController
 {
     self.activeDismissHandler = handler;
+    self.activeAlertController.modalPresentationStyle = UIModalPresentationPopover;
     [viewController presentViewController:self.activeAlertController animated:NO completion:nil];
 }
 

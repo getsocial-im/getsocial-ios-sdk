@@ -105,8 +105,8 @@
         view = [GetSocialUI createActivityFeedView:@"DemoFeed"];
     }
     __weak typeof(self) weakSelf = self;
-    
-    [view setActionListener:^(NSString *action, GetSocialActivityPost *post) {
+
+    [view setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
         typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf log:LogLevelInfo context:NSStringFromSelector(_cmd) message:[NSString stringWithFormat:@"Activity Feed button clicked, action: %@", action] showAlert:YES];
     }];
