@@ -126,6 +126,11 @@
 
     cell.user = self.friends[indexPath.row];
     cell.delegate = self;
+    if ([cell.user.userId isEqualToString:self.markedFriendId]) {
+        cell.backgroundColor = [UIColor greenColor];
+    } else {
+        cell.backgroundColor = [UIColor clearColor];
+    }
 
     return cell;
 }

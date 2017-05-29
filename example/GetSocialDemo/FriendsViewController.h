@@ -18,4 +18,7 @@
 
 @interface FriendsViewController : UIViewController
 
+@property (nonatomic, copy) NSString *markedFriendId;
+
 @end
+

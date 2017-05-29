@@ -19,10 +19,15 @@
 #import <GetSocialUI/GetSocialUI.h>
 #import "UISimpleAlertViewController.h"
 
-@interface CustomSmartInviteViewController ()
+#define MAX_WIDTH 1024.f
+#define MAX_HEIGHT 768.f
+
+@interface CustomSmartInviteViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     BOOL keyboardIsShown;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *customImage;
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
 
 @end
 
@@ -102,7 +107,7 @@
             if (!didCancel)
             {
                 UITextField *textField = (UITextField *) sender.view;
-                textField.text = [textField.text stringByAppendingString:tags[selectedIndex - 1]];
+                textField.text = [textField.text stringByAppendingString:tags[selectedIndex]];
             }
         } onViewController:self];
     }
@@ -122,6 +127,10 @@
     if (![self.subjectField.text isEqualToString:@""])
     {
         mutableInviteContent.subject = self.subjectField.text;
+    }
+    if (self.customImage.image)
+    {
+        mutableInviteContent.image = self.customImage.image;
     }
 
     NSMutableDictionary* customReferralData = [NSMutableDictionary new];
@@ -169,5 +178,60 @@
 {
     [self.view endEditing:YES];
 }
+
+- (IBAction)changeImage:(id)sender
+{
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.delegate = self;
+    
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)clearImage:(id)sender
+{
+    self.customImage.image = nil;
+}
+
+
+/**
+ * Resize an image to be not larger than MAX_WIDTH x MAX_HEIGHT and keep the ratio.
+ * @param image
+ * @return
+ */
+- (UIImage *)resizeImage:(UIImage *)image
+{
+    CGFloat scale = MAX(MAX_WIDTH / image.size.width, MAX_HEIGHT / image.size.height);
+    scale = MIN(1, scale);
+    return [self imageWithImage:image scaledToSize:CGSizeMake(image.size.width * scale, image.size.height * scale)];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#pragma mark - UIImagePickerController
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    image = [self resizeImage:image];
+    
+    self.customImage.image = image;
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    self.imagePicker = nil;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    self.imagePicker = nil;
+}
+
 
 @end

@@ -35,12 +35,22 @@
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
     
+    NSMutableArray* sharedContent = [NSMutableArray array];
     KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:invitePackage.text];
+    [sharedContent addObject:label];
     
-    KakaoTalkLinkObject *webLink = [KakaoTalkLinkObject createWebLink:invitePackage.referralUrl
-                                     url:invitePackage.referralUrl];
+    if(invitePackage.imageUrl && invitePackage.image)
+    {
+        CGFloat sharedImageWidth = 300;
+        UIImage* image = invitePackage.image;
+        CGFloat ratio = image.size.height / image.size.width;
+        CGFloat height = ratio * sharedImageWidth;
+        
+        KakaoTalkLinkObject *imageLink = [KakaoTalkLinkObject createImage:invitePackage.imageUrl width:sharedImageWidth height:height];
+        [sharedContent addObject:imageLink];
+    }
     
-    [KOAppCall openKakaoTalkAppLink:@[label,webLink]];
+    [KOAppCall openKakaoTalkAppLink:sharedContent];
     
     if(successCallback)
     {

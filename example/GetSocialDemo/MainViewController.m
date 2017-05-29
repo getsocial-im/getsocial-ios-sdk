@@ -14,6 +14,7 @@
  *	limitations under the License.
  */
 
+#import <UIKit/UIKit.h>
 #import "UIViewController+GetSocial.h"
 #import "ConsoleViewController.h"
 #import "Constants.h"
@@ -23,11 +24,13 @@
 #import "UISimpleAlertViewController.h"
 #import "UserIdentityUtils.h"
 #import "ActivityIndicatorViewController.h"
+#import "FriendsViewController.h"
 
 #import <GetSocial/GetSocial.h>
 #import <GetSocial/GetSocialUser.h>
 #import <GetSocialUI/GetSocialUI.h>
 #import <GetSocial/GetSocialConflictUser.h>
+#import <GetSocial/GetSocialInviteChannelPlugin.h>
 
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
@@ -42,6 +45,8 @@
 #import <GetSocial/GetSocialAuthIdentity.h>
 #import <GetSocial/GetSocialNotificationAction.h>
 #import <GetSocial/GetSocialOpenActivityAction.h>
+#import <GetSocial/GetSocialOpenProfileAction.h>
+#import <GetSocial/GetSocialPublicUser.h>
 
 
 #define GSLogInfo(bShowAlert, bShowConsole, sMessage, ...)                \
@@ -100,12 +105,21 @@ NSString *const kCustomProvider = @"custom";
 - (void)setUpGetSocial
 {
     [GetSocial setNotificationActionHandler:^BOOL(GetSocialNotificationAction *action) {
-        //handle action here
+        if (action.action == GetSocialNotificationActionOpenProfile)
+        {
+            GetSocialOpenProfileAction *openProfileAction = (GetSocialOpenProfileAction *) action;
+            [self openFriendsWithNewFriend:openProfileAction.userId];
+            return YES;
+        }
         return NO;
     }];
     [GetSocialUser setOnUserChangedHandler:^() {
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         [self updateFriendsCount];
+    }];
+
+    [GetSocial executeWhenInitialized:^() {
+        [self checkReferralData];
     }];
 
     // Register FBInvitePlugin
@@ -243,6 +257,22 @@ NSString *const kCustomProvider = @"custom";
             }                                 close:^() {
                 NSLog(@"Global feed is closed");
             }];
+            [activityFeedView setAvatarClickHandler:^(GetSocialPublicUser *user) {
+                if ([user.userId isEqualToString:[GetSocialUser userId] ])
+                {
+                    NSLog(@"Tapped on yourself");
+                    return;
+                }
+                [GetSocialUser isFriend:user.userId success:^(BOOL isFriend) {
+                    if (isFriend) {
+                        [self showAlertToRemoveFriend:user];
+                    } else {
+                        [self showAlertToAddFriend:user];
+                    }
+                } failure:^(NSError *error) {
+                    NSLog(@"Failed to check if friends, error: %@", error.description);
+                }];
+            }];
             [activityFeedView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
                 switch (actionType) {
                     case GetSocialUIActionLikeActivity:
@@ -266,6 +296,14 @@ NSString *const kCustomProvider = @"custom";
                 GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
             }];
             [activityFeedView show];
+        }]];
+        
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details" action:^{
+            [self showChooseActivityAlert:YES];
+        }]];
+
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details(without activity feed)" action:^{
+            [self showChooseActivityAlert:NO];
         }]];
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post Activity" action:^{
@@ -342,6 +380,84 @@ NSString *const kCustomProvider = @"custom";
         [self.menu addObject:self.settingsMenu];
 
     }
+}
+
+- (void)showAlertToRemoveFriend:(GetSocialPublicUser *)user
+{
+    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Remove Friend"
+                                                                                                  message:[NSString stringWithFormat:@"Add %@ to friends?", user.displayName]
+                                                                                        cancelButtonTitle:@"Cancel"
+                                                                                        otherButtonTitles:@[@"Remove"]];
+    [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            [GetSocialUser removeFriend:user.userId success:^(int friendsCount) {
+                [self showAlertWithText:[NSString stringWithFormat:@"%@ removed from friends.", user.displayName]];
+            } failure:^(NSError *error) {
+                NSLog(@"Failed to remove friend, error: %@", error.description);
+            }];
+        }
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (void)showAlertToAddFriend:(GetSocialPublicUser *)user
+{
+    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Friend"
+                                                                                                  message:[NSString stringWithFormat:@"Add %@ to friends?", user.displayName]
+                                                                                        cancelButtonTitle:@"Cancel"
+                                                                                        otherButtonTitles:@[@"Add"]];
+    [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            [GetSocialUser addFriend:user.userId success:^(int friendsCount) {
+                [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", user.displayName]];
+            } failure:^(NSError *error) {
+                NSLog(@"Failed to add friend, error: %@", error.description);
+            }];
+        }
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (void)showChooseActivityAlert:(BOOL)showFeed
+{
+    GetSocialActivitiesQuery *query = [GetSocialActivitiesQuery postsForGlobalFeed];
+    [query setLimit:5];
+    [GetSocial activitiesWithQuery:query success:^(NSArray<GetSocialActivityPost *> * _Nonnull result) {
+        NSMutableArray *activityIds         = [@[] mutableCopy];
+        NSMutableArray *activityContents    = [@[] mutableCopy];
+        for (GetSocialActivityPost *activity in result)
+        {
+            [activityIds addObject:activity.activityId];
+            [activityContents addObject:activity.text];
+        }
+        UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Activity ID"
+                                                                                                      message:@"Select an activity ID to be displayed"
+                                                                                            cancelButtonTitle:@"Cancel"
+                                                                                            otherButtonTitles:activityContents];
+        [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (!didCancel)
+            {
+                GetSocialUIActivityDetailsView *detailsView = [GetSocialUI createActivityDetailsView:activityIds[selectedIndex]];
+                [detailsView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
+                    [self showAlertWithText:[NSString stringWithFormat:@"Action button pressed: %@", action]];
+                }];
+                [detailsView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
+                    NSLog(@"Action performed %ld", (long)actionType);
+                    pendingAction();
+                }];
+                [detailsView setWindowTitle:@"Activity Details"];
+                [detailsView setShowActivityFeedView:showFeed];
+                [detailsView setHandlerForViewOpen:^{
+                    NSLog(@"On view opened");
+                } close:^{
+                    NSLog(@"On view closed");
+                }];
+                [detailsView show];
+            }
+        } onViewController:self];
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"Error loading activities %@", error);
+    }];
 }
 
 - (void)showAlertToChooseAuthorizationOptionToPerform:(GetSocialUIPendingAction)pendingUiAction
@@ -494,6 +610,7 @@ NSString *const kCustomProvider = @"custom";
                 [self addIdentity:[GetSocialAuthIdentity facebookIdentityWithAccessToken:result.token.tokenString]
                           success:^{
                               [self setFacebookDisplayName];
+                              [self setFacebookAvatar];
                               ExecuteBlock(success);
                           }
                           failure:failure];
@@ -505,15 +622,57 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
+- (void)setFacebookAvatar
+{
+    FBSDKProfile *profile = [FBSDKProfile currentProfile];
+    NSString* profileImageUrl = [profile imagePathForPictureMode:FBSDKProfilePictureModeNormal size:CGSizeMake(250, 250)];
+    
+    [self fetchFacebookProfilePictureWithPath:profileImageUrl completionBlock:^(NSString *pictureUrl) {
+        if (pictureUrl != nil)
+        {
+            [GetSocialUser setAvatarUrl:pictureUrl success:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+            } failure:^(NSError *error) {
+                GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.description);
+            }];
+        }
+    }];
+    
+}
+
+- (void)fetchFacebookProfilePictureWithPath:(NSString*)path completionBlock:(void (^)(NSString* pictureUrl))success
+{
+    NSDictionary* params = @{@"redirect" : @"false", @"type" : @"small"};
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:path
+                                  parameters:params
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error)
+    {
+        NSString* pictureUrl = nil;
+        if (error == nil)
+        {
+            NSDictionary* resultDict = (NSDictionary*)result;
+            NSDictionary* dataDict = resultDict[@"data"];
+            pictureUrl = dataDict[@"url"];
+        }
+        success(pictureUrl);
+    }];}
+
 - (void)setFacebookDisplayName
 {
     FBSDKProfile *profile = [FBSDKProfile currentProfile];
     NSString *displayName = [NSString stringWithFormat:@"%@ %@", profile.firstName, profile.lastName];
+    
     [GetSocialUser setDisplayName:displayName success:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
     } failure:^(NSError *error) {
         GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.description);
     }];
+    
+    
 }
 
 - (void)removeFBUserIdentity
@@ -645,7 +804,15 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openFriends
 {
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Friends"];
+    FriendsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Friends"];
+    [self.mainNavigationController pushViewController:vc animated:YES];
+}
+
+- (void)openFriendsWithNewFriend:(NSString *)newFriendId
+{
+    FriendsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Friends"];
+    vc.markedFriendId = newFriendId;
+    [self.mainNavigationController popToRootViewControllerAnimated:NO];
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 

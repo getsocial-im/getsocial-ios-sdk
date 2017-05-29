@@ -42,7 +42,7 @@
     self.cancelCallback = cancelCallback;
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    if (invitePackage.imageUrl)
+    if(invitePackage.imageUrl && invitePackage.image)
     {
         NSURL* appImageUrl = [NSURL URLWithString:invitePackage.imageUrl];
         if (appImageUrl != nil)
