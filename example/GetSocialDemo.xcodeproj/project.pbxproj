@@ -64,6 +64,8 @@
 		BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998298D7181C2BFF0028113B /* Security.framework */; };
 		BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */; };
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
+		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
+		BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -168,6 +170,8 @@
 		BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = GetSocialDemo/Vendor/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogoFullColorBlackBgIOS.png; path = Resources/getSocialLogoFullColorBlackBgIOS.png; sourceTree = "<group>"; };
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
+		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
+		BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFriendViewController.h; sourceTree = "<group>"; };
 		F4AD6CFE18BF313400B1F342 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.tbd"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -307,6 +311,8 @@
 		99FE1A811BB2B2EC00EF576A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */,
+				BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */,
 				995AC1E71BB15C95006424DF /* MenuItem.h */,
 				995AC1E81BB15C95006424DF /* MenuItem.m */,
 				995D99B417EB064500F65204 /* Main.storyboard */,
@@ -373,6 +379,7 @@
 				BC585E6C1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h in Headers */,
 				BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */,
 				213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */,
+				BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +502,7 @@
 				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
 				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
+				BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */,
 				6F8D5C0A1E57317700A43DAD /* FriendsTableViewCell.m in Sources */,
 				99F26AEB19A65BE5006D3B1A /* AppDelegate.m in Sources */,
 				9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */,

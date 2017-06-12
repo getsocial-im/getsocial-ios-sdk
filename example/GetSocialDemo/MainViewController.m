@@ -20,11 +20,13 @@
 #import "Constants.h"
 #import "MainNavigationController.h"
 #import "MainViewController.h"
+#import "NewFriendViewController.h"
 #import "MenuItem.h"
 #import "UISimpleAlertViewController.h"
 #import "UserIdentityUtils.h"
 #import "ActivityIndicatorViewController.h"
 #import "FriendsViewController.h"
+#import "PostActivityViewController.h"
 
 #import <GetSocial/GetSocial.h>
 #import <GetSocial/GetSocialUser.h>
@@ -75,7 +77,7 @@
 
 NSString *const kCustomProvider = @"custom";
 
-@interface MainViewController ()<UINavigationControllerDelegate>
+@interface MainViewController ()<UINavigationControllerDelegate, PostActivityVCDelegate>
 
 @property(nonatomic, strong) ParentMenuItem *uiCustomizationMenu;
 @property(nonatomic, strong) ParentMenuItem *languageMenu;
@@ -108,7 +110,7 @@ NSString *const kCustomProvider = @"custom";
         if (action.action == GetSocialNotificationActionOpenProfile)
         {
             GetSocialOpenProfileAction *openProfileAction = (GetSocialOpenProfileAction *) action;
-            [self openFriendsWithNewFriend:openProfileAction.userId];
+            [self showNewFriend:openProfileAction.userId];
             return YES;
         }
         return NO;
@@ -378,7 +380,6 @@ NSString *const kCustomProvider = @"custom";
         [self.settingsMenu addSubmenu:self.languageMenu];
         
         [self.menu addObject:self.settingsMenu];
-
     }
 }
 
@@ -808,12 +809,16 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
-- (void)openFriendsWithNewFriend:(NSString *)newFriendId
+- (void)showNewFriend:(NSString*)newFriendId
 {
-    FriendsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Friends"];
-    vc.markedFriendId = newFriendId;
-    [self.mainNavigationController popToRootViewControllerAnimated:NO];
-    [self.mainNavigationController pushViewController:vc animated:YES];
+    [GetSocial userWithId:newFriendId success:^(GetSocialPublicUser * _Nonnull publicUser) {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        NewFriendViewController* newFriendViewController = [storyboard instantiateViewControllerWithIdentifier:@"NewFriendViewController"];
+        [newFriendViewController setPublicUser:publicUser];
+        [self presentViewController:newFriendViewController animated:YES completion:nil];
+    } failure:^(NSError * _Nonnull error) {
+        GSLogError(YES, NO, @"Fetch user failed, error: %@", [error description]);
+    }];
 }
 
 #pragma mark - Smart Invites
@@ -893,8 +898,16 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openPostActivityView
 {
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PostActivity"];
+    PostActivityViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PostActivity"];
+    vc.delegate = self;
     [self.mainNavigationController pushViewController:vc animated:YES];
+}
+
+- (void)authorizeWithSuccess:(void (^)())success
+{
+    [self showAlertToChooseAuthorizationOptionToPerform:^{
+        success();
+    }];
 }
 
 #pragma mark - Localization

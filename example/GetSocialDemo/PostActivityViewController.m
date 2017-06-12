@@ -75,6 +75,15 @@
     UIImage *image = self.contentImage.image;
     BOOL hasImage = image != nil;
 
+    BOOL globalFeed = [self.currentFeedTitle isEqualToString:GLOBAL_FEED];
+    if (globalFeed && [GetSocialUser isAnonymous])
+    {
+        [self.delegate authorizeWithSuccess:^{
+            [self postActivity:sender];
+        }];
+        return;
+    }
+    
     if (!hasText && !hasButton && !hasImage)
     {
         [self showAlertWithTitle:@"Error" andText:@"Can not post activity withot any data"];
@@ -94,7 +103,6 @@
         content.buttonAction = buttonAction;
     }
 
-    BOOL globalFeed = [self.currentFeedTitle isEqualToString:GLOBAL_FEED];
     [self showActivityIndicator];
 
     GetSocialUIActivityFeedView *view;

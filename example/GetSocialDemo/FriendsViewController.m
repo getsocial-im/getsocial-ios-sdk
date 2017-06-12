@@ -39,6 +39,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 - (IBAction)addFriend:(id)sender
 {
     [self.friendId endEditing:YES];

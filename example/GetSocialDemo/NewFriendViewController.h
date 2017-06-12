@@ -14,14 +14,11 @@
  *	limitations under the License.
  */
 
-@protocol PostActivityVCDelegate <NSObject>
+#import <UIKit/UIKit.h>
+#import <GetSocial/GetSocial.h>
 
-- (void)authorizeWithSuccess:(void(^)())success;
+@interface NewFriendViewController : UIViewController
 
-@end
-
-@interface PostActivityViewController : UIViewController
-
-@property (nonatomic, weak) id<PostActivityVCDelegate> delegate;
+@property (strong) GetSocialPublicUser* publicUser;
 
 @end

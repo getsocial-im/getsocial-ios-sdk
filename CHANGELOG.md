@@ -2,6 +2,14 @@
 
 ## Version History
 
+### v6.3.0
+
+**Added**:
++ Now you can disable image attachment to Smart Invites from Dashboard. Useful to avoid charges for sending MMS instead of SMS.
++ Method `userById:`, you can retrieve `GetSocialPublicUser` entity having only user ID.
+
+----
+
 ### v6.2.0
 
 **Added**:
