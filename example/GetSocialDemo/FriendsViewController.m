@@ -18,6 +18,7 @@
 #import "FriendsTableViewCell.h"
 #import "UIViewController+GetSocial.h"
 #import <GetSocial/GetSocial.h>
+#import "SuggestedFriendsViewController.h"
 
 @interface FriendsViewController () <UITableViewDelegate, UITableViewDataSource, FriendsTableViewCellDelegate>
 
@@ -32,6 +33,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self loadFriends];
 }
 
@@ -90,6 +96,30 @@
                                  [strongSelf hideActivityIndicator];
                                  [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
                              }];
+}
+- (IBAction)suggestFriends:(UIButton *)sender
+{
+    [self showActivityIndicator];
+    __weak typeof(self) weakSelf = self;
+    [GetSocialUser suggestedFriendsWithOffset:0
+                                        limit:10
+                                      success:^(NSArray<GetSocialSuggestedFriend *> * _Nonnull friends) {
+                                          __strong typeof(weakSelf) strongSelf = weakSelf;
+                                          [strongSelf hideActivityIndicator];
+                                          [strongSelf showSuggestedFriends:friends];
+                                      } failure:^(NSError * _Nonnull error) {
+                                          __strong typeof(weakSelf) strongSelf = weakSelf;
+                                          [strongSelf hideActivityIndicator];
+                                          [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+                                      }];
+}
+
+- (void)showSuggestedFriends:(NSArray<GetSocialSuggestedFriend *> *)friends
+{
+    SuggestedFriendsViewController *suggestedFriendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SuggestedFriends"];
+    suggestedFriendsVC.friends = friends;
+    suggestedFriendsVC.modalInPopover = YES;
+    [self.navigationController presentViewController:suggestedFriendsVC animated:YES completion:nil];
 }
 
 #pragma mark - FriendsTableViewCell

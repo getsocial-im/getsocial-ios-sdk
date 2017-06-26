@@ -12,6 +12,10 @@
 		6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */; };
 		6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */; };
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
+		6F6979A11EE8360900ED08B5 /* SuggestedFriendsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */; };
+		6F6979A21EE8360900ED08B5 /* SuggestedFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */; };
+		6F6979AB1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */; };
+		6F6979AC1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6979AA1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m */; };
 		6F8D5C051E57304E00A43DAD /* FriendsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D5C031E57304E00A43DAD /* FriendsViewController.h */; };
 		6F8D5C061E57304E00A43DAD /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5C041E57304E00A43DAD /* FriendsViewController.m */; };
 		6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */; };
@@ -88,6 +92,10 @@
 		213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GetSocial.m"; sourceTree = "<group>"; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
+		6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendsViewController.h; sourceTree = "<group>"; };
+		6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestedFriendsViewController.m; sourceTree = "<group>"; };
+		6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendTableViewCell.h; sourceTree = "<group>"; };
+		6F6979AA1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestedFriendTableViewCell.m; sourceTree = "<group>"; };
 		6F8D5C031E57304E00A43DAD /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		6F8D5C041E57304E00A43DAD /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewCell.h; sourceTree = "<group>"; };
@@ -340,6 +348,10 @@
 				6F8D5C041E57304E00A43DAD /* FriendsViewController.m */,
 				6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */,
 				6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */,
+				6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */,
+				6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */,
+				6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */,
+				6F6979AA1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -371,9 +383,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6979A11EE8360900ED08B5 /* SuggestedFriendsViewController.h in Headers */,
 				6F8D5C051E57304E00A43DAD /* FriendsViewController.h in Headers */,
 				6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */,
 				BC4637561E8D12F5008074E3 /* UISimpleAlertViewController.h in Headers */,
+				6F6979AB1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h in Headers */,
 				6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */,
 				BC217B161E55E22400426793 /* UIViewController+GetSocial.h in Headers */,
 				BC585E6C1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h in Headers */,
@@ -501,6 +515,7 @@
 				99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */,
 				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
 				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
+				6F6979AC1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
 				BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */,
 				6F8D5C0A1E57317700A43DAD /* FriendsTableViewCell.m in Sources */,
@@ -514,6 +529,7 @@
 				99B68F171BB18FC500E1F252 /* UserIdentityViewController.m in Sources */,
 				995AC1EB1BB15C95006424DF /* MenuItem.m in Sources */,
 				6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */,
+				6F6979A21EE8360900ED08B5 /* SuggestedFriendsViewController.m in Sources */,
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
 				BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */,
 				995AC1E11BB15218006424DF /* MainNavigationController.m in Sources */,

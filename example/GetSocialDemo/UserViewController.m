@@ -82,6 +82,19 @@
         [details appendString:@"\n\nAnonymous\n\n"];
     }
 
+    [details appendString:@"\n\nPublic Properties\n\n"];
+    [[GetSocialUser allPublicProperties] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
+        [details appendFormat:@"%@: %@\n", key, val];
+        [details appendString:@"\n\n"];
+    }];
+
+    [details appendString:@"\n\nPrivate Properties\n\n"];
+    [[GetSocialUser allPrivateProperties] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
+        [details appendFormat:@"%@: %@\n", key, val];
+        [details appendString:@"\n\n"];
+    }];
+
+
     self.detailsTextView.text = details;
 }
 
