@@ -20,6 +20,7 @@
 		6F8D5C061E57304E00A43DAD /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5C041E57304E00A43DAD /* FriendsViewController.m */; };
 		6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */; };
 		6F8D5C0A1E57317700A43DAD /* FriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */; };
+		7A5A1FC31F0FC64D0086C021 /* getsocial in Resources */ = {isa = PBXBuildFile; fileRef = 7A5A1FC21F0FC64D0086C021 /* getsocial */; };
 		990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A617EB064500F65204 /* UIKit.framework */; };
 		990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */; };
 		991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */; };
@@ -100,6 +101,7 @@
 		6F8D5C041E57304E00A43DAD /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewCell.h; sourceTree = "<group>"; };
 		6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewCell.m; sourceTree = "<group>"; };
+		7A5A1FC21F0FC64D0086C021 /* getsocial */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial; path = Resources/getsocial; sourceTree = "<group>"; };
 		9908FAA91A9B4C7800F39657 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		990BC5B71AF265D6003A0B96 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		990CFD6D1BA9C2CF008872CA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -208,6 +210,7 @@
 		2563FAEF1A6E859E006E0448 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7A5A1FC21F0FC64D0086C021 /* getsocial */,
 				BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */,
 				BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */,
 				99F3E7FE1AB32CA900033238 /* activityImage.png */,
@@ -478,6 +481,7 @@
 				99ABE3CC1BCEBC8600296F50 /* GetSocialDemo.entitlements in Resources */,
 				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
 				BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
+				7A5A1FC31F0FC64D0086C021 /* getsocial in Resources */,
 				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
 				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
 				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,

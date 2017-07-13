@@ -324,6 +324,12 @@ NSString *const kCustomProvider = @"custom";
                                                                                       return [self loadDefaultUI];
                                                                                   }]];
 
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Default UI Landscape"
+                                                                               isChecked:NO
+                                                                                  action:^BOOL(BOOL isChecked) {
+                                                                                      return [self loadDefaultUILandscape];
+                                                                                  }]];
+
         [self.menu addObject:self.uiCustomizationMenu];
 
         // Settings Menu
@@ -931,6 +937,21 @@ NSString *const kCustomProvider = @"custom";
     self.uiCustomizationMenu.detail = @"Current UI: Default";
     return YES;
 }
+
+- (BOOL)loadDefaultUILandscape
+{
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-landscape" ofType:@"json" inDirectory:@"getsocial"];
+    if (![GetSocialUI loadConfiguration:configPath])
+    {
+        NSLog(@"Could not load custom configuration");
+        return NO;
+    }
+
+    self.uiCustomizationMenu.detail = @"Current UI: Default Landscape";
+
+    return YES;
+}
+
 
 #pragma mark - Navigation
 
