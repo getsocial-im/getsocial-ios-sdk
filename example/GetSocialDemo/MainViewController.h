@@ -19,7 +19,7 @@
 
 @class ActionableMenuItem;
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <UIImagePickerControllerDelegate>
 
 @property(nonatomic, strong) NSMutableArray *menu;
 @property(nonatomic, strong) MainNavigationController *mainNavigationController;

@@ -18,6 +18,7 @@
 #import <GetSocial/GetSocial.h>
 #import <GetSocialUI/GetSocialUI.h>
 #import "UISimpleAlertViewController.h"
+#import "UIImage+GetSocial.h"
 
 #define MAX_WIDTH 1024.f
 #define MAX_HEIGHT 768.f
@@ -194,33 +195,12 @@
 }
 
 
-/**
- * Resize an image to be not larger than MAX_WIDTH x MAX_HEIGHT and keep the ratio.
- * @param image
- * @return
- */
-- (UIImage *)resizeImage:(UIImage *)image
-{
-    CGFloat scale = MAX(MAX_WIDTH / image.size.width, MAX_HEIGHT / image.size.height);
-    scale = MIN(1, scale);
-    return [self imageWithImage:image scaledToSize:CGSizeMake(image.size.width * scale, image.size.height * scale)];
-}
-
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
-{
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
 #pragma mark - UIImagePickerController
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    image = [self resizeImage:image];
+    image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
     
     self.customImage.image = image;
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];

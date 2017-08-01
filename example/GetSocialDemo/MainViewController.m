@@ -38,6 +38,7 @@
 #import "GetSocialFacebookInvitePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
 #import "MenuTableViewController.h"
+#import "UIImage+GetSocial.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -75,6 +76,9 @@
 #define ExecuteBlock(block, ...)                                          \
     if (block) block(##__VA_ARGS__)
 
+#define MAX_WIDTH 500.f
+#define MAX_HEIGHT 500.f
+
 NSString *const kCustomProvider = @"custom";
 
 @interface MainViewController ()<UINavigationControllerDelegate, PostActivityVCDelegate>
@@ -89,6 +93,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) FBSDKLoginManager *facebookSdkManager;
 
 @property(nonatomic, strong) ActionableMenuItem *friendsMenu;
+@property(nonatomic, strong) UIImagePickerController *avatarImagePicker;
 @end
 
 @implementation MainViewController
@@ -183,6 +188,11 @@ NSString *const kCustomProvider = @"custom";
                                                                                    [self changeUserAvatar];
                                                                                }]];
 
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Choose Avatar"
+                                                                               action:^{
+                                                                                   [self chooseUserAvatar];
+                                                                               }]];
+
         [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Set User Property"
                                                                                action:^{
                                                                                    [self setProperty];
@@ -262,14 +272,14 @@ NSString *const kCustomProvider = @"custom";
             [activityFeedView setAvatarClickHandler:^(GetSocialPublicUser *user) {
                 if ([user.userId isEqualToString:[GetSocialUser userId] ])
                 {
-                    NSLog(@"Tapped on yourself");
+                    [self showActionDialogForCurrentUser:user];
                     return;
                 }
                 [GetSocialUser isFriend:user.userId success:^(BOOL isFriend) {
                     if (isFriend) {
-                        [self showAlertToRemoveFriend:user];
+                        [self showActionDialogForFriend:user];
                     } else {
-                        [self showAlertToAddFriend:user];
+                        [self showActionDialogForNonFriend:user];
                     }
                 } failure:^(NSError *error) {
                     NSLog(@"Failed to check if friends, error: %@", error.description);
@@ -299,7 +309,22 @@ NSString *const kCustomProvider = @"custom";
             }];
             [activityFeedView show];
         }]];
-        
+
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Global Activity Feed" action:^{
+            [self showGlobalFeedForUser:[GetSocialUser userId] withTitle:@"My Global Activity Feed"];
+        }]];
+
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Custom Activity Feed" action:^{
+            GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createActivityFeedView:@"DemoFeed"];
+            [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
+                GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
+            }];
+            [activityFeedView setWindowTitle:@"My Custom Activity Feed"];
+            [activityFeedView setReadOnly:NO];
+            [activityFeedView setFilterByUser:[GetSocialUser userId]];
+            [activityFeedView show];
+        }]];
+
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details" action:^{
             [self showChooseActivityAlert:YES];
         }]];
@@ -328,6 +353,30 @@ NSString *const kCustomProvider = @"custom";
                                                                                isChecked:NO
                                                                                   action:^BOOL(BOOL isChecked) {
                                                                                       return [self loadDefaultUILandscape];
+                                                                                  }]];
+
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"White UI - Portrait"
+                                                                               isChecked:NO
+                                                                                  action:^BOOL(BOOL isChecked) {
+                                                                                      return [self loadWhiteUIPortrait];
+                                                                                  }]];
+
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"White UI - Landscape"
+                                                                               isChecked:NO
+                                                                                  action:^BOOL(BOOL isChecked) {
+                                                                                      return [self loadWhiteUILandscape];
+                                                                                  }]];
+
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Dark UI - Portrait"
+                                                                               isChecked:NO
+                                                                                  action:^BOOL(BOOL isChecked) {
+                                                                                      return [self loadDarkUIPortrait];
+                                                                                  }]];
+
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Dark UI - Landscape"
+                                                                               isChecked:NO
+                                                                                  action:^BOOL(BOOL isChecked) {
+                                                                                      return [self loadDarkUILandscape];
                                                                                   }]];
 
         [self.menu addObject:self.uiCustomizationMenu];
@@ -389,38 +438,82 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
-- (void)showAlertToRemoveFriend:(GetSocialPublicUser *)user
+- (void)showGlobalFeedForUser:(GetSocialId)userId withTitle:(NSString *)title {
+    GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
+    [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
+        GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
+    }];
+    [activityFeedView setWindowTitle:title];
+    [activityFeedView setReadOnly:YES];
+    [activityFeedView setFilterByUser:userId];
+    [activityFeedView show];
+}
+
+- (void)showActionDialogForCurrentUser:(GetSocialPublicUser *)user
 {
-    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Remove Friend"
-                                                                                                  message:[NSString stringWithFormat:@"Add %@ to friends?", user.displayName]
+    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Choose action"
+                                                                                                  message:[NSString stringWithFormat:@"Choose one of possible actions"]
                                                                                         cancelButtonTitle:@"Cancel"
-                                                                                        otherButtonTitles:@[@"Remove"]];
+                                                                                        otherButtonTitles:@[@"Show User Feed"]];
     [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
         {
-            [GetSocialUser removeFriend:user.userId success:^(int friendsCount) {
-                [self showAlertWithText:[NSString stringWithFormat:@"%@ removed from friends.", user.displayName]];
-            } failure:^(NSError *error) {
-                NSLog(@"Failed to remove friend, error: %@", error.description);
-            }];
+            [self showGlobalFeedForUser:user.userId withTitle:@"My Global Feed"];
         }
     } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
-- (void)showAlertToAddFriend:(GetSocialPublicUser *)user
+- (void)showActionDialogForFriend:(GetSocialPublicUser *)user
 {
-    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Friend"
-                                                                                                  message:[NSString stringWithFormat:@"Add %@ to friends?", user.displayName]
+    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:[NSString stringWithFormat:@"User %@", user.displayName]
+                                                                                                  message:[NSString stringWithFormat:@"Choose one of possible actions"]
                                                                                         cancelButtonTitle:@"Cancel"
-                                                                                        otherButtonTitles:@[@"Add"]];
+                                                                                        otherButtonTitles:@[@"Show User Feed", @"Remove from Friends"]];
+
     [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
         {
-            [GetSocialUser addFriend:user.userId success:^(int friendsCount) {
-                [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", user.displayName]];
-            } failure:^(NSError *error) {
-                NSLog(@"Failed to add friend, error: %@", error.description);
-            }];
+            switch (selectedIndex)
+            {
+                case 0:
+                    [self showGlobalFeedForUser:user.userId withTitle:[NSString stringWithFormat:@"%@ Global Feed", user.displayName]];
+                    break;
+
+                case 1:
+                    [GetSocialUser removeFriend:user.userId success:^(int friendsCount) {
+                        [self showAlertWithText:[NSString stringWithFormat:@"%@ removed from friends.", user.displayName]];
+                    } failure:^(NSError *error) {
+                        NSLog(@"Failed to remove friend, error: %@", error.description);
+                    }];
+                    break;
+            }
+        }
+    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (void)showActionDialogForNonFriend:(GetSocialPublicUser *)user
+{
+    UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:[NSString stringWithFormat:@"User %@", user.displayName]
+                                                                                                  message:[NSString stringWithFormat:@"Choose one of possible actions"]
+                                                                                        cancelButtonTitle:@"Cancel"
+                                                                                        otherButtonTitles:@[@"Show User Feed", @"Add to Friends"]];
+
+    [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            switch (selectedIndex) {
+                case 0:
+                    [self showGlobalFeedForUser:user.userId withTitle:[NSString stringWithFormat:@"%@ Global Feed", user.displayName]];
+                    break;
+
+                case 1:
+                    [GetSocialUser addFriend:user.userId success:^(int friendsCount) {
+                        [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", user.displayName]];
+                    } failure:^(NSError *error) {
+                        NSLog(@"Failed to add friend, error: %@", error.description);
+                    }];
+                    break;
+            }
         }
     } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
@@ -520,15 +613,24 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)changeUserAvatar
 {
-    [self showActivityIndicator];
+    [self showActivityIndicatorView];
     [GetSocialUser setAvatarUrl:[UserIdentityUtils randomAvatarUrl] success:^{
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         GSLogInfo(YES, NO, @"User avatar has been successfully updated");
     } failure:^(NSError *error) {
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogError(YES, NO, @"Error changing user avatar: %@", error.description);
     }];
+}
+
+- (void)chooseUserAvatar
+{
+    self.avatarImagePicker = [[UIImagePickerController alloc] init];
+    self.avatarImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.avatarImagePicker.delegate = self;
+
+    [self presentViewController:self.avatarImagePicker animated:YES completion:nil];
 }
 
 - (void)setProperty
@@ -543,17 +645,17 @@ NSString *const kCustomProvider = @"custom";
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel) {
-            [self showActivityIndicator];
+            [self showActivityIndicatorView];
             NSString *key = [alert contentOfTextFieldAtIndex:0];
             NSString *value = [alert contentOfTextFieldAtIndex:1];
             [GetSocialUser setPublicPropertyValue:value
                                            forKey:key
                                           success:^{
-                                              [self hideActivityIndicator];
+                                              [self hideActivityIndicatorView];
                                               [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
                                               GSLogInfo(YES, NO, @"User property was successfully set");
                                           } failure:^(NSError *error) {
-                        [self hideActivityIndicator];
+                        [self hideActivityIndicatorView];
                         GSLogError(YES, NO, @"Error changing user property: %@", error.description);
             }];
         }
@@ -591,14 +693,14 @@ NSString *const kCustomProvider = @"custom";
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel) {
-            [self showActivityIndicator];
+            [self showActivityIndicatorView];
             NSString* newDisplayName = [alert contentOfTextFieldAtIndex:0];
             [GetSocialUser setDisplayName:newDisplayName success:^{
-                [self hideActivityIndicator];
+                [self hideActivityIndicatorView];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
                 GSLogInfo(YES, NO, @"User display name has been successfully updated");
             } failure:^(NSError *error) {
-                [self hideActivityIndicator];
+                [self hideActivityIndicatorView];
                 GSLogError(YES, NO, @"Error changing user display name: %@", error.description);
             }];
         }
@@ -685,15 +787,15 @@ NSString *const kCustomProvider = @"custom";
 - (void)removeFBUserIdentity
 {
     [self.facebookSdkManager logOut];
-    if ([[GetSocialUser authIdentities] objectForKey:GetSocial_AuthIdentityProviderId_Facebook] != nil)
+    if ([GetSocialUser authIdentities][GetSocial_AuthIdentityProviderId_Facebook])
     {
-        [self showActivityIndicator];
+        [self showActivityIndicatorView];
         [GetSocialUser removeAuthIdentityWithProviderId:GetSocial_AuthIdentityProviderId_Facebook success:^{
-            [self hideActivityIndicator];
+            [self hideActivityIndicatorView];
             GSLogInfo(YES, NO, @"Identity removed for Provider %@.", GetSocial_AuthIdentityProviderId_Facebook);
             [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         }                                       failure:^(NSError *error) {
-            [self hideActivityIndicator];
+            [self hideActivityIndicatorView];
             GSLogError(YES, NO, @"Failed to remove Identity for Provider %@, error: %@", GetSocial_AuthIdentityProviderId_Facebook,
                     [error localizedDescription]);
         }];
@@ -728,15 +830,15 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)removeCustomUserIdentity
 {
-    if ([[GetSocialUser authIdentities] objectForKey:kCustomProvider])
+    if ([GetSocialUser authIdentities][kCustomProvider])
     {
-        [self showActivityIndicator];
+        [self showActivityIndicatorView];
         [GetSocialUser removeAuthIdentityWithProviderId:kCustomProvider success:^{
-            [self hideActivityIndicator];
+            [self hideActivityIndicatorView];
             GSLogInfo(YES, NO, @"User identity removed for Provider '%@'", kCustomProvider);
             [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         }                                       failure:^(NSError *error) {
-            [self hideActivityIndicator];
+            [self hideActivityIndicatorView];
             GSLogError(YES, NO, @"Failed to remove user identity for Provider '%@', error: %@", kCustomProvider, [error localizedDescription]);
         }];
     } else
@@ -747,15 +849,15 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)addIdentity:(GetSocialAuthIdentity *)identity success:(void (^)())success failure:(void (^)())failure
 {
-    [self showActivityIndicator];
+    [self showActivityIndicatorView];
     [GetSocialUser addAuthIdentity:identity
                            success:^{
-                               [self hideActivityIndicator];
+                               [self hideActivityIndicatorView];
                                GSLogInfo(YES, NO, @"User identity %@ added, result: Identity added", identity);
                                [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
                                ExecuteBlock(success);
                            } conflict:^(GetSocialConflictUser *conflictUser) {
-                               [self hideActivityIndicator];
+                               [self hideActivityIndicatorView];
                 [self showAlertViewToResolveIdentityConflictWithConflictUser:conflictUser conflictResolution:^(BOOL switchUser) {
                     if (switchUser)
                     {
@@ -765,7 +867,7 @@ NSString *const kCustomProvider = @"custom";
                     }
                 }];
             } failure:^(NSError *error) {
-                [self hideActivityIndicator];
+                [self hideActivityIndicatorView];
                 GSLogError(YES, NO, @"Failed to add user identity %@, error: %@", identity, [error localizedDescription]);
                 ExecuteBlock(failure);
             }];
@@ -775,14 +877,14 @@ NSString *const kCustomProvider = @"custom";
                            success:(void (^)())success
                            failure:(void (^)())failure
 {
-    [self showActivityIndicator];
+    [self showActivityIndicatorView];
     [GetSocialUser switchUserToIdentity:identity success:^{
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         GSLogInfo(YES, NO, @"User switching was successfull.");
         ExecuteBlock(success);
     }                               failure:^(NSError *error) {
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogInfo(YES, NO, @"User switching failed, error: %@", [error description]);
         ExecuteBlock(failure);
     }];
@@ -836,9 +938,9 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)checkReferralData
 {
-    [self showActivityIndicator];
+    [self showActivityIndicatorView];
     [GetSocial referralDataWithSuccess:^(GetSocialReferralData * _Nullable referralData) {
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         if (referralData == nil)
         {
             GSLogInfo(YES, NO, @"No referral data");
@@ -849,7 +951,7 @@ NSString *const kCustomProvider = @"custom";
                     [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch], [referralData customData]);
         }
     } failure:^(NSError * _Nonnull error) {
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogInfo(YES, NO, @"Could not get referral data: %@", [error description]);
     }];
 }
@@ -881,15 +983,15 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)callSendInviteWithProviderId:(NSString *)providerId
 {
-    [self showActivityIndicator];
+    [self showActivityIndicatorView];
     [GetSocial sendInviteWithChannelId:providerId success:^{
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogInfo(NO, NO, @"Sending invites was successful");
     }                           cancel:^{
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogInfo(NO, NO, @"Sending invites was cancelled");
     }                          failure:^(NSError *error) {
-        [self hideActivityIndicator];
+        [self hideActivityIndicatorView];
         GSLogInfo(NO, NO, @"Sending invites failed, error: %@", [error description]);
     }];
 }
@@ -926,6 +1028,37 @@ NSString *const kCustomProvider = @"custom";
     return YES;
 }
 
+#pragma mark - UIImagePickerController
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    if (picker == self.avatarImagePicker) {
+        UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+        image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
+
+        [self showActivityIndicatorView];
+        [GetSocialUser setAvatar:image success:^{
+            [self hideActivityIndicatorView];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+            GSLogInfo(YES, NO, @"User avatar has been successfully updated");
+        } failure:^(NSError *error) {
+            [self hideActivityIndicatorView];
+            GSLogError(YES, NO, @"Error changing user avatar: %@", error.description);
+        }];
+        [self.avatarImagePicker dismissViewControllerAnimated:YES completion:nil];
+        self.avatarImagePicker = nil;
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    if (picker == self.avatarImagePicker)
+    {
+        [self.avatarImagePicker dismissViewControllerAnimated:YES completion:nil];
+        self.avatarImagePicker = nil;
+    }
+}
+
 #pragma mark - UI Customization
 
 - (BOOL)loadDefaultUI
@@ -949,6 +1082,61 @@ NSString *const kCustomProvider = @"custom";
 
     self.uiCustomizationMenu.detail = @"Current UI: Default Landscape";
 
+    return YES;
+}
+
+- (BOOL)loadWhiteUIPortrait
+{
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_white" ofType:@"json" inDirectory:@"getsocial_white"];
+    if (![GetSocialUI loadConfiguration:configPath])
+    {
+        NSLog(@"Could not load custom configuration");
+        return NO;
+    }
+
+    self.uiCustomizationMenu.detail = @"Current UI: Default White Portrait";
+
+    return YES;
+}
+- (BOOL)loadWhiteUILandscape
+{
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_white" ofType:@"json" inDirectory:@"getsocial_white_landscape"];
+    if (![GetSocialUI loadConfiguration:configPath])
+    {
+        NSLog(@"Could not load custom configuration");
+        return NO;
+    }
+    
+    self.uiCustomizationMenu.detail = @"Current UI: Default White Landscape";
+    
+    return YES;
+}
+
+- (BOOL)loadDarkUIPortrait
+{
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_dark" ofType:@"json" inDirectory:@"getsocial_dark"];
+    if (![GetSocialUI loadConfiguration:configPath])
+    {
+        NSLog(@"Could not load custom configuration");
+        return NO;
+    }
+    
+    self.uiCustomizationMenu.detail = @"Current UI: Default Dark Portrait";
+    
+    return YES;
+}
+
+- (BOOL)loadDarkUILandscape
+{
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_dark" ofType:@"json" inDirectory:@"getsocial_dark_landscape"];
+    if (![GetSocialUI loadConfiguration:configPath])
+    {
+        NSLog(@"Could not load custom configuration");
+        return NO;
+    }
+    
+    self.uiCustomizationMenu.detail = @"Current UI: Default Dark Landscape";
+    
     return YES;
 }
 

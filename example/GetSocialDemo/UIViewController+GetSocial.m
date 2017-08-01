@@ -31,7 +31,7 @@ static UIView* activityIndicatorView;
     return [storyboard instantiateViewControllerWithIdentifier:@"activityIndicatorViewController"];
 }
 
-- (void)showActivityIndicator
+- (void)showActivityIndicatorView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         ActivityIndicatorViewController *activityViewController = [self activityViewController];
@@ -42,7 +42,7 @@ static UIView* activityIndicatorView;
     });
 }
 
-- (void)hideActivityIndicator
+- (void)hideActivityIndicatorView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [activityIndicatorView removeFromSuperview];

@@ -19,8 +19,8 @@
 
 @interface UIViewController(GetSocial)
 
-- (void)showActivityIndicator;
-- (void)hideActivityIndicator;
+- (void)showActivityIndicatorView;
+- (void)hideActivityIndicatorView;
 
 - (void)log:(LogLevel)level context:(NSString *)context message:(NSString *)message showAlert:(BOOL)showAlert showConsole:(BOOL)showConsole;
 - (void)log:(LogLevel)level context:(NSString *)context message:(NSString *)message showAlert:(BOOL)showAlert;

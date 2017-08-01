@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213E3390EB835D536BCA62C3 /* UIImage+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */; };
+		213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */; };
 		213E37035794BC972349DCDF /* UIImageView+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */; };
 		213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */; };
 		6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */; };
@@ -67,6 +69,10 @@
 		BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */; };
 		BC585E6F1E2FC5BA0057A73A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */; };
 		BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998298D7181C2BFF0028113B /* Security.framework */; };
+		BC9391A11F1CC3BC00422950 /* getsocial_white in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A01F1CC3BC00422950 /* getsocial_white */; };
+		BC9391A71F1CED2400422950 /* getsocial_white_landscape in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A61F1CED2400422950 /* getsocial_white_landscape */; };
+		BC9391A91F1D030400422950 /* getsocial_dark in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A81F1D030400422950 /* getsocial_dark */; };
+		BC9391AD1F1E34F200422950 /* getsocial_dark_landscape in Resources */ = {isa = PBXBuildFile; fileRef = BC9391AC1F1E34F200422950 /* getsocial_dark_landscape */; };
 		BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */; };
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
@@ -90,7 +96,9 @@
 
 /* Begin PBXFileReference section */
 		213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GetSocial.h"; sourceTree = "<group>"; };
+		213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GetSocial.m"; sourceTree = "<group>"; };
 		213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GetSocial.m"; sourceTree = "<group>"; };
+		213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetSocial.h"; sourceTree = "<group>"; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
 		6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendsViewController.h; sourceTree = "<group>"; };
@@ -178,6 +186,10 @@
 		BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialKakaoTalkInvitePlugin.h; path = Plugins/GetSocialKakaoTalkInvitePlugin.h; sourceTree = "<group>"; };
 		BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialKakaoTalkInvitePlugin.m; path = Plugins/GetSocialKakaoTalkInvitePlugin.m; sourceTree = "<group>"; };
 		BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = GetSocialDemo/Vendor/KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		BC9391A01F1CC3BC00422950 /* getsocial_white */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_white; path = Resources/getsocial_white; sourceTree = "<group>"; };
+		BC9391A61F1CED2400422950 /* getsocial_white_landscape */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_white_landscape; path = Resources/getsocial_white_landscape; sourceTree = "<group>"; };
+		BC9391A81F1D030400422950 /* getsocial_dark */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_dark; path = Resources/getsocial_dark; sourceTree = "<group>"; };
+		BC9391AC1F1E34F200422950 /* getsocial_dark_landscape */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_dark_landscape; path = Resources/getsocial_dark_landscape; sourceTree = "<group>"; };
 		BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogoFullColorBlackBgIOS.png; path = Resources/getSocialLogoFullColorBlackBgIOS.png; sourceTree = "<group>"; };
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
@@ -210,6 +222,10 @@
 		2563FAEF1A6E859E006E0448 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC9391AC1F1E34F200422950 /* getsocial_dark_landscape */,
+				BC9391A81F1D030400422950 /* getsocial_dark */,
+				BC9391A61F1CED2400422950 /* getsocial_white_landscape */,
+				BC9391A01F1CC3BC00422950 /* getsocial_white */,
 				7A5A1FC21F0FC64D0086C021 /* getsocial */,
 				BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */,
 				BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */,
@@ -234,6 +250,8 @@
 				99ABE3C31BCE7E8A00296F50 /* UserIdentityUtils.m */,
 				213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */,
 				213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */,
+				213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */,
+				213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -397,6 +415,7 @@
 				BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */,
 				213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */,
 				BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */,
+				213E3390EB835D536BCA62C3 /* UIImage+GetSocial.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +500,7 @@
 				99ABE3CC1BCEBC8600296F50 /* GetSocialDemo.entitlements in Resources */,
 				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
 				BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
+				BC9391AD1F1E34F200422950 /* getsocial_dark_landscape in Resources */,
 				7A5A1FC31F0FC64D0086C021 /* getsocial in Resources */,
 				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
 				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
@@ -489,6 +509,9 @@
 				99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */,
 				99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */,
 				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
+				BC9391A91F1D030400422950 /* getsocial_dark in Resources */,
+				BC9391A71F1CED2400422950 /* getsocial_white_landscape in Resources */,
+				BC9391A11F1CC3BC00422950 /* getsocial_white in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +564,7 @@
 				BC217B171E55E22400426793 /* UIViewController+GetSocial.m in Sources */,
 				991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */,
 				213E37035794BC972349DCDF /* UIImageView+GetSocial.m in Sources */,
+				213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
