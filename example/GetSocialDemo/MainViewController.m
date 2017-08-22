@@ -42,15 +42,6 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <GetSocial/GetSocialActivityPost.h>
-#import <GetSocial/GetSocialUserUpdate.h>
-#import <GetSocial/GetSocialConstants.h>
-#import <GetSocial/GetSocialAuthIdentity.h>
-#import <GetSocial/GetSocialNotificationAction.h>
-#import <GetSocial/GetSocialOpenActivityAction.h>
-#import <GetSocial/GetSocialOpenProfileAction.h>
-#import <GetSocial/GetSocialPublicUser.h>
-
 
 #define GSLogInfo(bShowAlert, bShowConsole, sMessage, ...)                \
     [self log:LogLevelInfo                                                \
@@ -947,8 +938,8 @@ NSString *const kCustomProvider = @"custom";
         }
         else
         {
-            GSLogInfo(YES, NO, @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i customData: %@.",
-                    [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch], [referralData customData]);
+            GSLogInfo(YES, NO, @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i, isGuaranteedMatch: %i, customData: %@.",
+                    [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch], [referralData isGuaranteedMatch], [referralData customData]);
         }
     } failure:^(NSError * _Nonnull error) {
         [self hideActivityIndicatorView];
