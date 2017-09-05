@@ -19,6 +19,7 @@
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface AppDelegate ()
 
@@ -28,12 +29,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    return [[Twitter sharedInstance] application:app openURL:url options:options];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

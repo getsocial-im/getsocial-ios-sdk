@@ -69,6 +69,15 @@
 		BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */; };
 		BC585E6F1E2FC5BA0057A73A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */; };
 		BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998298D7181C2BFF0028113B /* Security.framework */; };
+		BC5C5A791F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC5C5A771F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h */; };
+		BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5C5A781F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m */; };
+		BC5C5A7F1F4DCBE800533C43 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A7B1F4DCBE800533C43 /* TwitterCore.framework */; };
+		BC5C5A801F4DCBE800533C43 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A7C1F4DCBE800533C43 /* TwitterKit.framework */; };
+		BC5C5A811F4DCBE800533C43 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC5C5A7D1F4DCBE800533C43 /* TwitterKitResources.bundle */; };
+		BC5C5A821F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC5C5A7E1F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle */; };
+		BC5C5A841F4DCC0300533C43 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A831F4DCC0300533C43 /* CoreMedia.framework */; };
+		BC5C5A861F4DCC0900533C43 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A851F4DCC0900533C43 /* SafariServices.framework */; };
+		BC5C5A871F4DCC1B00533C43 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAA91A9B4C7800F39657 /* AVFoundation.framework */; };
 		BC9391A11F1CC3BC00422950 /* getsocial_white in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A01F1CC3BC00422950 /* getsocial_white */; };
 		BC9391A71F1CED2400422950 /* getsocial_white_landscape in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A61F1CED2400422950 /* getsocial_white_landscape */; };
 		BC9391A91F1D030400422950 /* getsocial_dark in Resources */ = {isa = PBXBuildFile; fileRef = BC9391A81F1D030400422950 /* getsocial_dark */; };
@@ -186,6 +195,14 @@
 		BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialKakaoTalkInvitePlugin.h; path = Plugins/GetSocialKakaoTalkInvitePlugin.h; sourceTree = "<group>"; };
 		BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialKakaoTalkInvitePlugin.m; path = Plugins/GetSocialKakaoTalkInvitePlugin.m; sourceTree = "<group>"; };
 		BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = GetSocialDemo/Vendor/KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		BC5C5A771F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialTwitterInvitePlugin.h; path = Plugins/GetSocialTwitterInvitePlugin.h; sourceTree = "<group>"; };
+		BC5C5A781F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialTwitterInvitePlugin.m; path = Plugins/GetSocialTwitterInvitePlugin.m; sourceTree = "<group>"; };
+		BC5C5A7B1F4DCBE800533C43 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = GetSocialDemo/Vendor/TwitterCore.framework; sourceTree = "<group>"; };
+		BC5C5A7C1F4DCBE800533C43 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = GetSocialDemo/Vendor/TwitterKit.framework; sourceTree = "<group>"; };
+		BC5C5A7D1F4DCBE800533C43 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = GetSocialDemo/Vendor/TwitterKit.framework/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		BC5C5A7E1F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterShareExtensionUIResources.bundle; path = GetSocialDemo/Vendor/TwitterKit.framework/TwitterShareExtensionUIResources.bundle; sourceTree = "<group>"; };
+		BC5C5A831F4DCC0300533C43 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BC5C5A851F4DCC0900533C43 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		BC9391A01F1CC3BC00422950 /* getsocial_white */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_white; path = Resources/getsocial_white; sourceTree = "<group>"; };
 		BC9391A61F1CED2400422950 /* getsocial_white_landscape */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_white_landscape; path = Resources/getsocial_white_landscape; sourceTree = "<group>"; };
 		BC9391A81F1D030400422950 /* getsocial_dark */ = {isa = PBXFileReference; lastKnownFileType = folder; name = getsocial_dark; path = Resources/getsocial_dark; sourceTree = "<group>"; };
@@ -202,7 +219,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC5C5A871F4DCC1B00533C43 /* AVFoundation.framework in Frameworks */,
+				BC5C5A861F4DCC0900533C43 /* SafariServices.framework in Frameworks */,
+				BC5C5A841F4DCC0300533C43 /* CoreMedia.framework in Frameworks */,
 				BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */,
+				BC5C5A7F1F4DCBE800533C43 /* TwitterCore.framework in Frameworks */,
 				6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */,
 				BC1DE1F41E2CD655007AE67F /* CoreGraphics.framework in Frameworks */,
 				BC283CD91E0B332800572390 /* GetSocial.framework in Frameworks */,
@@ -212,6 +233,7 @@
 				998B71EF1BB95CB800325DAF /* FBSDKLoginKit.framework in Frameworks */,
 				BC585E6F1E2FC5BA0057A73A /* KakaoOpenSDK.framework in Frameworks */,
 				990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */,
+				BC5C5A801F4DCBE800533C43 /* TwitterKit.framework in Frameworks */,
 				990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +298,12 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC5C5A851F4DCC0900533C43 /* SafariServices.framework */,
+				BC5C5A831F4DCC0300533C43 /* CoreMedia.framework */,
+				BC5C5A7B1F4DCBE800533C43 /* TwitterCore.framework */,
+				BC5C5A7C1F4DCBE800533C43 /* TwitterKit.framework */,
+				BC5C5A7D1F4DCBE800533C43 /* TwitterKitResources.bundle */,
+				BC5C5A7E1F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle */,
 				BC1DE1F21E2CD633007AE67F /* libz.tbd */,
 				BC283CD31E0B31E900572390 /* GetSocial.framework */,
 				BC283CD11E0B31DD00572390 /* GetSocialUI.framework */,
@@ -309,6 +337,7 @@
 		995D99A817EB064500F65204 /* GetSocialDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BC5C5A761F4DCBA200533C43 /* Twitter */,
 				99ABE3C81BCE8EA000296F50 /* GetSocialDemo.entitlements */,
 				99F772E51BBAA96A00A4CD69 /* LICENSE */,
 				BC585E691E2FC4D50057A73A /* KakaoTalk */,
@@ -397,6 +426,15 @@
 			name = KakaoTalk;
 			sourceTree = "<group>";
 		};
+		BC5C5A761F4DCBA200533C43 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				BC5C5A771F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h */,
+				BC5C5A781F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -416,6 +454,7 @@
 				213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */,
 				BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */,
 				213E3390EB835D536BCA62C3 /* UIImage+GetSocial.h in Headers */,
+				BC5C5A791F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +542,7 @@
 				BC9391AD1F1E34F200422950 /* getsocial_dark_landscape in Resources */,
 				7A5A1FC31F0FC64D0086C021 /* getsocial in Resources */,
 				99F26B1B19A65BE5006D3B1A /* Main.storyboard in Resources */,
+				BC5C5A811F4DCBE800533C43 /* TwitterKitResources.bundle in Resources */,
 				9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */,
 				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,
 				99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */,
@@ -512,6 +552,7 @@
 				BC9391A91F1D030400422950 /* getsocial_dark in Resources */,
 				BC9391A71F1CED2400422950 /* getsocial_white_landscape in Resources */,
 				BC9391A11F1CC3BC00422950 /* getsocial_white in Resources */,
+				BC5C5A821F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +584,7 @@
 				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
 				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
 				6F6979AC1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m in Sources */,
+				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
 				BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */,
 				6F8D5C0A1E57317700A43DAD /* FriendsTableViewCell.m in Sources */,
@@ -635,13 +677,14 @@
 					"$(PROJECT_DIR)/../bin/",
 					"$(PROJECT_DIR)",
 					"$(SRCROOT)/GetSocialDemo/Vendor/**",
+					"$(PROJECT_DIR)/GetSocialDemo/Vendor",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GetSocialDemo/GetSocialDemo-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "GetSocialDemo/GetSocialDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -37,6 +37,7 @@
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
+#import "GetSocialTwitterInvitePlugin.h"
 #import "MenuTableViewController.h"
 #import "UIImage+GetSocial.h"
 
@@ -131,6 +132,11 @@ NSString *const kCustomProvider = @"custom";
     // Register KakaoTalk Invite Plugin
     GetSocialKakaoTalkInvitePlugin *kakaoTalkPlugin = [[GetSocialKakaoTalkInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:kakaoTalkPlugin forChannelId:GetSocial_InviteChannelPluginId_Kakao];
+
+    // Register Twitter Invite Plugin
+    GetSocialTwitterInvitePlugin *twitterPlugin = [[GetSocialTwitterInvitePlugin alloc] init];
+    [GetSocial registerInviteChannelPlugin:twitterPlugin forChannelId:GetSocial_InviteChannelPluginId_Twitter];
+
 }
 
 - (void)updateFriendsCount

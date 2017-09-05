@@ -33,6 +33,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+                <string>twitterkit-o1Cfa4YDso0fFjRQuRUSjkFWf</string>
 				<string>getsocial-LGa80P9790g4</string>
 			</array>
 		</dict>
@@ -57,6 +58,8 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+        <string>twitterauth</string>
+        <string>twitter</string>
 		<string>kakaostory-2.9.0</string>
 		<string>kakaotalk-4.5.0</string>
 		<string>storykompassauth</string>
