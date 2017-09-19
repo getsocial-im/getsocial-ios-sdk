@@ -49,7 +49,20 @@
 }
 
 - (void)presentTweetComposer {
-    TWTRComposerViewController *composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:self.invitePackage.image videoURL:nil];
+    NSURL* videoUrl = nil;
+    if (self.invitePackage.videoUrl != nil)
+    {
+        videoUrl = [NSURL URLWithString:self.invitePackage.videoUrl];
+    }
+
+    TWTRComposerViewController *composer = nil;
+    if (videoUrl != nil)
+    {
+        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:nil videoURL:videoUrl];
+    } else
+    {
+        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:self.invitePackage.image videoURL:nil];
+    }
     composer.delegate = self;
     [self.viewController presentViewController:composer animated:YES completion:nil];
 }
