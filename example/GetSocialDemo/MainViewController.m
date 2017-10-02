@@ -311,6 +311,15 @@ NSString *const kCustomProvider = @"custom";
             [self showGlobalFeedForUser:[GetSocialUser userId] withTitle:@"My Global Activity Feed"];
         }]];
 
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Friends Global Activity Feed" action:^{
+            GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
+            [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
+                GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
+            }];
+            [activityFeedView setShowFriendsFeed:YES];
+            [activityFeedView show];
+        }]];
+
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Custom Activity Feed" action:^{
             GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createActivityFeedView:@"DemoFeed"];
             [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {

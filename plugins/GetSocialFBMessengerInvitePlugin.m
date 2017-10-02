@@ -52,8 +52,6 @@
     }
 
     content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
-    content.contentTitle = invitePackage.subject;
-    content.contentDescription = invitePackage.text;
 
     [FBSDKMessageDialog showWithContent:content delegate:self];
 }
