@@ -33,6 +33,7 @@
 #import <GetSocialUI/GetSocialUI.h>
 #import <GetSocial/GetSocialConflictUser.h>
 #import <GetSocial/GetSocialInviteChannelPlugin.h>
+#import <GetSocial/GetSocialReferredUser.h>
 
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
@@ -244,6 +245,11 @@ NSString *const kCustomProvider = @"custom";
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referral Data"
                                                                          action:^{
                                                                              [self checkReferralData];
+                                                                         }]];
+
+        [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referred Users"
+                                                                         action:^{
+                                                                             [self checkReferredUsers];
                                                                          }]];
 
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Invite without UI"
@@ -959,6 +965,27 @@ NSString *const kCustomProvider = @"custom";
     } failure:^(NSError * _Nonnull error) {
         [self hideActivityIndicatorView];
         GSLogInfo(YES, NO, @"Could not get referral data: %@", [error description]);
+    }];
+}
+
+- (void)checkReferredUsers
+{
+    [self showActivityIndicatorView];
+    [GetSocial referredUsersWithSuccess:^(NSArray<GetSocialReferredUser *> * _Nonnull referredUsers) {
+        [self hideActivityIndicatorView];
+        __block NSString* messageContent = @"No referred users";
+        if (referredUsers.count > 0)
+        {
+            messageContent = @"";
+            [referredUsers enumerateObjectsUsingBlock:^(GetSocialReferredUser * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                messageContent = [messageContent stringByAppendingString:[NSString stringWithFormat:@"%@,", obj.displayName]];
+            }];
+            messageContent = [messageContent substringToIndex:messageContent.length - 1];
+        }
+        GSLogInfo(YES, NO, @"%@", messageContent);
+    } failure:^(NSError * _Nonnull error) {
+        [self hideActivityIndicatorView];
+        GSLogInfo(YES, NO, @"Could not get list of referred users: %@", [error description]);
     }];
 }
 
