@@ -119,6 +119,7 @@ NSString *const kCustomProvider = @"custom";
     }];
 
     [GetSocial executeWhenInitialized:^() {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         [self checkReferralData];
     }];
 
@@ -137,7 +138,6 @@ NSString *const kCustomProvider = @"custom";
     // Register Twitter Invite Plugin
     GetSocialTwitterInvitePlugin *twitterPlugin = [[GetSocialTwitterInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:twitterPlugin forChannelId:GetSocial_InviteChannelPluginId_Twitter];
-
 }
 
 - (void)updateFriendsCount
@@ -220,6 +220,11 @@ NSString *const kCustomProvider = @"custom";
                                                                                action:^{
                                                                                    [self removeCustomUserIdentity];
                                                                                }]];
+
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Logout"
+                                                                               action:^{
+                                                                                   [self logOut];
+                                                                               }]];
         
         [self.menu addObject:self.userAuthenticationMenu];
         
@@ -273,20 +278,15 @@ NSString *const kCustomProvider = @"custom";
                 NSLog(@"Global feed is closed");
             }];
             [activityFeedView setAvatarClickHandler:^(GetSocialPublicUser *user) {
-                if ([user.userId isEqualToString:[GetSocialUser userId] ])
-                {
-                    [self showActionDialogForCurrentUser:user];
-                    return;
-                }
-                [GetSocialUser isFriend:user.userId success:^(BOOL isFriend) {
-                    if (isFriend) {
-                        [self showActionDialogForFriend:user];
-                    } else {
-                        [self showActionDialogForNonFriend:user];
-                    }
-                } failure:^(NSError *error) {
-                    NSLog(@"Failed to check if friends, error: %@", error.description);
-                }];
+                [self didClickOnUser:user];
+            }];
+            [activityFeedView setMentionClickHandler:^(GetSocialId userId) {
+                [GetSocial userWithId:userId
+                              success:^(GetSocialPublicUser *publicUser) {
+                                  [self didClickOnUser:publicUser];
+                              } failure:^(NSError *error) {
+                            NSLog(@"Failed to get uesr, error: %@", error.description);
+                        }];
             }];
             [activityFeedView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
                 switch (actionType) {
@@ -448,6 +448,24 @@ NSString *const kCustomProvider = @"custom";
         
         [self.menu addObject:self.settingsMenu];
     }
+}
+
+- (void)didClickOnUser:(GetSocialPublicUser *)user
+{
+    if ([user.userId isEqualToString:[GetSocialUser userId] ])
+    {
+        [self showActionDialogForCurrentUser:user];
+        return;
+    }
+    [GetSocialUser isFriend:user.userId success:^(BOOL isFriend) {
+        if (isFriend) {
+            [self showActionDialogForFriend:user];
+        } else {
+            [self showActionDialogForNonFriend:user];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Failed to check if friends, error: %@", error.description);
+    }];
 }
 
 - (void)showGlobalFeedForUser:(GetSocialId)userId withTitle:(NSString *)title {
@@ -859,6 +877,20 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
+- (void)logOut
+{
+    [self showActivityIndicatorView];
+    [GetSocialUser resetWithSuccess:^() {
+        [self hideActivityIndicatorView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+        
+        GSLogInfo(YES, NO, @"User was successfully logged out.");
+    } failure:^(NSError *error) {
+        [self hideActivityIndicatorView];
+        GSLogError(YES, NO, @"Failed to log out user, error: %@", [error localizedDescription]);
+    }];
+}
+
 - (void)addIdentity:(GetSocialAuthIdentity *)identity success:(void (^)())success failure:(void (^)())failure
 {
     [self showActivityIndicatorView];
@@ -973,14 +1005,17 @@ NSString *const kCustomProvider = @"custom";
     [self showActivityIndicatorView];
     [GetSocial referredUsersWithSuccess:^(NSArray<GetSocialReferredUser *> * _Nonnull referredUsers) {
         [self hideActivityIndicatorView];
-        __block NSString* messageContent = @"No referred users";
+        __block NSString *messageContent = @"No referred users";
         if (referredUsers.count > 0)
         {
             messageContent = @"";
-            [referredUsers enumerateObjectsUsingBlock:^(GetSocialReferredUser * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                messageContent = [messageContent stringByAppendingString:[NSString stringWithFormat:@"%@,", obj.displayName]];
+            [referredUsers enumerateObjectsUsingBlock:^(GetSocialReferredUser * _Nonnull referredUser, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDateFormatter *formatter = [NSDateFormatter new];
+                formatter.dateFormat = @"MM-dd-yyyy HH:mm";
+                NSString *referredUserInfo = [NSString stringWithFormat:@"%@(on %@ via %@), ", referredUser.displayName, [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:referredUser.installationDate]], referredUser.installationChannel];
+                messageContent = [messageContent stringByAppendingString:referredUserInfo];
             }];
-            messageContent = [messageContent substringToIndex:messageContent.length - 1];
+            messageContent = [messageContent substringToIndex:messageContent.length - 2];
         }
         GSLogInfo(YES, NO, @"%@", messageContent);
     } failure:^(NSError * _Nonnull error) {
@@ -1008,7 +1043,7 @@ NSString *const kCustomProvider = @"custom";
 
         if (!didCancel)
         {
-            NSString *selectedProviderId = [[channels objectAtIndex:selectedIndex] channelId];
+            NSString *selectedProviderId = [channels[selectedIndex] channelId];
             [self performSelector:@selector(callSendInviteWithProviderId:) withObject:selectedProviderId afterDelay:.5f];
         }
     } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];

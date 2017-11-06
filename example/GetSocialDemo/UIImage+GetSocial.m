@@ -5,7 +5,6 @@
 
 #import "UIImage+GetSocial.h"
 
-
 @implementation UIImage (GetSocial)
 
 - (UIImage *)imageByResizeAndKeepRatio:(CGSize)size
