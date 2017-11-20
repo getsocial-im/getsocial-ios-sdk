@@ -44,7 +44,7 @@
     return menuItem;
 }
 
-+ (ActionableMenuItem *)actionableMenuItemWithTitle:(NSString *)title action:(void (^)())action
++ (ActionableMenuItem *)actionableMenuItemWithTitle:(NSString *)title action:(void (^)(void))action
 {
     ActionableMenuItem *menuItem = [ActionableMenuItem new];
     menuItem.title = title;

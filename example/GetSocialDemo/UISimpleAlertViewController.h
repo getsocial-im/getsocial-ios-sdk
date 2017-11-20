@@ -28,6 +28,6 @@ typedef void (^UISimpleAlertViewControllerDismissedHandler)(NSInteger selectedIn
 - (void)addTextFieldWithPlaceholder:(NSString*)placeholder defaultText:(NSString*)defaultText isSecure:(BOOL)isSecure;
 - (NSString*)contentOfTextFieldAtIndex:(NSInteger)index;
 
-- (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler onViewController:(UIViewController*)viewController;
+- (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler;
 
 @end

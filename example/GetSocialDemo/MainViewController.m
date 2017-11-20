@@ -490,7 +490,7 @@ NSString *const kCustomProvider = @"custom";
         {
             [self showGlobalFeedForUser:user.userId withTitle:@"My Global Feed"];
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }];
 }
 
 - (void)showActionDialogForFriend:(GetSocialPublicUser *)user
@@ -518,7 +518,7 @@ NSString *const kCustomProvider = @"custom";
                     break;
             }
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }];
 }
 
 - (void)showActionDialogForNonFriend:(GetSocialPublicUser *)user
@@ -545,7 +545,7 @@ NSString *const kCustomProvider = @"custom";
                     break;
             }
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }];
 }
 
 - (void)showChooseActivityAlert:(BOOL)showFeed
@@ -584,7 +584,7 @@ NSString *const kCustomProvider = @"custom";
                 }];
                 [detailsView show];
             }
-        } onViewController:self];
+        }];
     } failure:^(NSError * _Nonnull error) {
         NSLog(@"Error loading activities %@", error);
     }];
@@ -618,7 +618,7 @@ NSString *const kCustomProvider = @"custom";
                 }];
             }
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController ];
+    }];
 }
 
 #pragma mark - Authentication
@@ -689,7 +689,7 @@ NSString *const kCustomProvider = @"custom";
                         GSLogError(YES, NO, @"Error changing user property: %@", error.description);
             }];
         }
-    } onViewController:self];
+    }];
 }
 
 - (void)getProperty
@@ -709,7 +709,7 @@ NSString *const kCustomProvider = @"custom";
             NSString *value = [GetSocialUser publicPropertyValueForKey:key];
             [self showAlertWithText:[NSString stringWithFormat:@"%@ = %@", key, value] ];
         }
-    } onViewController:self];
+    }];
 }
 
 - (void)changeDisplayName
@@ -734,10 +734,10 @@ NSString *const kCustomProvider = @"custom";
                 GSLogError(YES, NO, @"Error changing user display name: %@", error.description);
             }];
         }
-    } onViewController:self];
+    }];
 }
 
-- (void)addFBUserIdentityWithSuccess:(void (^)())success failure:(void (^)())failure
+- (void)addFBUserIdentityWithSuccess:(void (^)(void))success failure:(void (^)(void))failure
 {
     NSDictionary *authIdentities = [GetSocialUser authIdentities];
     if (!authIdentities[GetSocial_AuthIdentityProviderId_Facebook])
@@ -835,7 +835,7 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
-- (void)addCustomUserIdentityWithSuccess:(void (^)())success failure:(void (^)())failure
+- (void)addCustomUserIdentityWithSuccess:(void (^)(void))success failure:(void (^)(void))failure
 {
     UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Custom User identity"
                                                       message:@"Enter UserId and Token"
@@ -855,7 +855,7 @@ NSString *const kCustomProvider = @"custom";
 
             [self addIdentity:identity success:success failure:failure];
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }];
 }
 
 - (void)removeCustomUserIdentity
@@ -891,7 +891,7 @@ NSString *const kCustomProvider = @"custom";
     }];
 }
 
-- (void)addIdentity:(GetSocialAuthIdentity *)identity success:(void (^)())success failure:(void (^)())failure
+- (void)addIdentity:(GetSocialAuthIdentity *)identity success:(void (^)(void))success failure:(void (^)(void))failure
 {
     [self showActivityIndicatorView];
     [GetSocialUser addAuthIdentity:identity
@@ -918,8 +918,8 @@ NSString *const kCustomProvider = @"custom";
 }
 
 - (void)callSwitchUserWithIdentity:(GetSocialAuthIdentity *)identity
-                           success:(void (^)())success
-                           failure:(void (^)())failure
+                           success:(void (^)(void))success
+                           failure:(void (^)(void))failure
 {
     [self showActivityIndicatorView];
     [GetSocialUser switchUserToIdentity:identity success:^{
@@ -949,7 +949,7 @@ NSString *const kCustomProvider = @"custom";
             {
                 conflictResolution(switchUser);
             }
-        } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        }];
     });
 }
 
@@ -1046,7 +1046,7 @@ NSString *const kCustomProvider = @"custom";
             NSString *selectedProviderId = [channels[selectedIndex] channelId];
             [self performSelector:@selector(callSendInviteWithProviderId:) withObject:selectedProviderId afterDelay:.5f];
         }
-    } onViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }];
 }
 
 - (void)callSendInviteWithProviderId:(NSString *)providerId
@@ -1079,7 +1079,7 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
-- (void)authorizeWithSuccess:(void (^)())success
+- (void)authorizeWithSuccess:(void (^)(void))success
 {
     [self showAlertToChooseAuthorizationOptionToPerform:^{
         success();

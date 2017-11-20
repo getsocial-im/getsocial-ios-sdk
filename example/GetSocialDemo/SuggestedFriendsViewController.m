@@ -65,7 +65,7 @@
         }];
         return;
     }
-    void (^onAddFriend)() = ^void() {
+    void (^onAddFriend)(void) = ^void() {
         if (--counter == 0) {
             [self dismissViewControllerAnimated:YES completion:^() {
                 self.navigationController.toolbarHidden = YES;

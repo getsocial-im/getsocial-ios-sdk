@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, MenuItemType)
 @property(nonatomic, readonly) MenuItemType type;
 @property(nonatomic, strong) NSString *name;
 
-+ (ActionableMenuItem *)actionableMenuItemWithTitle:(NSString *)title action:(void (^)())action;
++ (ActionableMenuItem *)actionableMenuItemWithTitle:(NSString *)title action:(void (^)(void))action;
 + (ParentMenuItem *)parentMenuItemWithTitle:(NSString *)title;
 + (ParentMenuItem *)parentMenuItemWithTitle:(NSString *)title subitems:(NSMutableArray *)subitems;
 + (CheckableMenuItem *)checkableMenuItemWithTitle:(NSString *)title isChecked:(BOOL)isChecked action:(BOOL (^)(BOOL isChecked))action;
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, MenuItemType)
 
 @interface ActionableMenuItem : MenuItem
 
-@property(nonatomic, copy) void (^action)();
+@property(nonatomic, copy) void (^action)(void);
 
 @end
 

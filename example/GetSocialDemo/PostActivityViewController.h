@@ -16,7 +16,7 @@
 
 @protocol PostActivityVCDelegate <NSObject>
 
-- (void)authorizeWithSuccess:(void(^)())success;
+- (void)authorizeWithSuccess:(void(^)(void))success;
 
 @end
 

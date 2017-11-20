@@ -42,7 +42,10 @@
         for (NSString *buttonTitle in otherTitles)
         {
             UIAlertAction* alertAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull selectedAction) {
-                self.activeDismissHandler(selectedIndex, selectedAction.title, NO);
+                if (self.activeDismissHandler)
+                {
+                    self.activeDismissHandler(selectedIndex, selectedAction.title, NO);
+                }
             }];
 
             [_activeAlertController addAction:alertAction];
@@ -50,7 +53,10 @@
             selectedIndex ++;
         }
         UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:aCancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull selectedAction) {
-            self.activeDismissHandler(0, selectedAction.title, YES);
+            if (self.activeDismissHandler)
+            {
+                self.activeDismissHandler(0, selectedAction.title, YES);
+            }
         }];
         [_activeAlertController addAction:cancelAction];
 
@@ -60,11 +66,10 @@
 
 #pragma mark - Public (Functionality)
 
-- (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler onViewController:(UIViewController*)viewController
+- (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler
 {
     self.activeDismissHandler = handler;
-    self.activeAlertController.modalPresentationStyle = UIModalPresentationPopover;
-    [viewController presentViewController:self.activeAlertController animated:NO completion:nil];
+    [[self rootViewController] presentViewController:self.activeAlertController animated:NO completion:nil];
 }
 
 - (void)addTextFieldWithPlaceholder:(NSString*)placeholder defaultText:(NSString*)defaultText isSecure:(BOOL)isSecure
@@ -79,6 +84,11 @@
 - (NSString*)contentOfTextFieldAtIndex:(NSInteger)index
 {
     return self.activeAlertController.textFields[index].text;
+}
+
+- (UIViewController*)rootViewController
+{
+    return [UIApplication sharedApplication].keyWindow.rootViewController;
 }
 
 

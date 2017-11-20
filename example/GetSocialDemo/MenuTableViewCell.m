@@ -34,6 +34,7 @@
 
 - (void)prepareForReuse
 {
+    [super prepareForReuse];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

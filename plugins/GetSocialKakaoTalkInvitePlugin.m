@@ -54,7 +54,7 @@
     
     if(successCallback)
     {
-        successCallback(nil);
+        successCallback();
     }
 }
 

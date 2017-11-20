@@ -110,7 +110,7 @@
                 UITextField *textField = (UITextField *) sender.view;
                 textField.text = [textField.text stringByAppendingString:tags[selectedIndex]];
             }
-        } onViewController:self];
+        }];
     }
 }
 
@@ -167,7 +167,7 @@
             {
                 [invitesView show];
             }
-        } onViewController:self];
+        }];
     }
     else
     {

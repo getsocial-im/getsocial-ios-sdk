@@ -59,7 +59,7 @@ static UIView* activityIndicatorView;
 - (void)log:(LogLevel)level context:(NSString *)context message:(NSString *)message showAlert:(BOOL)showAlert showConsole:(BOOL)showConsole
 {
     [[ConsoleViewController sharedController] log:level message:message context:context];
-    
+
     if (showAlert)
     {
         switch (level)
@@ -94,8 +94,8 @@ static UIView* activityIndicatorView;
 
 - (void)showAlertWithTitle:(NSString *)title andText:(NSString *)text
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    UISimpleAlertViewController* alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:title message:text cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertViewController showWithDismissHandler:nil];
 }
 
 - (void)openConsole
