@@ -280,8 +280,13 @@ NSString *const kCustomProvider = @"custom";
             [activityFeedView setAvatarClickHandler:^(GetSocialPublicUser *user) {
                 [self didClickOnUser:user];
             }];
-            [activityFeedView setMentionClickHandler:^(GetSocialId userId) {
-                [GetSocial userWithId:userId
+            [activityFeedView setMentionClickHandler:^(GetSocialId mention) {
+                if ([mention isEqualToString:GetSocialUI_Shortcut_App])
+                {
+                    [self showAlertWithText:@"Application mention clicked."];
+                    return;
+                }
+                [GetSocial userWithId:mention
                               success:^(GetSocialPublicUser *publicUser) {
                                   [self didClickOnUser:publicUser];
                               } failure:^(NSError *error) {
@@ -367,16 +372,16 @@ NSString *const kCustomProvider = @"custom";
                                                                                       return [self loadDefaultUILandscape];
                                                                                   }]];
 
-        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"White UI - Portrait"
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Light UI - Portrait"
                                                                                isChecked:NO
                                                                                   action:^BOOL(BOOL isChecked) {
-                                                                                      return [self loadWhiteUIPortrait];
+                                                                                      return [self loadLightUIPortrait];
                                                                                   }]];
 
-        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"White UI - Landscape"
+        [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Light UI - Landscape"
                                                                                isChecked:NO
                                                                                   action:^BOOL(BOOL isChecked) {
-                                                                                      return [self loadWhiteUILandscape];
+                                                                                      return [self loadLightUILandscape];
                                                                                   }]];
 
         [self.uiCustomizationMenu addSubmenu:[MenuItem groupedCheckableMenuItemWithTitle:@"Dark UI - Portrait"
@@ -1131,7 +1136,7 @@ NSString *const kCustomProvider = @"custom";
 
 - (BOOL)loadDefaultUI
 {
-    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationUnknown) forKey:@"orientation"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
 
     [GetSocialUI loadDefaultConfiguration];
 
@@ -1141,7 +1146,9 @@ NSString *const kCustomProvider = @"custom";
 
 - (BOOL)loadDefaultUILandscape
 {
-    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-landscape" ofType:@"json" inDirectory:@"getsocial"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeLeft) forKey:@"orientation"];
+
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-config" ofType:@"json" inDirectory:@"getsocial-default-landscape"];
     if (![GetSocialUI loadConfiguration:configPath])
     {
         NSLog(@"Could not load custom configuration");
@@ -1153,57 +1160,65 @@ NSString *const kCustomProvider = @"custom";
     return YES;
 }
 
-- (BOOL)loadWhiteUIPortrait
+- (BOOL)loadLightUIPortrait
 {
-    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_white" ofType:@"json" inDirectory:@"getsocial_white"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
+
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-config" ofType:@"json" inDirectory:@"getsocial-light"];
     if (![GetSocialUI loadConfiguration:configPath])
     {
         NSLog(@"Could not load custom configuration");
         return NO;
     }
 
-    self.uiCustomizationMenu.detail = @"Current UI: Default White Portrait";
+    self.uiCustomizationMenu.detail = @"Current UI: Light Portrait";
 
     return YES;
 }
-- (BOOL)loadWhiteUILandscape
+- (BOOL)loadLightUILandscape
 {
-    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_white" ofType:@"json" inDirectory:@"getsocial_white_landscape"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeLeft) forKey:@"orientation"];
+
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-config" ofType:@"json" inDirectory:@"getsocial-light-landscape"];
     if (![GetSocialUI loadConfiguration:configPath])
     {
         NSLog(@"Could not load custom configuration");
         return NO;
     }
     
-    self.uiCustomizationMenu.detail = @"Current UI: Default White Landscape";
+    self.uiCustomizationMenu.detail = @"Current UI: Light Landscape";
     
     return YES;
 }
 
 - (BOOL)loadDarkUIPortrait
 {
-    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_dark" ofType:@"json" inDirectory:@"getsocial_dark"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
+
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-config" ofType:@"json" inDirectory:@"getsocial-dark"];
     if (![GetSocialUI loadConfiguration:configPath])
     {
         NSLog(@"Could not load custom configuration");
         return NO;
     }
     
-    self.uiCustomizationMenu.detail = @"Current UI: Default Dark Portrait";
+    self.uiCustomizationMenu.detail = @"Current UI: Dark Portrait";
     
     return YES;
 }
 
 - (BOOL)loadDarkUILandscape
 {
-    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"getsocial_dark" ofType:@"json" inDirectory:@"getsocial_dark_landscape"];
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeLeft) forKey:@"orientation"];
+
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"ui-config" ofType:@"json" inDirectory:@"getsocial-dark-landscape"];
     if (![GetSocialUI loadConfiguration:configPath])
     {
         NSLog(@"Could not load custom configuration");
         return NO;
     }
     
-    self.uiCustomizationMenu.detail = @"Current UI: Default Dark Landscape";
+    self.uiCustomizationMenu.detail = @"Current UI: Dark Landscape";
     
     return YES;
 }

@@ -20,6 +20,7 @@
 #import "Constants.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <TwitterKit/TwitterKit.h>
+#import <GetSocialUI/GetSocialUI.h>
 
 @interface AppDelegate ()
 
@@ -45,6 +46,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSDKAppEvents activateApp];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [GetSocialUI closeView:NO];
 }
 
 @end
