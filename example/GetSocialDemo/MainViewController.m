@@ -44,6 +44,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <Crashlytics/Crashlytics.h>
 
 #define GSLogInfo(bShowAlert, bShowConsole, sMessage, ...)                \
     [self log:LogLevelInfo                                                \
@@ -292,6 +293,13 @@ NSString *const kCustomProvider = @"custom";
                               } failure:^(NSError *error) {
                             NSLog(@"Failed to get uesr, error: %@", error.description);
                         }];
+            }];
+            [activityFeedView setTagClickHandler:^(NSString *tagName) {
+                GetSocialUIActivityFeedView *tagFeedView = [GetSocialUI createGlobalActivityFeedView];
+                [tagFeedView setWindowTitle:[NSString stringWithFormat:@"Search #%@", tagName] ];
+                [tagFeedView setFilterByTags:@[tagName]];
+                [tagFeedView setReadOnly:YES];
+                [tagFeedView show];
             }];
             [activityFeedView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
                 switch (actionType) {

@@ -84,6 +84,12 @@
 		BC5C5A871F4DCC1B00533C43 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAA91A9B4C7800F39657 /* AVFoundation.framework */; };
 		BC92860A1FC48F6F00306B6E /* UserIdentityView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9286081FC48F6F00306B6E /* UserIdentityView.h */; };
 		BC92860B1FC48F6F00306B6E /* UserIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9286091FC48F6F00306B6E /* UserIdentityView.m */; };
+		BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC92863F1FD8282400306B6E /* Crashlytics.framework */; };
+		BC9286431FD8282500306B6E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286401FD8282500306B6E /* FirebaseCore.framework */; };
+		BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286411FD8282500306B6E /* Fabric.framework */; };
+		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
+		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
+		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
 		BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */; };
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
@@ -133,7 +139,7 @@
 		990CFD731BA9C350008872CA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSmartInviteViewController.h; sourceTree = "<group>"; };
 		991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CustomSmartInviteViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9916C6A51BE7BF0B00ABBCF0 /* libicucore.tbd */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		9916C6A51BE7BF0B00ABBCF0 /* libicucore.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = Plugins/GetSocialFacebookInvitePlugin.h; sourceTree = "<group>"; };
 		99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = Plugins/GetSocialFacebookInvitePlugin.m; sourceTree = "<group>"; };
 		992923981BB2EEAD0010D481 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UserViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -189,7 +195,7 @@
 		99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsoleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFBMessengerInvitePlugin.m; path = Plugins/GetSocialFBMessengerInvitePlugin.m; sourceTree = "<group>"; };
 		BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFBMessengerInvitePlugin.h; path = Plugins/GetSocialFBMessengerInvitePlugin.h; sourceTree = "<group>"; };
-		BC1DE1F21E2CD633007AE67F /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BC1DE1F21E2CD633007AE67F /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BC217B0A1E55C2AE00426793 /* ActivityIndicatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityIndicatorViewController.h; sourceTree = "<group>"; };
 		BC217B0B1E55C2AE00426793 /* ActivityIndicatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndicatorViewController.m; sourceTree = "<group>"; };
 		BC217B141E55E22400426793 /* UIViewController+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GetSocial.h"; sourceTree = "<group>"; };
@@ -211,6 +217,11 @@
 		BC5C5A851F4DCC0900533C43 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		BC9286081FC48F6F00306B6E /* UserIdentityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityView.h; sourceTree = "<group>"; };
 		BC9286091FC48F6F00306B6E /* UserIdentityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentityView.m; sourceTree = "<group>"; };
+		BC92863F1FD8282400306B6E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = GetSocialDemo/Vendor/Crashlytics.framework; sourceTree = "<group>"; };
+		BC9286401FD8282500306B6E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = GetSocialDemo/Vendor/FirebaseCore.framework; sourceTree = "<group>"; };
+		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
+		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogoFullColorBlackBgIOS.png; path = Resources/getSocialLogoFullColorBlackBgIOS.png; sourceTree = "<group>"; };
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
@@ -223,15 +234,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */,
 				BC5C5A871F4DCC1B00533C43 /* AVFoundation.framework in Frameworks */,
 				BC5C5A861F4DCC0900533C43 /* SafariServices.framework in Frameworks */,
+				BC9286431FD8282500306B6E /* FirebaseCore.framework in Frameworks */,
+				BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */,
 				BC5C5A841F4DCC0300533C43 /* CoreMedia.framework in Frameworks */,
 				BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */,
 				BC5C5A7F1F4DCBE800533C43 /* TwitterCore.framework in Frameworks */,
 				6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */,
 				BC1DE1F41E2CD655007AE67F /* CoreGraphics.framework in Frameworks */,
 				BC283CD91E0B332800572390 /* GetSocial.framework in Frameworks */,
+				BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */,
 				BC283CDA1E0B332800572390 /* GetSocialUI.framework in Frameworks */,
+				BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */,
 				998B71EE1BB95CB800325DAF /* FBSDKCoreKit.framework in Frameworks */,
 				998B71F01BB95CB800325DAF /* FBSDKShareKit.framework in Frameworks */,
 				998B71EF1BB95CB800325DAF /* FBSDKLoginKit.framework in Frameworks */,
@@ -285,6 +301,7 @@
 		995D999617EB064500F65204 = {
 			isa = PBXGroup;
 			children = (
+				BC9286481FD82A0200306B6E /* GoogleService-Info.plist */,
 				995D99A817EB064500F65204 /* GetSocialDemo */,
 				995D99A117EB064500F65204 /* Frameworks */,
 				995D99A017EB064500F65204 /* Products */,
@@ -302,6 +319,10 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC9286451FD828C800306B6E /* libstdc++.tbd */,
+				BC92863F1FD8282400306B6E /* Crashlytics.framework */,
+				BC9286411FD8282500306B6E /* Fabric.framework */,
+				BC9286401FD8282500306B6E /* FirebaseCore.framework */,
 				BC5C5A851F4DCC0900533C43 /* SafariServices.framework */,
 				BC5C5A831F4DCC0300533C43 /* CoreMedia.framework */,
 				BC5C5A7B1F4DCBE800533C43 /* TwitterCore.framework */,
@@ -560,6 +581,7 @@
 				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
 				BC5C5A821F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle in Resources */,
 				7A3B8E9F1FCEC82500481004 /* getsocial-light in Resources */,
+				BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +599,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "bash \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/GetSocial.framework/strip_frameworks.sh\"";
+			shellScript = "\"$PROJECT_DIR/../GetSocialDemo/GetSocialDemo/Vendor/Fabric.framework/run\"\n\nbash \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/GetSocial.framework/strip_frameworks.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

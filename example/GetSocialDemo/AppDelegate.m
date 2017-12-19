@@ -15,11 +15,14 @@
  */
 
 #import <GetSocial/GetSocial.h>
+#import <GetSocialUI/GetSocialUI.h>
 #import "AppDelegate.h"
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <TwitterKit/TwitterKit.h>
+#import <FirebaseCore/FIRApp.h>
+#import <Fabric/Fabric.h>
 #import <GetSocialUI/GetSocialUI.h>
 
 @interface AppDelegate ()
@@ -30,6 +33,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [FIRApp configure];
     [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
