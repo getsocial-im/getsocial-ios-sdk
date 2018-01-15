@@ -77,7 +77,7 @@
         [GetSocialUser addFriend:friend.userId success:^(int result) {
             onAddFriend();
         } failure:^(NSError * _Nonnull error) {
-            NSLog(@"Failed to add friend: %@", error.description);
+            NSLog(@"Failed to add friend: %@", error.localizedDescription);
             onAddFriend();
         }];
     }

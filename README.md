@@ -10,8 +10,6 @@ Provided demo application will show you GetSocial SDK features effortlessly, no 
 
        git clone git@github.com:getsocial-im/getsocial-ios-sdk.git
        
-   ⚠️ Do not use GitHub download feature, downloaded archive will not contain files stored under [Git LFS](https://git-lfs.github.com/). As a result iOS build will fail with linkage errors.
-   
 1. Open project `example/GetSocialDemo.xcodeproj` in Xcode.
 1. Build the demo.
 
@@ -31,7 +29,6 @@ GetSocial iOS SDK Reference can be found at:
 
 This repository contains all you need to start working with GetSocial:
 
-- GetSocial iOS SDK dynamic frameworks in the `bin/` folder.
 - An example application that showcases all GetSocial features in `example/` folder.
 - GetSocial Invite Channel plugins in `plugins/` folder. Learn more about Invite Plugins in [docs](http://docs.getsocial.im/guides/smart-invites/ios/essential-setup/#setup-invite-channels).
 

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>im.getsocial.demo.adjust.AppToken</key>
+	<string>21rj2ca3e800</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -33,7 +35,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-                <string>twitterkit-o1Cfa4YDso0fFjRQuRUSjkFWf</string>
+				<string>twitterkit-o1Cfa4YDso0fFjRQuRUSjkFWf</string>
 				<string>getsocial-LGa80P9790g4</string>
 			</array>
 		</dict>
@@ -43,6 +45,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakao4d436485d41336a82c47d0142682b4d7</string>
+				<string>getsocial-LGa80P9790g4</string>
 			</array>
 		</dict>
 	</array>
@@ -58,8 +61,8 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-        <string>twitterauth</string>
-        <string>twitter</string>
+		<string>twitterauth</string>
+		<string>twitter</string>
 		<string>kakaostory-2.9.0</string>
 		<string>kakaotalk-4.5.0</string>
 		<string>storykompassauth</string>
@@ -78,6 +81,7 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 		<string>line</string>
+		<string>facebook</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -187,6 +191,10 @@
 	<true/>
 	<key>im.getsocial.sdk.AppId</key>
 	<string>LGa80P9790g4</string>
+	<key>im.getsocial.sdk.AutoInitSdk</key>
+	<true/>
+	<key>im.getsocial.sdk.AutoRegisterForPush</key>
+	<true/>
 	<key>im.getsocial.sdk.DebugMode</key>
 	<false/>
 </dict>

@@ -24,6 +24,7 @@
 #import <FirebaseCore/FIRApp.h>
 #import <Fabric/Fabric.h>
 #import <GetSocialUI/GetSocialUI.h>
+#import <AdjustSdk/Adjust.h>
 
 @interface AppDelegate ()
 
@@ -35,6 +36,7 @@
 {
     [FIRApp configure];
     [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
+    [self setUpAdjust];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -55,6 +57,20 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [GetSocialUI closeView:NO];
+}
+
+- (void)setUpAdjust
+{
+    NSString *yourAppToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"im.getsocial.demo.adjust.AppToken"];
+    if (!yourAppToken.length)
+    {
+        return;
+    }
+    NSString *environment = ADJEnvironmentProduction;
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken
+                                                environment:environment];
+
+    [Adjust appDidLaunch:adjustConfig];
 }
 
 @end

@@ -17,6 +17,13 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GetSocial/GetSocialInviteChannelPlugin.h>
 
+/*!
+ * @abstract Facebook App Invite plugin.
+ * @deprecated use FacebookSharePlugin instead.
+ * Facebook is deprecating App Invites from February 5, 2018: https://developers.facebook.com/blog/post/2017/11/07/changes-developer-offerings/
+ * More: https://blog.getsocial.im/facebook-deprecates-app-invites-are-you-ready/
+ */
+__deprecated_msg("Use FacebookSharePlugin instead, more: https://blog.getsocial.im/facebook-deprecates-app-invites-are-you-ready/")
 @interface GetSocialFacebookInvitePlugin : GetSocialInviteChannelPlugin<FBSDKAppInviteDialogDelegate>
 
 @end

@@ -37,6 +37,7 @@
 
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
+#import "GetSocialFacebookSharePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
 #import "GetSocialTwitterInvitePlugin.h"
 #import "MenuTableViewController.h"
@@ -124,10 +125,6 @@ NSString *const kCustomProvider = @"custom";
         [self checkReferralData];
     }];
 
-    // Register FBInvitePlugin
-    GetSocialFacebookInvitePlugin *fbInvitePlugin = [[GetSocialFacebookInvitePlugin alloc] init];
-    [GetSocial registerInviteChannelPlugin:fbInvitePlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook];
-
     // Register FB Messenger Invite Plugin
     GetSocialFBMessengerInvitePlugin *fbMessengerPlugin = [[GetSocialFBMessengerInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:fbMessengerPlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook_Messenger];
@@ -139,6 +136,11 @@ NSString *const kCustomProvider = @"custom";
     // Register Twitter Invite Plugin
     GetSocialTwitterInvitePlugin *twitterPlugin = [[GetSocialTwitterInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:twitterPlugin forChannelId:GetSocial_InviteChannelPluginId_Twitter];
+
+    // Register Facebook Share Plugin
+    GetSocialFacebookSharePlugin *fbSharePlugin = [[GetSocialFacebookSharePlugin alloc] init];
+    [GetSocial registerInviteChannelPlugin:fbSharePlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook];
+
 }
 
 - (void)updateFriendsCount
@@ -291,7 +293,7 @@ NSString *const kCustomProvider = @"custom";
                               success:^(GetSocialPublicUser *publicUser) {
                                   [self didClickOnUser:publicUser];
                               } failure:^(NSError *error) {
-                            NSLog(@"Failed to get uesr, error: %@", error.description);
+                            NSLog(@"Failed to get user, error: %@", error.localizedDescription);
                         }];
             }];
             [activityFeedView setTagClickHandler:^(NSString *tagName) {
@@ -477,7 +479,7 @@ NSString *const kCustomProvider = @"custom";
             [self showActionDialogForNonFriend:user];
         }
     } failure:^(NSError *error) {
-        NSLog(@"Failed to check if friends, error: %@", error.description);
+        NSLog(@"Failed to check if friends, error: %@", error.localizedDescription);
     }];
 }
 
@@ -526,7 +528,7 @@ NSString *const kCustomProvider = @"custom";
                     [GetSocialUser removeFriend:user.userId success:^(int friendsCount) {
                         [self showAlertWithText:[NSString stringWithFormat:@"%@ removed from friends.", user.displayName]];
                     } failure:^(NSError *error) {
-                        NSLog(@"Failed to remove friend, error: %@", error.description);
+                        NSLog(@"Failed to remove friend, error: %@", error.localizedDescription);
                     }];
                     break;
             }
@@ -553,7 +555,7 @@ NSString *const kCustomProvider = @"custom";
                     [GetSocialUser addFriend:user.userId success:^(int friendsCount) {
                         [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", user.displayName]];
                     } failure:^(NSError *error) {
-                        NSLog(@"Failed to add friend, error: %@", error.description);
+                        NSLog(@"Failed to add friend, error: %@", error.localizedDescription);
                     }];
                     break;
             }
@@ -663,7 +665,7 @@ NSString *const kCustomProvider = @"custom";
         GSLogInfo(YES, NO, @"User avatar has been successfully updated");
     } failure:^(NSError *error) {
         [self hideActivityIndicatorView];
-        GSLogError(YES, NO, @"Error changing user avatar: %@", error.description);
+        GSLogError(YES, NO, @"Error changing user avatar: %@", error.localizedDescription);
     }];
 }
 
@@ -699,7 +701,7 @@ NSString *const kCustomProvider = @"custom";
                                               GSLogInfo(YES, NO, @"User property was successfully set");
                                           } failure:^(NSError *error) {
                         [self hideActivityIndicatorView];
-                        GSLogError(YES, NO, @"Error changing user property: %@", error.description);
+                        GSLogError(YES, NO, @"Error changing user property: %@", error.localizedDescription);
             }];
         }
     }];
@@ -744,7 +746,7 @@ NSString *const kCustomProvider = @"custom";
                 GSLogInfo(YES, NO, @"User display name has been successfully updated");
             } failure:^(NSError *error) {
                 [self hideActivityIndicatorView];
-                GSLogError(YES, NO, @"Error changing user display name: %@", error.description);
+                GSLogError(YES, NO, @"Error changing user display name: %@", error.localizedDescription);
             }];
         }
     }];
@@ -785,7 +787,7 @@ NSString *const kCustomProvider = @"custom";
             [GetSocialUser setAvatarUrl:pictureUrl success:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
             } failure:^(NSError *error) {
-                GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.description);
+                GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.localizedDescription);
             }];
         }
     }];
@@ -821,7 +823,7 @@ NSString *const kCustomProvider = @"custom";
     [GetSocialUser setDisplayName:displayName success:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
     } failure:^(NSError *error) {
-        GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.description);
+        GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.localizedDescription);
     }];
     
     
@@ -1124,7 +1126,7 @@ NSString *const kCustomProvider = @"custom";
             GSLogInfo(YES, NO, @"User avatar has been successfully updated");
         } failure:^(NSError *error) {
             [self hideActivityIndicatorView];
-            GSLogError(YES, NO, @"Error changing user avatar: %@", error.description);
+            GSLogError(YES, NO, @"Error changing user avatar: %@", error.localizedDescription);
         }];
         [self.avatarImagePicker dismissViewControllerAnimated:YES completion:nil];
         self.avatarImagePicker = nil;
