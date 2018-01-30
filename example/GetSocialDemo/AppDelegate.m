@@ -20,7 +20,9 @@
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#if DISABLE_TWITTER != 1
 #import <TwitterKit/TwitterKit.h>
+#endif
 #import <FirebaseCore/FIRApp.h>
 #import <Fabric/Fabric.h>
 #import <GetSocialUI/GetSocialUI.h>
@@ -35,7 +37,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [FIRApp configure];
+    
+#if DISABLE_TWITTER != 1
     [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
+#endif
     [self setUpAdjust];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -46,7 +51,11 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+#if DISABLE_TWITTER != 1
     return [[Twitter sharedInstance] application:app openURL:url options:options];
+#else
+    return false;
+#endif
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

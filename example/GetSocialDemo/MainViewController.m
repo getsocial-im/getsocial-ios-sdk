@@ -34,14 +34,18 @@
 #import <GetSocial/GetSocialConflictUser.h>
 #import <GetSocial/GetSocialInviteChannelPlugin.h>
 #import <GetSocial/GetSocialReferredUser.h>
+#import <GetSocial/GetSocialNotification.h>
 
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookInvitePlugin.h"
 #import "GetSocialFacebookSharePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
+#if DISABLE_TWITTER != 1
 #import "GetSocialTwitterInvitePlugin.h"
+#endif
 #import "MenuTableViewController.h"
 #import "UIImage+GetSocial.h"
+#import "PushNotificationView.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -106,11 +110,14 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)setUpGetSocial
 {
-    [GetSocial setNotificationActionHandler:^BOOL(GetSocialNotificationAction *action) {
-        if (action.action == GetSocialNotificationActionOpenProfile)
-        {
-            GetSocialOpenProfileAction *openProfileAction = (GetSocialOpenProfileAction *) action;
-            [self showNewFriend:openProfileAction.userId];
+    [GetSocial setNotificationHandler:^BOOL(GetSocialNotification *notification, BOOL wasClicked) {
+        if (!wasClicked) {
+            NSString *title = notification.title ? notification.title : @"Push Notification Received";
+            [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
+            return YES;
+        }
+        if (notification.action == GetSocialNotificationActionOpenProfile) {
+            [self showNewFriend:notification.actionData[GetSocialNotificationKey_OpenProfile_UserId]];
             return YES;
         }
         return NO;
@@ -133,10 +140,11 @@ NSString *const kCustomProvider = @"custom";
     GetSocialKakaoTalkInvitePlugin *kakaoTalkPlugin = [[GetSocialKakaoTalkInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:kakaoTalkPlugin forChannelId:GetSocial_InviteChannelPluginId_Kakao];
 
+#if DISABLE_TWITTER != 1
     // Register Twitter Invite Plugin
     GetSocialTwitterInvitePlugin *twitterPlugin = [[GetSocialTwitterInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:twitterPlugin forChannelId:GetSocial_InviteChannelPluginId_Twitter];
-
+#endif
     // Register Facebook Share Plugin
     GetSocialFacebookSharePlugin *fbSharePlugin = [[GetSocialFacebookSharePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:fbSharePlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook];
@@ -976,7 +984,7 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
-- (void)showNewFriend:(NSString*)newFriendId
+- (void)showNewFriend:(NSString *)newFriendId
 {
     [GetSocial userWithId:newFriendId success:^(GetSocialPublicUser * _Nonnull publicUser) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
