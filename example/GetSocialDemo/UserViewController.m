@@ -67,42 +67,42 @@
     NSMutableDictionary* userDetails = [NSMutableDictionary dictionary];
 
     [details appendFormat:@"DisplayName: %@\n", [GetSocialUser displayName]];
-    [userDetails setObject:[GetSocialUser displayName] forKey:@"DisplayName"];
+    userDetails[@"DisplayName"] = [GetSocialUser displayName];
     
     [details appendFormat:@"User ID: %@\n", [GetSocialUser userId]];
-    [userDetails setObject:[GetSocialUser userId] forKey:@"User ID"];
+    userDetails[@"User ID"] = [GetSocialUser userId];
 
     [details appendFormat:@"Avatar: %@\n", [GetSocialUser avatarUrl]];
-    [userDetails setObject:[GetSocialUser avatarUrl] forKey:@"Avatar"];
+    userDetails[@"Avatar"] = [GetSocialUser avatarUrl];
 
     if (![GetSocialUser isAnonymous])
     {
-        [userDetails setObject:@NO forKey:@"IsAnonymous"];
+        userDetails[@"IsAnonymous"] = @NO;
         [details appendString:@"\n\nIdentities\n\n"];
         NSMutableDictionary* identities = [NSMutableDictionary dictionary];
         [[GetSocialUser authIdentities] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
             [details appendFormat:@"Provider: %@\n", key];
             [details appendFormat:@"UserId: %@\n", val];
             [details appendString:@"\n\n"];
-            [identities setObject:key forKey:@"Provider"];
-            [identities setObject:val forKey:@"Provider User ID"];
+            identities[@"Provider"] = key;
+            identities[@"Provider User ID"] = val;
         }];
-        [userDetails setObject:identities forKey:@"Identities"];
+        userDetails[@"Identities"] = identities;
     } else
     {
-        [userDetails setObject:@YES forKey:@"IsAnonymous"];
+        userDetails[@"IsAnonymous"] = @YES;
         [details appendString:@"\n\nAnonymous\n\n"];
     }
 
     [details appendString:@"\n\nPublic Properties\n\n"];
-    [userDetails setObject:[GetSocialUser allPublicProperties] forKey:@"PublicProperties"];
+    userDetails[@"PublicProperties"] = [GetSocialUser allPublicProperties];
     [[GetSocialUser allPublicProperties] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
         [details appendFormat:@"%@: %@\n", key, val];
         [details appendString:@"\n\n"];
     }];
 
     [details appendString:@"\n\nPrivate Properties\n\n"];
-    [userDetails setObject:[GetSocialUser allPrivateProperties] forKey:@"PrivateProperties"];
+    userDetails[@"PrivateProperties"] = [GetSocialUser allPrivateProperties];
     [[GetSocialUser allPrivateProperties] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
         [details appendFormat:@"%@: %@\n", key, val];
         [details appendString:@"\n\n"];

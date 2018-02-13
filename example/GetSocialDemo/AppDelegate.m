@@ -27,6 +27,7 @@
 #import <Fabric/Fabric.h>
 #import <GetSocialUI/GetSocialUI.h>
 #import <AdjustSdk/Adjust.h>
+#import <AppsFlyerLib/AppsFlyerTracker.h>
 
 @interface AppDelegate ()
 
@@ -42,15 +43,18 @@
     [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
 #endif
     [self setUpAdjust];
+    [self setUpAppsFlyer];
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+     [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    [[AppsFlyerTracker sharedTracker] handleOpenUrl:url options:options];
 #if DISABLE_TWITTER != 1
     return [[Twitter sharedInstance] application:app openURL:url options:options];
 #else
@@ -61,6 +65,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSDKAppEvents activateApp];
+    [AppsFlyerTracker.sharedTracker trackAppLaunch];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -70,16 +75,32 @@
 
 - (void)setUpAdjust
 {
-    NSString *yourAppToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"im.getsocial.demo.adjust.AppToken"];
-    if (!yourAppToken.length)
+    NSString *appToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"im.getsocial.demo.adjust.AppToken"];
+    if (!appToken.length)
     {
         return;
     }
     NSString *environment = ADJEnvironmentProduction;
-    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:appToken
                                                 environment:environment];
-
+    
     [Adjust appDidLaunch:adjustConfig];
+}
+
+- (void)setUpAppsFlyer
+{
+    NSString *appToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"im.getsocial.demo.appsflyer.AppToken"];
+    if (!appToken.length)
+    {
+        return;
+    }
+    AppsFlyerTracker.sharedTracker.appsFlyerDevKey  = @"AP8P3GvwHgw9NBdBTWAqrb";
+    AppsFlyerTracker.sharedTracker.appleAppID       = appToken;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+    return [[AppsFlyerTracker sharedTracker] continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
 @end

@@ -19,6 +19,7 @@
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
 		6F3DCE9F1FFE84B200F65784 /* AdjustSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7DF86E1FFE827A00D8F309 /* AdjustSdk.framework */; };
 		6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7DF86E1FFE827A00D8F309 /* AdjustSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6F654C652017844B00B2FCFD /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */; };
 		6F6979A11EE8360900ED08B5 /* SuggestedFriendsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */; };
 		6F6979A21EE8360900ED08B5 /* SuggestedFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */; };
 		6F6979AB1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */; };
@@ -33,7 +34,6 @@
 		7A3B8E9D1FCEC82500481004 /* getsocial-light-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E981FCEC82500481004 /* getsocial-light-landscape */; };
 		7A3B8E9E1FCEC82500481004 /* getsocial-default-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E991FCEC82500481004 /* getsocial-default-landscape */; };
 		7A3B8E9F1FCEC82500481004 /* getsocial-light in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E9A1FCEC82500481004 /* getsocial-light */; };
-		86AD45C3A30A9FC0A146D0F0 /* GetSocialUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39BE438B9897CF185541E84A /* GetSocialUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A617EB064500F65204 /* UIKit.framework */; };
 		990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */; };
 		991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */; };
@@ -100,7 +100,6 @@
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
 		BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */; };
 		EB0E474CB3072E048A7E355B /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BE438B9897CF185541E84A /* GetSocialUI.framework */; };
-		F4744EAF95F1118B742699B5 /* GetSocial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BD3A46C48A74400A31AB2E9E /* GetSocial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -110,9 +109,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BC283CD81E0B31F600572390 /* GetSocialUI.framework in Embed Frameworks */,
 				6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */,
-				BC283CD61E0B31F600572390 /* GetSocial.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +126,8 @@
 		39BE438B9897CF185541E84A /* GetSocialUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialUI.framework; path = GetSocial/bin/GetSocialUI.framework; sourceTree = SOURCE_ROOT; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
+		6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppsFlyerLib.framework; path = GetSocialDemo/Vendor/AppsFlyerLib.framework; sourceTree = "<group>"; };
+		6F654C6B201786F700B2FCFD /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendsViewController.h; sourceTree = "<group>"; };
 		6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestedFriendsViewController.m; sourceTree = "<group>"; };
 		6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendTableViewCell.h; sourceTree = "<group>"; };
@@ -254,6 +253,7 @@
 				6F3DCE9F1FFE84B200F65784 /* AdjustSdk.framework in Frameworks */,
 				BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */,
 				BC5C5A841F4DCC0300533C43 /* CoreMedia.framework in Frameworks */,
+				6F654C652017844B00B2FCFD /* AppsFlyerLib.framework in Frameworks */,
 				BC585E701E30AD3C0057A73A /* Security.framework in Frameworks */,
 				BC5C5A7F1F4DCBE800533C43 /* TwitterCore.framework in Frameworks */,
 				6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */,
@@ -334,6 +334,8 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F654C6B201786F700B2FCFD /* iAd.framework */,
+				6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */,
 				BC9286451FD828C800306B6E /* libstdc++.tbd */,
 				6F7DF86E1FFE827A00D8F309 /* AdjustSdk.framework */,
 				BC92863F1FD8282400306B6E /* Crashlytics.framework */,
@@ -766,9 +768,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "GetSocialDemo/GetSocialDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited) @executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/GetSocialDemo/Vendor/**",
