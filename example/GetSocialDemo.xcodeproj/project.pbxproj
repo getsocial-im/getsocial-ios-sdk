@@ -13,7 +13,9 @@
 		213E390AAA73E4B0B7227FCF /* PushNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E3F34621E037B8687B57D /* PushNotificationView.m */; };
 		213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */; };
 		213E3EF84029D5E4E4865B71 /* PushNotificationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E3B4404D851B304096807 /* PushNotificationView.h */; };
-		338043ADA362C71DF5C5F860 /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3A46C48A74400A31AB2E9E /* GetSocial.framework */; };
+		3E2642A48FF18C0B0B23D81F /* GetSocial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F442499FBFEA81798D7805F2 /* GetSocial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42134C2681A36446E4FE6C1E /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442499FBFEA81798D7805F2 /* GetSocial.framework */; };
+		5D684F7D92BF7F0AA84941E1 /* GetSocialUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */; };
 		6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */; };
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
@@ -64,6 +66,7 @@
 		99F3E8011AB32CA900033238 /* activityImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7FE1AB32CA900033238 /* activityImage.png */; };
 		99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 99F772E51BBAA96A00A4CD69 /* LICENSE */; };
 		99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */; };
+		AC59453C93EEADA0968BC6D0 /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */; };
 		BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */; };
 		BC1DE1F41E2CD655007AE67F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E0C1C904F830041DDE3 /* CoreGraphics.framework */; };
 		BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC217B0A1E55C2AE00426793 /* ActivityIndicatorViewController.h */; };
@@ -99,7 +102,6 @@
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
 		BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */; };
-		EB0E474CB3072E048A7E355B /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BE438B9897CF185541E84A /* GetSocialUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -110,6 +112,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */,
+				3E2642A48FF18C0B0B23D81F /* GetSocial.framework in Embed Frameworks */,
+				5D684F7D92BF7F0AA84941E1 /* GetSocialUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,13 +121,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialUI.framework; path = GetSocial/GetSocialUI.framework; sourceTree = SOURCE_ROOT; };
 		213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GetSocial.h"; sourceTree = "<group>"; };
 		213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GetSocial.m"; sourceTree = "<group>"; };
 		213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GetSocial.m"; sourceTree = "<group>"; };
 		213E3B4404D851B304096807 /* PushNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationView.h; sourceTree = "<group>"; };
 		213E3F34621E037B8687B57D /* PushNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationView.m; sourceTree = "<group>"; };
 		213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetSocial.h"; sourceTree = "<group>"; };
-		39BE438B9897CF185541E84A /* GetSocialUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialUI.framework; path = GetSocial/bin/GetSocialUI.framework; sourceTree = SOURCE_ROOT; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
 		6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppsFlyerLib.framework; path = GetSocialDemo/Vendor/AppsFlyerLib.framework; sourceTree = "<group>"; };
@@ -201,7 +205,7 @@
 		99F3E7E51AB205C400033238 /* activityCallToActionButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityCallToActionButtonPressed.png; path = Resources/activityCallToActionButtonPressed.png; sourceTree = "<group>"; };
 		99F3E7ED1AB31DC100033238 /* activityImageWithAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImageWithAction.png; path = Resources/activityImageWithAction.png; sourceTree = "<group>"; };
 		99F3E7FE1AB32CA900033238 /* activityImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activityImage.png; path = Resources/activityImage.png; sourceTree = "<group>"; };
-		99F772E51BBAA96A00A4CD69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		99F772E51BBAA96A00A4CD69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		99FE1A7C1BB2A82100EF576A /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ConsoleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsoleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFBMessengerInvitePlugin.m; path = Plugins/GetSocialFBMessengerInvitePlugin.m; sourceTree = "<group>"; };
@@ -237,7 +241,7 @@
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
 		BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFriendViewController.h; sourceTree = "<group>"; };
-		BD3A46C48A74400A31AB2E9E /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocial.framework; path = GetSocial/bin/GetSocial.framework; sourceTree = SOURCE_ROOT; };
+		F442499FBFEA81798D7805F2 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocial.framework; path = GetSocial/GetSocial.framework; sourceTree = SOURCE_ROOT; };
 		F4AD6CFE18BF313400B1F342 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.tbd"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -268,8 +272,8 @@
 				990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */,
 				BC5C5A801F4DCBE800533C43 /* TwitterKit.framework in Frameworks */,
 				990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */,
-				338043ADA362C71DF5C5F860 /* GetSocial.framework in Frameworks */,
-				EB0E474CB3072E048A7E355B /* GetSocialUI.framework in Frameworks */,
+				42134C2681A36446E4FE6C1E /* GetSocial.framework in Frameworks */,
+				AC59453C93EEADA0968BC6D0 /* GetSocialUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,8 +375,8 @@
 				99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */,
 				BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */,
 				995D99A617EB064500F65204 /* UIKit.framework */,
-				BD3A46C48A74400A31AB2E9E /* GetSocial.framework */,
-				39BE438B9897CF185541E84A /* GetSocialUI.framework */,
+				F442499FBFEA81798D7805F2 /* GetSocial.framework */,
+				11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -760,6 +764,10 @@
 					"$(SRCROOT)/GetSocialDemo/Vendor/**",
 					"$(PROJECT_DIR)/GetSocialDemo/Vendor",
 					"$(SRCROOT)/GetSocial/bin",
+					"$(inherited)",
+					"$(SRCROOT)/GetSocial",
+					"$(inherited)",
+					"$(SRCROOT)/GetSocial",
 					"$(inherited)",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;

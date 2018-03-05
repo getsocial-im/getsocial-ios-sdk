@@ -70,6 +70,11 @@
     keyboardIsShown = NO;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     if (keyboardIsShown)
