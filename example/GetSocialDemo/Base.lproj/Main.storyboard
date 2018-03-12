@@ -764,6 +764,68 @@
             </objects>
             <point key="canvasLocation" x="1335.5" y="-88.5"/>
         </scene>
+        <!--Url Scheme Tester View Controller-->
+        <scene sceneID="Pfl-D5-kUT">
+            <objects>
+                <viewController storyboardIdentifier="UrlSchemeTesterViewController" id="d81-ck-xBY" customClass="UrlSchemeTesterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3BU-ZW-l7m"/>
+                        <viewControllerLayoutGuide type="bottom" id="XOM-QC-9SV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OS8-Df-3rT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nxr-6a-AXr">
+                                <rect key="frame" x="16" y="48" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="D6W-u6-JUG"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1X5-dE-Ark">
+                                <rect key="frame" x="137" y="86" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4ea-NS-F2F"/>
+                                    <constraint firstAttribute="width" constant="100" id="I70-68-Scv"/>
+                                </constraints>
+                                <state key="normal" title="Open URL"/>
+                                <connections>
+                                    <action selector="generateUrl:" destination="d81-ck-xBY" eventType="touchUpInside" id="f5M-7i-2pz"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter URL Scheme and press Open URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNg-EI-XX6">
+                                <rect key="frame" x="34.5" y="10" width="306" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jOi-Z5-dch"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aNg-EI-XX6" firstAttribute="centerX" secondItem="OS8-Df-3rT" secondAttribute="centerX" id="HsS-gK-UVT"/>
+                            <constraint firstItem="nxr-6a-AXr" firstAttribute="leading" secondItem="OS8-Df-3rT" secondAttribute="leadingMargin" id="PY2-NB-o6S"/>
+                            <constraint firstItem="nxr-6a-AXr" firstAttribute="trailing" secondItem="OS8-Df-3rT" secondAttribute="trailingMargin" id="X3F-tj-y7M"/>
+                            <constraint firstItem="nxr-6a-AXr" firstAttribute="top" secondItem="aNg-EI-XX6" secondAttribute="bottom" constant="8" id="lQV-Kq-75c"/>
+                            <constraint firstItem="aNg-EI-XX6" firstAttribute="top" secondItem="OS8-Df-3rT" secondAttribute="top" constant="10" id="qOU-Br-GBk"/>
+                            <constraint firstItem="1X5-dE-Ark" firstAttribute="centerX" secondItem="OS8-Df-3rT" secondAttribute="centerX" id="sPn-RD-lB3"/>
+                            <constraint firstItem="1X5-dE-Ark" firstAttribute="top" secondItem="nxr-6a-AXr" secondAttribute="bottom" constant="8" id="wI7-Z7-0Rg"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="urlInput" destination="nxr-6a-AXr" id="uqB-N8-J1X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lci-CK-jyl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1827.5" y="-39.5"/>
+        </scene>
         <!--Custom Smart Invite View Controller-->
         <scene sceneID="jGP-zC-1Nt">
             <objects>

@@ -521,7 +521,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 99F26B2119A65BE5006D3B1A /* Build configuration list for PBXNativeTarget "GetSocialDemo" */;
 			buildPhases = (
-				6F6D3F4C202C8F1400204307 /* ShellScript */,
 				BC4439751FFE3BC200682226 /* ShellScript */,
 				99F26AD219A65BE5006D3B1A /* Sources */,
 				99F26B0719A65BE5006D3B1A /* Frameworks */,
@@ -618,19 +617,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F6D3F4C202C8F1400204307 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/../../../../tools/update-version.sh $INFOPLIST_FILE";
-		};
 		BC4439751FFE3BC200682226 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

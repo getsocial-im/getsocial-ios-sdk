@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.15.2-master-a238e24</string>
+	<string>6.15.3-master-6bad45c</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -59,6 +59,8 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>tg</string>
+		<string>viber</string>
 		<string>twitterauth</string>
 		<string>twitter</string>
 		<string>kakaostory-2.9.0</string>

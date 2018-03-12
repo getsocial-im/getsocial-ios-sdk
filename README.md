@@ -30,7 +30,7 @@ GetSocial iOS SDK Reference can be found at:
 This repository contains all you need to start working with GetSocial:
 
 - An example application that showcases all GetSocial features in `example/` folder.
-- GetSocial Invite Channel plugins in `plugins/` folder. Learn more about Invite Plugins in [docs](http://docs.getsocial.im/guides/smart-invites/ios/essential-setup/#setup-invite-channels).
+- GetSocial Invite Channel plugins in `plugins/` folder. Learn more about Invite Plugins in [docs](http://docs.getsocial.im/guides/smart-invites/channels/setup-ios/).
 
 ## Licence
 
