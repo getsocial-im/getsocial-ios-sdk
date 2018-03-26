@@ -17,18 +17,38 @@
 #import "CustomSmartInviteViewController.h"
 #import <GetSocial/GetSocial.h>
 #import <GetSocialUI/GetSocialUI.h>
-#import "UISimpleAlertViewController.h"
 #import "UIImage+GetSocial.h"
+#import "UISimpleAlertViewController.h"
 
 #define MAX_WIDTH 1024.f
 #define MAX_HEIGHT 768.f
+
+#define IMAGE_HEIGHT 140
+
+#define INVITE_SECTION_HEIGHT_W_IMAGE 325
+#define LP_SECTION_HEIGHT_W_IMAGE 368
 
 @interface CustomSmartInviteViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     BOOL keyboardIsShown;
 }
-@property (weak, nonatomic) IBOutlet UIImageView *customImage;
-@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property(weak, nonatomic) IBOutlet UIImageView *customImage;
+@property(nonatomic, strong) UIImagePickerController *imagePicker;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *inviteSectionHeight;
+
+@property(nonatomic) BOOL selectImageForInvite;
+
+// landing page customization
+@property(weak, nonatomic) IBOutlet UITextField *landingPageTitle;
+@property(weak, nonatomic) IBOutlet UITextField *landingPageDescription;
+
+@property(weak, nonatomic) IBOutlet UITextField *landingPageImageUrl;
+
+@property(weak, nonatomic) IBOutlet UITextField *landingPageVideoUrl;
+
+@property(weak, nonatomic) IBOutlet UIImageView *landingPageImage;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *landingPageSectionHeight;
 
 @end
 
@@ -49,6 +69,9 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
     keyboardIsShown = NO;
+
+    self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -102,17 +125,17 @@
 {
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-        NSArray *tags = @[
-                          GetSocial_InviteContentPlaceholder_App_Invite_Url
-                          ];
+        NSArray *tags = @[ GetSocial_InviteContentPlaceholder_App_Invite_Url ];
 
-        UISimpleAlertViewController *alert =
-            [[UISimpleAlertViewController alloc] initWithTitle:@"Add Tag" message:@"Choose the tag to add" cancelButtonTitle:@"Cancel" otherButtonTitles:tags];
+        UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Tag"
+                                                                                        message:@"Choose the tag to add"
+                                                                              cancelButtonTitle:@"Cancel"
+                                                                              otherButtonTitles:tags];
 
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (!didCancel)
             {
-                UITextField *textField = (UITextField *) sender.view;
+                UITextField *textField = (UITextField *)sender.view;
                 textField.text = [textField.text stringByAppendingString:tags[selectedIndex]];
             }
         }];
@@ -123,7 +146,7 @@
 {
     [self.view endEditing:YES];
 
-    GetSocialMutableInviteContent* mutableInviteContent = [GetSocialMutableInviteContent new];
+    GetSocialMutableInviteContent *mutableInviteContent = [GetSocialMutableInviteContent new];
 
     if (![self.textfield.text isEqualToString:@""])
     {
@@ -139,33 +162,19 @@
         mutableInviteContent.image = self.customImage.image;
     }
 
-    NSMutableDictionary* customReferralData = [NSMutableDictionary new];
-    if (![self.key1Field.text isEqualToString:@""] && ![self.value1Field.text isEqualToString:@""])
-    {
-        customReferralData[self.key1Field.text] = self.value1Field.text;
-    }
-
-    if (![self.key2Field.text isEqualToString:@""] && ![self.value2Field.text isEqualToString:@""])
-    {
-        customReferralData[self.key2Field.text] = self.value3Field.text;
-    }
-
-    if (![self.key3Field.text isEqualToString:@""] && ![self.value3Field.text isEqualToString:@""])
-    {
-        customReferralData[self.key3Field.text] = self.value3Field.text;
-    }
-
-    GetSocialUIInvitesView* invitesView = [GetSocialUI createInvitesView];
+    GetSocialUIInvitesView *invitesView = [GetSocialUI createInvitesView];
     [invitesView setCustomInviteContent:mutableInviteContent];
-    [invitesView setCustomReferralData:customReferralData];
+    [invitesView setLinkParams:[self addLandingPageCustomization]];
 
     if ([self.textfield.text rangeOfString:GetSocial_InviteContentPlaceholder_App_Invite_Url].location == NSNotFound)
     {
-        UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Send Smart Invite"
-                                                          message:@"No placeholder for URL found in text, would you like to continue "
-                                                                  @"anyway?\nWithout placeholder the invite URL will not be visible."
-                                                cancelButtonTitle:@"Cancel"
-                                                otherButtonTitles:@[ @"Ok" ]];
+        UISimpleAlertViewController *alert =
+            [[UISimpleAlertViewController alloc] initWithTitle:@"Send Smart Invite"
+                                                       message:
+                                                           @"No placeholder for URL found in text, would you like to continue "
+                                                           @"anyway?\nWithout placeholder the invite URL will not be visible."
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:@[ @"Ok" ]];
 
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (!didCancel)
@@ -187,18 +196,97 @@
 
 - (IBAction)changeImage:(id)sender
 {
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.imagePicker.delegate = self;
-    
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    self.selectImageForInvite = YES;
+    [self openImagePicker];
 }
 
 - (IBAction)clearImage:(id)sender
 {
+    if (self.customImage.image == self.landingPageImage.image)
+    {
+        self.landingPageImage.image = nil;
+        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    }
     self.customImage.image = nil;
+    self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
 }
 
+- (IBAction)changeLandingPageImage:(id)sender
+{
+    self.selectImageForInvite = NO;
+    [self openImagePicker];
+}
+
+- (IBAction)clearLandingPageImage:(id)sender
+{
+    self.landingPageImage.image = nil;
+    self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+}
+
+- (IBAction)useSameImage:(id)sender
+{
+    if (self.customImage.image != nil)
+    {
+        self.landingPageImage.image = self.customImage.image;
+        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE;
+    }
+}
+
+- (NSMutableDictionary *)addLandingPageCustomization
+{
+    NSMutableDictionary *linkParams = [NSMutableDictionary new];
+
+    // add custom title
+    if (self.landingPageTitle.text.length > 0)
+    {
+        linkParams[GetSocial_Custom_Title] = self.landingPageTitle.text;
+    }
+    // add custom description
+    if (self.landingPageDescription.text.length > 0)
+    {
+        linkParams[GetSocial_Custom_Description] = self.landingPageDescription.text;
+    }
+    // add custom image url
+    if (self.landingPageImageUrl.text.length > 0)
+    {
+        linkParams[GetSocial_Custom_Image] = self.landingPageImageUrl.text;
+    }
+    // add custom video url
+    if (self.landingPageVideoUrl.text.length > 0)
+    {
+        linkParams[GetSocial_Custom_YouTubeVideo] = self.landingPageVideoUrl.text;
+    }
+    // add custom image
+    if (self.landingPageImage.image != nil)
+    {
+        linkParams[GetSocial_Custom_Image] = self.landingPageImage.image;
+    }
+    // add other properties
+    if (![self.key1Field.text isEqualToString:@""] && ![self.value1Field.text isEqualToString:@""])
+    {
+        linkParams[self.key1Field.text] = self.value1Field.text;
+    }
+
+    if (![self.key2Field.text isEqualToString:@""] && ![self.value2Field.text isEqualToString:@""])
+    {
+        linkParams[self.key2Field.text] = self.value2Field.text;
+    }
+
+    if (![self.key3Field.text isEqualToString:@""] && ![self.value3Field.text isEqualToString:@""])
+    {
+        linkParams[self.key3Field.text] = self.value3Field.text;
+    }
+    return linkParams;
+}
+
+- (void)openImagePicker
+{
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.delegate = self;
+
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
 
 #pragma mark - UIImagePickerController
 
@@ -206,8 +294,18 @@
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
-    
-    self.customImage.image = image;
+
+    if (self.selectImageForInvite)
+    {
+        self.customImage.image = image;
+        self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE;
+    }
+    else
+    {
+        self.landingPageImage.image = image;
+        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE;
+    }
+
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
 }
@@ -216,7 +314,15 @@
 {
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
-}
 
+    if (self.selectImageForInvite)
+    {
+        self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    }
+    else
+    {
+        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    }
+}
 
 @end

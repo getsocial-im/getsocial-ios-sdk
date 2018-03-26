@@ -14,20 +14,20 @@
  *	limitations under the License.
  */
 
+#import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <GetSocial/GetSocial.h>
 #import <GetSocialUI/GetSocialUI.h>
-#import "AppDelegate.h"
 #import "ConsoleViewController.h"
 #import "Constants.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #if DISABLE_TWITTER != 1
 #import <TwitterKit/TwitterKit.h>
 #endif
-#import <FirebaseCore/FIRApp.h>
-#import <Fabric/Fabric.h>
-#import <GetSocialUI/GetSocialUI.h>
 #import <AdjustSdk/Adjust.h>
 #import <AppsFlyerLib/AppsFlyerTracker.h>
+#import <Fabric/Fabric.h>
+#import <FirebaseCore/FIRApp.h>
+#import <GetSocialUI/GetSocialUI.h>
 
 @interface AppDelegate ()
 
@@ -38,9 +38,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [FIRApp configure];
-    
+
 #if DISABLE_TWITTER != 1
-    [[Twitter sharedInstance] startWithConsumerKey:@"o1Cfa4YDso0fFjRQuRUSjkFWf" consumerSecret:@"VI4yh2BclI1zQ7hRcNINaEdXz0EtUG3p5e23kcPT55uHy1dzuj"];
+    [[Twitter sharedInstance] startWithConsumerKey:@"fiCw1nyiio9pdkim79jgnG7gB" consumerSecret:@"p5F4GHGQcv4faqGBGL3xBsXwD2GNkxvEF8pMcbvaa0LALWw02v"];
 #endif
     [self setUpAdjust];
     [self setUpAppsFlyer];
@@ -49,11 +49,12 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-     [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
+    [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
     [[AppsFlyerTracker sharedTracker] handleOpenUrl:url options:options];
 #if DISABLE_TWITTER != 1
     return [[Twitter sharedInstance] application:app openURL:url options:options];
@@ -81,9 +82,8 @@
         return;
     }
     NSString *environment = ADJEnvironmentProduction;
-    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:appToken
-                                                environment:environment];
-    
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:appToken environment:environment];
+
     [Adjust appDidLaunch:adjustConfig];
 }
 
@@ -94,11 +94,13 @@
     {
         return;
     }
-    AppsFlyerTracker.sharedTracker.appsFlyerDevKey  = @"AP8P3GvwHgw9NBdBTWAqrb";
-    AppsFlyerTracker.sharedTracker.appleAppID       = appToken;
+    AppsFlyerTracker.sharedTracker.appsFlyerDevKey = @"AP8P3GvwHgw9NBdBTWAqrb";
+    AppsFlyerTracker.sharedTracker.appleAppID = appToken;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+- (BOOL)application:(UIApplication *)application
+    continueUserActivity:(NSUserActivity *)userActivity
+      restorationHandler:(void (^)(NSArray *_Nullable))restorationHandler
 {
     return [[AppsFlyerTracker sharedTracker] continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
