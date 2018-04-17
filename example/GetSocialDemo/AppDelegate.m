@@ -27,7 +27,7 @@
 #import <AppsFlyerLib/AppsFlyerTracker.h>
 #import <Fabric/Fabric.h>
 #import <FirebaseCore/FIRApp.h>
-#import <GetSocialUI/GetSocialUI.h>
+#import "VKSdk.h"
 
 @interface AppDelegate ()
 
@@ -44,18 +44,23 @@
 #endif
     [self setUpAdjust];
     [self setUpAppsFlyer];
+    VKSdk *sdkInstance = [VKSdk initializeWithAppId:@"6435876"];
+
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
+    [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
     [[AppsFlyerTracker sharedTracker] handleOpenUrl:url options:options];
+    [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+
 #if DISABLE_TWITTER != 1
     return [[Twitter sharedInstance] application:app openURL:url options:options];
 #else

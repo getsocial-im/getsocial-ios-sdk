@@ -14,8 +14,8 @@
  *	limitations under the License.
  */
 
-#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "GetSocialFBMessengerInvitePlugin.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface GetSocialFBMessengerInvitePlugin ()<FBSDKSharingDelegate>
 
@@ -25,9 +25,8 @@
 
 - (BOOL)isAvailableForDevice:(GetSocialInviteChannel *)inviteChannel
 {
-    // check if FB Messenger is installed
-    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb-messenger-api://"]];
-    return installed;
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb-messenger-api://"]]            // old version scheme
+           || [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb-messenger-share-api://"]];  // new version scheme
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
@@ -42,15 +41,6 @@
     self.cancelCallback = cancelCallback;
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    if(invitePackage.imageUrl && invitePackage.image)
-    {
-        NSURL* appImageUrl = [NSURL URLWithString:invitePackage.imageUrl];
-        if (appImageUrl != nil)
-        {
-            content.imageURL = appImageUrl;
-        }
-    }
-
     content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
 
     [FBSDKMessageDialog showWithContent:content delegate:self];
@@ -76,11 +66,13 @@
                 self.cancelCallback();
             }
         }
-    } else
+    }
+    else
     {
         if (self.failureCallback)
         {
-            self.failureCallback([NSError errorWithDomain:@"GetSocialFBMessengerInvitePlugin" code:1000 userInfo:@{NSLocalizedDescriptionKey : @"Failed to invite."}]);
+            self.failureCallback(
+                [NSError errorWithDomain:@"GetSocialFBMessengerInvitePlugin" code:1000 userInfo:@{NSLocalizedDescriptionKey : @"Failed to invite."}]);
         }
     }
 }

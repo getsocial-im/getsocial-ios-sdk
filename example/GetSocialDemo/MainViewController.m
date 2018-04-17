@@ -40,6 +40,7 @@
 #import "GetSocialFacebookInvitePlugin.h"
 #import "GetSocialFacebookSharePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
+#import "GetSocialVKInvitePlugin.h"
 #if DISABLE_TWITTER != 1
 #import "GetSocialTwitterInvitePlugin.h"
 #endif
@@ -113,7 +114,7 @@ NSString *const kCustomProvider = @"custom";
     [GetSocial setNotificationHandler:^BOOL(GetSocialNotification *notification, BOOL wasClicked) {
         if (!wasClicked)
         {
-            NSString *title = notification.title ? notification.title : @"Push Notification Received";
+            NSString *title = notification.title.length > 0 ? notification.title : @"Push Notification Received";
             [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
             return YES;
         }
@@ -150,6 +151,10 @@ NSString *const kCustomProvider = @"custom";
     // Register Facebook Share Plugin
     GetSocialFacebookSharePlugin *fbSharePlugin = [[GetSocialFacebookSharePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:fbSharePlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook];
+
+    // Register VK Invite Plugin
+    GetSocialVKInvitePlugin *vkInvitePlugin = [[GetSocialVKInvitePlugin alloc] init];
+    [GetSocial registerInviteChannelPlugin:vkInvitePlugin forChannelId:GetSocial_InviteChannelPluginId_VK];
 }
 
 - (void)updateFriendsCount
@@ -244,6 +249,7 @@ NSString *const kCustomProvider = @"custom";
                                                                                action:^{
                                                                                    [self openFriends];
                                                                                }]];
+
         self.friendsMenu.detail = @"You have 0 friends";
 
         // Smart Invites Menu
