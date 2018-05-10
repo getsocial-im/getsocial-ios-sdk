@@ -5,7 +5,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface PushNotificationView : UIView
 
 + (void)showNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;

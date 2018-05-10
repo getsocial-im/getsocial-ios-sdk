@@ -18,7 +18,7 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GetSocialUI/GetSocialUI.h>
 
-@interface GetSocialFacebookSharePlugin()<FBSDKSharingDelegate>
+@interface GetSocialFacebookSharePlugin ()<FBSDKSharingDelegate>
 
 @end
 
@@ -39,13 +39,13 @@
     self.successCallback = successCallback;
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
-    
+
     [GetSocialUI closeView:YES];
-    
+
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
 
-    FBSDKShareDialog* shareDialog = [[FBSDKShareDialog alloc] init];
+    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
     shareDialog.fromViewController = viewController;
     shareDialog.shareContent = content;
     shareDialog.delegate = self;
@@ -54,7 +54,7 @@
     [shareDialog show];
 }
 
-- (void)sharer:(FBSDKShareDialog*)sharer didCompleteWithResults:(NSDictionary *)results
+- (void)sharer:(FBSDKShareDialog *)sharer didCompleteWithResults:(NSDictionary *)results
 {
     [GetSocialUI restoreView];
     if (self.successCallback)
@@ -63,7 +63,7 @@
     }
 }
 
-- (void)sharer:(FBSDKShareDialog*)sharer didFailWithError:(NSError *)error
+- (void)sharer:(FBSDKShareDialog *)sharer didFailWithError:(NSError *)error
 {
     [GetSocialUI restoreView];
     if (self.failureCallback)
@@ -72,7 +72,7 @@
     }
 }
 
-- (void)sharerDidCancel:(FBSDKShareDialog*)sharer
+- (void)sharerDidCancel:(FBSDKShareDialog *)sharer
 {
     [GetSocialUI restoreView];
     if (self.cancelCallback)

@@ -41,25 +41,28 @@
         int selectedIndex = 0;
         for (NSString *buttonTitle in otherTitles)
         {
-            UIAlertAction* alertAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull selectedAction) {
-                if (self.activeDismissHandler)
-                {
-                    self.activeDismissHandler(selectedIndex, selectedAction.title, NO);
-                }
-            }];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:buttonTitle
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction *_Nonnull selectedAction) {
+                                                                    if (self.activeDismissHandler)
+                                                                    {
+                                                                        self.activeDismissHandler(selectedIndex, selectedAction.title, NO);
+                                                                    }
+                                                                }];
 
             [_activeAlertController addAction:alertAction];
 
-            selectedIndex ++;
+            selectedIndex++;
         }
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:aCancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull selectedAction) {
-            if (self.activeDismissHandler)
-            {
-                self.activeDismissHandler(0, selectedAction.title, YES);
-            }
-        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:aCancelTitle
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *_Nonnull selectedAction) {
+                                                                 if (self.activeDismissHandler)
+                                                                 {
+                                                                     self.activeDismissHandler(0, selectedAction.title, YES);
+                                                                 }
+                                                             }];
         [_activeAlertController addAction:cancelAction];
-
     }
     return self;
 }
@@ -72,24 +75,23 @@
     [[self rootViewController] presentViewController:self.activeAlertController animated:NO completion:nil];
 }
 
-- (void)addTextFieldWithPlaceholder:(NSString*)placeholder defaultText:(NSString*)defaultText isSecure:(BOOL)isSecure
+- (void)addTextFieldWithPlaceholder:(NSString *)placeholder defaultText:(NSString *)defaultText isSecure:(BOOL)isSecure
 {
-    [self.activeAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.activeAlertController addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
         textField.placeholder = placeholder;
         textField.text = defaultText;
         [textField setSecureTextEntry:isSecure];
     }];
 }
 
-- (NSString*)contentOfTextFieldAtIndex:(NSInteger)index
+- (NSString *)contentOfTextFieldAtIndex:(NSInteger)index
 {
     return self.activeAlertController.textFields[index].text;
 }
 
-- (UIViewController*)rootViewController
+- (UIViewController *)rootViewController
 {
     return [UIApplication sharedApplication].keyWindow.rootViewController;
 }
-
 
 @end

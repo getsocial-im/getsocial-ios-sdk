@@ -15,8 +15,10 @@
  */
 
 #import "CustomSmartInviteViewController.h"
+#import <AVFoundation/AVFoundation.h>
 #import <GetSocial/GetSocial.h>
 #import <GetSocialUI/GetSocialUI.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImage+GetSocial.h"
 #import "UISimpleAlertViewController.h"
 
@@ -25,16 +27,22 @@
 
 #define IMAGE_HEIGHT 140
 
-#define INVITE_SECTION_HEIGHT_W_IMAGE 325
-#define LP_SECTION_HEIGHT_W_IMAGE 368
+#define CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES 160
+#define LP_SECTION_HEIGHT_WITH_IMAGE 368
 
 @interface CustomSmartInviteViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     BOOL keyboardIsShown;
 }
 @property(weak, nonatomic) IBOutlet UIImageView *customImage;
+@property(weak, nonatomic) IBOutlet UIImageView *customVideoThumbnail;
+
 @property(nonatomic, strong) UIImagePickerController *imagePicker;
-@property(weak, nonatomic) IBOutlet NSLayoutConstraint *inviteSectionHeight;
+@property(weak, nonatomic) IBOutlet UIButton *clearImageButton;
+@property(weak, nonatomic) IBOutlet UIButton *clearVideoButton;
+@property(nonatomic) NSData *customVideoContent;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *customImageSectionHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *customVideoSectionHeight;
 
 @property(nonatomic) BOOL selectImageForInvite;
 
@@ -70,8 +78,14 @@
                                                object:self.view.window];
     keyboardIsShown = NO;
 
-    self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
-    self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    self.customImage.hidden = YES;
+    self.clearImageButton.hidden = YES;
+    self.customVideoThumbnail.hidden = YES;
+    self.clearVideoButton.hidden = YES;
+
+    self.customImageSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
+    self.customVideoSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
+    self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_WITH_IMAGE - IMAGE_HEIGHT;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -148,18 +162,28 @@
 
     GetSocialMutableInviteContent *mutableInviteContent = [GetSocialMutableInviteContent new];
 
-    if (![self.textfield.text isEqualToString:@""])
+    if (self.textfield.text.length > 0)
     {
         mutableInviteContent.text = self.textfield.text;
     }
 
-    if (![self.subjectField.text isEqualToString:@""])
+    if (self.subjectField.text.length > 0)
     {
         mutableInviteContent.subject = self.subjectField.text;
     }
+
+    if (self.imageUrlField.text.length > 0)
+    {
+        mutableInviteContent.imageUrl = self.imageUrlField.text;
+    }
+
     if (self.customImage.image)
     {
         mutableInviteContent.image = self.customImage.image;
+    }
+    if (self.customVideoContent)
+    {
+        mutableInviteContent.video = self.customVideoContent;
     }
 
     GetSocialUIInvitesView *invitesView = [GetSocialUI createInvitesView];
@@ -197,30 +221,65 @@
 - (IBAction)changeImage:(id)sender
 {
     self.selectImageForInvite = YES;
-    [self openImagePicker];
+    [self showImagePickerViewForMediaType:(NSString *)kUTTypeImage];
+}
+- (IBAction)changeVideo:(id)sender
+{
+    [self showImagePickerViewForMediaType:(NSString *)kUTTypeMovie];
 }
 
 - (IBAction)clearImage:(id)sender
 {
-    if (self.customImage.image == self.landingPageImage.image)
-    {
-        self.landingPageImage.image = nil;
-        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
-    }
     self.customImage.image = nil;
-    self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    self.customImage.hidden = YES;
+    self.clearImageButton.hidden = YES;
+    self.customImageSectionHeight.constant -= IMAGE_HEIGHT;
+}
+
+- (void)showImagePickerViewForMediaType:(NSString *)mediaType
+{
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.mediaTypes = @[ mediaType ];
+
+    self.imagePicker.delegate = self;
+
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)clearVideo:(id)sender
+{
+    self.customVideoThumbnail.image = nil;
+    self.customVideoThumbnail.hidden = YES;
+    self.clearVideoButton.hidden = YES;
+    self.customVideoContent = nil;
+    self.customVideoSectionHeight.constant -= IMAGE_HEIGHT;
+}
+
+- (UIImage *)generateThumbnailImage:(NSURL *)filepath
+{
+    AVAsset *asset = [AVAsset assetWithURL:filepath];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 0;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+
+    return thumbnail;
 }
 
 - (IBAction)changeLandingPageImage:(id)sender
 {
     self.selectImageForInvite = NO;
-    [self openImagePicker];
+    [self showImagePickerViewForMediaType:(NSString *)kUTTypeImage];
 }
 
 - (IBAction)clearLandingPageImage:(id)sender
 {
     self.landingPageImage.image = nil;
-    self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
+    self.landingPageSectionHeight.constant -= IMAGE_HEIGHT;
 }
 
 - (IBAction)useSameImage:(id)sender
@@ -228,7 +287,7 @@
     if (self.customImage.image != nil)
     {
         self.landingPageImage.image = self.customImage.image;
-        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE;
+        self.landingPageSectionHeight.constant += IMAGE_HEIGHT;
     }
 }
 
@@ -279,18 +338,7 @@
     return linkParams;
 }
 
-- (void)openImagePicker
-{
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.imagePicker.delegate = self;
-
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
-}
-
-#pragma mark - UIImagePickerController
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
+- (void)useSelectedImageWithInfo:(NSDictionary<NSString *, id> *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
@@ -298,12 +346,44 @@
     if (self.selectImageForInvite)
     {
         self.customImage.image = image;
-        self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE;
+        self.customImageSectionHeight.constant += IMAGE_HEIGHT;
+        self.customImage.hidden = NO;
+        self.clearImageButton.hidden = NO;
     }
     else
     {
         self.landingPageImage.image = image;
-        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE;
+        self.landingPageSectionHeight.constant += IMAGE_HEIGHT;
+        self.landingPageImage.hidden = NO;
+    }
+}
+
+- (void)useSelectedVideoWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
+    self.customVideoContent = [NSData dataWithContentsOfURL:videoUrl];
+    UIImage *image = [self generateThumbnailImage:videoUrl];
+    int max_width = self.view.bounds.size.width * 0.8;
+    image = [image imageByResizeAndKeepRatio:CGSizeMake(max_width, max_width * 0.4)];
+
+    self.customVideoThumbnail.image = image;
+    self.customVideoThumbnail.hidden = NO;
+    self.clearVideoButton.hidden = NO;
+    self.customVideoSectionHeight.constant += IMAGE_HEIGHT;
+}
+
+#pragma mark - UIImagePickerController
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
+        [self useSelectedImageWithInfo:info];
+    }
+    else
+    {
+        [self useSelectedVideoWithInfo:info];
     }
 
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
@@ -314,15 +394,6 @@
 {
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
-
-    if (self.selectImageForInvite)
-    {
-        self.inviteSectionHeight.constant = INVITE_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
-    }
-    else
-    {
-        self.landingPageSectionHeight.constant = LP_SECTION_HEIGHT_W_IMAGE - IMAGE_HEIGHT;
-    }
 }
 
 @end

@@ -22,6 +22,8 @@
 #import "ConsoleViewController.h"
 #import "UIViewController+GetSocial.h"
 #import "UIImage+GetSocial.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define GLOBAL_FEED @"Global Feed"
 #define CUSTOM_FEED @"Custom Feed"
@@ -42,6 +44,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *buttonAction;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *currentFeed;
+@property (weak, nonatomic) IBOutlet UIButton *clearImageButton;
+
+@property (nonatomic) NSData* contentVideo;
 
 @property (nonatomic, strong) NSString *currentFeedTitle;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
@@ -56,6 +61,8 @@
     self.currentFeed.dataSource = self;
     self.currentFeedTitle = GLOBAL_FEED;
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
+    self.contentImage.hidden = YES;
+    self.clearImageButton.hidden = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -75,6 +82,7 @@
 
     UIImage *image = self.contentImage.image;
     BOOL hasImage = image != nil;
+    BOOL hasVideo = self.contentVideo != nil;
 
     BOOL globalFeed = [self.currentFeedTitle isEqualToString:GLOBAL_FEED];
     if (globalFeed && [GetSocialUser isAnonymous])
@@ -85,9 +93,9 @@
         return;
     }
     
-    if (!hasText && !hasButton && !hasImage)
+    if (!hasText && !hasButton && !hasImage && !hasVideo)
     {
-        [self showAlertWithTitle:@"Error" andText:@"Can not post activity withot any data"];
+        [self showAlertWithTitle:@"Error" andText:@"Can not post activity without any data"];
         return;
     }
     if (hasText)
@@ -102,6 +110,11 @@
     {
         content.buttonTitle = buttonTitle;
         content.buttonAction = buttonAction;
+    }
+    
+    if (hasVideo)
+    {
+        content.video = self.contentVideo;
     }
 
     [self showActivityIndicatorView];
@@ -137,19 +150,33 @@
         [GetSocial postActivity:content toFeed:@"DemoFeed" success:onSuccess failure:onFailure];
     }
 }
+- (IBAction)changeVideo:(id)sender
+{
+    [self showImagePickerViewForMediaType:(NSString*)kUTTypeMovie];
+}
 
 - (IBAction)changeImage:(id)sender
 {
+    [self showImagePickerViewForMediaType:(NSString*)kUTTypeImage];
+}
+
+- (void)showImagePickerViewForMediaType:(NSString*)mediaType
+{
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.imagePicker.delegate = self;
+    self.imagePicker.mediaTypes = @[mediaType];
 
+    self.imagePicker.delegate = self;
+    
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
 - (IBAction)clearImage:(id)sender
 {
     self.contentImage.image = nil;
+    self.contentImage.hidden = YES;
+    self.clearImageButton.hidden = YES;
+    self.contentVideo = nil;
 }
 
 - (NSArray *)feeds
@@ -185,12 +212,30 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
 {
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
+    NSString* mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString*)kUTTypeImage])
+    {
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
+        
+        self.contentImage.image = image;
+    }
+    else
+    {
+        NSURL* videoUrl = info[UIImagePickerControllerMediaURL];
+        self.contentVideo = [NSData dataWithContentsOfURL:videoUrl];
+        UIImage* image =  [self generateThumbnailImage:videoUrl];
+        int max_width = self.view.bounds.size.width * 0.8;
+        image = [image imageByResizeAndKeepRatio:CGSizeMake(max_width, max_width * 0.4)];
 
-    self.contentImage.image = image;
+        self.contentImage.image = image;
+    }
+    
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
+
+    self.contentImage.hidden = NO;
+    self.clearImageButton.hidden = NO;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -199,6 +244,19 @@
     self.imagePicker = nil;
 }
 
+- (UIImage *)generateThumbnailImage:(NSURL *)filepath
+{
+    AVAsset *asset = [AVAsset assetWithURL:filepath];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 0;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+
+    return thumbnail;
+}
 
 
 @end

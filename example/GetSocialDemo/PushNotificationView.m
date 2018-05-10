@@ -14,15 +14,18 @@ static NSInteger const Padding = 10;
 
 + (void)showNotificationWithTitle:(NSString *)title andMessage:(NSString *)message
 {
-    UIViewController *root                    = [UIApplication sharedApplication].keyWindow.rootViewController;
-    PushNotificationView *notificationsView   = [[PushNotificationView alloc] initWithFrame:CGRectMake(HorizontalMargin, -Height * 2, root.view.frame.size.width - HorizontalMargin * 2, Height)];
+    UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
+    PushNotificationView *notificationsView = [[PushNotificationView alloc]
+        initWithFrame:CGRectMake(HorizontalMargin, -Height * 2, root.view.frame.size.width - HorizontalMargin * 2, Height)];
 
     [notificationsView showWithTitle:title andMessage:message];
 
     [root.view addSubview:notificationsView];
-    [UIView animateWithDuration:0.2f animations:^{
-        notificationsView.frame = CGRectMake(HorizontalMargin, VerticalMargin, root.view.frame.size.width - HorizontalMargin * 2, Height);
-    }];
+    [UIView animateWithDuration:0.2f
+                     animations:^{
+                         notificationsView.frame =
+                             CGRectMake(HorizontalMargin, VerticalMargin, root.view.frame.size.width - HorizontalMargin * 2, Height);
+                     }];
 }
 
 - (void)showWithTitle:(NSString *)title andMessage:(NSString *)message
@@ -34,22 +37,20 @@ static NSInteger const Padding = 10;
     self.layer.shadowRadius = 2.0;
     self.layer.shadowOffset = CGSizeMake(2.0, 2.0);
 
-    UILabel *titleView      = [[UILabel alloc] initWithFrame:CGRectMake(Padding, 10, self.frame.size.width - Padding * 2, 30)];
-    UILabel *messageView    = [[UILabel alloc] initWithFrame:CGRectMake(Padding, 40, self.frame.size.width - Padding * 2, 60)];
+    UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(Padding, 10, self.frame.size.width - Padding * 2, 30)];
+    UILabel *messageView = [[UILabel alloc] initWithFrame:CGRectMake(Padding, 40, self.frame.size.width - Padding * 2, 60)];
 
-    titleView.font              = [UIFont boldSystemFontOfSize:15];
-    messageView.font            = [UIFont systemFontOfSize:15];
-    messageView.numberOfLines   = 0;
+    titleView.font = [UIFont boldSystemFontOfSize:15];
+    messageView.font = [UIFont systemFontOfSize:15];
+    messageView.numberOfLines = 0;
 
-    titleView.text      = title;
-    messageView.text    = message;
+    titleView.text = title;
+    messageView.text = message;
 
     [self addSubview:titleView];
     [self addSubview:messageView];
 
-    UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]
-            initWithTarget:self
-                    action:@selector(handlePan:)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
 
     [self addGestureRecognizer:pan];
 
@@ -62,30 +63,40 @@ static NSInteger const Padding = 10;
 {
     CGPoint center = pan.view.center;
     CGPoint translation = [pan translationInView:pan.view];
-    if (pan.state == UIGestureRecognizerStateChanged) {
-        if (center.y > 150) {
+    if (pan.state == UIGestureRecognizerStateChanged)
+    {
+        if (center.y > 150)
+        {
             translation.y = translation.y / 2.f;
         }
         center = CGPointMake(center.x, center.y + translation.y);
         pan.view.center = center;
         [pan setTranslation:CGPointZero inView:pan.view];
-    } else if (pan.state == UIGestureRecognizerStateEnded) {
-        if (center.y < 20) {
+    }
+    else if (pan.state == UIGestureRecognizerStateEnded)
+    {
+        if (center.y < 20)
+        {
             [self hideAnimated];
-        } else {
-            [UIView animateWithDuration:0.3f animations:^{
-                pan.view.center = CGPointMake(center.x, 50 + VerticalMargin);
-            }];
+        }
+        else
+        {
+            [UIView animateWithDuration:0.3f
+                             animations:^{
+                                 pan.view.center = CGPointMake(center.x, 50 + VerticalMargin);
+                             }];
         }
     }
 }
 
 - (void)hideAnimated
 {
-    [UIView animateWithDuration:0.3f animations:^{
-        self.center = CGPointMake(self.center.x, -150);
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    [UIView animateWithDuration:0.3f
+        animations:^{
+            self.center = CGPointMake(self.center.x, -150);
+        }
+        completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
 }
 @end

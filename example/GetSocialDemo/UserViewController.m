@@ -14,11 +14,11 @@
  *	limitations under the License.
  */
 
+#import "UserViewController.h"
 #import <GetSocial/GetSocial.h>
 #import <GetSocial/GetSocialUser.h>
 #import "Constants.h"
 #import "UserIdentityViewController.h"
-#import "UserViewController.h"
 
 @interface UserViewController ()
 
@@ -64,11 +64,11 @@
         return;
     }
     NSMutableString *details = [NSMutableString string];
-    NSMutableDictionary* userDetails = [NSMutableDictionary dictionary];
+    NSMutableDictionary *userDetails = [NSMutableDictionary dictionary];
 
     [details appendFormat:@"DisplayName: %@\n", [GetSocialUser displayName]];
     userDetails[@"DisplayName"] = [GetSocialUser displayName];
-    
+
     [details appendFormat:@"User ID: %@\n", [GetSocialUser userId]];
     userDetails[@"User ID"] = [GetSocialUser userId];
 
@@ -79,7 +79,7 @@
     {
         userDetails[@"IsAnonymous"] = @NO;
         [details appendString:@"\n\nIdentities\n\n"];
-        NSMutableDictionary* identities = [NSMutableDictionary dictionary];
+        NSMutableDictionary *identities = [NSMutableDictionary dictionary];
         [[GetSocialUser authIdentities] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *val, BOOL *stop) {
             [details appendFormat:@"Provider: %@\n", key];
             [details appendFormat:@"UserId: %@\n", val];
@@ -88,7 +88,8 @@
             identities[@"Provider User ID"] = val;
         }];
         userDetails[@"Identities"] = identities;
-    } else
+    }
+    else
     {
         userDetails[@"IsAnonymous"] = @YES;
         [details appendString:@"\n\nAnonymous\n\n"];
@@ -109,8 +110,8 @@
     }];
 
     [details appendString:@"\n\nJSON\n\n"];
-    
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:userDetails options:NSJSONWritingPrettyPrinted error:nil];
+
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userDetails options:NSJSONWritingPrettyPrinted error:nil];
     [details appendString:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
 
     self.detailsTextView.text = details;

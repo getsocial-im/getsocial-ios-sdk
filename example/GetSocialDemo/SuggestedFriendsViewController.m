@@ -7,19 +7,20 @@
 //
 
 #import "SuggestedFriendsViewController.h"
-#import "SuggestedFriendTableViewCell.h"
 #import <GetSocial/GetSocialUser.h>
+#import "SuggestedFriendTableViewCell.h"
 
 @interface SuggestedFriendsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSMutableArray *selectedRows;
-@property (weak, nonatomic) IBOutlet UITableView *suggestedFriends;
+@property(nonatomic, strong) NSMutableArray *selectedRows;
+@property(weak, nonatomic) IBOutlet UITableView *suggestedFriends;
 
 @end
 
 @implementation SuggestedFriendsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationController.toolbarHidden = NO;
     self.suggestedFriends.delegate = self;
@@ -29,59 +30,71 @@
 
 - (NSMutableArray *)selectedRows
 {
-    if (!_selectedRows) {
+    if (!_selectedRows)
+    {
         _selectedRows = [NSMutableArray new];
-        for (int i = 0; i < self.friends.count; i++) {
+        for (int i = 0; i < self.friends.count; i++)
+        {
             _selectedRows[i] = @(NO);
         }
     }
     return _selectedRows;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)didPressCancel:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^() {
-        self.navigationController.toolbarHidden = YES;
-    }];
+    [self dismissViewControllerAnimated:YES
+                             completion:^() {
+                                 self.navigationController.toolbarHidden = YES;
+                             }];
 }
 
 - (IBAction)didPressAdd:(id)sender
 {
     NSMutableArray<GetSocialSuggestedFriend *> *friendsToAdd = [NSMutableArray new];
-    for (int i = 0; i < self.selectedRows.count; i++) {
-        if ([self.selectedRows[i] boolValue]) {
+    for (int i = 0; i < self.selectedRows.count; i++)
+    {
+        if ([self.selectedRows[i] boolValue])
+        {
             [friendsToAdd addObject:self.friends[i]];
         }
     }
     __block NSUInteger counter = friendsToAdd.count;
-    if (counter == 0) {
-        [self dismissViewControllerAnimated:YES completion:^() {
-            self.navigationController.toolbarHidden = YES;
-        }];
+    if (counter == 0)
+    {
+        [self dismissViewControllerAnimated:YES
+                                 completion:^() {
+                                     self.navigationController.toolbarHidden = YES;
+                                 }];
         return;
     }
     void (^onAddFriend)(void) = ^void() {
-        if (--counter == 0) {
-            [self dismissViewControllerAnimated:YES completion:^() {
-                self.navigationController.toolbarHidden = YES;
-            }];
+        if (--counter == 0)
+        {
+            [self dismissViewControllerAnimated:YES
+                                     completion:^() {
+                                         self.navigationController.toolbarHidden = YES;
+                                     }];
         }
     };
-    
-    for (GetSocialSuggestedFriend *friend in friendsToAdd) {
-        [GetSocialUser addFriend:friend.userId success:^(int result) {
-            onAddFriend();
-        } failure:^(NSError * _Nonnull error) {
-            NSLog(@"Failed to add friend: %@", error.localizedDescription);
-            onAddFriend();
-        }];
-    }
 
+    for (GetSocialSuggestedFriend *friend in friendsToAdd)
+    {
+        [GetSocialUser addFriend:friend.userId
+            success:^(int result) {
+                onAddFriend();
+            }
+            failure:^(NSError *_Nonnull error) {
+                NSLog(@"Failed to add friend: %@", error.localizedDescription);
+                onAddFriend();
+            }];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -97,11 +110,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SuggestedFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"suggestedFriendCell"];
-    
+
     cell.user = self.friends[indexPath.row];
     BOOL isSelected = [self.selectedRows[indexPath.row] boolValue];
     cell.accessoryType = isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    
+
     return cell;
 }
 

@@ -16,13 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, MenuItemType)
-{
-    MenuItemTypeParent,
-    MenuItemTypeActionable,
-    MenuItemTypeCheckable,
-    MenuItemTypeGroupedCheckable
-};
+typedef NS_ENUM(NSUInteger, MenuItemType) { MenuItemTypeParent, MenuItemTypeActionable, MenuItemTypeCheckable, MenuItemTypeGroupedCheckable };
 
 @class ParentMenuItem;
 @class ActionableMenuItem;

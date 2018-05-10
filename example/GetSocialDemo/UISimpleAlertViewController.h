@@ -25,8 +25,8 @@ typedef void (^UISimpleAlertViewControllerDismissedHandler)(NSInteger selectedIn
             cancelButtonTitle:(NSString *)aCancelTitle
             otherButtonTitles:(NSArray *)otherTitles;
 
-- (void)addTextFieldWithPlaceholder:(NSString*)placeholder defaultText:(NSString*)defaultText isSecure:(BOOL)isSecure;
-- (NSString*)contentOfTextFieldAtIndex:(NSInteger)index;
+- (void)addTextFieldWithPlaceholder:(NSString *)placeholder defaultText:(NSString *)defaultText isSecure:(BOOL)isSecure;
+- (NSString *)contentOfTextFieldAtIndex:(NSInteger)index;
 
 - (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler;
 

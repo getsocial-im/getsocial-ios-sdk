@@ -14,8 +14,8 @@
  *	limitations under the License.
  */
 
-#import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import "GetSocialKakaoTalkInvitePlugin.h"
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 @implementation GetSocialKakaoTalkInvitePlugin
 
@@ -34,25 +34,25 @@
     self.successCallback = successCallback;
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
-    
-    NSMutableArray* sharedContent = [NSMutableArray array];
+
+    NSMutableArray *sharedContent = [NSMutableArray array];
     KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:invitePackage.text];
     [sharedContent addObject:label];
-    
-    if(invitePackage.imageUrl && invitePackage.image)
+
+    if (invitePackage.imageUrl && invitePackage.image)
     {
         CGFloat sharedImageWidth = 300;
-        UIImage* image = invitePackage.image;
+        UIImage *image = invitePackage.image;
         CGFloat ratio = image.size.height / image.size.width;
         CGFloat height = ratio * sharedImageWidth;
-        
+
         KakaoTalkLinkObject *imageLink = [KakaoTalkLinkObject createImage:invitePackage.imageUrl width:sharedImageWidth height:height];
         [sharedContent addObject:imageLink];
     }
-    
+
     [KOAppCall openKakaoTalkAppLink:sharedContent];
-    
-    if(successCallback)
+
+    if (successCallback)
     {
         successCallback();
     }

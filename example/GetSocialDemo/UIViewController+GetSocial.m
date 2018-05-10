@@ -14,18 +14,18 @@
  *	limitations under the License.
  */
 
-#import "UIViewController+GetSocial.h"
 #import "ActivityIndicatorViewController.h"
-#import "UISimpleAlertViewController.h"
 #import "MainNavigationController.h"
+#import "UISimpleAlertViewController.h"
+#import "UIViewController+GetSocial.h"
 
-@implementation UIViewController(GetSocial)
+@implementation UIViewController (GetSocial)
 
-static UIView* activityIndicatorView;
+static UIView *activityIndicatorView;
 
 #pragma mark - Activity Indicator
 
-- (ActivityIndicatorViewController*)activityViewController
+- (ActivityIndicatorViewController *)activityViewController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     return [storyboard instantiateViewControllerWithIdentifier:@"activityIndicatorViewController"];
@@ -67,20 +67,20 @@ static UIView* activityIndicatorView;
             case LogLevelInfo:
                 [self showAlertWithTitle:[NSString stringWithFormat:@"Info (%@)", context] andText:message];
                 break;
-                
+
             case LogLevelWarning:
                 [self showAlertWithTitle:[NSString stringWithFormat:@"Warning (%@)", context] andText:message];
                 break;
-                
+
             case LogLevelError:
                 [self showAlertWithTitle:[NSString stringWithFormat:@"Error (%@)", context] andText:message];
                 break;
-                
+
             default:
                 break;
         }
     }
-    
+
     if (showConsole)
     {
         [self openConsole];
@@ -94,13 +94,14 @@ static UIView* activityIndicatorView;
 
 - (void)showAlertWithTitle:(NSString *)title andText:(NSString *)text
 {
-    UISimpleAlertViewController* alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:title message:text cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UISimpleAlertViewController *alertViewController =
+        [[UISimpleAlertViewController alloc] initWithTitle:title message:text cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertViewController showWithDismissHandler:nil];
 }
 
 - (void)openConsole
 {
-    MainNavigationController* mainNavigationController = self.childViewControllers[0];
+    MainNavigationController *mainNavigationController = self.childViewControllers[0];
     [mainNavigationController pushViewController:[ConsoleViewController sharedController] animated:YES];
 }
 

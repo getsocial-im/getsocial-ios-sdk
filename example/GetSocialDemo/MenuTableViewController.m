@@ -14,13 +14,13 @@
  *	limitations under the License.
  */
 
-#import <GetSocial/GetSocialUser.h>
 #import "MenuTableViewController.h"
-#import "UserIdentityViewController.h"
+#import <GetSocial/GetSocialUser.h>
 #import "ConsoleViewController.h"
-#import "UserViewController.h"
 #import "MenuTableViewCell.h"
 #import "PushNotificationView.h"
+#import "UserIdentityViewController.h"
+#import "UserViewController.h"
 
 @interface MenuTableViewController ()
 
@@ -43,7 +43,8 @@
         self.navigationItem.titleView = userIdentityVC.view;
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openUserDetails:)];
-        UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copyUserIdToClipboard:)];
+        UILongPressGestureRecognizer *longPressGestureRecognizer =
+            [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copyUserIdToClipboard:)];
 
         [self.navigationItem.titleView addGestureRecognizer:tapGestureRecognizer];
         [self.navigationItem.titleView addGestureRecognizer:longPressGestureRecognizer];
@@ -65,12 +66,14 @@
     if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         self.isPressing = NO;
-    } else if (recognizer.state == UIGestureRecognizerStateBegan)
+    }
+    else if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         if (!self.isPressing)
         {
             [UIPasteboard generalPasteboard].string = [GetSocialUser userId];
-            [PushNotificationView showNotificationWithTitle:@"Clipboard" andMessage:[NSString stringWithFormat:@"Copy %@ to clipboard.", [GetSocialUser userId] ]];
+            [PushNotificationView showNotificationWithTitle:@"Clipboard"
+                                                 andMessage:[NSString stringWithFormat:@"Copy %@ to clipboard.", [GetSocialUser userId]]];
             self.isPressing = YES;
         }
     }

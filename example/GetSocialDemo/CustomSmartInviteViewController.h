@@ -20,6 +20,9 @@
 @property(weak, nonatomic) IBOutlet UITextField *subjectField;
 @property(weak, nonatomic) IBOutlet UITextField *textfield;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *imageUrlField;
+@property (weak, nonatomic) IBOutlet UITextField *gifUrlField;
+@property (weak, nonatomic) IBOutlet UITextField *videoUrlField;
 
 @property(weak, nonatomic) IBOutlet UITextField *key1Field;
 @property(weak, nonatomic) IBOutlet UITextField *key2Field;

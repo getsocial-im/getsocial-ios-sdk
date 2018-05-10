@@ -14,14 +14,14 @@
  *	limitations under the License.
  */
 
-@protocol PostActivityVCDelegate <NSObject>
+@protocol PostActivityVCDelegate<NSObject>
 
-- (void)authorizeWithSuccess:(void(^)(void))success;
+- (void)authorizeWithSuccess:(void (^)(void))success;
 
 @end
 
 @interface PostActivityViewController : UIViewController
 
-@property (nonatomic, weak) id<PostActivityVCDelegate> delegate;
+@property(nonatomic, weak) id<PostActivityVCDelegate> delegate;
 
 @end
