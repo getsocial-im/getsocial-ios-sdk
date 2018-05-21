@@ -23,6 +23,7 @@
 #import "MainNavigationController.h"
 #import "MenuItem.h"
 #import "NewFriendViewController.h"
+#import "NotificationsViewController.h"
 #import "PostActivityViewController.h"
 #import "UISimpleAlertViewController.h"
 #import "UIViewController+GetSocial.h"
@@ -93,7 +94,9 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) FBSDKLoginManager *facebookSdkManager;
 
 @property(nonatomic, strong) ActionableMenuItem *friendsMenu;
+@property(nonatomic, strong) ActionableMenuItem *notificationsMenu;
 @property(nonatomic, strong) UIImagePickerController *avatarImagePicker;
+@property(nonatomic, strong) CheckableMenuItem *pushNotificationsEnabledMenu;
 @end
 
 @implementation MainViewController
@@ -168,6 +171,36 @@ NSString *const kCustomProvider = @"custom";
     }
         failure:^(NSError *error) {
             GSLogError(NO, NO, @"Error updating friends count: %@", error.localizedDescription);
+        }];
+
+    NSString *status = [NSUserDefaults.standardUserDefaults stringForKey:@"notification_status"];
+    GetSocialNotificationsCountQuery *query;
+    if ([status isEqualToString:@"Read"])
+    {
+        query = [GetSocialNotificationsCountQuery read];
+    }
+    else if ([status isEqualToString:@"Unread"])
+    {
+        query = [GetSocialNotificationsCountQuery unread];
+    }
+    else
+    {
+        query = [GetSocialNotificationsCountQuery readAndUnread];
+    }
+    [query setTypes:[NSUserDefaults.standardUserDefaults arrayForKey:@"notification_types"]];
+    [GetSocialUser notificationsCountWithQuery:query
+        success:^(int result) {
+            self.notificationsMenu.detail = [NSString stringWithFormat:@"You have %d notifications", result];
+        }
+        failure:^(NSError *error) {
+            GSLogError(NO, NO, @"Error updating notifications count: %@", error.localizedDescription);
+        }];
+
+    [GetSocialUser isPushNotificationsEnabledWithSuccess:^(BOOL result) {
+        self.pushNotificationsEnabledMenu.isChecked = result;
+    }
+        failure:^(NSError *error) {
+            NSLog(@"Failed to check PN status, %@", error.localizedDescription);
         }];
 }
 
@@ -401,6 +434,14 @@ NSString *const kCustomProvider = @"custom";
 
         [self.menu addObject:self.activitiesMenu];
 
+        // Notifications Menu
+        [self.menu addObject:self.notificationsMenu = [MenuItem actionableMenuItemWithTitle:@"Notifications"
+                                                                                     action:^{
+                                                                                         [self openNotifications];
+                                                                                     }]];
+
+        self.notificationsMenu.detail = @"You have 0 notifications";
+
         // UI Customization Menu
         self.uiCustomizationMenu = [MenuItem parentMenuItemWithTitle:@"UI Customization"];
         self.uiCustomizationMenu.detail = @"Current UI: Default";
@@ -493,6 +534,20 @@ NSString *const kCustomProvider = @"custom";
                                                       }];
 
         [self.settingsMenu addSubmenu:self.languageMenu];
+        self.pushNotificationsEnabledMenu =
+            [MenuItem checkableMenuItemWithTitle:@"Enable Push Notifications"
+                                       isChecked:YES
+                                          action:^BOOL(BOOL isChecked) {
+                                              [GetSocialUser setPushNotificationsEnabled:isChecked
+                                                  success:^{
+                                                      self.pushNotificationsEnabledMenu.isChecked = isChecked;
+                                                  }
+                                                  failure:^(NSError *error) {
+                                                      NSLog(@"Failed to change PN status, %@", error.localizedDescription);
+                                                  }];
+                                              return NO;
+                                          }];
+        [self.settingsMenu addSubmenu:self.pushNotificationsEnabledMenu];
 
         [self.menu addObject:self.settingsMenu];
     }
@@ -842,38 +897,15 @@ NSString *const kCustomProvider = @"custom";
 - (void)setFacebookAvatar
 {
     FBSDKProfile *profile = [FBSDKProfile currentProfile];
-    NSString *profileImageUrl = [profile imagePathForPictureMode:FBSDKProfilePictureModeNormal size:CGSizeMake(250, 250)];
+    NSURL *profileImageUrl = [profile imageURLForPictureMode:FBSDKProfilePictureModeNormal size:CGSizeMake(250, 250)];
 
-    [self fetchFacebookProfilePictureWithPath:profileImageUrl
-                              completionBlock:^(NSString *pictureUrl) {
-                                  if (pictureUrl != nil)
-                                  {
-                                      [GetSocialUser setAvatarUrl:pictureUrl
-                                          success:^{
-                                              [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
-                                          }
-                                          failure:^(NSError *error) {
-                                              GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@",
-                                                         error.localizedDescription);
-                                          }];
-                                  }
-                              }];
-}
-
-- (void)fetchFacebookProfilePictureWithPath:(NSString *)path completionBlock:(void (^)(NSString *pictureUrl))success
-{
-    NSDictionary *params = @{@"redirect" : @"false", @"type" : @"small"};
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path parameters:params HTTPMethod:@"GET"];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        NSString *pictureUrl = nil;
-        if (error == nil)
-        {
-            NSDictionary *resultDict = (NSDictionary *)result;
-            NSDictionary *dataDict = resultDict[@"data"];
-            pictureUrl = dataDict[@"url"];
+    [GetSocialUser setAvatarUrl:profileImageUrl.absoluteString
+        success:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         }
-        success(pictureUrl);
-    }];
+        failure:^(NSError *error) {
+            GSLogError(YES, NO, @"Error changing user display name to facebook provided: %@", error.localizedDescription);
+        }];
 }
 
 - (void)setFacebookDisplayName
@@ -1190,6 +1222,14 @@ NSString *const kCustomProvider = @"custom";
     [self showAlertToChooseAuthorizationOptionToPerform:^{
         success();
     }];
+}
+
+#pragma mark - Notifications
+
+- (void)openNotifications
+{
+    NotificationsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Notifications"];
+    [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Localization

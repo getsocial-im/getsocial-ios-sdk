@@ -18,6 +18,7 @@
 #import "MainNavigationController.h"
 
 @class ActionableMenuItem;
+@class CheckableMenuItem;
 
 @interface MainViewController : UIViewController <UIImagePickerControllerDelegate>
 

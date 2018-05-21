@@ -21,6 +21,12 @@
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
 		6F3DCE9F1FFE84B200F65784 /* AdjustSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7DF86E1FFE827A00D8F309 /* AdjustSdk.framework */; };
 		6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7DF86E1FFE827A00D8F309 /* AdjustSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6F5CD6C620A095BE00693B85 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5CD6C420A095BE00693B85 /* NotificationsViewController.m */; };
+		6F5CD6C720A095BE00693B85 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5CD6C520A095BE00693B85 /* NotificationTableViewCell.m */; };
+		6F5CD6CA20A095DA00693B85 /* NotificationsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5CD6C820A095DA00693B85 /* NotificationsViewController.h */; };
+		6F5CD6CB20A095DA00693B85 /* NotificationTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5CD6C920A095DA00693B85 /* NotificationTableViewCell.h */; };
+		6F5CD6D420A1BD5E00693B85 /* NotificationsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5CD6D220A1BD5D00693B85 /* NotificationsFilterViewController.m */; };
+		6F5CD6D520A1BD5E00693B85 /* NotificationsFilterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5CD6D320A1BD5E00693B85 /* NotificationsFilterViewController.h */; };
 		6F654C652017844B00B2FCFD /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */; };
 		6F6979A11EE8360900ED08B5 /* SuggestedFriendsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */; };
 		6F6979A21EE8360900ED08B5 /* SuggestedFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */; };
@@ -248,6 +254,12 @@
 		213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetSocial.h"; sourceTree = "<group>"; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
+		6F5CD6C420A095BE00693B85 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
+		6F5CD6C520A095BE00693B85 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		6F5CD6C820A095DA00693B85 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		6F5CD6C920A095DA00693B85 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
+		6F5CD6D220A1BD5D00693B85 /* NotificationsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsFilterViewController.m; sourceTree = "<group>"; };
+		6F5CD6D320A1BD5E00693B85 /* NotificationsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsFilterViewController.h; sourceTree = "<group>"; };
 		6F654C642017844B00B2FCFD /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppsFlyerLib.framework; path = GetSocialDemo/Vendor/AppsFlyerLib.framework; sourceTree = "<group>"; };
 		6F654C6B201786F700B2FCFD /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedFriendsViewController.h; sourceTree = "<group>"; };
@@ -660,6 +672,12 @@
 		99FE1A811BB2B2EC00EF576A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6F5CD6D320A1BD5E00693B85 /* NotificationsFilterViewController.h */,
+				6F5CD6D220A1BD5D00693B85 /* NotificationsFilterViewController.m */,
+				6F5CD6C820A095DA00693B85 /* NotificationsViewController.h */,
+				6F5CD6C920A095DA00693B85 /* NotificationTableViewCell.h */,
+				6F5CD6C420A095BE00693B85 /* NotificationsViewController.m */,
+				6F5CD6C520A095BE00693B85 /* NotificationTableViewCell.m */,
 				BC9286081FC48F6F00306B6E /* UserIdentityView.h */,
 				BC9286091FC48F6F00306B6E /* UserIdentityView.m */,
 				BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */,
@@ -973,6 +991,7 @@
 				BC680F532074D08700A3551E /* VKBundle.h in Headers */,
 				BC680F452074D08700A3551E /* VKCaptchaView.h in Headers */,
 				BC680F3B2074D08700A3551E /* NSString+MD5.h in Headers */,
+				6F5CD6D520A1BD5E00693B85 /* NotificationsFilterViewController.h in Headers */,
 				BC680F072074D08600A3551E /* VKDocs.h in Headers */,
 				BC680F232074D08600A3551E /* NSError+VKError.h in Headers */,
 				BC680F272074D08600A3551E /* VKHTTPClient.h in Headers */,
@@ -987,6 +1006,7 @@
 				BC4637561E8D12F5008074E3 /* UISimpleAlertViewController.h in Headers */,
 				BC680F392074D08600A3551E /* VKUploadImage.h in Headers */,
 				BC680F092074D08600A3551E /* VKGroup.h in Headers */,
+				6F5CD6CA20A095DA00693B85 /* NotificationsViewController.h in Headers */,
 				BC680F132074D08600A3551E /* VKSchool.h in Headers */,
 				6F6979AB1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h in Headers */,
 				BC680EFB2074D08600A3551E /* VKApiUsers.h in Headers */,
@@ -1008,6 +1028,7 @@
 				BC680F0D2074D08600A3551E /* VKPhoto.h in Headers */,
 				BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */,
 				BC680F052074D08600A3551E /* VKCounters.h in Headers */,
+				6F5CD6CB20A095DA00693B85 /* NotificationTableViewCell.h in Headers */,
 				BC680F372074D08600A3551E /* VKImageParameters.h in Headers */,
 				BC4439A92003C67800682226 /* GetSocialFacebookSharePlugin.h in Headers */,
 				BC680F312074D08600A3551E /* VKRequest.h in Headers */,
@@ -1174,6 +1195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5CD6C620A095BE00693B85 /* NotificationsViewController.m in Sources */,
+				6F5CD6C720A095BE00693B85 /* NotificationTableViewCell.m in Sources */,
 				BC680F302074D08600A3551E /* VKOperation.m in Sources */,
 				BC680F1A2074D08600A3551E /* VKUploadMessagesPhotoRequest.m in Sources */,
 				995AC1E61BB1568E006424DF /* MenuTableViewController.m in Sources */,
@@ -1193,6 +1216,7 @@
 				BC680F442074D08700A3551E /* VKAuthorizeController.m in Sources */,
 				BC680EF12074D08600A3551E /* VKApiConst.m in Sources */,
 				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
+				6F5CD6D420A1BD5E00693B85 /* NotificationsFilterViewController.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
 				BC680EFA2074D08600A3551E /* VKApiPhotos.m in Sources */,
 				BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */,
