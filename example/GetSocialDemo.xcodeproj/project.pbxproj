@@ -1068,6 +1068,7 @@
 				6FF9938E1DD229FA00FB4F57 /* Headers */,
 				BC283CC81E0B315200572390 /* Embed Frameworks */,
 				BC8FF8DA1E166F25000AFAEF /* ShellScript */,
+				22B944B8945522255E9A4AF0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1162,6 +1163,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22B944B8945522255E9A4AF0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/GetSocial.framework/strip_frameworks.sh\"";
+			showEnvVarsInLog = 0;
+		};
 		BC4439751FFE3BC200682226 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1173,7 +1188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FRAMEWORK=\"$PROJECT_DIR/../bin/GetSocial.framework\"\necho $FRAMEWORK\nif [ ! -d \"$FRAMEWORK\" ]\nthen\n    ./getsocial.sh --app-id=LGa80P9790g4\nfi";
+			shellScript = "FRAMEWORK=\"$PROJECT_DIR/../bin/GetSocial.framework\"\necho $FRAMEWORK\nif [ ! -d \"$FRAMEWORK\" ]\nthen\n    ./getsocial.sh --app-id=LGa80P9790g4\nfi\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1186,7 +1201,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"$PROJECT_DIR/../GetSocialDemo/GetSocialDemo/Vendor/Fabric.framework/run\"";
+			shellScript = "\"$PROJECT_DIR/../GetSocialDemo/GetSocialDemo/Vendor/Fabric.framework/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
