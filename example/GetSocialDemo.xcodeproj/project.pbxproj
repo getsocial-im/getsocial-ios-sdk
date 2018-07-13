@@ -1188,7 +1188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FRAMEWORK=\"$PROJECT_DIR/../bin/GetSocial.framework\"\necho $FRAMEWORK\nif [ ! -d \"$FRAMEWORK\" ]\nthen\n    ./getsocial.sh --app-id=LGa80P9790g4\nfi\n";
+			shellScript = "FRAMEWORK=\"$PROJECT_DIR/../bin/GetSocial.framework\"\necho $FRAMEWORK\nif [ ! -d \"$FRAMEWORK\" ]\nthen\n    ./getsocial.sh --app-id=LGa80P9790g4\n    mv \"$PROJECT_DIR/GetSocial/\" \"$PROJECT_DIR/../bin/\"\nfi\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
