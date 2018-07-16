@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.19.1-master-c90d18e</string>
+	<string>6.20.0-master-685d25f</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -42,6 +42,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>twitterkit-fiCw1nyiio9pdkim79jgnG7gB</string>
 				<string>kakao4d436485d41336a82c47d0142682b4d7</string>
 				<string>getsocial-LGa80P9790g4</string>
 				<string>vk6437031</string>
