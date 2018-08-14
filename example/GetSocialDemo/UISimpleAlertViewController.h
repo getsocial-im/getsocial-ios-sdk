@@ -30,4 +30,6 @@ typedef void (^UISimpleAlertViewControllerDismissedHandler)(NSInteger selectedIn
 
 - (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler;
 
++ (void)hideAlertView;
+
 @end

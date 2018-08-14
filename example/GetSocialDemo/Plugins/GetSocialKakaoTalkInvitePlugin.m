@@ -15,13 +15,16 @@
  */
 
 #import "GetSocialKakaoTalkInvitePlugin.h"
+#import <KakaoLink/KakaoLink.h>
+#import <KakaoMessageTemplate/KakaoMessageTemplate.h>
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 @implementation GetSocialKakaoTalkInvitePlugin
 
 - (BOOL)isAvailableForDevice:(GetSocialInviteChannel *)inviteChannel
 {
-    return [KOAppCall canOpenKakaoTalkAppLink];
+    BOOL isAvailable = [[KLKTalkLinkCenter sharedCenter] isAvailable];
+    return isAvailable;
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
@@ -35,9 +38,12 @@
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
 
-    NSMutableArray *sharedContent = [NSMutableArray array];
-    KakaoTalkLinkObject *label = [KakaoTalkLinkObject createLabel:invitePackage.text];
-    [sharedContent addObject:label];
+    KMTContentObject *contentObject = [KMTContentObject new];
+    contentObject.title = invitePackage.text;
+
+    KMTLinkObject *linkObject = [KMTLinkObject new];
+    linkObject.mobileWebURL = [NSURL URLWithString:invitePackage.referralUrl];
+    contentObject.link = linkObject;
 
     if (invitePackage.imageUrl && invitePackage.image)
     {
@@ -46,16 +52,24 @@
         CGFloat ratio = image.size.height / image.size.width;
         CGFloat height = ratio * sharedImageWidth;
 
-        KakaoTalkLinkObject *imageLink = [KakaoTalkLinkObject createImage:invitePackage.imageUrl width:sharedImageWidth height:height];
-        [sharedContent addObject:imageLink];
+        contentObject.imageURL = [NSURL URLWithString:invitePackage.imageUrl];
+        contentObject.imageWidth = @(sharedImageWidth);
+        contentObject.imageHeight = @(height);
     }
-
-    [KOAppCall openKakaoTalkAppLink:sharedContent];
-
-    if (successCallback)
-    {
-        successCallback();
-    }
+    KMTFeedTemplate *template = [KMTFeedTemplate feedTemplateWithContent:contentObject];
+    [[KLKTalkLinkCenter sharedCenter] sendDefaultWithTemplate:template
+        success:^(NSDictionary<NSString *, NSString *> *_Nullable warningMsg, NSDictionary<NSString *, NSString *> *_Nullable argumentMsg) {
+            if (successCallback)
+            {
+                successCallback();
+            }
+        }
+        failure:^(NSError *_Nonnull error) {
+            if (failureCallback)
+            {
+                failureCallback(error);
+            }
+        }];
 }
 
 @end

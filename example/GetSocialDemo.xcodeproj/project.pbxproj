@@ -13,9 +13,7 @@
 		213E390AAA73E4B0B7227FCF /* PushNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E3F34621E037B8687B57D /* PushNotificationView.m */; };
 		213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */; };
 		213E3EF84029D5E4E4865B71 /* PushNotificationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E3B4404D851B304096807 /* PushNotificationView.h */; };
-		3E2642A48FF18C0B0B23D81F /* GetSocial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F442499FBFEA81798D7805F2 /* GetSocial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		42134C2681A36446E4FE6C1E /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442499FBFEA81798D7805F2 /* GetSocial.framework */; };
-		5D684F7D92BF7F0AA84941E1 /* GetSocialUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6278441E9B0A61A254DC1D09 /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */; };
 		6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */; };
 		6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */; };
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
@@ -74,7 +72,7 @@
 		99F3E8011AB32CA900033238 /* activityImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F3E7FE1AB32CA900033238 /* activityImage.png */; };
 		99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 99F772E51BBAA96A00A4CD69 /* LICENSE */; };
 		99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */; };
-		AC59453C93EEADA0968BC6D0 /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */; };
+		B506466FBCE6F9308E5AB341 /* GetSocialUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */; };
 		BC1DE1F41E2CD655007AE67F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E0C1C904F830041DDE3 /* CoreGraphics.framework */; };
 		BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC217B0A1E55C2AE00426793 /* ActivityIndicatorViewController.h */; };
@@ -226,6 +224,11 @@
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
 		BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */; };
+		BCF8DE7620EE4E58006DDB45 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */; };
+		BCF8DE7820EE504A006DDB45 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */; };
+		BCF8DE7A20EE5654006DDB45 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */; };
+		C3B9468C8578B9C78CB61377 /* GetSocial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFC54F0286BBC9E8FBB50E87 /* GetSocial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE034BC78A05907AE3B68DD7 /* GetSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC54F0286BBC9E8FBB50E87 /* GetSocial.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -236,8 +239,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */,
-				3E2642A48FF18C0B0B23D81F /* GetSocial.framework in Embed Frameworks */,
-				5D684F7D92BF7F0AA84941E1 /* GetSocialUI.framework in Embed Frameworks */,
+				C3B9468C8578B9C78CB61377 /* GetSocial.framework in Embed Frameworks */,
+				B506466FBCE6F9308E5AB341 /* GetSocialUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +248,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialUI.framework; path = ../bin/GetSocialUI.framework; sourceTree = SOURCE_ROOT; };
 		213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GetSocial.h"; sourceTree = "<group>"; };
 		213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GetSocial.m"; sourceTree = "<group>"; };
 		213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GetSocial.m"; sourceTree = "<group>"; };
@@ -490,7 +492,11 @@
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
 		BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFriendViewController.h; sourceTree = "<group>"; };
-		F442499FBFEA81798D7805F2 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocial.framework; path = ../bin/GetSocial.framework; sourceTree = SOURCE_ROOT; };
+		BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoMessageTemplate.framework; path = GetSocialDemo/Vendor/KakaoMessageTemplate.framework; sourceTree = "<group>"; };
+		BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoLink.framework; path = GetSocialDemo/Vendor/KakaoLink.framework; sourceTree = "<group>"; };
+		BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = GetSocialDemo/Vendor/KakaoCommon.framework; sourceTree = "<group>"; };
+		D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialUI.framework; path = GetSocial/GetSocialUI.framework; sourceTree = SOURCE_ROOT; };
+		EFC54F0286BBC9E8FBB50E87 /* GetSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocial.framework; path = GetSocial/GetSocial.framework; sourceTree = SOURCE_ROOT; };
 		F4AD6CFE18BF313400B1F342 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.tbd"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -499,6 +505,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCF8DE7A20EE5654006DDB45 /* KakaoCommon.framework in Frameworks */,
+				BCF8DE7820EE504A006DDB45 /* KakaoLink.framework in Frameworks */,
+				BCF8DE7620EE4E58006DDB45 /* KakaoMessageTemplate.framework in Frameworks */,
 				6F96BA88207F6E470022ECF9 /* Bolts.framework in Frameworks */,
 				6FD96C06206E4B7400C514A3 /* UserNotifications.framework in Frameworks */,
 				BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */,
@@ -523,8 +532,8 @@
 				990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */,
 				BC5C5A801F4DCBE800533C43 /* TwitterKit.framework in Frameworks */,
 				990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */,
-				42134C2681A36446E4FE6C1E /* GetSocial.framework in Frameworks */,
-				AC59453C93EEADA0968BC6D0 /* GetSocialUI.framework in Frameworks */,
+				CE034BC78A05907AE3B68DD7 /* GetSocial.framework in Frameworks */,
+				6278441E9B0A61A254DC1D09 /* GetSocialUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +598,9 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */,
+				BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */,
+				BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */,
 				6F96BA87207F6E470022ECF9 /* Bolts.framework */,
 				6FD96C05206E4B7400C514A3 /* UserNotifications.framework */,
 				6F654C6B201786F700B2FCFD /* iAd.framework */,
@@ -628,8 +640,8 @@
 				99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */,
 				BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */,
 				995D99A617EB064500F65204 /* UIKit.framework */,
-				F442499FBFEA81798D7805F2 /* GetSocial.framework */,
-				11344D8C9194808AD1D92FC8 /* GetSocialUI.framework */,
+				EFC54F0286BBC9E8FBB50E87 /* GetSocial.framework */,
+				D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1188,7 +1200,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FRAMEWORK=\"$PROJECT_DIR/../bin/GetSocial.framework\"\necho $FRAMEWORK\nif [ ! -d \"$FRAMEWORK\" ]\nthen\n    ./getsocial.sh --app-id=LGa80P9790g4\n    mv \"$PROJECT_DIR/GetSocial/\" \"$PROJECT_DIR/../bin/\"\nfi\n";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1386,9 +1398,10 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../bin/",
 					"$(SRCROOT)/GetSocialDemo/Vendor/**",
 					"$(PROJECT_DIR)/GetSocialDemo/Vendor",
+					"$(SRCROOT)/GetSocial",
+					"$(inherited)",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

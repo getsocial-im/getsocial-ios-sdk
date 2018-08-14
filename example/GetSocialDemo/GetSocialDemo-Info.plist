@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.20.3-master-11766f7</string>
+	<string>6.20.5-master-39c8a06</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -43,7 +43,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>twitterkit-fiCw1nyiio9pdkim79jgnG7gB</string>
-				<string>kakao4d436485d41336a82c47d0142682b4d7</string>
+				<string>kakao1817939d1a5b05af3601ed50dc3b077d</string>
 				<string>getsocial-LGa80P9790g4</string>
 				<string>vk6437031</string>
 			</array>
@@ -56,20 +56,21 @@
 	<key>FacebookDisplayName</key>
 	<string>GetSocial Demo</string>
 	<key>KAKAO_APP_KEY</key>
-	<string>4d436485d41336a82c47d0142682b4d7</string>
+	<string>1817939d1a5b05af3601ed50dc3b077d</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>kakaolink</string>
 		<string>tg</string>
 		<string>viber</string>
 		<string>twitterauth</string>
 		<string>twitter</string>
 		<string>kakaostory-2.9.0</string>
-		<string>kakaotalk-4.5.0</string>
+		<string>kakaotalk-5.9.7</string>
 		<string>storykompassauth</string>
 		<string>kakaokompassauth</string>
-		<string>kakao4d436485d41336a82c47d0142682b4d7</string>
+		<string>kakao1817939d1a5b05af3601ed50dc3b077d</string>
 		<string>fb-messenger-platform-20150714</string>
 		<string>fb-messenger-api20140430</string>
 		<string>fb-messenger-platform-20150128</string>
@@ -88,6 +89,7 @@
 		<string>vk-share</string>
 		<string>vkauthorize</string>
 		<string>fb-messenger-share-api</string>
+		<string>kakaotalk-4.5.0</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

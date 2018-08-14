@@ -72,7 +72,7 @@
 - (void)showWithDismissHandler:(UISimpleAlertViewControllerDismissedHandler)handler
 {
     self.activeDismissHandler = handler;
-    [[self rootViewController] presentViewController:self.activeAlertController animated:NO completion:nil];
+    [[UISimpleAlertViewController rootViewController] presentViewController:self.activeAlertController animated:NO completion:nil];
 }
 
 - (void)addTextFieldWithPlaceholder:(NSString *)placeholder defaultText:(NSString *)defaultText isSecure:(BOOL)isSecure
@@ -89,9 +89,14 @@
     return self.activeAlertController.textFields[index].text;
 }
 
-- (UIViewController *)rootViewController
++ (UIViewController *)rootViewController
 {
     return [UIApplication sharedApplication].keyWindow.rootViewController;
+}
+
++ (void)hideAlertView
+{
+    [self.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

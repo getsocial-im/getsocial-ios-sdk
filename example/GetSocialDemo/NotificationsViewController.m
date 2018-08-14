@@ -8,7 +8,6 @@
 
 #import "NotificationsViewController.h"
 #import <GetSocial/GetSocial.h>
-#import <GetSocial/NSArray+Map.h>
 #import "NotificationTableViewCell.h"
 #import "NotificationsFilterViewController.h"
 #import "UIViewController+GetSocial.h"
@@ -49,10 +48,12 @@ static NSDateFormatter *dateFormatter;
 
 - (void)readAll
 {
-    [self setNotifications:[self.notifications mapObjectsUsingBlock:^id(GetSocialNotification *obj) {
-              return obj.notificationId;
-          }]
-                      read:YES];
+    NSMutableArray *ids = [@[] mutableCopy];
+    for (GetSocialNotification *notification in self.notifications)
+    {
+        [ids addObject:notification.notificationId];
+    }
+    [self setNotifications:ids read:YES];
 }
 
 - (void)setupFilter

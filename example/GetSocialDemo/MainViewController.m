@@ -121,9 +121,14 @@ NSString *const kCustomProvider = @"custom";
             [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
             return YES;
         }
-        if (notification.action == GetSocialNotificationActionOpenProfile)
+        else if (notification.action == GetSocialNotificationActionOpenProfile)
         {
             [self showNewFriend:notification.actionData[GetSocialNotificationKey_OpenProfile_UserId]];
+            return YES;
+        }
+        else if (notification.action == GetSocialNotificationActionCustom)
+        {
+            GSLogError(NO, NO, @"Received custom notification: %@", notification.actionData);
             return YES;
         }
         return NO;
@@ -174,19 +179,11 @@ NSString *const kCustomProvider = @"custom";
         }];
 
     NSString *status = [NSUserDefaults.standardUserDefaults stringForKey:@"notification_status"];
-    GetSocialNotificationsCountQuery *query;
-    if ([status isEqualToString:@"Read"])
-    {
-        query = [GetSocialNotificationsCountQuery read];
-    }
-    else if ([status isEqualToString:@"Unread"])
-    {
-        query = [GetSocialNotificationsCountQuery unread];
-    }
-    else
-    {
-        query = [GetSocialNotificationsCountQuery readAndUnread];
-    }
+    GetSocialNotificationsCountQuery *query =
+        [status isEqualToString:@"Read"]
+            ? [GetSocialNotificationsCountQuery read]
+            : [status isEqualToString:@"Unread"] ? [GetSocialNotificationsCountQuery unread] : [GetSocialNotificationsCountQuery readAndUnread];
+
     [query setTypes:[NSUserDefaults.standardUserDefaults arrayForKey:@"notification_types"]];
     [GetSocialUser notificationsCountWithQuery:query
         success:^(int result) {
@@ -296,6 +293,11 @@ NSString *const kCustomProvider = @"custom";
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Send Customized Smart Invite"
                                                                          action:^{
                                                                              [self openCustomizedSmartInvite];
+                                                                         }]];
+
+        [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Create Invite Url"
+                                                                         action:^{
+                                                                             [self createInviteLink];
                                                                          }]];
 
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referral Data"
@@ -1087,6 +1089,7 @@ NSString *const kCustomProvider = @"custom";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
             NewFriendViewController *newFriendViewController = [storyboard instantiateViewControllerWithIdentifier:@"NewFriendViewController"];
             [newFriendViewController setPublicUser:publicUser];
+            [UISimpleAlertViewController hideAlertView];
             [self presentViewController:newFriendViewController animated:YES completion:nil];
         }
         failure:^(NSError *_Nonnull error) {
@@ -1182,6 +1185,17 @@ NSString *const kCustomProvider = @"custom";
             [self performSelector:@selector(callSendInviteWithProviderId:) withObject:selectedProviderId afterDelay:.5f];
         }
     }];
+}
+
+- (void)createInviteLink
+{
+    [GetSocial createInviteLinkWithParams:nil
+        success:^(NSString *_Nonnull result) {
+            GSLogInfo(YES, NO, @"Created invite url: %@", result);
+        }
+        failure:^(NSError *_Nonnull error) {
+            GSLogInfo(YES, NO, @"Failed to create invite url, error: %@", error);
+        }];
 }
 
 - (void)callSendInviteWithProviderId:(NSString *)providerId
