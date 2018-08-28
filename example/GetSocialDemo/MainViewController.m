@@ -97,6 +97,9 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) ActionableMenuItem *notificationsMenu;
 @property(nonatomic, strong) UIImagePickerController *avatarImagePicker;
 @property(nonatomic, strong) CheckableMenuItem *pushNotificationsEnabledMenu;
+@property(nonatomic, strong) CheckableMenuItem *statusBarMenuItem;
+@property(nonatomic, assign) BOOL statusBarHidden;
+
 @end
 
 @implementation MainViewController
@@ -110,6 +113,11 @@ NSString *const kCustomProvider = @"custom";
     [self log:LogLevelInfo context:nil message:self.versionLabel.text showAlert:NO showConsole:NO];
 
     [self setUpGetSocial];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.statusBarHidden;
 }
 
 - (void)setUpGetSocial
@@ -550,6 +558,15 @@ NSString *const kCustomProvider = @"custom";
                                               return NO;
                                           }];
         [self.settingsMenu addSubmenu:self.pushNotificationsEnabledMenu];
+
+        self.statusBarMenuItem = [MenuItem checkableMenuItemWithTitle:@"Status bar hidden"
+                                                            isChecked:NO
+                                                               action:^BOOL(BOOL isChecked) {
+                                                                   self.statusBarHidden = isChecked;
+                                                                   [self setNeedsStatusBarAppearanceUpdate];
+                                                                   return YES;
+                                                               }];
+        [self.settingsMenu addSubmenu:self.statusBarMenuItem];
 
         [self.menu addObject:self.settingsMenu];
     }
