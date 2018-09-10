@@ -83,6 +83,8 @@
 		BC4439A92003C67800682226 /* GetSocialFacebookSharePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */; };
 		BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4637531E8D12F5008074E3 /* UISimpleAlertViewController.m */; };
 		BC4637561E8D12F5008074E3 /* UISimpleAlertViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4637541E8D12F5008074E3 /* UISimpleAlertViewController.h */; };
+		BC537B2221358E86009D905A /* UITextField+DisableCopyAndPaste.h in Headers */ = {isa = PBXBuildFile; fileRef = BC537B2021358E85009D905A /* UITextField+DisableCopyAndPaste.h */; };
+		BC537B2321358E86009D905A /* UITextField+DisableCopyAndPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537B2121358E86009D905A /* UITextField+DisableCopyAndPaste.m */; };
 		BC585E6C1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */; };
 		BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */; };
 		BC585E6F1E2FC5BA0057A73A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */; };
@@ -353,6 +355,8 @@
 		BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookSharePlugin.h; path = Plugins/GetSocialFacebookSharePlugin.h; sourceTree = "<group>"; };
 		BC4637531E8D12F5008074E3 /* UISimpleAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISimpleAlertViewController.m; sourceTree = "<group>"; };
 		BC4637541E8D12F5008074E3 /* UISimpleAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISimpleAlertViewController.h; sourceTree = "<group>"; };
+		BC537B2021358E85009D905A /* UITextField+DisableCopyAndPaste.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisableCopyAndPaste.h"; sourceTree = "<group>"; };
+		BC537B2121358E86009D905A /* UITextField+DisableCopyAndPaste.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisableCopyAndPaste.m"; sourceTree = "<group>"; };
 		BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialKakaoTalkInvitePlugin.h; path = Plugins/GetSocialKakaoTalkInvitePlugin.h; sourceTree = "<group>"; };
 		BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialKakaoTalkInvitePlugin.m; path = Plugins/GetSocialKakaoTalkInvitePlugin.m; sourceTree = "<group>"; };
 		BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = GetSocialDemo/Vendor/KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 		994F498B1B15F057007B4494 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BC537B2021358E85009D905A /* UITextField+DisableCopyAndPaste.h */,
+				BC537B2121358E86009D905A /* UITextField+DisableCopyAndPaste.m */,
 				BC4637541E8D12F5008074E3 /* UISimpleAlertViewController.h */,
 				BC4637531E8D12F5008074E3 /* UISimpleAlertViewController.m */,
 				BC217B141E55E22400426793 /* UIViewController+GetSocial.h */,
@@ -1032,6 +1038,7 @@
 				6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */,
 				BC680F332074D08600A3551E /* VKRequestsScheduler.h in Headers */,
 				BC680EF82074D08600A3551E /* VKApiModels.h in Headers */,
+				BC537B2221358E86009D905A /* UITextField+DisableCopyAndPaste.h in Headers */,
 				BC680F112074D08600A3551E /* VKRelative.h in Headers */,
 				BC680F3F2074D08700A3551E /* VKUtil.h in Headers */,
 				BC217B161E55E22400426793 /* UIViewController+GetSocial.h in Headers */,
@@ -1200,7 +1207,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.20.6";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.20.7";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1245,6 +1252,7 @@
 				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
 				6F5CD6D420A1BD5E00693B85 /* NotificationsFilterViewController.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
+				BC537B2321358E86009D905A /* UITextField+DisableCopyAndPaste.m in Sources */,
 				BC680EFA2074D08600A3551E /* VKApiPhotos.m in Sources */,
 				BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */,
 				BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */,

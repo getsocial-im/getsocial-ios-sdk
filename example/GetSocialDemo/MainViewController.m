@@ -151,6 +151,11 @@ NSString *const kCustomProvider = @"custom";
         [self checkReferralData];
     }];
 
+    [self registerInviteChannelPlugins];
+}
+
+- (void)registerInviteChannelPlugins
+{
     // Register FB Messenger Invite Plugin
     GetSocialFBMessengerInvitePlugin *fbMessengerPlugin = [[GetSocialFBMessengerInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:fbMessengerPlugin forChannelId:GetSocial_InviteChannelPluginId_Facebook_Messenger];

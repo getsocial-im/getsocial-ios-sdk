@@ -15,6 +15,7 @@
  */
 
 #import "UISimpleAlertViewController.h"
+#import "UITextField+DisableCopyAndPaste.h"
 
 @interface UISimpleAlertViewController ()
 
