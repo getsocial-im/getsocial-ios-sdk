@@ -20,6 +20,7 @@
 #import "ConsoleViewController.h"
 #import "Constants.h"
 #import "FriendsViewController.h"
+#import "IAPViewController.h"
 #import "MainNavigationController.h"
 #import "MenuItem.h"
 #import "NewFriendViewController.h"
@@ -52,6 +53,8 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <GetSocial/GetSocialInstallPlatform.h>
+#import <UserNotifications/UserNotifications.h>
 
 #define GSLogInfo(bShowAlert, bShowConsole, sMessage, ...)                \
     [self log:LogLevelInfo                                                \
@@ -455,6 +458,12 @@ NSString *const kCustomProvider = @"custom";
                                                                                          [self openNotifications];
                                                                                      }]];
 
+        // Send local notification Menu
+        [self.menu addObject:[MenuItem actionableMenuItemWithTitle:@"Send local PN"
+                                                            action:^{
+                                                                [self sendLocalNotification];
+                                                            }]];
+
         self.notificationsMenu.detail = @"You have 0 notifications";
 
         // UI Customization Menu
@@ -574,6 +583,13 @@ NSString *const kCustomProvider = @"custom";
         [self.settingsMenu addSubmenu:self.statusBarMenuItem];
 
         [self.menu addObject:self.settingsMenu];
+
+        [self.menu addObject:[MenuItem actionableMenuItemWithTitle:@"In-app purchase"
+                                                            action:^{
+                                                                IAPViewController *vc =
+                                                                    [self.storyboard instantiateViewControllerWithIdentifier:@"iapviewcontroller"];
+                                                                [self.mainNavigationController pushViewController:vc animated:YES];
+                                                            }]];
     }
 }
 
@@ -923,6 +939,8 @@ NSString *const kCustomProvider = @"custom";
     FBSDKProfile *profile = [FBSDKProfile currentProfile];
     NSURL *profileImageUrl = [profile imageURLForPictureMode:FBSDKProfilePictureModeNormal size:CGSizeMake(250, 250)];
 
+    GSLogInfo(NO, NO, @"FB Avatar url: %@", profileImageUrl);
+
     [GetSocialUser setAvatarUrl:profileImageUrl.absoluteString
         success:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
@@ -936,6 +954,8 @@ NSString *const kCustomProvider = @"custom";
 {
     FBSDKProfile *profile = [FBSDKProfile currentProfile];
     NSString *displayName = [NSString stringWithFormat:@"%@ %@", profile.firstName, profile.lastName];
+
+    GSLogInfo(NO, NO, @"FB Display name: %@", displayName);
 
     [GetSocialUser setDisplayName:displayName
         success:^{
@@ -1166,10 +1186,11 @@ NSString *const kCustomProvider = @"custom";
             [referredUsers enumerateObjectsUsingBlock:^(GetSocialReferredUser *_Nonnull referredUser, NSUInteger idx, BOOL *_Nonnull stop) {
                 NSDateFormatter *formatter = [NSDateFormatter new];
                 formatter.dateFormat = @"MM-dd-yyyy HH:mm";
-                NSString *referredUserInfo =
-                    [NSString stringWithFormat:@"%@(on %@ via %@), ", referredUser.displayName,
-                                               [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:referredUser.installationDate]],
-                                               referredUser.installationChannel];
+                NSString *referredUserInfo = [NSString
+                    stringWithFormat:@"%@(on %@ via %@, reinstall=%d, installSuspicious=%d, installPlatform=%@), ", referredUser.displayName,
+                                     [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:referredUser.installationDate]],
+                                     referredUser.installationChannel, referredUser.isReinstall, referredUser.isInstallSuspicious,
+                                     referredUser.installationPlatform];
                 messageContent = [messageContent stringByAppendingString:referredUserInfo];
             }];
             messageContent = [messageContent substringToIndex:messageContent.length - 2];
@@ -1266,6 +1287,29 @@ NSString *const kCustomProvider = @"custom";
 {
     NotificationsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Notifications"];
     [self.mainNavigationController pushViewController:vc animated:YES];
+}
+
+- (void)sendLocalNotification
+{
+    UNMutableNotificationContent *notificationContent = [UNMutableNotificationContent new];
+    notificationContent.body = @"Amazing local push notification";
+    notificationContent.title = @"Check this out!";
+
+    NSString *pnId = [NSUUID UUID].UUIDString;
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:5 repeats:NO];
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:pnId content:notificationContent trigger:trigger];
+
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request
+                                                           withCompletionHandler:^(NSError *_Nullable error) {
+                                                               if (error == nil)
+                                                               {
+                                                                   GSLogInfo(YES, NO, @"PN was sent, it arrives in 5 seconds");
+                                                               }
+                                                               else
+                                                               {
+                                                                   GSLogError(YES, NO, @"Sending PN failed, error: %@", [error description]);
+                                                               }
+                                                           }];
 }
 
 #pragma mark - Localization

@@ -74,11 +74,16 @@
 		99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */; };
 		B506466FBCE6F9308E5AB341 /* GetSocialUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */; };
+		BC12D77F215CD27B001F45AE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC12D77E215CD27B001F45AE /* StoreKit.framework */; };
 		BC1DE1F41E2CD655007AE67F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E0C1C904F830041DDE3 /* CoreGraphics.framework */; };
 		BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC217B0A1E55C2AE00426793 /* ActivityIndicatorViewController.h */; };
 		BC217B0D1E55C2AE00426793 /* ActivityIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC217B0B1E55C2AE00426793 /* ActivityIndicatorViewController.m */; };
 		BC217B161E55E22400426793 /* UIViewController+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = BC217B141E55E22400426793 /* UIViewController+GetSocial.h */; };
 		BC217B171E55E22400426793 /* UIViewController+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = BC217B151E55E22400426793 /* UIViewController+GetSocial.m */; };
+		BC2A18A021400E9900ADB0C6 /* ManualIAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2A189C21400E9900ADB0C6 /* ManualIAPViewController.m */; };
+		BC2A18A121400E9900ADB0C6 /* IAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2A189D21400E9900ADB0C6 /* IAPViewController.m */; };
+		BC2A18A221400E9900ADB0C6 /* ManualIAPViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC2A189E21400E9900ADB0C6 /* ManualIAPViewController.h */; };
+		BC2A18A321400E9900ADB0C6 /* IAPViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC2A189F21400E9900ADB0C6 /* IAPViewController.h */; };
 		BC4439A82003C67800682226 /* GetSocialFacebookSharePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4439A62003C67800682226 /* GetSocialFacebookSharePlugin.m */; };
 		BC4439A92003C67800682226 /* GetSocialFacebookSharePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */; };
 		BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4637531E8D12F5008074E3 /* UISimpleAlertViewController.m */; };
@@ -346,11 +351,16 @@
 		99FE1A7D1BB2A82100EF576A /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsoleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFBMessengerInvitePlugin.m; path = Plugins/GetSocialFBMessengerInvitePlugin.m; sourceTree = "<group>"; };
 		BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFBMessengerInvitePlugin.h; path = Plugins/GetSocialFBMessengerInvitePlugin.h; sourceTree = "<group>"; };
+		BC12D77E215CD27B001F45AE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BC1DE1F21E2CD633007AE67F /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BC217B0A1E55C2AE00426793 /* ActivityIndicatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityIndicatorViewController.h; sourceTree = "<group>"; };
 		BC217B0B1E55C2AE00426793 /* ActivityIndicatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityIndicatorViewController.m; sourceTree = "<group>"; };
 		BC217B141E55E22400426793 /* UIViewController+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GetSocial.h"; sourceTree = "<group>"; };
 		BC217B151E55E22400426793 /* UIViewController+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GetSocial.m"; sourceTree = "<group>"; };
+		BC2A189C21400E9900ADB0C6 /* ManualIAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManualIAPViewController.m; path = IAP/ManualIAPViewController.m; sourceTree = "<group>"; };
+		BC2A189D21400E9900ADB0C6 /* IAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAPViewController.m; path = IAP/IAPViewController.m; sourceTree = "<group>"; };
+		BC2A189E21400E9900ADB0C6 /* ManualIAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManualIAPViewController.h; path = IAP/ManualIAPViewController.h; sourceTree = "<group>"; };
+		BC2A189F21400E9900ADB0C6 /* IAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAPViewController.h; path = IAP/IAPViewController.h; sourceTree = "<group>"; };
 		BC4439A62003C67800682226 /* GetSocialFacebookSharePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookSharePlugin.m; path = Plugins/GetSocialFacebookSharePlugin.m; sourceTree = "<group>"; };
 		BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookSharePlugin.h; path = Plugins/GetSocialFacebookSharePlugin.h; sourceTree = "<group>"; };
 		BC4637531E8D12F5008074E3 /* UISimpleAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISimpleAlertViewController.m; sourceTree = "<group>"; };
@@ -509,6 +519,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC12D77F215CD27B001F45AE /* StoreKit.framework in Frameworks */,
 				BCF8DE7A20EE5654006DDB45 /* KakaoCommon.framework in Frameworks */,
 				BCF8DE7820EE504A006DDB45 /* KakaoLink.framework in Frameworks */,
 				BCF8DE7620EE4E58006DDB45 /* KakaoMessageTemplate.framework in Frameworks */,
@@ -604,6 +615,7 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC12D77E215CD27B001F45AE /* StoreKit.framework */,
 				BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */,
 				BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */,
 				BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */,
@@ -690,6 +702,7 @@
 		99FE1A811BB2B2EC00EF576A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BC2A189B21400E8500ADB0C6 /* IAP */,
 				6F5CD6D320A1BD5E00693B85 /* NotificationsFilterViewController.h */,
 				6F5CD6D220A1BD5D00693B85 /* NotificationsFilterViewController.m */,
 				6F5CD6C820A095DA00693B85 /* NotificationsViewController.h */,
@@ -746,6 +759,17 @@
 				BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */,
 			);
 			name = Facebook;
+			sourceTree = "<group>";
+		};
+		BC2A189B21400E8500ADB0C6 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				BC2A189F21400E9900ADB0C6 /* IAPViewController.h */,
+				BC2A189D21400E9900ADB0C6 /* IAPViewController.m */,
+				BC2A189E21400E9900ADB0C6 /* ManualIAPViewController.h */,
+				BC2A189C21400E9900ADB0C6 /* ManualIAPViewController.m */,
+			);
+			name = IAP;
 			sourceTree = "<group>";
 		};
 		BC585E691E2FC4D50057A73A /* KakaoTalk */ = {
@@ -999,6 +1023,7 @@
 				BC680EF92074D08600A3551E /* VKApiPhotos.h in Headers */,
 				BC680F472074D08700A3551E /* VKCaptchaViewController.h in Headers */,
 				BC680EEE2074D08600A3551E /* VKApiCaptcha.h in Headers */,
+				BC2A18A321400E9900ADB0C6 /* IAPViewController.h in Headers */,
 				BC680F192074D08600A3551E /* VKUploadMessagesPhotoRequest.h in Headers */,
 				BC680F252074D08600A3551E /* VKError.h in Headers */,
 				BC680EF42074D08600A3551E /* VKApiFriends.h in Headers */,
@@ -1045,6 +1070,7 @@
 				BC585E6C1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h in Headers */,
 				BC680F0B2074D08600A3551E /* VKLikes.h in Headers */,
 				BC680F0D2074D08600A3551E /* VKPhoto.h in Headers */,
+				BC2A18A221400E9900ADB0C6 /* ManualIAPViewController.h in Headers */,
 				BC217B0C1E55C2AE00426793 /* ActivityIndicatorViewController.h in Headers */,
 				BC680F052074D08600A3551E /* VKCounters.h in Headers */,
 				6F5CD6CB20A095DA00693B85 /* NotificationTableViewCell.h in Headers */,
@@ -1193,7 +1219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/GetSocial.framework/strip_frameworks.sh\"";
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/GetSocial.framework/strip_frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC4439751FFE3BC200682226 /* ShellScript */ = {
@@ -1207,7 +1233,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.20.7";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.21.0\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1295,6 +1321,8 @@
 				BC680F062074D08600A3551E /* VKCounters.m in Sources */,
 				6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */,
 				6F6979A21EE8360900ED08B5 /* SuggestedFriendsViewController.m in Sources */,
+				BC2A18A021400E9900ADB0C6 /* ManualIAPViewController.m in Sources */,
+				BC2A18A121400E9900ADB0C6 /* IAPViewController.m in Sources */,
 				BC680F022074D08600A3551E /* VKApiObjectArray.m in Sources */,
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
 				BC92860B1FC48F6F00306B6E /* UserIdentityView.m in Sources */,
