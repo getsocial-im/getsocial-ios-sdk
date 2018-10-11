@@ -1233,7 +1233,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.21.0\n";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.21.1\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
