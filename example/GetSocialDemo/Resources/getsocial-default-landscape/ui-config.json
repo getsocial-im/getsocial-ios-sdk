@@ -8,7 +8,8 @@
 	"elements": {
 		"window": {
 			"width": 500,
-			"height": 320
+			"height": 320,
+            "animation-style": "fade-and-scale"
 		}
 	}
 }

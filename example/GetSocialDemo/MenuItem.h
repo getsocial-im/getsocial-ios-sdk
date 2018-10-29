@@ -16,12 +16,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, MenuItemType) { MenuItemTypeParent, MenuItemTypeActionable, MenuItemTypeCheckable, MenuItemTypeGroupedCheckable };
-
 @class ParentMenuItem;
 @class ActionableMenuItem;
 @class CheckableMenuItem;
 @class GroupedCheckableMenuItem;
+
+typedef NS_ENUM(NSUInteger, MenuItemType) { MenuItemTypeParent, MenuItemTypeActionable, MenuItemTypeCheckable, MenuItemTypeGroupedCheckable };
 
 @interface MenuItem : NSObject
 

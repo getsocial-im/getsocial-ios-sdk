@@ -14,15 +14,9 @@
  *    limitations under the License.
  */
 
+
 #import <UIKit/UIKit.h>
-@protocol NotificationsFilterViewControllerDelegate
 
-- (void)didUpdateFilter;
-
-@end
-
-@interface NotificationsFilterViewController : UITableViewController
-
-@property(nonatomic, weak) id<NotificationsFilterViewControllerDelegate> delegate;
+@interface SendNotificationViewController : UIViewController
 
 @end

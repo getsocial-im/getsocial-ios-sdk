@@ -19,6 +19,7 @@
 #import "ConsoleViewController.h"
 #import "MenuTableViewCell.h"
 #import "PushNotificationView.h"
+#import "UIStoryboard+GetSocial.h"
 #import "UserIdentityViewController.h"
 #import "UserViewController.h"
 
@@ -35,7 +36,8 @@
 
     if (self.showUserIdentity)
     {
-        UserIdentityViewController *userIdentityVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserIdentity"];
+        UserIdentityViewController *userIdentityVC =
+            [UIStoryboard viewControllerForName:@"UserIdentity" inStoryboard:GetSocialStoryboardUserManagement];
 
         userIdentityVC.view.frame =
             CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height);
@@ -57,7 +59,7 @@
 
 - (void)openUserDetails:(UITapGestureRecognizer *)recognizer
 {
-    UserViewController *userVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UserDetails"];
+    UserViewController *userVC = [UIStoryboard viewControllerForName:@"UserDetails" inStoryboard:GetSocialStoryboardUserManagement];
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
@@ -119,7 +121,7 @@
 
             if (parentMenuItem.hasSubmenus)
             {
-                MenuTableViewController *subMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+                MenuTableViewController *subMenu = [UIStoryboard viewControllerForName:@"Menu" inStoryboard:GetSocialStoryboardMain];
                 subMenu.menu = parentMenuItem.subitems;
                 subMenu.title = currentMenuItem.title;
                 [self.navigationController pushViewController:subMenu animated:YES];

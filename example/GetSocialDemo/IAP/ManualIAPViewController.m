@@ -2,7 +2,7 @@
 //  ManualIAPViewController.m
 //  GetSocialInternalDemo
 //
-//  Created by Vass Gábor on 03/09/2018.
+//
 //  Copyright © 2018 GrambleWorld. All rights reserved.
 //
 

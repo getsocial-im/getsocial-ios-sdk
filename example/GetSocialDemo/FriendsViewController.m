@@ -15,23 +15,25 @@
  */
 
 #import "FriendsViewController.h"
-#import "FriendsTableViewCell.h"
-#import "UIViewController+GetSocial.h"
 #import <GetSocial/GetSocial.h>
+#import "FriendsTableViewCell.h"
 #import "SuggestedFriendsViewController.h"
+#import "UIStoryboard+GetSocial.h"
+#import "UIViewController+GetSocial.h"
 
-@interface FriendsViewController () <UITableViewDelegate, UITableViewDataSource, FriendsTableViewCellDelegate>
+@interface FriendsViewController ()<UITableViewDelegate, UITableViewDataSource, FriendsTableViewCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *friendId;
-@property (weak, nonatomic) IBOutlet UITableView *friendsList;
+@property(weak, nonatomic) IBOutlet UITextField *friendId;
+@property(weak, nonatomic) IBOutlet UITableView *friendsList;
 
-@property (nonatomic, strong) NSArray<GetSocialPublicUser *> *friends;
+@property(nonatomic, strong) NSArray<GetSocialPublicUser *> *friends;
 
 @end
 
 @implementation FriendsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 }
 
@@ -41,11 +43,11 @@
     [self loadFriends];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (IBAction)addFriend:(id)sender
 {
@@ -53,31 +55,36 @@
     [self showActivityIndicatorView];
     NSString *userId = self.friendId.text;
     __weak typeof(self) weakSelf = self;
-    [GetSocialUser isFriend:userId success:^(BOOL isFriend) {
-        if (isFriend)
-        {
+    [GetSocialUser isFriend:userId
+        success:^(BOOL isFriend) {
+            if (isFriend)
+            {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf hideActivityIndicatorView];
+                [strongSelf showAlertWithText:@"User already is your friend"];
+            }
+            else
+            {
+                [GetSocialUser addFriend:userId
+                    success:^(int result) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
+                        [strongSelf.friendId endEditing:YES];
+                        strongSelf.friendId.text = @"";
+                        [strongSelf hideActivityIndicatorView];
+                        [strongSelf loadFriends];
+                    }
+                    failure:^(NSError *error) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
+                        [strongSelf hideActivityIndicatorView];
+                        [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+                    }];
+            }
+        }
+        failure:^(NSError *error) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf hideActivityIndicatorView];
-            [strongSelf showAlertWithText:@"User already is your friend"];
-        } else
-        {
-            [GetSocialUser addFriend:userId success:^(int result){
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf.friendId endEditing:YES];
-                strongSelf.friendId.text = @"";
-                [strongSelf hideActivityIndicatorView];
-                [strongSelf loadFriends];
-            } failure:^(NSError *error) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf hideActivityIndicatorView];
-                [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-            }];
-        }
-    } failure:^(NSError *error) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf hideActivityIndicatorView];
-        [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-    }];
+            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        }];
 }
 
 - (void)loadFriends
@@ -85,38 +92,41 @@
     [self showActivityIndicatorView];
     __weak typeof(self) weakSelf = self;
     [GetSocialUser friendsWithOffset:0
-                               limit:1000
-                             success:^(NSArray<GetSocialPublicUser *> *friends) {
-                                 __strong typeof(weakSelf) strongSelf = weakSelf;
-                                 strongSelf.friends = [NSArray arrayWithArray:friends];
-                                 [strongSelf hideActivityIndicatorView];
-                                 [strongSelf.friendsList reloadData];
-                             } failure:^(NSError *error) {
-                                 __strong typeof(weakSelf) strongSelf = weakSelf;
-                                 [strongSelf hideActivityIndicatorView];
-                                 [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-                             }];
+        limit:1000
+        success:^(NSArray<GetSocialPublicUser *> *friends) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.friends = [NSArray arrayWithArray:friends];
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf.friendsList reloadData];
+        }
+        failure:^(NSError *error) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        }];
 }
 - (IBAction)suggestFriends:(UIButton *)sender
 {
     [self showActivityIndicatorView];
     __weak typeof(self) weakSelf = self;
     [GetSocialUser suggestedFriendsWithOffset:0
-                                        limit:10
-                                      success:^(NSArray<GetSocialSuggestedFriend *> * _Nonnull friends) {
-                                          __strong typeof(weakSelf) strongSelf = weakSelf;
-                                          [strongSelf hideActivityIndicatorView];
-                                          [strongSelf showSuggestedFriends:friends];
-                                      } failure:^(NSError * _Nonnull error) {
-                                          __strong typeof(weakSelf) strongSelf = weakSelf;
-                                          [strongSelf hideActivityIndicatorView];
-                                          [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-                                      }];
+        limit:10
+        success:^(NSArray<GetSocialSuggestedFriend *> *_Nonnull friends) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf showSuggestedFriends:friends];
+        }
+        failure:^(NSError *_Nonnull error) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        }];
 }
 
 - (void)showSuggestedFriends:(NSArray<GetSocialSuggestedFriend *> *)friends
 {
-    SuggestedFriendsViewController *suggestedFriendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SuggestedFriends"];
+    SuggestedFriendsViewController *suggestedFriendsVC =
+        [UIStoryboard viewControllerForName:@"SuggestedFriends" inStoryboard:GetSocialStoryboardSocialGraph];
     suggestedFriendsVC.friends = friends;
     suggestedFriendsVC.modalInPopover = YES;
     [self.navigationController presentViewController:suggestedFriendsVC animated:YES completion:nil];
@@ -129,15 +139,16 @@
     [self showActivityIndicatorView];
     __weak typeof(self) weakSelf = self;
     [GetSocialUser removeFriend:user.userId
-                        success:^(int result){
-                            __strong typeof(weakSelf) strongSelf = weakSelf;
-                            [strongSelf hideActivityIndicatorView];
-                            [strongSelf loadFriends];
-                        } failure:^(NSError *error) {
-                            __strong typeof(weakSelf) strongSelf = weakSelf;
-                            [strongSelf hideActivityIndicatorView];
-                            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-                        }];
+        success:^(int result) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf loadFriends];
+        }
+        failure:^(NSError *error) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf hideActivityIndicatorView];
+            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -158,9 +169,12 @@
 
     cell.user = self.friends[indexPath.row];
     cell.delegate = self;
-    if ([cell.user.userId isEqualToString:self.markedFriendId]) {
+    if ([cell.user.userId isEqualToString:self.markedFriendId])
+    {
         cell.backgroundColor = [UIColor greenColor];
-    } else {
+    }
+    else
+    {
         cell.backgroundColor = [UIColor clearColor];
     }
 

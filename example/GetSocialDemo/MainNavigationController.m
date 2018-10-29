@@ -15,8 +15,9 @@
  */
 
 #import "MainNavigationController.h"
-#import "MenuTableViewController.h"
 #import "MainViewController.h"
+#import "MenuTableViewController.h"
+#import "UIStoryboard+GetSocial.h"
 
 @interface MainNavigationController ()
 
@@ -28,7 +29,7 @@
 {
     [super viewDidLoad];
 
-    MenuTableViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    MenuTableViewController *menuViewController = [UIStoryboard viewControllerForName:@"Menu" inStoryboard:GetSocialStoryboardMain];
     menuViewController.menu = self.menu;
     menuViewController.showUserIdentity = YES;
     [self setViewControllers:@[ menuViewController ]];

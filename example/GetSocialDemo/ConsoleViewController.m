@@ -15,6 +15,7 @@
  */
 
 #import "ConsoleViewController.h"
+#import "UIStoryboard+GetSocial.h"
 
 @interface ConsoleViewController ()
 @property(weak, nonatomic) IBOutlet UITextView *consoleTextView;
@@ -31,8 +32,7 @@
     static id sharedController;
 
     dispatch_once(&onceToken, ^{
-        sharedController =
-            [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Console"];
+        sharedController = [UIStoryboard viewControllerForName:@"Console" inStoryboard:GetSocialStoryboardMain];
     });
 
     return sharedController;
@@ -64,7 +64,7 @@
     {
         message = [NSString stringWithFormat:@"%@", message];
     }
-    
+
     switch (level)
     {
         case LogLevelInfo:
@@ -91,12 +91,9 @@
         NSString *convertedDateString = [self.dateFormatter stringFromDate:[NSDate date]];
         NSString *logMessage = [NSString stringWithFormat:@"[%@] %@\n", convertedDateString, message];
 
-        NSMutableAttributedString *attributedMessage =
-            [[NSMutableAttributedString alloc] initWithString:logMessage
-                                                   attributes:@{
-                                                       NSFontAttributeName : [UIFont fontWithName:@"Courier" size:12],
-                                                       NSForegroundColorAttributeName : color
-                                                   }];
+        NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc]
+            initWithString:logMessage
+                attributes:@{NSFontAttributeName : [UIFont fontWithName:@"Courier" size:12], NSForegroundColorAttributeName : color}];
 
         [self.consoleAttributedText appendAttributedString:attributedMessage];
 
@@ -107,7 +104,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+
     [self updateTextView];
 
     UIBarButtonItem *shareItem =

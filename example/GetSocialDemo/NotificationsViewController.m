@@ -10,6 +10,7 @@
 #import <GetSocial/GetSocial.h>
 #import "NotificationTableViewCell.h"
 #import "NotificationsFilterViewController.h"
+#import "UIStoryboard+GetSocial.h"
 #import "UIViewController+GetSocial.h"
 
 static NSDateFormatter *dateFormatter;
@@ -59,7 +60,8 @@ static NSDateFormatter *dateFormatter;
 - (void)setupFilter
 {
     NotificationsFilterViewController *notificationsFilterViewController =
-        [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationsFilter"];
+        [UIStoryboard viewControllerForName:@"NotificationsFilter" inStoryboard:GetSocialStoryboardNotifications];
+
     notificationsFilterViewController.modalInPopover = YES;
     notificationsFilterViewController.delegate = self;
     [self.navigationController presentViewController:notificationsFilterViewController animated:YES completion:nil];

@@ -31,11 +31,6 @@
 #import "UserIdentityUtils.h"
 
 #import <GetSocial/GetSocial.h>
-#import <GetSocial/GetSocialConflictUser.h>
-#import <GetSocial/GetSocialInviteChannelPlugin.h>
-#import <GetSocial/GetSocialNotification.h>
-#import <GetSocial/GetSocialReferredUser.h>
-#import <GetSocial/GetSocialUser.h>
 #import <GetSocialUI/GetSocialUI.h>
 
 #import "GetSocialFBMessengerInvitePlugin.h"
@@ -49,6 +44,7 @@
 #import "MenuTableViewController.h"
 #import "PushNotificationView.h"
 #import "UIImage+GetSocial.h"
+#import "UIStoryboard+GetSocial.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -97,7 +93,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) FBSDKLoginManager *facebookSdkManager;
 
 @property(nonatomic, strong) ActionableMenuItem *friendsMenu;
-@property(nonatomic, strong) ActionableMenuItem *notificationsMenu;
+@property(nonatomic, strong) ParentMenuItem *notificationsMenu;
 @property(nonatomic, strong) UIImagePickerController *avatarImagePicker;
 @property(nonatomic, strong) CheckableMenuItem *pushNotificationsEnabledMenu;
 @property(nonatomic, strong) CheckableMenuItem *statusBarMenuItem;
@@ -453,10 +449,15 @@ NSString *const kCustomProvider = @"custom";
         [self.menu addObject:self.activitiesMenu];
 
         // Notifications Menu
-        [self.menu addObject:self.notificationsMenu = [MenuItem actionableMenuItemWithTitle:@"Notifications"
-                                                                                     action:^{
-                                                                                         [self openNotifications];
-                                                                                     }]];
+        [self.menu addObject:self.notificationsMenu = [MenuItem parentMenuItemWithTitle:@"Notifications"]];
+        [self.notificationsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Notifications List"
+                                                                          action:^{
+                                                                              [self openNotifications];
+                                                                          }]];
+        [self.notificationsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Send Notification"
+                                                                          action:^{
+                                                                              [self sendNotification];
+                                                                          }]];
 
         // Send local notification Menu
         [self.menu addObject:[MenuItem actionableMenuItemWithTitle:@"Send local PN"
@@ -587,7 +588,8 @@ NSString *const kCustomProvider = @"custom";
         [self.menu addObject:[MenuItem actionableMenuItemWithTitle:@"In-app purchase"
                                                             action:^{
                                                                 IAPViewController *vc =
-                                                                    [self.storyboard instantiateViewControllerWithIdentifier:@"iapviewcontroller"];
+                                                                    [UIStoryboard viewControllerForName:@"iapviewcontroller"
+                                                                                           inStoryboard:GetSocialStoryboardInAppPurchase];
                                                                 [self.mainNavigationController pushViewController:vc animated:YES];
                                                             }]];
     }
@@ -1120,7 +1122,8 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openFriends
 {
-    FriendsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Friends"];
+    FriendsViewController *vc = [UIStoryboard viewControllerForName:@"Friends" inStoryboard:GetSocialStoryboardSocialGraph];
+
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
@@ -1128,8 +1131,8 @@ NSString *const kCustomProvider = @"custom";
 {
     [GetSocial userWithId:newFriendId
         success:^(GetSocialPublicUser *_Nonnull publicUser) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            NewFriendViewController *newFriendViewController = [storyboard instantiateViewControllerWithIdentifier:@"NewFriendViewController"];
+            NewFriendViewController *newFriendViewController =
+                [UIStoryboard viewControllerForName:@"NewFriendViewController" inStoryboard:GetSocialStoryboardSocialGraph];
             [newFriendViewController setPublicUser:publicUser];
             [UISimpleAlertViewController hideAlertView];
             [self presentViewController:newFriendViewController animated:YES completion:nil];
@@ -1261,7 +1264,7 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openCustomizedSmartInvite
 {
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CustomSmartInvite"];
+    UIViewController *vc = [UIStoryboard viewControllerForName:@"CustomSmartInvite" inStoryboard:GetSocialStoryboardSmartInvites];
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
@@ -1269,7 +1272,7 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openPostActivityView
 {
-    PostActivityViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PostActivity"];
+    PostActivityViewController *vc = [UIStoryboard viewControllerForName:@"PostActivity" inStoryboard:GetSocialStoryboardActivityFeed];
     vc.delegate = self;
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
@@ -1285,8 +1288,15 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)openNotifications
 {
-    NotificationsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Notifications"];
+    NotificationsViewController *vc = [UIStoryboard viewControllerForName:@"Notifications" inStoryboard:GetSocialStoryboardNotifications];
     [self.mainNavigationController pushViewController:vc animated:YES];
+}
+
+- (void)sendNotification
+{
+    [self.mainNavigationController
+        pushViewController:[UIStoryboard viewControllerForName:@"SendNotification" inStoryboard:GetSocialStoryboardNotifications]
+                  animated:YES];
 }
 
 - (void)sendLocalNotification

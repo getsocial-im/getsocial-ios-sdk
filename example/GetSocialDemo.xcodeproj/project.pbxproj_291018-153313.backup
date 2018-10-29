@@ -36,6 +36,16 @@
 		6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */; };
 		6F8D5C0A1E57317700A43DAD /* FriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */; };
 		6F96BA88207F6E470022ECF9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F96BA87207F6E470022ECF9 /* Bolts.framework */; };
+		6F99AA19216E02F700B01C5D /* InAppPurchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F99AA17216E02F700B01C5D /* InAppPurchase.storyboard */; };
+		6FA45A2A214017790040D937 /* ActivityFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA45A1E214017780040D937 /* ActivityFeed.storyboard */; };
+		6FA45A2B214017790040D937 /* UIStoryboard+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA45A20214017780040D937 /* UIStoryboard+GetSocial.m */; };
+		6FA45A2C214017790040D937 /* SocialGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA45A21214017790040D937 /* SocialGraph.storyboard */; };
+		6FA45A2D214017790040D937 /* SmartInvites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA45A23214017790040D937 /* SmartInvites.storyboard */; };
+		6FA45A2E214017790040D937 /* UserManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA45A25214017790040D937 /* UserManagement.storyboard */; };
+		6FA45A2F214017790040D937 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA45A27214017790040D937 /* Notifications.storyboard */; };
+		6FA45A30214017790040D937 /* UIStoryboard+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA45A29214017790040D937 /* UIStoryboard+GetSocial.h */; };
+		6FA45A3A21413D2F0040D937 /* SendNotificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA45A3821413D2E0040D937 /* SendNotificationViewController.h */; };
+		6FA45A3B21413D2F0040D937 /* SendNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA45A3921413D2F0040D937 /* SendNotificationViewController.m */; };
 		6FD96C06206E4B7400C514A3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD96C05206E4B7400C514A3 /* UserNotifications.framework */; };
 		7A3B8E9B1FCEC82500481004 /* getsocial-dark-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E961FCEC82500481004 /* getsocial-dark-landscape */; };
 		7A3B8E9C1FCEC82500481004 /* getsocial-dark in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E971FCEC82500481004 /* getsocial-dark */; };
@@ -106,119 +116,119 @@
 		BC680EEA2074D08600A3551E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC680E6D2074D08600A3551E /* Localizable.strings */; };
 		BC680EEB2074D08600A3551E /* SdkAssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC680E702074D08600A3551E /* SdkAssetCatalog.xcassets */; };
 		BC680EEC2074D08600A3551E /* VKApiBase.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E742074D08600A3551E /* VKApiBase.h */; };
-		BC680EED2074D08600A3551E /* VKApiBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E752074D08600A3551E /* VKApiBase.m */; };
+		BC680EED2074D08600A3551E /* VKApiBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E752074D08600A3551E /* VKApiBase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EEE2074D08600A3551E /* VKApiCaptcha.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E762074D08600A3551E /* VKApiCaptcha.h */; };
-		BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E772074D08600A3551E /* VKApiCaptcha.m */; };
+		BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E772074D08600A3551E /* VKApiCaptcha.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EF02074D08600A3551E /* VKApiConst.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E782074D08600A3551E /* VKApiConst.h */; };
-		BC680EF12074D08600A3551E /* VKApiConst.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E792074D08600A3551E /* VKApiConst.m */; };
+		BC680EF12074D08600A3551E /* VKApiConst.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E792074D08600A3551E /* VKApiConst.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EF22074D08600A3551E /* VKApiDocs.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E7A2074D08600A3551E /* VKApiDocs.h */; };
-		BC680EF32074D08600A3551E /* VKApiDocs.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7B2074D08600A3551E /* VKApiDocs.m */; };
+		BC680EF32074D08600A3551E /* VKApiDocs.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7B2074D08600A3551E /* VKApiDocs.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EF42074D08600A3551E /* VKApiFriends.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E7C2074D08600A3551E /* VKApiFriends.h */; };
-		BC680EF52074D08600A3551E /* VKApiFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7D2074D08600A3551E /* VKApiFriends.m */; };
+		BC680EF52074D08600A3551E /* VKApiFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7D2074D08600A3551E /* VKApiFriends.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EF62074D08600A3551E /* VKApiGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E7E2074D08600A3551E /* VKApiGroups.h */; };
-		BC680EF72074D08600A3551E /* VKApiGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7F2074D08600A3551E /* VKApiGroups.m */; };
+		BC680EF72074D08600A3551E /* VKApiGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E7F2074D08600A3551E /* VKApiGroups.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EF82074D08600A3551E /* VKApiModels.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E802074D08600A3551E /* VKApiModels.h */; };
 		BC680EF92074D08600A3551E /* VKApiPhotos.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E812074D08600A3551E /* VKApiPhotos.h */; };
-		BC680EFA2074D08600A3551E /* VKApiPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E822074D08600A3551E /* VKApiPhotos.m */; };
+		BC680EFA2074D08600A3551E /* VKApiPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E822074D08600A3551E /* VKApiPhotos.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EFB2074D08600A3551E /* VKApiUsers.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E832074D08600A3551E /* VKApiUsers.h */; };
-		BC680EFC2074D08600A3551E /* VKApiUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E842074D08600A3551E /* VKApiUsers.m */; };
+		BC680EFC2074D08600A3551E /* VKApiUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E842074D08600A3551E /* VKApiUsers.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EFD2074D08600A3551E /* VKApiWall.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E852074D08600A3551E /* VKApiWall.h */; };
-		BC680EFE2074D08600A3551E /* VKApiWall.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E862074D08600A3551E /* VKApiWall.m */; };
+		BC680EFE2074D08600A3551E /* VKApiWall.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E862074D08600A3551E /* VKApiWall.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680EFF2074D08600A3551E /* VKApiObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E882074D08600A3551E /* VKApiObject.h */; };
-		BC680F002074D08600A3551E /* VKApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E892074D08600A3551E /* VKApiObject.m */; };
+		BC680F002074D08600A3551E /* VKApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E892074D08600A3551E /* VKApiObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F012074D08600A3551E /* VKApiObjectArray.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E8A2074D08600A3551E /* VKApiObjectArray.h */; };
-		BC680F022074D08600A3551E /* VKApiObjectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8B2074D08600A3551E /* VKApiObjectArray.m */; };
+		BC680F022074D08600A3551E /* VKApiObjectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8B2074D08600A3551E /* VKApiObjectArray.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F032074D08600A3551E /* VKAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E8C2074D08600A3551E /* VKAudio.h */; };
-		BC680F042074D08600A3551E /* VKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8D2074D08600A3551E /* VKAudio.m */; };
+		BC680F042074D08600A3551E /* VKAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8D2074D08600A3551E /* VKAudio.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F052074D08600A3551E /* VKCounters.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E8E2074D08600A3551E /* VKCounters.h */; };
-		BC680F062074D08600A3551E /* VKCounters.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8F2074D08600A3551E /* VKCounters.m */; };
+		BC680F062074D08600A3551E /* VKCounters.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E8F2074D08600A3551E /* VKCounters.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F072074D08600A3551E /* VKDocs.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E902074D08600A3551E /* VKDocs.h */; };
-		BC680F082074D08600A3551E /* VKDocs.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E912074D08600A3551E /* VKDocs.m */; };
+		BC680F082074D08600A3551E /* VKDocs.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E912074D08600A3551E /* VKDocs.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F092074D08600A3551E /* VKGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E922074D08600A3551E /* VKGroup.h */; };
-		BC680F0A2074D08600A3551E /* VKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E932074D08600A3551E /* VKGroup.m */; };
+		BC680F0A2074D08600A3551E /* VKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E932074D08600A3551E /* VKGroup.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F0B2074D08600A3551E /* VKLikes.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E942074D08600A3551E /* VKLikes.h */; };
-		BC680F0C2074D08600A3551E /* VKLikes.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E952074D08600A3551E /* VKLikes.m */; };
+		BC680F0C2074D08600A3551E /* VKLikes.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E952074D08600A3551E /* VKLikes.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F0D2074D08600A3551E /* VKPhoto.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E962074D08600A3551E /* VKPhoto.h */; };
-		BC680F0E2074D08600A3551E /* VKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E972074D08600A3551E /* VKPhoto.m */; };
+		BC680F0E2074D08600A3551E /* VKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E972074D08600A3551E /* VKPhoto.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F0F2074D08600A3551E /* VKPhotoSize.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E982074D08600A3551E /* VKPhotoSize.h */; };
-		BC680F102074D08600A3551E /* VKPhotoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E992074D08600A3551E /* VKPhotoSize.m */; };
+		BC680F102074D08600A3551E /* VKPhotoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E992074D08600A3551E /* VKPhotoSize.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F112074D08600A3551E /* VKRelative.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E9A2074D08600A3551E /* VKRelative.h */; };
-		BC680F122074D08600A3551E /* VKRelative.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9B2074D08600A3551E /* VKRelative.m */; };
+		BC680F122074D08600A3551E /* VKRelative.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9B2074D08600A3551E /* VKRelative.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F132074D08600A3551E /* VKSchool.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E9C2074D08600A3551E /* VKSchool.h */; };
-		BC680F142074D08600A3551E /* VKSchool.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9D2074D08600A3551E /* VKSchool.m */; };
+		BC680F142074D08600A3551E /* VKSchool.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9D2074D08600A3551E /* VKSchool.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F152074D08600A3551E /* VKUniversity.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E9E2074D08600A3551E /* VKUniversity.h */; };
-		BC680F162074D08600A3551E /* VKUniversity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9F2074D08600A3551E /* VKUniversity.m */; };
+		BC680F162074D08600A3551E /* VKUniversity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680E9F2074D08600A3551E /* VKUniversity.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F172074D08600A3551E /* VKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EA02074D08600A3551E /* VKUser.h */; };
-		BC680F182074D08600A3551E /* VKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA12074D08600A3551E /* VKUser.m */; };
+		BC680F182074D08600A3551E /* VKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA12074D08600A3551E /* VKUser.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F192074D08600A3551E /* VKUploadMessagesPhotoRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EA32074D08600A3551E /* VKUploadMessagesPhotoRequest.h */; };
-		BC680F1A2074D08600A3551E /* VKUploadMessagesPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA42074D08600A3551E /* VKUploadMessagesPhotoRequest.m */; };
+		BC680F1A2074D08600A3551E /* VKUploadMessagesPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA42074D08600A3551E /* VKUploadMessagesPhotoRequest.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F1B2074D08600A3551E /* VKUploadPhotoBase.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EA52074D08600A3551E /* VKUploadPhotoBase.h */; };
-		BC680F1C2074D08600A3551E /* VKUploadPhotoBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA62074D08600A3551E /* VKUploadPhotoBase.m */; };
+		BC680F1C2074D08600A3551E /* VKUploadPhotoBase.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA62074D08600A3551E /* VKUploadPhotoBase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F1D2074D08600A3551E /* VKUploadPhotoRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EA72074D08600A3551E /* VKUploadPhotoRequest.h */; };
-		BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA82074D08600A3551E /* VKUploadPhotoRequest.m */; };
+		BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EA82074D08600A3551E /* VKUploadPhotoRequest.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F1F2074D08600A3551E /* VKUploadWallPhotoRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EA92074D08600A3551E /* VKUploadWallPhotoRequest.h */; };
-		BC680F202074D08600A3551E /* VKUploadWallPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAA2074D08600A3551E /* VKUploadWallPhotoRequest.m */; };
+		BC680F202074D08600A3551E /* VKUploadWallPhotoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAA2074D08600A3551E /* VKUploadWallPhotoRequest.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F212074D08600A3551E /* VKApi.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EAB2074D08600A3551E /* VKApi.h */; };
-		BC680F222074D08600A3551E /* VKApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAC2074D08600A3551E /* VKApi.m */; };
+		BC680F222074D08600A3551E /* VKApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAC2074D08600A3551E /* VKApi.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F232074D08600A3551E /* NSError+VKError.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EAE2074D08600A3551E /* NSError+VKError.h */; };
-		BC680F242074D08600A3551E /* NSError+VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAF2074D08600A3551E /* NSError+VKError.m */; };
+		BC680F242074D08600A3551E /* NSError+VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EAF2074D08600A3551E /* NSError+VKError.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F252074D08600A3551E /* VKError.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EB02074D08600A3551E /* VKError.h */; };
-		BC680F262074D08600A3551E /* VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB12074D08600A3551E /* VKError.m */; };
+		BC680F262074D08600A3551E /* VKError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB12074D08600A3551E /* VKError.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F272074D08600A3551E /* VKHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EB22074D08600A3551E /* VKHTTPClient.h */; };
-		BC680F282074D08600A3551E /* VKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB32074D08600A3551E /* VKHTTPClient.m */; };
+		BC680F282074D08600A3551E /* VKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB32074D08600A3551E /* VKHTTPClient.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F292074D08600A3551E /* VKHTTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EB42074D08600A3551E /* VKHTTPOperation.h */; };
-		BC680F2A2074D08600A3551E /* VKHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB52074D08600A3551E /* VKHTTPOperation.m */; };
+		BC680F2A2074D08600A3551E /* VKHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB52074D08600A3551E /* VKHTTPOperation.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F2B2074D08600A3551E /* VKJSONOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EB62074D08600A3551E /* VKJSONOperation.h */; };
-		BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB72074D08600A3551E /* VKJSONOperation.m */; };
+		BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB72074D08600A3551E /* VKJSONOperation.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F2D2074D08600A3551E /* VKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EB82074D08600A3551E /* VKObject.h */; };
-		BC680F2E2074D08600A3551E /* VKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB92074D08600A3551E /* VKObject.m */; };
+		BC680F2E2074D08600A3551E /* VKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EB92074D08600A3551E /* VKObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F2F2074D08600A3551E /* VKOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EBA2074D08600A3551E /* VKOperation.h */; };
-		BC680F302074D08600A3551E /* VKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBB2074D08600A3551E /* VKOperation.m */; };
+		BC680F302074D08600A3551E /* VKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBB2074D08600A3551E /* VKOperation.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F312074D08600A3551E /* VKRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EBC2074D08600A3551E /* VKRequest.h */; };
-		BC680F322074D08600A3551E /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBD2074D08600A3551E /* VKRequest.m */; };
+		BC680F322074D08600A3551E /* VKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBD2074D08600A3551E /* VKRequest.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F332074D08600A3551E /* VKRequestsScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EBE2074D08600A3551E /* VKRequestsScheduler.h */; };
-		BC680F342074D08600A3551E /* VKRequestsScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBF2074D08600A3551E /* VKRequestsScheduler.m */; };
+		BC680F342074D08600A3551E /* VKRequestsScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EBF2074D08600A3551E /* VKRequestsScheduler.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F352074D08600A3551E /* VKResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EC02074D08600A3551E /* VKResponse.h */; };
-		BC680F362074D08600A3551E /* VKResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC12074D08600A3551E /* VKResponse.m */; };
+		BC680F362074D08600A3551E /* VKResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC12074D08600A3551E /* VKResponse.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F372074D08600A3551E /* VKImageParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EC32074D08600A3551E /* VKImageParameters.h */; };
-		BC680F382074D08600A3551E /* VKImageParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC42074D08600A3551E /* VKImageParameters.m */; };
+		BC680F382074D08600A3551E /* VKImageParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC42074D08600A3551E /* VKImageParameters.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F392074D08600A3551E /* VKUploadImage.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EC52074D08600A3551E /* VKUploadImage.h */; };
-		BC680F3A2074D08600A3551E /* VKUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC62074D08600A3551E /* VKUploadImage.m */; };
+		BC680F3A2074D08600A3551E /* VKUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC62074D08600A3551E /* VKUploadImage.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F3B2074D08700A3551E /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EC82074D08600A3551E /* NSString+MD5.h */; };
 		BC680F3C2074D08700A3551E /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EC92074D08600A3551E /* NSString+MD5.m */; };
 		BC680F3D2074D08700A3551E /* OrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ECA2074D08600A3551E /* OrderedDictionary.h */; };
 		BC680F3E2074D08700A3551E /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ECB2074D08600A3551E /* OrderedDictionary.m */; };
 		BC680F3F2074D08700A3551E /* VKUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ECC2074D08600A3551E /* VKUtil.h */; };
-		BC680F402074D08700A3551E /* VKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ECD2074D08600A3551E /* VKUtil.m */; };
+		BC680F402074D08700A3551E /* VKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ECD2074D08600A3551E /* VKUtil.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F412074D08700A3551E /* VKActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ECF2074D08600A3551E /* VKActivity.h */; };
-		BC680F422074D08700A3551E /* VKActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED02074D08600A3551E /* VKActivity.m */; };
+		BC680F422074D08700A3551E /* VKActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED02074D08600A3551E /* VKActivity.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F432074D08700A3551E /* VKAuthorizeController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ED12074D08600A3551E /* VKAuthorizeController.h */; };
-		BC680F442074D08700A3551E /* VKAuthorizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED22074D08600A3551E /* VKAuthorizeController.m */; };
+		BC680F442074D08700A3551E /* VKAuthorizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED22074D08600A3551E /* VKAuthorizeController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F452074D08700A3551E /* VKCaptchaView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ED32074D08600A3551E /* VKCaptchaView.h */; };
-		BC680F462074D08700A3551E /* VKCaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED42074D08600A3551E /* VKCaptchaView.m */; };
+		BC680F462074D08700A3551E /* VKCaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED42074D08600A3551E /* VKCaptchaView.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F472074D08700A3551E /* VKCaptchaViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ED52074D08600A3551E /* VKCaptchaViewController.h */; };
-		BC680F482074D08700A3551E /* VKCaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED62074D08600A3551E /* VKCaptchaViewController.m */; };
+		BC680F482074D08700A3551E /* VKCaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED62074D08600A3551E /* VKCaptchaViewController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F492074D08700A3551E /* VKShareDialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ED72074D08600A3551E /* VKShareDialogController.h */; };
-		BC680F4A2074D08700A3551E /* VKShareDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED82074D08600A3551E /* VKShareDialogController.m */; };
+		BC680F4A2074D08700A3551E /* VKShareDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680ED82074D08600A3551E /* VKShareDialogController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F4B2074D08700A3551E /* VKSharedTransitioningObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680ED92074D08600A3551E /* VKSharedTransitioningObject.h */; };
-		BC680F4C2074D08700A3551E /* VKSharedTransitioningObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDA2074D08600A3551E /* VKSharedTransitioningObject.m */; };
+		BC680F4C2074D08700A3551E /* VKSharedTransitioningObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDA2074D08600A3551E /* VKSharedTransitioningObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F4D2074D08700A3551E /* VKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EDB2074D08600A3551E /* VKAccessToken.h */; };
-		BC680F4E2074D08700A3551E /* VKAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDC2074D08600A3551E /* VKAccessToken.m */; };
+		BC680F4E2074D08700A3551E /* VKAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDC2074D08600A3551E /* VKAccessToken.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F4F2074D08700A3551E /* VKAuthorizationResult.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EDD2074D08600A3551E /* VKAuthorizationResult.h */; };
-		BC680F502074D08700A3551E /* VKAuthorizationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDE2074D08600A3551E /* VKAuthorizationResult.m */; };
+		BC680F502074D08700A3551E /* VKAuthorizationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EDE2074D08600A3551E /* VKAuthorizationResult.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F512074D08700A3551E /* VKBatchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EDF2074D08600A3551E /* VKBatchRequest.h */; };
-		BC680F522074D08700A3551E /* VKBatchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE02074D08600A3551E /* VKBatchRequest.m */; };
+		BC680F522074D08700A3551E /* VKBatchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE02074D08600A3551E /* VKBatchRequest.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F532074D08700A3551E /* VKBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EE12074D08600A3551E /* VKBundle.h */; };
-		BC680F542074D08700A3551E /* VKBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE22074D08600A3551E /* VKBundle.m */; };
+		BC680F542074D08700A3551E /* VKBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE22074D08600A3551E /* VKBundle.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F552074D08700A3551E /* VKPermissions.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EE32074D08600A3551E /* VKPermissions.h */; };
-		BC680F562074D08700A3551E /* VKPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE42074D08600A3551E /* VKPermissions.m */; };
+		BC680F562074D08700A3551E /* VKPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE42074D08600A3551E /* VKPermissions.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F572074D08700A3551E /* VKSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EE52074D08600A3551E /* VKSdk.h */; };
-		BC680F582074D08700A3551E /* VKSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE62074D08600A3551E /* VKSdk.m */; };
+		BC680F582074D08700A3551E /* VKSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680EE62074D08600A3551E /* VKSdk.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC680F592074D08700A3551E /* VKSdkVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680EE72074D08600A3551E /* VKSdkVersion.h */; };
 		BC680F5A2074D08700A3551E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BC680EE82074D08600A3551E /* LICENSE */; };
 		BC680F5B2074D08700A3551E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BC680EE92074D08600A3551E /* README.md */; };
 		BC680F5E2074D09000A3551E /* GetSocialVKInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */; };
-		BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */; };
+		BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		BC92860A1FC48F6F00306B6E /* UserIdentityView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9286081FC48F6F00306B6E /* UserIdentityView.h */; };
 		BC92860B1FC48F6F00306B6E /* UserIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9286091FC48F6F00306B6E /* UserIdentityView.m */; };
 		BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC92863F1FD8282400306B6E /* Crashlytics.framework */; };
@@ -281,6 +291,16 @@
 		6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewCell.h; sourceTree = "<group>"; };
 		6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewCell.m; sourceTree = "<group>"; };
 		6F96BA87207F6E470022ECF9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = GetSocialDemo/Vendor/Bolts.framework; sourceTree = "<group>"; };
+		6F99AA18216E02F700B01C5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/InAppPurchase.storyboard; sourceTree = "<group>"; };
+		6FA45A1F214017780040D937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ActivityFeed.storyboard; sourceTree = "<group>"; };
+		6FA45A20214017780040D937 /* UIStoryboard+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIStoryboard+GetSocial.m"; path = "Storyboards/UIStoryboard+GetSocial.m"; sourceTree = "<group>"; };
+		6FA45A22214017790040D937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SocialGraph.storyboard; sourceTree = "<group>"; };
+		6FA45A24214017790040D937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SmartInvites.storyboard; sourceTree = "<group>"; };
+		6FA45A26214017790040D937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserManagement.storyboard; sourceTree = "<group>"; };
+		6FA45A28214017790040D937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Notifications.storyboard; sourceTree = "<group>"; };
+		6FA45A29214017790040D937 /* UIStoryboard+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIStoryboard+GetSocial.h"; path = "Storyboards/UIStoryboard+GetSocial.h"; sourceTree = "<group>"; };
+		6FA45A3821413D2E0040D937 /* SendNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendNotificationViewController.h; sourceTree = "<group>"; };
+		6FA45A3921413D2F0040D937 /* SendNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendNotificationViewController.m; sourceTree = "<group>"; };
 		6FD96C05206E4B7400C514A3 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		7A3B8E961FCEC82500481004 /* getsocial-dark-landscape */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "getsocial-dark-landscape"; path = "Resources/getsocial-dark-landscape"; sourceTree = "<group>"; };
 		7A3B8E971FCEC82500481004 /* getsocial-dark */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "getsocial-dark"; path = "Resources/getsocial-dark"; sourceTree = "<group>"; };
@@ -575,6 +595,22 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6FA45A1D2140175A0040D937 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6F99AA17216E02F700B01C5D /* InAppPurchase.storyboard */,
+				6FA45A29214017790040D937 /* UIStoryboard+GetSocial.h */,
+				6FA45A20214017780040D937 /* UIStoryboard+GetSocial.m */,
+				6FA45A1E214017780040D937 /* ActivityFeed.storyboard */,
+				6FA45A27214017790040D937 /* Notifications.storyboard */,
+				6FA45A23214017790040D937 /* SmartInvites.storyboard */,
+				6FA45A21214017790040D937 /* SocialGraph.storyboard */,
+				6FA45A25214017790040D937 /* UserManagement.storyboard */,
+				995D99B417EB064500F65204 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		994F498B1B15F057007B4494 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +738,9 @@
 		99FE1A811BB2B2EC00EF576A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6FA45A1D2140175A0040D937 /* Storyboards */,
+				6FA45A3821413D2E0040D937 /* SendNotificationViewController.h */,
+				6FA45A3921413D2F0040D937 /* SendNotificationViewController.m */,
 				BC2A189B21400E8500ADB0C6 /* IAP */,
 				6F5CD6D320A1BD5E00693B85 /* NotificationsFilterViewController.h */,
 				6F5CD6D220A1BD5D00693B85 /* NotificationsFilterViewController.m */,
@@ -715,7 +754,6 @@
 				BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */,
 				995AC1E71BB15C95006424DF /* MenuItem.h */,
 				995AC1E81BB15C95006424DF /* MenuItem.m */,
-				995D99B417EB064500F65204 /* Main.storyboard */,
 				991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */,
 				991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */,
 				995AC1D21BB06955006424DF /* MainViewController.h */,
@@ -1036,6 +1074,7 @@
 				BC680F3B2074D08700A3551E /* NSString+MD5.h in Headers */,
 				6F5CD6D520A1BD5E00693B85 /* NotificationsFilterViewController.h in Headers */,
 				BC680F072074D08600A3551E /* VKDocs.h in Headers */,
+				6FA45A3A21413D2F0040D937 /* SendNotificationViewController.h in Headers */,
 				BC680F232074D08600A3551E /* NSError+VKError.h in Headers */,
 				BC680F272074D08600A3551E /* VKHTTPClient.h in Headers */,
 				6F8D5C051E57304E00A43DAD /* FriendsViewController.h in Headers */,
@@ -1084,6 +1123,7 @@
 				BC680F0F2074D08600A3551E /* VKPhotoSize.h in Headers */,
 				BC680EFF2074D08600A3551E /* VKApiObject.h in Headers */,
 				BC680F492074D08700A3551E /* VKShareDialogController.h in Headers */,
+				6FA45A30214017790040D937 /* UIStoryboard+GetSocial.h in Headers */,
 				BC680F592074D08700A3551E /* VKSdkVersion.h in Headers */,
 				BC680F4F2074D08700A3551E /* VKAuthorizationResult.h in Headers */,
 				BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */,
@@ -1179,6 +1219,7 @@
 			files = (
 				7A3B8E9C1FCEC82500481004 /* getsocial-dark in Resources */,
 				99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */,
+				6F99AA19216E02F700B01C5D /* InAppPurchase.storyboard in Resources */,
 				BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */,
 				99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */,
 				99ABE3CC1BCEBC8600296F50 /* GetSocialDemo.entitlements in Resources */,
@@ -1198,10 +1239,15 @@
 				BC680EEB2074D08600A3551E /* SdkAssetCatalog.xcassets in Resources */,
 				BC680F5A2074D08700A3551E /* LICENSE in Resources */,
 				99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */,
+				6FA45A2F214017790040D937 /* Notifications.storyboard in Resources */,
+				6FA45A2A214017790040D937 /* ActivityFeed.storyboard in Resources */,
+				6FA45A2C214017790040D937 /* SocialGraph.storyboard in Resources */,
+				6FA45A2D214017790040D937 /* SmartInvites.storyboard in Resources */,
 				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
 				BC5C5A821F4DCBE800533C43 /* TwitterShareExtensionUIResources.bundle in Resources */,
 				7A3B8E9F1FCEC82500481004 /* getsocial-light in Resources */,
 				BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */,
+				6FA45A2E214017790040D937 /* UserManagement.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,7 +1279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.21.1\n";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.22.0\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1278,12 +1324,14 @@
 				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
 				6F5CD6D420A1BD5E00693B85 /* NotificationsFilterViewController.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
+				6FA45A2B214017790040D937 /* UIStoryboard+GetSocial.m in Sources */,
 				BC537B2321358E86009D905A /* UITextField+DisableCopyAndPaste.m in Sources */,
 				BC680EFA2074D08600A3551E /* VKApiPhotos.m in Sources */,
 				BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */,
 				BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */,
 				BC680F522074D08700A3551E /* VKBatchRequest.m in Sources */,
 				BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */,
+				6FA45A3B21413D2F0040D937 /* SendNotificationViewController.m in Sources */,
 				BC680F382074D08600A3551E /* VKImageParameters.m in Sources */,
 				BC680F182074D08600A3551E /* VKUser.m in Sources */,
 				BC680F4A2074D08700A3551E /* VKShareDialogController.m in Sources */,
@@ -1353,6 +1401,54 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6F99AA17216E02F700B01C5D /* InAppPurchase.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F99AA18216E02F700B01C5D /* Base */,
+			);
+			name = InAppPurchase.storyboard;
+			sourceTree = "<group>";
+		};
+		6FA45A1E214017780040D937 /* ActivityFeed.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FA45A1F214017780040D937 /* Base */,
+			);
+			name = ActivityFeed.storyboard;
+			sourceTree = "<group>";
+		};
+		6FA45A21214017790040D937 /* SocialGraph.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FA45A22214017790040D937 /* Base */,
+			);
+			name = SocialGraph.storyboard;
+			sourceTree = "<group>";
+		};
+		6FA45A23214017790040D937 /* SmartInvites.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FA45A24214017790040D937 /* Base */,
+			);
+			name = SmartInvites.storyboard;
+			sourceTree = "<group>";
+		};
+		6FA45A25214017790040D937 /* UserManagement.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FA45A26214017790040D937 /* Base */,
+			);
+			name = UserManagement.storyboard;
+			sourceTree = "<group>";
+		};
+		6FA45A27214017790040D937 /* Notifications.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FA45A28214017790040D937 /* Base */,
+			);
+			name = Notifications.storyboard;
+			sourceTree = "<group>";
+		};
 		995D99B417EB064500F65204 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
