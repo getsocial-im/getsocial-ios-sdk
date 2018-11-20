@@ -7,13 +7,21 @@
 //
 
 #import "SendNotificationViewController.h"
+#import <AVFoundation/AVFoundation.h>
 #import <GetSocial/GetSocial.h>
-#import <GetSocial/GetSocialConstants.h>
-#import <GetSocial/GetSocialNotificationContent.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "UIImage+GetSocial.h"
 #import "UISimpleAlertViewController.h"
 #import "UIViewController+GetSocial.h"
 
-@interface SendNotificationViewController ()<UIPickerViewDelegate, UIPickerViewDataSource>
+#define MAX_WIDTH 1024.f
+#define MAX_HEIGHT 768.f
+
+#define IMAGE_HEIGHT 140
+
+#define CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES 160
+
+@interface SendNotificationViewController ()<UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     BOOL keyboardIsShown;
 }
@@ -26,6 +34,20 @@
 
 @property(weak, nonatomic) IBOutlet UITextField *customText;
 @property(weak, nonatomic) IBOutlet UITextField *customTitle;
+
+// custom image/video controls
+@property(nonatomic, strong) UIImagePickerController *imagePicker;
+@property(nonatomic) NSData *customVideoContent;
+@property(weak, nonatomic) IBOutlet UIButton *buttonChangeCustomImage;
+@property(weak, nonatomic) IBOutlet UIButton *buttonChangeCustomVideo;
+@property(weak, nonatomic) IBOutlet UIButton *buttonRemoveCustomImage;
+@property(weak, nonatomic) IBOutlet UIButton *buttonRemoveCustomVideo;
+@property(weak, nonatomic) IBOutlet UIImageView *customImagePreview;
+@property(weak, nonatomic) IBOutlet UIImageView *customVideoPreview;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *customImageSectionHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *customVideoSectionHeight;
+@property(weak, nonatomic) IBOutlet UITextField *imageUrl;
+@property(weak, nonatomic) IBOutlet UITextField *videoUrl;
 
 @property(weak, nonatomic) IBOutlet UIPickerView *notificationAction;
 @property(weak, nonatomic) IBOutlet UIView *actionData;
@@ -73,6 +95,13 @@ static NSInteger const DynamicRowHeight = 36;
     self.recipients = [NSMutableArray new];
 
     self.templateData.translatesAutoresizingMaskIntoConstraints = NO;
+    self.customImagePreview.hidden = YES;
+    self.buttonRemoveCustomImage.hidden = YES;
+    self.customVideoPreview.hidden = YES;
+    self.buttonRemoveCustomVideo.hidden = YES;
+
+    self.customImageSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
+    self.customVideoSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
 }
 
 - (void)dealloc
@@ -283,12 +312,25 @@ static NSInteger const DynamicRowHeight = 36;
         [content addTemplatePlaceholders:[self createTemplateData]];
     }
 
-    int selectedAction = [self.actions.allValues[[self.notificationAction selectedRowInComponent:0]] intValue];
+    NSInteger selectedRow = [self.notificationAction selectedRowInComponent:0];
+    NSString *selectedItem = [self pickerView:self.notificationAction titleForRow:selectedRow forComponent:0];
+    int selectedAction = [self.actions[selectedItem] intValue];
     if (selectedAction != -1)
     {
         GetSocialNotificationActionType action = (GetSocialNotificationActionType)selectedAction;
         [content setActionType:action];
     }
+
+    GetSocialMediaAttachment *attachment =
+        self.imageUrl.text.length > 0
+            ? [GetSocialMediaAttachment imageUrl:self.imageUrl.text]
+            : self.videoUrl.text.length > 0
+                  ? [GetSocialMediaAttachment videoUrl:self.videoUrl.text]
+                  : self.customImagePreview.image != nil
+                        ? [GetSocialMediaAttachment image:self.customImagePreview.image]
+                        : self.customVideoPreview.image != nil ? [GetSocialMediaAttachment video:self.customVideoContent] : nil;
+
+    [content setMediaAttachment:attachment];
     [content addActionData:[self createActionData]];
 
     [GetSocialUser sendNotification:[self createUserIds]
@@ -355,7 +397,12 @@ static NSInteger const DynamicRowHeight = 36;
 
 - (NSDictionary *)pickersSetup
 {
-    return @{ @(self.notificationAction.hash) : @{@"size" : @(self.actions.count), @"titles" : self.actions.allKeys} };
+    return @{ @(self.notificationAction.hash) : @{@"size" : @(self.actions.count), @"titles" : [self.actions.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [self.actions[obj1] intValue] > [self.actions[obj2] intValue];
+}]
+}
+}
+;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -380,6 +427,109 @@ static NSInteger const DynamicRowHeight = 36;
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return self.pickersSetup[@(pickerView.hash)][@"titles"][row];
+}
+
+- (IBAction)changeImage:(id)sender
+{
+    [self showImagePickerViewForMediaType:(NSString *)kUTTypeImage];
+}
+
+- (IBAction)changeVideo:(id)sender
+{
+    [self showImagePickerViewForMediaType:(NSString *)kUTTypeMovie];
+}
+
+- (IBAction)clearImage:(id)sender
+{
+    self.customImagePreview.image = nil;
+    self.customImagePreview.hidden = YES;
+    self.buttonRemoveCustomImage.hidden = YES;
+    self.customImageSectionHeight.constant -= IMAGE_HEIGHT;
+}
+
+- (IBAction)clearVideo:(id)sender
+{
+    self.customVideoPreview.image = nil;
+    self.customVideoPreview.hidden = YES;
+    self.buttonRemoveCustomVideo.hidden = YES;
+    self.customVideoContent = nil;
+    self.customVideoSectionHeight.constant -= IMAGE_HEIGHT;
+}
+
+- (void)showImagePickerViewForMediaType:(NSString *)mediaType
+{
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.mediaTypes = @[ mediaType ];
+
+    self.imagePicker.delegate = self;
+
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (UIImage *)generateThumbnailImage:(NSURL *)filepath
+{
+    AVAsset *asset = [AVAsset assetWithURL:filepath];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 0;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+
+    return thumbnail;
+}
+
+- (void)useSelectedImageWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    image = [image imageByResizeAndKeepRatio:CGSizeMake(MAX_WIDTH, MAX_HEIGHT)];
+
+    self.customImagePreview.image = image;
+    self.customImageSectionHeight.constant += IMAGE_HEIGHT;
+    self.customImagePreview.hidden = NO;
+    self.buttonRemoveCustomImage.hidden = NO;
+}
+
+- (void)useSelectedVideoWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
+    self.customVideoContent = [NSData dataWithContentsOfURL:videoUrl];
+    UIImage *image = [self generateThumbnailImage:videoUrl];
+    int max_width = self.view.bounds.size.width * 0.8;
+    image = [image imageByResizeAndKeepRatio:CGSizeMake(max_width, max_width * 0.4)];
+
+    self.customVideoPreview.image = image;
+    self.customVideoPreview.hidden = NO;
+    self.buttonRemoveCustomVideo.hidden = NO;
+    self.customVideoSectionHeight.constant += IMAGE_HEIGHT;
+}
+
+#pragma mark - UIImagePickerController
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info
+{
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
+        [self useSelectedImageWithInfo:info];
+        [self clearVideo:nil];
+    }
+    else
+    {
+        [self useSelectedVideoWithInfo:info];
+        [self clearImage:nil];
+    }
+
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    self.imagePicker = nil;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    self.imagePicker = nil;
 }
 
 /*

@@ -174,16 +174,15 @@
 
     if (self.imageUrlField.text.length > 0)
     {
-        mutableInviteContent.imageUrl = self.imageUrlField.text;
+        mutableInviteContent.mediaAttachment = [GetSocialMediaAttachment imageUrl:self.imageUrlField.text];
     }
-
-    if (self.customImage.image)
+    else if (self.customImage.image)
     {
-        mutableInviteContent.image = self.customImage.image;
+        mutableInviteContent.mediaAttachment = [GetSocialMediaAttachment image:self.customImage.image];
     }
-    if (self.customVideoContent)
+    else if (self.customVideoContent)
     {
-        mutableInviteContent.video = self.customVideoContent;
+        mutableInviteContent.mediaAttachment = [GetSocialMediaAttachment video:self.customVideoContent];
     }
 
     GetSocialUIInvitesView *invitesView = [GetSocialUI createInvitesView];

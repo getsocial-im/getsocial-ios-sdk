@@ -184,7 +184,9 @@ static NSDateFormatter *dateFormatter;
                                                                            actionData:selected.actionData
                                                                               wasRead:read
                                                                                 title:selected.title
-                                                                                 text:selected.text];
+                                                                                 text:selected.text
+                                                                             imageUrl:selected.imageUrl
+                                                                             videoUrl:selected.videoUrl];
                 }
             }
             [self.notificationsTableView reloadData];
