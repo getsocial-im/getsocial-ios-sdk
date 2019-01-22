@@ -18,14 +18,14 @@
 
 @interface ActivityIndicatorViewController ()
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
 @implementation ActivityIndicatorViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 }
 
@@ -34,6 +34,5 @@
     [super viewWillAppear:animated];
     [self.activityIndicator startAnimating];
 }
-
 
 @end

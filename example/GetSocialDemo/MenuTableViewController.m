@@ -15,6 +15,7 @@
  */
 
 #import "MenuTableViewController.h"
+#import <AudioToolbox/AudioServices.h>
 #import <GetSocial/GetSocialUser.h>
 #import "ConsoleViewController.h"
 #import "MenuTableViewCell.h"
@@ -77,6 +78,7 @@
             [PushNotificationView showNotificationWithTitle:@"Clipboard"
                                                  andMessage:[NSString stringWithFormat:@"Copy %@ to clipboard.", [GetSocialUser userId]]];
             self.isPressing = YES;
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         }
     }
 }

@@ -14,19 +14,25 @@
  *	limitations under the License.
  */
 
+#import <GetSocial/GetSocial.h>
 #import <UIKit/UIKit.h>
 #import "MainNavigationController.h"
 
 @class ActionableMenuItem;
 @class CheckableMenuItem;
 
-@interface MainViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface MainViewController : UIViewController<UIImagePickerControllerDelegate>
 
 @property(nonatomic, strong) NSMutableArray *menu;
 @property(nonatomic, strong) MainNavigationController *mainNavigationController;
 @property(weak, nonatomic) IBOutlet UILabel *versionLabel;
 
--(void)loadMenu;
--(void)setUpGetSocial;
+- (void)loadMenu;
+- (void)setUpGetSocial;
+
+- (BOOL)handleNotification:(GetSocialNotification *)notification withContext:(NSDictionary *)context;
+
+- (BOOL)handleAction:(GetSocialAction *)action;
+- (void)handleAction:(NSString *)action withPost:(GetSocialActivityPost *)post;
 
 @end

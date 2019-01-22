@@ -19,14 +19,15 @@
 
 @interface NewFriendViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *displayName;
-@property (weak, nonatomic) IBOutlet UIImageView *avatar;
+@property(weak, nonatomic) IBOutlet UILabel *displayName;
+@property(weak, nonatomic) IBOutlet UIImageView *avatar;
 
 @end
 
 @implementation NewFriendViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 }
 
@@ -34,15 +35,15 @@
 {
     [super viewWillAppear:animated];
     self.displayName.text = self.publicUser.displayName;
-    if(self.publicUser.avatarUrl.length > 0)
+    if (self.publicUser.avatarUrl.length > 0)
     {
-        NSURL* avatarURL = [NSURL URLWithString:self.publicUser.avatarUrl];
+        NSURL *avatarURL = [NSURL URLWithString:self.publicUser.avatarUrl];
         [self.avatar gs_setImageURL:avatarURL];
     }
-    
 }
 
-- (IBAction)closeButton:(id)sender {
+- (IBAction)closeButton:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

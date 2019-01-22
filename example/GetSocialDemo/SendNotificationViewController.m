@@ -22,9 +22,6 @@
 #define CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES 160
 
 @interface SendNotificationViewController ()<UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
-{
-    BOOL keyboardIsShown;
-}
 @property(weak, nonatomic) IBOutlet UIView *templateContainer;
 @property(weak, nonatomic) IBOutlet UIView *textContainer;
 
@@ -52,6 +49,8 @@
 @property(weak, nonatomic) IBOutlet UIPickerView *notificationAction;
 @property(weak, nonatomic) IBOutlet UIView *actionData;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *actionDataHeight;
+@property(weak, nonatomic) IBOutlet UIView *actionButtons;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *actionButtonsHeight;
 
 @property(weak, nonatomic) IBOutlet UIView *customUserIds;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *customUserIdsHeight;
@@ -67,7 +66,7 @@
 
 @implementation SendNotificationViewController
 
-typedef NS_ENUM(NSInteger, DynamicRowType) { TemplateData, NotificationData, UserIds };
+typedef NS_ENUM(NSInteger, DynamicRowType) { TemplateData, NotificationData, UserIds, ActionButtons };
 
 static NSInteger const DynamicRowHeight = 36;
 
@@ -84,7 +83,6 @@ static NSInteger const DynamicRowHeight = 36;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
-    keyboardIsShown = NO;
 
     UIGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addPlaceholder:)];
     [self.customText addGestureRecognizer:longTap];
@@ -123,8 +121,6 @@ static NSInteger const DynamicRowHeight = 36;
 
     self.scrollView.contentInset = UIEdgeInsetsMake(self.scrollView.contentInset.top, self.scrollView.contentInset.left, keyboardSize.height,
                                                     self.scrollView.contentInset.bottom);
-
-    keyboardIsShown = NO;
 }
 
 - (void)addPlaceholder:(UILongPressGestureRecognizer *)sender
@@ -149,14 +145,88 @@ static NSInteger const DynamicRowHeight = 36;
     }
 }
 
+- (NSDictionary<NSString *, NSArray<NSString *> *> *)actionKeyPlaceholders
+{
+    return @{
+        GetSocialActionOpenUrl : @[ GetSocialActionDataKey_OpenUrl_Url ],
+        GetSocialActionOpenProfile : @[ GetSocialActionDataKey_OpenProfile_UserId ],
+        GetSocialActionOpenActivity : @[
+            GetSocialActionDataKey_OpenActivity_FeedName, GetSocialActionDataKey_OpenActivity_ActivityId,
+            GetSocialActionDataKey_OpenActivity_CommentId
+        ]
+    };
+}
+
+- (void)addPlaceholderKey:(UILongPressGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        NSInteger selectedRow = [self.notificationAction selectedRowInComponent:0];
+        NSString *selectedItem = [self pickerView:self.notificationAction titleForRow:selectedRow forComponent:0];
+        NSString *selectedAction = self.actions[selectedItem];
+        NSArray *placeholders = self.actionKeyPlaceholders[selectedAction];
+        if (!placeholders)
+        {
+            return;
+        }
+
+        UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Placeholders"
+                                                                                        message:@"Choose the placeholder to add"
+                                                                              cancelButtonTitle:@"Cancel"
+                                                                              otherButtonTitles:placeholders];
+
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (!didCancel)
+            {
+                UITextField *textField = (UITextField *)sender.view;
+                textField.text = placeholders[selectedIndex];
+            }
+        }];
+    }
+}
+
+- (void)addActionButtonPlaceholderKey:(UILongPressGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        NSArray *placeholders =
+            @[ GetSocialActionCustom, GetSocialActionOpenActivity, GetSocialActionOpenProfile, GetSocialActionOpenInvites, GetSocialActionOpenUrl ];
+        UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Placeholders"
+                                                                                        message:@"Choose the placeholder to add"
+                                                                              cancelButtonTitle:@"Cancel"
+                                                                              otherButtonTitles:placeholders];
+
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (!didCancel)
+            {
+                UITextField *textField = (UITextField *)sender.view;
+                textField.text = placeholders[selectedIndex];
+            }
+        }];
+    }
+}
+
 - (IBAction)addTemplateData:(id)sender
 {
     [self addDynamicRowType:TemplateData];
 }
 
+- (IBAction)addActionButton:(id)sender
+{
+    UIView *row = [self addDynamicRowType:ActionButtons];
+    UIView *actionId = row.subviews[1];
+
+    UIGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addActionButtonPlaceholderKey:)];
+    [actionId addGestureRecognizer:longTap];
+}
+
 - (IBAction)addActionData:(id)sender
 {
-    [self addDynamicRowType:NotificationData];
+    UIView *row = [self addDynamicRowType:NotificationData];
+    UIView *key = row.subviews[0];
+
+    UIGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addPlaceholderKey:)];
+    [key addGestureRecognizer:longTap];
 }
 
 - (IBAction)toggleFriends:(UIButton *)sender
@@ -184,11 +254,12 @@ static NSInteger const DynamicRowHeight = 36;
     return @{
         @(TemplateData) : @{@"inputs" : @[ @"Key", @"Value" ], @"container" : self.templateData, @"constraint" : self.templateDataHeight},
         @(NotificationData) : @{@"inputs" : @[ @"Key", @"Value" ], @"container" : self.actionData, @"constraint" : self.actionDataHeight},
-        @(UserIds) : @{@"inputs" : @[ @"UserID" ], @"container" : self.customUserIds, @"constraint" : self.customUserIdsHeight}
+        @(UserIds) : @{@"inputs" : @[ @"UserID" ], @"container" : self.customUserIds, @"constraint" : self.customUserIdsHeight},
+        @(ActionButtons) : @{@"inputs" : @[ @"Title", @"ActionID" ], @"container" : self.actionButtons, @"constraint" : self.actionButtonsHeight}
     };
 }
 
-- (void)addDynamicRowType:(DynamicRowType)type
+- (UIView *)addDynamicRowType:(DynamicRowType)type
 {
     UIView *container = self.dynamicRowTypes[@(type)][@"container"];
     NSArray *inputs = self.dynamicRowTypes[@(type)][@"inputs"];
@@ -204,6 +275,10 @@ static NSInteger const DynamicRowHeight = 36;
 
     [inputs enumerateObjectsUsingBlock:^(NSString *input, NSUInteger idx, BOOL *stop) {
         UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 60, 21)];
+
+        field.accessibilityIdentifier = input;
+        field.enabled = YES;
+        field.userInteractionEnabled = YES;
         field.placeholder = input;
         field.borderStyle = UITextBorderStyleRoundedRect;
         field.translatesAutoresizingMaskIntoConstraints = NO;
@@ -241,12 +316,14 @@ static NSInteger const DynamicRowHeight = 36;
                                                           attribute:NSLayoutAttributeWidth
                                                          multiplier:1
                                                            constant:0]];
-    NSInteger offset = numberOfRow * DynamicRowHeight + 8;
-    [container addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(%i)-[row(28)]", offset]
+    long offset = numberOfRow * DynamicRowHeight + 8;
+    [container addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(%li)-[row(28)]", offset]
                                                                       options:NSLayoutFormatDirectionLeftToRight
                                                                       metrics:nil
                                                                         views:@{@"row" : row}]];
     heightConstraint.constant += DynamicRowHeight;
+
+    return row;
 }
 
 - (void)removeDynamicRow:(UIButton *)sender
@@ -293,6 +370,40 @@ static NSInteger const DynamicRowHeight = 36;
 
 - (IBAction)sendNotification:(id)sender
 {
+    NSInteger selectedRow = [self.notificationAction selectedRowInComponent:0];
+    NSString *selectedItem = [self pickerView:self.notificationAction titleForRow:selectedRow forComponent:0];
+    GetSocialActionType selectedAction = self.actions[selectedItem];
+
+    if (self.templateName.text.length == 0 && self.customText.text.length == 0 && [selectedAction isEqualToString:@"custom_add_friend"])
+    {
+        GetSocialNotificationContent *content = [GetSocialNotificationContent
+            withText:[NSString stringWithFormat:@"%@ wants to become friends", GetSocial_NotificationPlaceholder_CustomText_SenderDisplayName]];
+        [content setTitle:@"Friend Request"];
+
+        GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
+        [builder addActionData:@{@"user_id" : [GetSocialUser userId], @"user_name" : [GetSocialUser displayName]}];
+        [content setAction:builder.build];
+        [content addActionButtons:@[
+            [GetSocialActionButton createWithTitle:@"Accept" andActionId:GetSocialActionIdConsume],
+            [GetSocialActionButton createWithTitle:@"Decline" andActionId:GetSocialActionIdIgnore]
+        ]];
+
+        [GetSocialUser sendNotification:[self createUserIds]
+            withContent:content
+            success:^(GetSocialNotificationsSummary *summary) {
+                [self log:LogLevelInfo
+                      context:@"Send Notification"
+                      message:[NSString stringWithFormat:@"Successfully sent notifications to %d users.", summary.successfullySentCount]
+                    showAlert:YES];
+            }
+            failure:^(NSError *error) {
+                [self log:LogLevelError
+                      context:@"Send Notification"
+                      message:[NSString stringWithFormat:@"Failed to send notification. Error: %@.", error]
+                    showAlert:YES];
+            }];
+        return;
+    }
     GetSocialNotificationContent *content = self.templateName.text.length > 0 ? [GetSocialNotificationContent withTemplateName:self.templateName.text]
                                                                               : [GetSocialNotificationContent withText:self.customText.text];
 
@@ -312,26 +423,24 @@ static NSInteger const DynamicRowHeight = 36;
         [content addTemplatePlaceholders:[self createTemplateData]];
     }
 
-    NSInteger selectedRow = [self.notificationAction selectedRowInComponent:0];
-    NSString *selectedItem = [self pickerView:self.notificationAction titleForRow:selectedRow forComponent:0];
-    int selectedAction = [self.actions[selectedItem] intValue];
-    if (selectedAction != -1)
+    if (![selectedAction isEqualToString:@"DEFAULT"])
     {
-        GetSocialNotificationActionType action = (GetSocialNotificationActionType)selectedAction;
-        [content setActionType:action];
+        GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
+        [builder addActionData:[self createActionData]];
+        [content setAction:builder.build];
     }
+
+    [content addActionButtons:[self createActionButtons]];
 
     GetSocialMediaAttachment *attachment =
         self.imageUrl.text.length > 0
             ? [GetSocialMediaAttachment imageUrl:self.imageUrl.text]
-            : self.videoUrl.text.length > 0
-                  ? [GetSocialMediaAttachment videoUrl:self.videoUrl.text]
-                  : self.customImagePreview.image != nil
-                        ? [GetSocialMediaAttachment image:self.customImagePreview.image]
-                        : self.customVideoPreview.image != nil ? [GetSocialMediaAttachment video:self.customVideoContent] : nil;
+            : self.videoUrl.text.length > 0 ? [GetSocialMediaAttachment videoUrl:self.videoUrl.text]
+                                            : self.customImagePreview.image != nil
+                                                  ? [GetSocialMediaAttachment image:self.customImagePreview.image]
+                                                  : self.customVideoContent != nil ? [GetSocialMediaAttachment video:self.customVideoContent] : nil;
 
     [content setMediaAttachment:attachment];
-    [content addActionData:[self createActionData]];
 
     [GetSocialUser sendNotification:[self createUserIds]
         withContent:content
@@ -347,6 +456,18 @@ static NSInteger const DynamicRowHeight = 36;
                   message:[NSString stringWithFormat:@"Failed to send notification. Error: %@.", error]
                 showAlert:YES];
         }];
+}
+
+- (NSArray *)createActionButtons
+{
+    NSMutableArray *actionButtons = [NSMutableArray new];
+    [self.actionButtons.subviews enumerateObjectsUsingBlock:^(__kindof UIView *row, NSUInteger idx, BOOL *stop) {
+        UITextField *title = row.subviews[0];
+        UITextField *actionId = row.subviews[1];
+
+        [actionButtons addObject:[GetSocialActionButton createWithTitle:title.text andActionId:actionId.text]];
+    }];
+    return actionButtons;
 }
 
 - (NSDictionary *)createActionData
@@ -386,24 +507,29 @@ static NSInteger const DynamicRowHeight = 36;
 - (NSDictionary *)actions
 {
     return @{
-        @"Default" : @(-1),
-        @"Custom" : @(GetSocialNotificationActionCustom),
-        @"Open Activity" : @(GetSocialNotificationActionOpenActivity),
-        @"Open Invites" : @(GetSocialNotificationActionOpenInvites),
-        @"Open Profile" : @(GetSocialNotificationActionOpenProfile),
-        @"Open URL" : @(GetSocialNotificationActionOpenUrl),
+        @"Default" : @"DEFAULT",
+        @"Custom" : GetSocialActionCustom,
+        @"Open Activity" : GetSocialActionOpenActivity,
+        @"Open Invites" : GetSocialActionOpenInvites,
+        @"Open Profile" : GetSocialActionOpenProfile,
+        @"Open URL" : GetSocialActionOpenUrl,
+        @"Add Friend(Custom)" : @"custom_add_friend"
     };
 }
 
+// clang-format off
 - (NSDictionary *)pickersSetup
 {
-    return @{ @(self.notificationAction.hash) : @{@"size" : @(self.actions.count), @"titles" : [self.actions.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [self.actions[obj1] intValue] > [self.actions[obj2] intValue];
-}]
+    return @{ 
+        @(self.notificationAction.hash) : @{
+            @"size" : @(self.actions.count), 
+            @"titles" : [self.actions.allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                return [self.actions[obj1] compare:self.actions[obj2]];
+            }]
+        }
+    };
 }
-}
-;
-}
+// clang-format on
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -497,8 +623,8 @@ static NSInteger const DynamicRowHeight = 36;
     NSURL *videoUrl = info[UIImagePickerControllerMediaURL];
     self.customVideoContent = [NSData dataWithContentsOfURL:videoUrl];
     UIImage *image = [self generateThumbnailImage:videoUrl];
-    int max_width = self.view.bounds.size.width * 0.8;
-    image = [image imageByResizeAndKeepRatio:CGSizeMake(max_width, max_width * 0.4)];
+    int maxWidth = (int)(self.view.bounds.size.width * 0.8);
+    image = [image imageByResizeAndKeepRatio:CGSizeMake(maxWidth, (int)(maxWidth * 0.4))];
 
     self.customVideoPreview.image = image;
     self.customVideoPreview.hidden = NO;
@@ -531,15 +657,5 @@ static NSInteger const DynamicRowHeight = 36;
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     self.imagePicker = nil;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -26,7 +26,7 @@
 
 @interface FriendsTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) GetSocialPublicUser *user;
-@property (nonatomic, weak) id<FriendsTableViewCellDelegate> delegate;
+@property(nonatomic, strong) GetSocialPublicUser *user;
+@property(nonatomic, weak) id<FriendsTableViewCellDelegate> delegate;
 
 @end

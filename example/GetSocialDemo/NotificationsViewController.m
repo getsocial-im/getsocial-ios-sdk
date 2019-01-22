@@ -8,8 +8,10 @@
 
 #import "NotificationsViewController.h"
 #import <GetSocial/GetSocial.h>
+#import "MainViewController.h"
 #import "NotificationTableViewCell.h"
 #import "NotificationsFilterViewController.h"
+#import "UIImageView+GetSocial.h"
 #import "UIStoryboard+GetSocial.h"
 #import "UIViewController+GetSocial.h"
 
@@ -54,7 +56,7 @@ static NSDateFormatter *dateFormatter;
     {
         [ids addObject:notification.notificationId];
     }
-    [self setNotifications:ids read:YES];
+    [self setNotifications:ids status:GetSocialNotificationStatusRead];
 }
 
 - (void)setupFilter
@@ -86,21 +88,16 @@ static NSDateFormatter *dateFormatter;
 
 - (GetSocialNotificationsQuery *)baseQuery
 {
-    NSString *status = [NSUserDefaults.standardUserDefaults stringForKey:@"notification_status"];
-    GetSocialNotificationsQuery *query;
-    if ([status isEqualToString:@"Read"])
-    {
-        query = [GetSocialNotificationsQuery read];
-    }
-    else if ([status isEqualToString:@"Unread"])
-    {
-        query = [GetSocialNotificationsQuery unread];
-    }
-    else
-    {
-        query = [GetSocialNotificationsQuery readAndUnread];
-    }
-    [query setTypes:[NSUserDefaults.standardUserDefaults arrayForKey:@"notification_types"]];
+    NSArray<NSString *> *statuses = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_statuses"];
+    NSArray<NSString *> *types = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_types"];
+    NSArray<NSString *> *actions = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_actions"];
+
+    GetSocialNotificationsQuery *query =
+        statuses ? [GetSocialNotificationsQuery withStatuses:statuses] : [GetSocialNotificationsQuery withAllStatuses];
+
+    if (types) [query setTypes:types];
+    if (actions) [query setActions:actions];
+
     return query;
 }
 
@@ -150,13 +147,69 @@ static NSDateFormatter *dateFormatter;
 {
     NotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationsViewCell"];
     GetSocialNotification *notification = self.notifications[indexPath.row];
+    BOOL consumedOrIgnored = [@[ GetSocialNotificationStatusConsumed, GetSocialNotificationStatusIgnored ] containsObject:notification.status];
+    BOOL wasRead = ![notification.status isEqualToString:GetSocialNotificationStatusUnread];
+    cell.delegate = self;
+    cell.notification = notification;
+    cell.actionButtons.distribution = UIStackViewDistributionEqualSpacing;
     cell.isAccessibilityElement = YES;
     cell.accessibilityIdentifier = @"notification_item";
     cell.title.text = notification.title;
+    if (consumedOrIgnored)
+    {
+        cell.title.text = [NSString stringWithFormat:@"%@ (%@)", cell.title.text, notification.status];
+    }
     cell.text.text = notification.text;
     cell.date.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:notification.createdAt]];
-    cell.readIndicator.hidden = notification.wasRead;
-    cell.backgroundColor = notification.wasRead ? [UIColor whiteColor] : [UIColor lightGrayColor];
+    cell.readIndicator.hidden = wasRead;
+    cell.backgroundColor = wasRead ? [UIColor whiteColor] : [UIColor lightGrayColor];
+
+    if (notification.imageUrl != nil)
+    {
+        cell.mediaPreview.hidden = NO;
+        cell.mediaHeight.constant = IMAGE_HEIGHT;
+        [cell.mediaPreview gs_setImageURL:[NSURL URLWithString:notification.imageUrl]];
+    }
+    else
+    {
+        cell.mediaPreview.hidden = YES;
+        cell.mediaHeight.constant = 0;
+    }
+
+    if (notification.videoUrl != nil)
+    {
+        cell.videoContentLabel.hidden = NO;
+        cell.videoContentLabel.text = notification.videoUrl;
+    }
+    else
+    {
+        cell.videoContentLabel.hidden = YES;
+    }
+
+    if (notification.actionButtons.count == 0 || consumedOrIgnored)
+    {
+        cell.actionButtonsContainerHeight.constant = 0;
+        cell.actionButtonsContainer.hidden = YES;
+    }
+    else
+    {
+        [cell.actionButtons.arrangedSubviews enumerateObjectsUsingBlock:^(__kindof UIView *obj, NSUInteger idx, BOOL *stop) {
+            [obj removeFromSuperview];
+        }];
+        for (GetSocialActionButton *actionButton in notification.actionButtons)
+        {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+            button.tag = [notification.actionButtons indexOfObject:actionButton];
+            [button setTitle:actionButton.title forState:UIControlStateNormal];
+            [button addTarget:cell action:@selector(actionButton:) forControlEvents:UIControlEventTouchUpInside];
+            [button.heightAnchor constraintEqualToConstant:45].active = YES;
+            [button.widthAnchor constraintEqualToConstant:100].active = YES;
+            [cell.actionButtons addArrangedSubview:button];
+        }
+        cell.actionButtonsContainerHeight.constant = 45;
+        cell.actionButtonsContainer.hidden = NO;
+    }
+
     return cell;
 }
 
@@ -164,29 +217,33 @@ static NSDateFormatter *dateFormatter;
 {
     GetSocialNotification *selected = self.notifications[indexPath.row];
     [self.notificationsTableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self setNotifications:@[ selected.notificationId ] read:!selected.wasRead];
+    GetSocialNotificationStatus status =
+        [selected.status isEqualToString:GetSocialNotificationStatusUnread] ? GetSocialNotificationStatusRead : GetSocialNotificationStatusUnread;
+
+    [self setNotifications:@[ selected.notificationId ] status:status];
 }
 
-- (void)setNotifications:(NSArray<GetSocialId> *)notifications read:(BOOL)read
+- (void)setNotifications:(NSArray<GetSocialId> *)notifications status:(GetSocialNotificationStatus)newStatus
 {
-    [GetSocialUser setNotificationsRead:notifications
-        read:read
+    [GetSocialUser setNotificationsStatus:notifications
+        status:newStatus
         success:^{
             for (uint i = 0; i < self.notifications.count; i++)
             {
                 GetSocialNotification *selected = self.notifications[i];
                 if ([notifications containsObject:selected.notificationId])
                 {
-                    self.notifications[i] = [[GetSocialNotification alloc] initWithId:selected.notificationId
-                                                                                 type:selected.type
-                                                                               action:selected.action
-                                                                            createdAt:selected.createdAt
-                                                                           actionData:selected.actionData
-                                                                              wasRead:read
-                                                                                title:selected.title
-                                                                                 text:selected.text
-                                                                             imageUrl:selected.imageUrl
-                                                                             videoUrl:selected.videoUrl];
+                    GetSocialNotificationBuilder *builder = [GetSocialNotificationBuilder builderWithId:selected.notificationId];
+                    [builder setAction:selected.notificationAction];
+                    [builder setTitle:selected.title];
+                    [builder setText:selected.text];
+                    [builder setCreatedAt:selected.createdAt];
+                    [builder setStatus:newStatus];
+                    [builder setImageUrl:selected.imageUrl];
+                    [builder setVideoUrl:selected.videoUrl];
+                    [builder addActionButtons:selected.actionButtons];
+                    [builder setNotificationType:selected.type];
+                    self.notifications[i] = [builder build];
                 }
             }
             [self.notificationsTableView reloadData];
@@ -209,6 +266,28 @@ static NSDateFormatter *dateFormatter;
 - (void)didUpdateFilter
 {
     [self loadNotifications];
+}
+
+- (void)actionButton:(NSString *)action notification:(GetSocialNotification *)selected
+{
+    MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
+    [mainVC handleNotification:selected withContext:@{ @"wasClicked" : @(YES), @"actionId" : action }];
+
+    GetSocialNotificationStatus newStatus =
+        [action isEqualToString:GetSocialActionIdIgnore] ? GetSocialNotificationStatusIgnored : GetSocialNotificationStatusConsumed;
+
+    GetSocialNotificationBuilder *builder = [GetSocialNotificationBuilder builderWithId:selected.notificationId];
+    [builder setAction:selected.notificationAction];
+    [builder setTitle:selected.title];
+    [builder setText:selected.text];
+    [builder setCreatedAt:selected.createdAt];
+    [builder setStatus:newStatus];
+    [builder setImageUrl:selected.imageUrl];
+    [builder setVideoUrl:selected.videoUrl];
+    [builder addActionButtons:selected.actionButtons];
+    [builder setNotificationType:selected.type];
+    self.notifications[[self.notifications indexOfObject:selected]] = [builder build];
+    [self.notificationsTableView reloadData];
 }
 
 @end

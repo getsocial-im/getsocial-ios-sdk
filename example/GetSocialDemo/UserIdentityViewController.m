@@ -14,9 +14,9 @@
  *	limitations under the License.
  */
 
-#import "Constants.h"
 #import "UserIdentityViewController.h"
 #import <GetSocial/GetSocialUser.h>
+#import "Constants.h"
 
 @interface UserIdentityViewController ()
 
@@ -40,7 +40,6 @@
                                                           [self updateUserDetails];
                                                       });
                                                   }];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -52,10 +51,10 @@
 - (void)updateUserDetails
 {
     __block NSString *identities = @"";
-    
+
     if (![GetSocialUser isAnonymous])
     {
-        [[GetSocialUser authIdentities] enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+        [[GetSocialUser authIdentities] enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSString *_Nonnull obj, BOOL *_Nonnull stop) {
             identities = [identities stringByAppendingFormat:@"%@, ", key];
         }];
         identities = [identities stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@", "]];
@@ -66,12 +65,14 @@
     }
 
     NSString *displayName = [GetSocialUser displayName];
-    if (displayName.length == 0) {
+    if (displayName.length == 0)
+    {
         displayName = [NSString stringWithFormat:@"id: %@", [GetSocialUser userId]];
     }
     self.displayNameLabel.text = displayName;
     NSString *imageURL = [GetSocialUser avatarUrl];
-    if (imageURL.length > 0) {
+    if (imageURL.length > 0)
+    {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             UIImage *image = [UIImage imageWithData:imageData];
@@ -79,7 +80,9 @@
                 self.avatarImageView.image = image;
             });
         });
-    } else {
+    }
+    else
+    {
         self.avatarImageView.image = [UIImage imageNamed:@"defaultAvatar.png"];
     }
     self.identitiesLabel.text = identities;

@@ -23,4 +23,9 @@
     // Configure the view for the selected state
 }
 
+- (void)actionButton:(UIButton *)button
+{
+    [self.delegate actionButton:self.notification.actionButtons[button.tag].actionId notification:self.notification];
+}
+
 @end

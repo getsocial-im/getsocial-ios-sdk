@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotificationTableViewCell.h"
 
-@interface NotificationsViewController : UIViewController
+@interface NotificationsViewController : UIViewController <NotificationTableViewCellDelegate>
 
 @end

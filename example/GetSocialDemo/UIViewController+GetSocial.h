@@ -17,7 +17,7 @@
 #import <UIKit/UIKit.h>
 #import "ConsoleViewController.h"
 
-@interface UIViewController(GetSocial)
+@interface UIViewController (GetSocial)
 
 - (void)showActivityIndicatorView;
 - (void)hideActivityIndicatorView;

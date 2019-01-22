@@ -16,8 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, LogLevel)
-{
+typedef NS_ENUM(NSUInteger, LogLevel) {
     LogLevelInfo,
     LogLevelWarning,
     LogLevelError,
@@ -27,6 +26,6 @@ typedef NS_ENUM(NSUInteger, LogLevel)
 
 + (instancetype)sharedController;
 
-- (void)log:(LogLevel)level message:(NSString *)message context:(NSString*)context;
+- (void)log:(LogLevel)level message:(NSString *)message context:(NSString *)context;
 
 @end

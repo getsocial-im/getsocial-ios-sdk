@@ -92,7 +92,12 @@
 
 + (UIViewController *)rootViewController
 {
-    return [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (rootViewController.presentedViewController != nil)
+    {
+        rootViewController = rootViewController.presentedViewController;
+    }
+    return rootViewController;
 }
 
 + (void)hideAlertView

@@ -122,23 +122,7 @@ NSString *const kCustomProvider = @"custom";
 - (void)setUpGetSocial
 {
     [GetSocial setNotificationHandler:^BOOL(GetSocialNotification *notification, BOOL wasClicked) {
-        if (!wasClicked)
-        {
-            NSString *title = notification.title.length > 0 ? notification.title : @"Push Notification Received";
-            [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
-            return YES;
-        }
-        else if (notification.action == GetSocialNotificationActionOpenProfile)
-        {
-            [self showNewFriend:notification.actionData[GetSocialNotificationKey_OpenProfile_UserId]];
-            return YES;
-        }
-        else if (notification.action == GetSocialNotificationActionCustom)
-        {
-            GSLogError(NO, NO, @"Received custom notification: %@", notification.actionData);
-            return YES;
-        }
-        return NO;
+        return [self handleNotification:notification withContext:@{ @"wasClicked" : @(wasClicked) }];
     }];
     [GetSocialUser setOnUserChangedHandler:^() {
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
@@ -151,6 +135,129 @@ NSString *const kCustomProvider = @"custom";
     }];
 
     [self registerInviteChannelPlugins];
+}
+
+- (BOOL)handleNotification:(GetSocialNotification *)notification withContext:(NSDictionary *)context
+{
+    if (context[@"actionId"])
+    {
+        [self handleNotification:notification withAction:context[@"actionId"]];
+        return YES;
+    }
+    if ([notification.notificationAction.type isEqualToString:@"custom_add_friend"])
+    {
+        NSMutableArray<NSString *> *buttons = @[].mutableCopy;
+        for (GetSocialActionButton *button in notification.actionButtons)
+        {
+            [buttons addObject:button.title];
+        }
+        UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:notification.title
+                                                                                                      message:notification.text
+                                                                                            cancelButtonTitle:@"Dismiss"
+                                                                                            otherButtonTitles:buttons];
+        [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel)
+            {
+                return;
+            }
+            [self handleNotification:notification withAction:notification.actionButtons[selectedIndex].actionId];
+        }];
+        return YES;
+    }
+    if (![context[@"wasClicked"] boolValue])
+    {
+        NSString *title = notification.title.length > 0 ? notification.title : @"Push Notification Received";
+        [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
+        return YES;
+    }
+
+    return [self handleAction:notification.notificationAction];
+}
+
+- (void)handleNotification:(GetSocialNotification *)notification withAction:(NSString *)actionId
+{
+    GetSocialAction *action = notification.notificationAction;
+    GetSocialNotificationStatus status = GetSocialNotificationStatusConsumed;
+
+    if ([actionId isEqualToString:GetSocialActionIdConsume])
+    {
+        if ([action.type isEqualToString:@"custom_add_friend"])
+        {
+            NSString *userId = action.data[@"user_id"];
+            NSString *userName = action.data[@"user_name"];
+
+            [GetSocialUser addFriend:userId
+                success:^(int friendsCount) {
+                    GetSocialNotificationContent *content = [GetSocialNotificationContent
+                        withText:[NSString stringWithFormat:@"%@ accepted your friend request!",
+                                                            GetSocial_NotificationPlaceholder_CustomText_SenderDisplayName]];
+
+                    [GetSocialUser sendNotification:@[ userId ]
+                        withContent:content
+                        success:^(GetSocialNotificationsSummary *summary) {
+                            NSLog(@"Successfully notified user");
+                        }
+                        failure:^(NSError *error) {
+                            NSLog(@"Failed to send push, error: %@", error.localizedDescription);
+                        }];
+                    [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", userName]];
+                }
+                failure:^(NSError *error) {
+                    NSLog(@"Failed to add friend, error: %@", error.localizedDescription);
+                }];
+        }
+        else
+        {
+            [GetSocial processAction:action];
+        }
+    }
+    else if ([actionId isEqualToString:GetSocialActionIdIgnore])
+    {
+        status = GetSocialNotificationStatusIgnored;
+    }
+    [GetSocialUser setNotificationsStatus:@[ notification.notificationId ]
+        status:status
+        success:^{
+            NSLog(@"Successfully updated notification");
+        }
+        failure:^(NSError *error) {
+            NSLog(@"Failed to update notification, error: %@", error.localizedDescription);
+        }];
+}
+
+- (BOOL)handleAction:(GetSocialAction *)action
+{
+    if ([action.type isEqualToString:GetSocialActionOpenProfile])
+    {
+        [self showNewFriend:action.data[GetSocialActionDataKey_OpenProfile_UserId]];
+        return YES;
+    }
+    if ([action.type isEqualToString:GetSocialActionCustom])
+    {
+        GSLogInfo(NO, NO, @"Received custom notification: %@", action.data);
+        return YES;
+    }
+    return NO;
+}
+
+- (void)handleAction:(NSString *)action withPost:(GetSocialActivityPost *)post
+{
+    GSLogInfo(NO, NO, @"Activity Feed button clicked, actionType: %@", action);
+    [PushNotificationView showNotificationWithTitle:@"Action Clicked" andMessage:action];
+}
+
+- (ActivityButtonActionHandler)defaultActionButtonHandler
+{
+    return ^void(NSString *action, GetSocialActivityPost *post) {
+        [self handleAction:action withPost:post];
+    };
+}
+
+- (GetSocialActionHandler)defaultActionHandler
+{
+    return ^BOOL(GetSocialAction *action) {
+        return [self handleAction:action];
+    };
 }
 
 - (void)registerInviteChannelPlugins
@@ -190,13 +297,16 @@ NSString *const kCustomProvider = @"custom";
             GSLogError(NO, NO, @"Error updating friends count: %@", error.localizedDescription);
         }];
 
-    NSString *status = [NSUserDefaults.standardUserDefaults stringForKey:@"notification_status"];
-    GetSocialNotificationsCountQuery *query =
-        [status isEqualToString:@"Read"]
-            ? [GetSocialNotificationsCountQuery read]
-            : [status isEqualToString:@"Unread"] ? [GetSocialNotificationsCountQuery unread] : [GetSocialNotificationsCountQuery readAndUnread];
+    NSArray<NSString *> *statuses = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_statuses"];
+    NSArray<NSString *> *types = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_types"];
+    NSArray<NSString *> *actions = [NSUserDefaults.standardUserDefaults stringArrayForKey:@"notification_actions"];
 
-    [query setTypes:[NSUserDefaults.standardUserDefaults arrayForKey:@"notification_types"]];
+    GetSocialNotificationsCountQuery *query =
+        statuses ? [GetSocialNotificationsCountQuery withStatuses:statuses] : [GetSocialNotificationsCountQuery withAllStatuses];
+
+    if (types) [query setTypes:types];
+    if (actions) [query setActions:actions];
+
     [GetSocialUser notificationsCountWithQuery:query
         success:^(int result) {
             self.notificationsMenu.detail = [NSString stringWithFormat:@"You have %d notifications", result];
@@ -336,9 +446,8 @@ NSString *const kCustomProvider = @"custom";
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed"
                                                       action:^{
                                                           GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
-                                                          [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-                                                              GSLogInfo(YES, NO, @"Activity Feed button clicked, actionType: %@", action);
-                                                          }];
+                                                          [activityFeedView setActionButtonHandler:[self defaultActionButtonHandler]];
+                                                          [activityFeedView setActionHandler:[self defaultActionHandler]];
                                                           [activityFeedView setHandlerForViewOpen:^() {
                                                               NSLog(@"Global feed is opened");
                                                           }
@@ -389,16 +498,15 @@ NSString *const kCustomProvider = @"custom";
                                                           [activityFeedView show];
                                                       }]];
 
-        [self.activitiesMenu
-            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Custom Activity Feed (DemoFeed)"
-                                                      action:^{
-                                                          GetSocialUIActivityFeedView *activityFeedView =
-                                                              [GetSocialUI createActivityFeedView:@"DemoFeed"];
-                                                          [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-                                                              GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
-                                                          }];
-                                                          [activityFeedView show];
-                                                      }]];
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Custom Activity Feed (DemoFeed)"
+                                                                       action:^{
+                                                                           GetSocialUIActivityFeedView *activityFeedView =
+                                                                               [GetSocialUI createActivityFeedView:@"DemoFeed"];
+                                                                           [activityFeedView
+                                                                               setActionButtonHandler:[self defaultActionButtonHandler]];
+                                                                           [activityFeedView setActionHandler:[self defaultActionHandler]];
+                                                                           [activityFeedView show];
+                                                                       }]];
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Global Activity Feed"
                                                                        action:^{
@@ -410,26 +518,24 @@ NSString *const kCustomProvider = @"custom";
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Friends Global Activity Feed"
                                                       action:^{
                                                           GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
-                                                          [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-                                                              GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
-                                                          }];
+                                                          [activityFeedView setActionButtonHandler:[self defaultActionButtonHandler]];
+                                                          [activityFeedView setActionHandler:[self defaultActionHandler]];
                                                           [activityFeedView setShowFriendsFeed:YES];
                                                           [activityFeedView show];
                                                       }]];
 
-        [self.activitiesMenu
-            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Custom Activity Feed"
-                                                      action:^{
-                                                          GetSocialUIActivityFeedView *activityFeedView =
-                                                              [GetSocialUI createActivityFeedView:@"DemoFeed"];
-                                                          [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-                                                              GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
-                                                          }];
-                                                          [activityFeedView setWindowTitle:@"My Custom Activity Feed"];
-                                                          [activityFeedView setReadOnly:NO];
-                                                          [activityFeedView setFilterByUser:[GetSocialUser userId]];
-                                                          [activityFeedView show];
-                                                      }]];
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Custom Activity Feed"
+                                                                       action:^{
+                                                                           GetSocialUIActivityFeedView *activityFeedView =
+                                                                               [GetSocialUI createActivityFeedView:@"DemoFeed"];
+                                                                           [activityFeedView
+                                                                               setActionButtonHandler:[self defaultActionButtonHandler]];
+                                                                           [activityFeedView setActionHandler:[self defaultActionHandler]];
+                                                                           [activityFeedView setWindowTitle:@"My Custom Activity Feed"];
+                                                                           [activityFeedView setReadOnly:NO];
+                                                                           [activityFeedView setFilterByUser:[GetSocialUser userId]];
+                                                                           [activityFeedView show];
+                                                                       }]];
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details"
                                                                        action:^{
@@ -592,6 +698,23 @@ NSString *const kCustomProvider = @"custom";
                                                                                            inStoryboard:GetSocialStoryboardInAppPurchase];
                                                                 [self.mainNavigationController pushViewController:vc animated:YES];
                                                             }]];
+        ParentMenuItem *customAnalyticsEventsMenu = [MenuItem parentMenuItemWithTitle:@"Custom Analytics Events"];
+        [self.menu addObject:customAnalyticsEventsMenu];
+        [customAnalyticsEventsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Level Completed"
+                                                                             action:^{
+                                                                                 [self trackCustomEventWithName:@"level_completed"
+                                                                                                     properties:@{@"level" : @"1"}];
+                                                                             }]];
+        [customAnalyticsEventsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Tutorial Completed"
+                                                                             action:^{
+                                                                                 [self trackCustomEventWithName:@"tutorial_completed" properties:nil];
+                                                                             }]];
+        [customAnalyticsEventsMenu
+            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Achievement Unlocked"
+                                                      action:^{
+                                                          [self trackCustomEventWithName:@"achievement_unlocked"
+                                                                              properties:@{@"achievement" : @"early_backer", @"item" : @"car001"}];
+                                                      }]];
     }
 }
 
@@ -621,9 +744,8 @@ NSString *const kCustomProvider = @"custom";
 - (void)showGlobalFeedForUser:(GetSocialId)userId withTitle:(NSString *)title
 {
     GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
-    [activityFeedView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-        GSLogInfo(YES, NO, @"Activity Feed button clicked, action: %@", action);
-    }];
+    [activityFeedView setActionButtonHandler:[self defaultActionButtonHandler]];
+    [activityFeedView setActionHandler:[self defaultActionHandler]];
     [activityFeedView setWindowTitle:title];
     [activityFeedView setReadOnly:YES];
     [activityFeedView setFilterByUser:userId];
@@ -717,8 +839,9 @@ NSString *const kCustomProvider = @"custom";
             NSMutableArray *activityContents = [@[] mutableCopy];
             for (GetSocialActivityPost *activity in result)
             {
+                NSString *content = activity.text ?: activity.imageUrl ?: activity.buttonTitle;
                 [activityIds addObject:activity.activityId];
-                [activityContents addObject:activity.text];
+                [activityContents addObject:content];
             }
             UISimpleAlertViewController *alertViewController =
                 [[UISimpleAlertViewController alloc] initWithTitle:@"Activity ID"
@@ -729,9 +852,8 @@ NSString *const kCustomProvider = @"custom";
                 if (!didCancel)
                 {
                     GetSocialUIActivityDetailsView *detailsView = [GetSocialUI createActivityDetailsView:activityIds[selectedIndex]];
-                    [detailsView setActionButtonHandler:^(NSString *action, GetSocialActivityPost *post) {
-                        [self showAlertWithText:[NSString stringWithFormat:@"Action button pressed: %@", action]];
-                    }];
+                    [detailsView setActionButtonHandler:[self defaultActionButtonHandler]];
+                    [detailsView setActionHandler:[self defaultActionHandler]];
                     [detailsView setUiActionHandler:^(GetSocialUIActionType actionType, GetSocialUIPendingAction pendingAction) {
                         NSLog(@"Action performed %ld", (long)actionType);
                         pendingAction();
@@ -1135,7 +1257,9 @@ NSString *const kCustomProvider = @"custom";
                 [UIStoryboard viewControllerForName:@"NewFriendViewController" inStoryboard:GetSocialStoryboardSocialGraph];
             [newFriendViewController setPublicUser:publicUser];
             [UISimpleAlertViewController hideAlertView];
-            [self presentViewController:newFriendViewController animated:YES completion:nil];
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:newFriendViewController
+                                                                                         animated:YES
+                                                                                       completion:nil];
         }
         failure:^(NSError *_Nonnull error) {
             GSLogError(YES, NO, @"Fetch user failed, error: %@", [error description]);
@@ -1455,6 +1579,20 @@ NSString *const kCustomProvider = @"custom";
     self.uiCustomizationMenu.detail = @"Current UI: Dark Landscape";
 
     return YES;
+}
+
+#pragma mark - Analytics
+
+- (void)trackCustomEventWithName:(NSString *)eventName properties:(NSDictionary *)properties
+{
+    if ([GetSocial trackCustomEventWithName:eventName eventProperties:properties])
+    {
+        GSLogInfo(YES, NO, @"Custom event was tracked.");
+    }
+    else
+    {
+        GSLogInfo(YES, NO, @"Failed to track custom event.");
+    }
 }
 
 #pragma mark - Navigation

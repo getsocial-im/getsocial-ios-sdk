@@ -21,17 +21,9 @@
 + (NSString *)randomDisplayName
 {
     NSArray *displayNames = @[
-                              @"Batman",
-                              @"Spiderman",
-                              @"Captain America",
-                              @"Green Lantern",
-                              @"Wolverine",
-                              @"Catwomen",
-                              @"Iron Man",
-                              @"Superman",
-                              @"Wonder Woman",
-                              @"Aquaman"
-                              ];
+        @"Batman", @"Spiderman", @"Captain America", @"Green Lantern", @"Wolverine", @"Catwomen", @"Iron Man", @"Superman", @"Wonder Woman",
+        @"Aquaman"
+    ];
     return [displayNames[(arc4random() % [displayNames count])] stringByAppendingString:@" iOS"];
 }
 
@@ -42,7 +34,7 @@
 
 + (NSString *)randomAvatarUrl
 {
-    return [self avatarUrlForUserId:[NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSince1970]];
+    return [self avatarUrlForUserId:[NSString stringWithFormat:@"%f", [NSDate date].timeIntervalSince1970]];
 }
 
 @end

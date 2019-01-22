@@ -32,8 +32,6 @@
 
 - (IBAction)trackPurchase:(id)sender
 {
-    [self showActivityIndicatorView];
-
     GetSocialPurchaseData *purchaseData = [GetSocialPurchaseData new];
     purchaseData.productId = self.productId.text;
     purchaseData.productType = Item;
@@ -43,15 +41,14 @@
     purchaseData.purchaseDate = [NSDate date];
     purchaseData.transactionIdentifier = [[NSUUID UUID] UUIDString];
 
-    [GetSocial trackPurchaseData:purchaseData
-        success:^{
-            [self hideActivityIndicatorView];
-            [self log:LogLevelInfo context:NSStringFromSelector(_cmd) message:@"Purchase was tracked" showAlert:YES];
-        }
-        failure:^(NSError *_Nonnull error) {
-            [self hideActivityIndicatorView];
-            [self log:LogLevelError context:NSStringFromSelector(_cmd) message:@"Could not track purchase" showAlert:YES];
-        }];
+    if ([GetSocial trackPurchaseEvent:purchaseData])
+    {
+        [self log:LogLevelInfo context:NSStringFromSelector(_cmd) message:@"Purchase was tracked" showAlert:YES];
+    }
+    else
+    {
+        [self log:LogLevelError context:NSStringFromSelector(_cmd) message:@"Could not track purchase" showAlert:YES];
+    }
 }
 
 @end

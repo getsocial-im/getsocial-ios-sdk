@@ -14,13 +14,13 @@
  *	limitations under the License.
  */
 
-#import <GetSocial/GetSocial.h>
 #import "FriendsTableViewCell.h"
+#import <GetSocial/GetSocial.h>
 #import "UIImageView+GetSocial.h"
 
 @interface FriendsTableViewCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *avatar;
-@property (weak, nonatomic) IBOutlet UILabel *userName;
+@property(weak, nonatomic) IBOutlet UIImageView *avatar;
+@property(weak, nonatomic) IBOutlet UILabel *userName;
 
 @end
 
@@ -39,11 +39,11 @@
     {
         NSURL *url = [NSURL URLWithString:self.user.avatarUrl];
         [self.avatar gs_setImageURL:url];
-    } else
+    }
+    else
     {
         [self.avatar setImage:[UIImage imageNamed:@"defaultAvatar.png"]];
     }
-
 }
 
 - (IBAction)didClickRemoveFriend:(id)sender
