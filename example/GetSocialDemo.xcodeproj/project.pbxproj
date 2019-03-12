@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BB4F047220BD1AA0077B476 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB4F046220BD1AA0077B476 /* Messages.storyboard */; };
+		1BB4F04A220BD21B0077B476 /* MessagesController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BB4F048220BD21B0077B476 /* MessagesController.h */; };
+		1BB4F04B220BD21B0077B476 /* MessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB4F049220BD21B0077B476 /* MessagesController.m */; };
+		1BB4F04E220D32700077B476 /* MessageTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BB4F04C220D32700077B476 /* MessageTableViewCell.h */; };
+		1BB4F04F220D32700077B476 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB4F04D220D32700077B476 /* MessageTableViewCell.m */; };
 		213E3390EB835D536BCA62C3 /* UIImage+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */; };
 		213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */; };
 		213E37035794BC972349DCDF /* UIImageView+GetSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */; };
@@ -286,6 +291,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1BB4F046220BD1AA0077B476 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		1BB4F048220BD21B0077B476 /* MessagesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesController.h; sourceTree = "<group>"; };
+		1BB4F049220BD21B0077B476 /* MessagesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesController.m; sourceTree = "<group>"; };
+		1BB4F04C220D32700077B476 /* MessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		1BB4F04D220D32700077B476 /* MessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GetSocial.h"; sourceTree = "<group>"; };
 		213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GetSocial.m"; sourceTree = "<group>"; };
 		213E357A17F621C05F7A8D4F /* UIImageView+GetSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GetSocial.m"; sourceTree = "<group>"; };
@@ -633,6 +643,7 @@
 				6FA45A20214017780040D937 /* UIStoryboard+GetSocial.m */,
 				6FA45A1E214017780040D937 /* ActivityFeed.storyboard */,
 				6FA45A27214017790040D937 /* Notifications.storyboard */,
+				1BB4F046220BD1AA0077B476 /* Messages.storyboard */,
 				6FA45A23214017790040D937 /* SmartInvites.storyboard */,
 				6FA45A21214017790040D937 /* SocialGraph.storyboard */,
 				6FA45A25214017790040D937 /* UserManagement.storyboard */,
@@ -808,12 +819,16 @@
 				BC217B0B1E55C2AE00426793 /* ActivityIndicatorViewController.m */,
 				6F8D5C031E57304E00A43DAD /* FriendsViewController.h */,
 				6F8D5C041E57304E00A43DAD /* FriendsViewController.m */,
+				1BB4F04C220D32700077B476 /* MessageTableViewCell.h */,
+				1BB4F04D220D32700077B476 /* MessageTableViewCell.m */,
 				6F8D5C071E57317700A43DAD /* FriendsTableViewCell.h */,
 				6F8D5C081E57317700A43DAD /* FriendsTableViewCell.m */,
 				6F69799F1EE8360900ED08B5 /* SuggestedFriendsViewController.h */,
 				6F6979A01EE8360900ED08B5 /* SuggestedFriendsViewController.m */,
 				6F6979A91EE8395C00ED08B5 /* SuggestedFriendTableViewCell.h */,
 				6F6979AA1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m */,
+				1BB4F048220BD21B0077B476 /* MessagesController.h */,
+				1BB4F049220BD21B0077B476 /* MessagesController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1114,6 +1129,7 @@
 				BC680F452074D08700A3551E /* VKCaptchaView.h in Headers */,
 				BC680F3B2074D08700A3551E /* NSString+MD5.h in Headers */,
 				6F5CD6D520A1BD5E00693B85 /* NotificationsFilterViewController.h in Headers */,
+				1BB4F04A220BD21B0077B476 /* MessagesController.h in Headers */,
 				BC680F072074D08600A3551E /* VKDocs.h in Headers */,
 				6FA45A3A21413D2F0040D937 /* SendNotificationViewController.h in Headers */,
 				BC680F232074D08600A3551E /* NSError+VKError.h in Headers */,
@@ -1157,6 +1173,7 @@
 				BC680F372074D08600A3551E /* VKImageParameters.h in Headers */,
 				BC4439A92003C67800682226 /* GetSocialFacebookSharePlugin.h in Headers */,
 				BC680F312074D08600A3551E /* VKRequest.h in Headers */,
+				1BB4F04E220D32700077B476 /* MessageTableViewCell.h in Headers */,
 				BC680F4D2074D08700A3551E /* VKAccessToken.h in Headers */,
 				BC680F432074D08700A3551E /* VKAuthorizeController.h in Headers */,
 				213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */,
@@ -1283,6 +1300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BB4F047220BD1AA0077B476 /* Messages.storyboard in Resources */,
 				7A3B8E9C1FCEC82500481004 /* getsocial-dark in Resources */,
 				99F3E7E81AB205C400033238 /* activityCallToActionButtonNormal.png in Resources */,
 				6F99AA19216E02F700B01C5D /* InAppPurchase.storyboard in Resources */,
@@ -1447,6 +1465,7 @@
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
 				BC92860B1FC48F6F00306B6E /* UserIdentityView.m in Sources */,
 				BC680F342074D08600A3551E /* VKRequestsScheduler.m in Sources */,
+				1BB4F04B220BD21B0077B476 /* MessagesController.m in Sources */,
 				BC680F242074D08600A3551E /* NSError+VKError.m in Sources */,
 				BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */,
 				BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */,
@@ -1461,6 +1480,7 @@
 				BC680F402074D08700A3551E /* VKUtil.m in Sources */,
 				213E37035794BC972349DCDF /* UIImageView+GetSocial.m in Sources */,
 				BC680EED2074D08600A3551E /* VKApiBase.m in Sources */,
+				1BB4F04F220D32700077B476 /* MessageTableViewCell.m in Sources */,
 				213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */,
 				BC680F362074D08600A3551E /* VKResponse.m in Sources */,
 				213E390AAA73E4B0B7227FCF /* PushNotificationView.m in Sources */,
