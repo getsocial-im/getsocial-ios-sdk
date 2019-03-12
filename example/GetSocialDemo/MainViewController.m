@@ -42,6 +42,7 @@
 #import "GetSocialTwitterInvitePlugin.h"
 #endif
 #import "MenuTableViewController.h"
+#import "MessagesController.h"
 #import "PushNotificationView.h"
 #import "UIImage+GetSocial.h"
 #import "UIStoryboard+GetSocial.h"
@@ -98,6 +99,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) CheckableMenuItem *pushNotificationsEnabledMenu;
 @property(nonatomic, strong) CheckableMenuItem *statusBarMenuItem;
 @property(nonatomic, assign) BOOL statusBarHidden;
+@property(nonatomic, strong) NSString *chatIdToShow;
 
 @end
 
@@ -131,7 +133,15 @@ NSString *const kCustomProvider = @"custom";
 
     [GetSocial executeWhenInitialized:^() {
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
-        [self checkReferralData];
+        if (self.chatIdToShow)
+        {
+            [self showChatView];
+        }
+        else
+        {
+            [self checkReferralData];
+        }
+
     }];
 
     [self registerInviteChannelPlugins];
@@ -164,6 +174,15 @@ NSString *const kCustomProvider = @"custom";
         }];
         return YES;
     }
+    if ([notification.notificationAction.type isEqualToString:@"open_chat_message"])
+    {
+        self.chatIdToShow = notification.notificationAction.data[@"open_messages_for_id"];
+        if (GetSocial.isInitialized)
+        {
+            [self showChatView];
+        }
+        return YES;
+    }
     if (![context[@"wasClicked"] boolValue])
     {
         NSString *title = notification.title.length > 0 ? notification.title : @"Push Notification Received";
@@ -172,6 +191,35 @@ NSString *const kCustomProvider = @"custom";
     }
 
     return [self handleAction:notification.notificationAction];
+}
+
+- (void)showChatView
+{
+    __block MessagesController *mc = nil;
+    [GetSocial userWithId:self.chatIdToShow
+                  success:^(GetSocialPublicUser *publicUser) {
+                      if ([self.mainNavigationController.topViewController isKindOfClass:[MessagesController class]])
+                      {
+                          mc = (MessagesController *)self.mainNavigationController.topViewController;
+                      }
+                      else
+                      {
+                          mc = [UIStoryboard viewControllerForName:@"Messages" inStoryboard:GetSocialStoryboardMessages];
+                      }
+                      if ([mc.receiver.userId isEqualToString:publicUser.userId])
+                      {
+                          [mc updateMessages];
+                      }
+                      else
+                      {
+                          [mc setReceiver:publicUser];
+                          [self.mainNavigationController pushViewController:mc animated:YES];
+                      }
+                      self.chatIdToShow = nil;
+                  }
+                  failure:^(NSError *error){
+
+                  }];
 }
 
 - (void)handleNotification:(GetSocialNotification *)notification withAction:(NSString *)actionId

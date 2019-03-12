@@ -50,5 +50,9 @@
 {
     [self.delegate didClickRemoveFriend:self.user];
 }
+- (IBAction)didClickMessageButton:(id)sender
+{
+    [self.delegate didClickMessageButton:self.user];
+}
 
 @end

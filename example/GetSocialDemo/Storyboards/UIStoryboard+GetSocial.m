@@ -24,7 +24,8 @@
         @(GetSocialStoryboardUserManagement) : @"UserManagement",
         @(GetSocialStoryboardActivityFeed) : @"ActivityFeed",
         @(GetSocialStoryboardSmartInvites) : @"SmartInvites",
-        @(GetSocialStoryboardInAppPurchase) : @"InAppPurchase"
+        @(GetSocialStoryboardInAppPurchase) : @"InAppPurchase",
+        @(GetSocialStoryboardMessages) : @"Messages"
     }[@(type)];
 }
 

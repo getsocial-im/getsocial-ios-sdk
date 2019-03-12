@@ -17,6 +17,7 @@
 #import "FriendsViewController.h"
 #import <GetSocial/GetSocial.h>
 #import "FriendsTableViewCell.h"
+#import "MessagesController.h"
 #import "SuggestedFriendsViewController.h"
 #import "UIStoryboard+GetSocial.h"
 #import "UIViewController+GetSocial.h"
@@ -149,6 +150,14 @@
             [strongSelf hideActivityIndicatorView];
             [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
         }];
+}
+
+- (void)didClickMessageButton:(GetSocialPublicUser *)user
+{
+    MessagesController *mc = [UIStoryboard viewControllerForName:@"Messages" inStoryboard:GetSocialStoryboardMessages];
+    [mc setReceiver:user];
+
+    [self.navigationController pushViewController:mc animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

@@ -22,6 +22,8 @@
 
 - (void)didClickRemoveFriend:(GetSocialPublicUser *)user;
 
+- (void)didClickMessageButton:(GetSocialPublicUser *)user;
+
 @end
 
 @interface FriendsTableViewCell : UITableViewCell

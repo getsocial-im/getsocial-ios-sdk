@@ -217,6 +217,10 @@ static NSDateFormatter *dateFormatter;
 {
     GetSocialNotification *selected = self.notifications[indexPath.row];
     [self.notificationsTableView deselectRowAtIndexPath:indexPath animated:NO];
+    if ([@[ GetSocialNotificationStatusConsumed, GetSocialNotificationStatusIgnored ] containsObject:selected.status])
+    {
+        return;
+    }
     GetSocialNotificationStatus status =
         [selected.status isEqualToString:GetSocialNotificationStatusUnread] ? GetSocialNotificationStatusRead : GetSocialNotificationStatusUnread;
 
