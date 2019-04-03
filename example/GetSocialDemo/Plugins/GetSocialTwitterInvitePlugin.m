@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2017 GetSocial B.V.
+ *    	Copyright 2015-2019 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 #import "GetSocialTwitterInvitePlugin.h"
 #import <TwitterKit/TwitterKit.h>
 
-@interface GetSocialTwitterInvitePlugin()
+@interface GetSocialTwitterInvitePlugin ()
 
-@property (nonatomic) GetSocialInvitePackage* invitePackage;
-@property (nonatomic) UIViewController* viewController;
+@property(nonatomic) GetSocialInvitePackage *invitePackage;
+@property(nonatomic) UIViewController *viewController;
 
 @end
 
@@ -41,15 +41,16 @@
     self.successCallback = successCallback;
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
-    
+
     self.invitePackage = invitePackage;
     self.viewController = viewController;
- 
+
     [self checkAvailableTwitterSession];
 }
 
-- (void)presentTweetComposer {
-    NSURL* videoUrl = nil;
+- (void)presentTweetComposer
+{
+    NSURL *videoUrl = nil;
     if (self.invitePackage.videoUrl != nil)
     {
         videoUrl = [NSURL URLWithString:self.invitePackage.videoUrl];
@@ -59,7 +60,8 @@
     if (videoUrl != nil)
     {
         composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:nil videoURL:videoUrl];
-    } else
+    }
+    else
     {
         composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:self.invitePackage.image videoURL:nil];
     }
@@ -67,18 +69,25 @@
     [self.viewController presentViewController:composer animated:YES completion:nil];
 }
 
-- (void) checkAvailableTwitterSession
+- (void)checkAvailableTwitterSession
 {
-    if ([[Twitter sharedInstance].sessionStore hasLoggedInUsers]) {
+    if ([[Twitter sharedInstance].sessionStore hasLoggedInUsers])
+    {
         [self presentTweetComposer];
-    } else {
-        [[Twitter sharedInstance] logInWithViewController:self.viewController completion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
-            if (session) {
-                [self presentTweetComposer];
-            } else {
-                self.cancelCallback();
-            }
-        }];
+    }
+    else
+    {
+        [[Twitter sharedInstance] logInWithViewController:self.viewController
+                                               completion:^(TWTRSession *_Nullable session, NSError *_Nullable error) {
+                                                   if (session)
+                                                   {
+                                                       [self presentTweetComposer];
+                                                   }
+                                                   else
+                                                   {
+                                                       self.cancelCallback();
+                                                   }
+                                               }];
     }
 }
 

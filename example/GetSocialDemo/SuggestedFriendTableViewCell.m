@@ -2,8 +2,7 @@
 //  SuggestedFriendTableViewCell.m
 //  GetSocialDemo
 //
-//  Created by Orest Savchak on 6/7/17.
-//  Copyright © 2017 GrambleWorld. All rights reserved.
+//  Copyright © 2019 GetSocial BV. All rights reserved.
 //
 
 #import "SuggestedFriendTableViewCell.h"

@@ -1,6 +1,6 @@
 //
 //
-// Copyright (c) 2017 GrambleWorld. All rights reserved.
+// Copyright (c) 2019 GetSocial BV. All rights reserved.
 //
 
 #import "UIImage+GetSocial.h"

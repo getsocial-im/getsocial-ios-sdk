@@ -2,7 +2,7 @@
 //  NotificationService.m
 //  GetSocialNotificationServiceExtension
 //
-//  Copyright © 2018 GetSocial. All rights reserved.
+//  Copyright © 2019 GetSocial. All rights reserved.
 //
 
 #import "NotificationService.h"

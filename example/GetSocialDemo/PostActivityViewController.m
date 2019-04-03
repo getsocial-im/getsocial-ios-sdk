@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2017 GetSocial B.V.
+ *    	Copyright 2015-2019 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@
     keyboardIsShown = NO;
 }
 
-- (NSDictionary<NSNumber *, NSArray<NSString *> *> *)actionKeyPlaceholders
+- (NSDictionary<GetSocialActionType, NSArray<NSString *> *> *)actionKeyPlaceholders
 {
     return @{
         GetSocialActionOpenUrl : @[ GetSocialActionDataKey_OpenUrl_Url ],

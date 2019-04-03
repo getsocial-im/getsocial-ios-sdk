@@ -2,13 +2,14 @@
 //  MessagesController.m
 //  GetSocialDemo
 //
-//  Copyright © 2019 GrambleWorld. All rights reserved.
+//  Copyright © 2019 GetSocial BV. All rights reserved.
 //
 
 #import "MessagesController.h"
 #import <GetSocial/GetSocial.h>
 #import <GetSocial/GetSocialPublicUser.h>
 #import "MessageTableViewCell.h"
+#import "UIViewController+GetSocial.h"
 
 @interface MessagesController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
@@ -28,6 +29,32 @@
     [super viewDidLoad];
     self.chatView.dataSource = self;
     self.input.delegate = self;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    CGSize keyboardSize = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height + keyboardSize.height);
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    CGSize keyboardSize = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardSize.height);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -53,9 +80,12 @@
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.posts = [[activities reverseObjectEnumerator] allObjects];
             [strongSelf.chatView reloadData];
-            [strongSelf.chatView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(strongSelf.posts.count - 1) inSection:0]
-                                       atScrollPosition:UITableViewScrollPositionBottom
-                                               animated:YES];
+            if (strongSelf.posts.count > 0)
+            {
+                [strongSelf.chatView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(strongSelf.posts.count - 1) inSection:0]
+                                           atScrollPosition:UITableViewScrollPositionBottom
+                                                   animated:YES];
+            }
         }
         failure:^(NSError *error) {
             NSLog(@"Failed to get activities, error: %@", error);
@@ -77,6 +107,7 @@
         GetSocialActivityPostContent *postContent = [GetSocialActivityPostContent new];
         postContent.text = self.input.text;
         __weak typeof(self) weakSelf = self;
+        [self showActivityIndicatorView];
         [GetSocial postActivity:postContent
             toFeed:[self chatIdForUsers:@[ GetSocialUser.userId, self.receiver.userId ]]
             success:^(GetSocialActivityPost *post) {
@@ -86,6 +117,7 @@
                 [strongSelf sendNotificationForMessage:postContent.text recipient:self.receiver.userId];
             }
             failure:^(NSError *error) {
+                [self hideActivityIndicatorView];
                 NSLog(@"Failed to post an activity, error: %@", error);
             }];
     }
@@ -107,9 +139,11 @@
         withContent:notificationContent
         success:^(GetSocialNotificationsSummary *summary) {
             NSLog(@"Chat notification sent");
+            [self hideActivityIndicatorView];
         }
         failure:^(NSError *error) {
             NSLog(@"Failed to send chat notifications, error: %@", error);
+            [self hideActivityIndicatorView];
         }];
 }
 
@@ -139,6 +173,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self sendMessage:textField];
     [textField resignFirstResponder];
     return YES;
 }

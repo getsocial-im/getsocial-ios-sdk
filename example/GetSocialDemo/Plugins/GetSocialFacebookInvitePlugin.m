@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2017 GetSocial B.V.
+ *    	Copyright 2015-2019 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -39,9 +39,9 @@
     self.cancelCallback = cancelCallback;
 
     FBSDKAppInviteContent *content = [[FBSDKAppInviteContent alloc] init];
-    if(invitePackage.imageUrl && invitePackage.image)
+    if (invitePackage.imageUrl && invitePackage.image)
     {
-        NSURL* appImageUrl = [NSURL URLWithString:invitePackage.imageUrl];
+        NSURL *appImageUrl = [NSURL URLWithString:invitePackage.imageUrl];
         if (appImageUrl != nil)
         {
             content.appInvitePreviewImageURL = appImageUrl;
@@ -84,7 +84,8 @@
         }
         else if (self.failureCallback)
         {
-            self.failureCallback([NSError errorWithDomain:@"GetSocialFacebookInvitePlugin" code:1000 userInfo:@{NSLocalizedDescriptionKey : @"Failed to invite."}]);
+            self.failureCallback(
+                [NSError errorWithDomain:@"GetSocialFacebookInvitePlugin" code:1000 userInfo:@{NSLocalizedDescriptionKey : @"Failed to invite."}]);
         }
     }
 }

@@ -2,8 +2,7 @@
 //  SendNotificationViewController.m
 //  GetSocialInternalDemo
 //
-//  Created by Orest Savchak on 9/6/18.
-//  Copyright © 2018 GrambleWorld. All rights reserved.
+//  Copyright © 2019 GetSocial BV. All rights reserved.
 //
 
 #import "SendNotificationViewController.h"
@@ -374,19 +373,16 @@ static NSInteger const DynamicRowHeight = 36;
     NSString *selectedItem = [self pickerView:self.notificationAction titleForRow:selectedRow forComponent:0];
     GetSocialActionType selectedAction = self.actions[selectedItem];
 
-    if (self.templateName.text.length == 0 && self.customText.text.length == 0 && [selectedAction isEqualToString:@"custom_add_friend"])
+    if (self.templateName.text.length == 0 && self.customText.text.length == 0 && [selectedAction isEqualToString:GetSocialActionAddFriend])
     {
         GetSocialNotificationContent *content = [GetSocialNotificationContent
             withText:[NSString stringWithFormat:@"%@ wants to become friends", GetSocial_NotificationPlaceholder_CustomText_SenderDisplayName]];
         [content setTitle:@"Friend Request"];
 
         GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
-        [builder addActionData:@{@"user_id" : [GetSocialUser userId], @"user_name" : [GetSocialUser displayName]}];
+        [builder addActionData:@{GetSocialActionDataKey_AddFriend_UserId : [GetSocialUser userId], @"user_name" : [GetSocialUser displayName]}];
         [content setAction:builder.build];
-        [content addActionButtons:@[
-            [GetSocialActionButton createWithTitle:@"Accept" andActionId:GetSocialActionIdConsume],
-            [GetSocialActionButton createWithTitle:@"Decline" andActionId:GetSocialActionIdIgnore]
-        ]];
+        [content addActionButtons:[self createActionButtons]];
 
         [GetSocialUser sendNotification:[self createUserIds]
             withContent:content
@@ -423,13 +419,9 @@ static NSInteger const DynamicRowHeight = 36;
         [content addTemplatePlaceholders:[self createTemplateData]];
     }
 
-    if (![selectedAction isEqualToString:@"DEFAULT"])
-    {
-        GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
-        [builder addActionData:[self createActionData]];
-        [content setAction:builder.build];
-    }
-
+    GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
+    [builder addActionData:[self createActionData]];
+    [content setAction:builder.build];
     [content addActionButtons:[self createActionButtons]];
 
     GetSocialMediaAttachment *attachment =
@@ -442,15 +434,18 @@ static NSInteger const DynamicRowHeight = 36;
 
     [content setMediaAttachment:attachment];
 
+    [self showActivityIndicatorView];
     [GetSocialUser sendNotification:[self createUserIds]
         withContent:content
         success:^(GetSocialNotificationsSummary *summary) {
+            [self hideActivityIndicatorView];
             [self log:LogLevelInfo
                   context:@"Send Notification"
                   message:[NSString stringWithFormat:@"Successfully sent notifications to %d users.", summary.successfullySentCount]
                 showAlert:YES];
         }
         failure:^(NSError *error) {
+            [self hideActivityIndicatorView];
             [self log:LogLevelError
                   context:@"Send Notification"
                   message:[NSString stringWithFormat:@"Failed to send notification. Error: %@.", error]
@@ -513,7 +508,7 @@ static NSInteger const DynamicRowHeight = 36;
         @"Open Invites" : GetSocialActionOpenInvites,
         @"Open Profile" : GetSocialActionOpenProfile,
         @"Open URL" : GetSocialActionOpenUrl,
-        @"Add Friend(Custom)" : @"custom_add_friend"
+        @"Add Friend" : GetSocialActionAddFriend
     };
 }
 

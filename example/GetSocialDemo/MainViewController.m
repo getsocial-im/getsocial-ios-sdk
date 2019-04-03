@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2017 GetSocial B.V.
+ *    	Copyright 2015-2019 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -100,6 +100,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) CheckableMenuItem *statusBarMenuItem;
 @property(nonatomic, assign) BOOL statusBarHidden;
 @property(nonatomic, strong) NSString *chatIdToShow;
+@property(nonatomic, strong) NSString *userIdToShow;
 
 @end
 
@@ -137,6 +138,10 @@ NSString *const kCustomProvider = @"custom";
         {
             [self showChatView];
         }
+        else if (self.userIdToShow)
+        {
+            [self showNewFriend];
+        }
         else
         {
             [self checkReferralData];
@@ -154,7 +159,7 @@ NSString *const kCustomProvider = @"custom";
         [self handleNotification:notification withAction:context[@"actionId"]];
         return YES;
     }
-    if ([notification.notificationAction.type isEqualToString:@"custom_add_friend"])
+    if ([notification.notificationAction.type isEqualToString:GetSocialActionAddFriend])
     {
         NSMutableArray<NSString *> *buttons = @[].mutableCopy;
         for (GetSocialActionButton *button in notification.actionButtons)
@@ -229,34 +234,11 @@ NSString *const kCustomProvider = @"custom";
 
     if ([actionId isEqualToString:GetSocialActionIdConsume])
     {
-        if ([action.type isEqualToString:@"custom_add_friend"])
+        [GetSocial processAction:action];
+        if ([action.type isEqualToString:GetSocialActionAddFriend])
         {
-            NSString *userId = action.data[@"user_id"];
             NSString *userName = action.data[@"user_name"];
-
-            [GetSocialUser addFriend:userId
-                success:^(int friendsCount) {
-                    GetSocialNotificationContent *content = [GetSocialNotificationContent
-                        withText:[NSString stringWithFormat:@"%@ accepted your friend request!",
-                                                            GetSocial_NotificationPlaceholder_CustomText_SenderDisplayName]];
-
-                    [GetSocialUser sendNotification:@[ userId ]
-                        withContent:content
-                        success:^(GetSocialNotificationsSummary *summary) {
-                            NSLog(@"Successfully notified user");
-                        }
-                        failure:^(NSError *error) {
-                            NSLog(@"Failed to send push, error: %@", error.localizedDescription);
-                        }];
-                    [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", userName]];
-                }
-                failure:^(NSError *error) {
-                    NSLog(@"Failed to add friend, error: %@", error.localizedDescription);
-                }];
-        }
-        else
-        {
-            [GetSocial processAction:action];
+            [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", userName]];
         }
     }
     else if ([actionId isEqualToString:GetSocialActionIdIgnore])
@@ -277,7 +259,11 @@ NSString *const kCustomProvider = @"custom";
 {
     if ([action.type isEqualToString:GetSocialActionOpenProfile])
     {
-        [self showNewFriend:action.data[GetSocialActionDataKey_OpenProfile_UserId]];
+        self.userIdToShow = action.data[GetSocialActionDataKey_OpenProfile_UserId];
+        if (GetSocial.isInitialized)
+        {
+            [self showNewFriend];
+        }
         return YES;
     }
     if ([action.type isEqualToString:GetSocialActionCustom])
@@ -611,6 +597,11 @@ NSString *const kCustomProvider = @"custom";
         [self.notificationsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Send Notification"
                                                                           action:^{
                                                                               [self sendNotification];
+                                                                          }]];
+
+        [self.notificationsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Notification Center UI"
+                                                                          action:^{
+                                                                              [self showNotificationCenterUI];
                                                                           }]];
 
         // Send local notification Menu
@@ -1297,17 +1288,32 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
-- (void)showNewFriend:(NSString *)newFriendId
+- (void)showNewFriend
 {
-    [GetSocial userWithId:newFriendId
+    [GetSocial userWithId:self.userIdToShow
         success:^(GetSocialPublicUser *_Nonnull publicUser) {
             NewFriendViewController *newFriendViewController =
                 [UIStoryboard viewControllerForName:@"NewFriendViewController" inStoryboard:GetSocialStoryboardSocialGraph];
             [newFriendViewController setPublicUser:publicUser];
             [UISimpleAlertViewController hideAlertView];
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:newFriendViewController
-                                                                                         animated:YES
-                                                                                       completion:nil];
+            if ([UIApplication sharedApplication].keyWindow.rootViewController.presentedViewController != nil)
+            {
+                [[UIApplication sharedApplication].keyWindow.rootViewController
+                    dismissViewControllerAnimated:YES
+                                       completion:^{
+                                           [[UIApplication sharedApplication].keyWindow.rootViewController
+                                               presentViewController:newFriendViewController
+                                                            animated:YES
+                                                          completion:nil];
+                                       }];
+            }
+            else
+            {
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:newFriendViewController
+                                                                                             animated:YES
+                                                                                           completion:nil];
+            }
+            self.userIdToShow = nil;
         }
         failure:^(NSError *_Nonnull error) {
             GSLogError(YES, NO, @"Fetch user failed, error: %@", [error description]);
@@ -1469,6 +1475,19 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController
         pushViewController:[UIStoryboard viewControllerForName:@"SendNotification" inStoryboard:GetSocialStoryboardNotifications]
                   animated:YES];
+}
+
+- (void)showNotificationCenterUI
+{
+    GetSocialUINotificationCenterView *ncView = [GetSocialUI createNotificationCenterView];
+    [ncView setClickHandler:^BOOL(GetSocialNotification *notification) {
+        return [self handleAction:notification.notificationAction];
+    }];
+    [ncView setActionButtonHandler:^BOOL(GetSocialNotification *notification, GetSocialActionButton *actionButton) {
+        GSLogInfo(NO, YES, @"Action button [%@] for notification [%@] clicked", actionButton.actionId, notification.notificationId);
+        return NO;
+    }];
+    [ncView show];
 }
 
 - (void)sendLocalNotification
