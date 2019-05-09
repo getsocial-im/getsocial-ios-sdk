@@ -476,8 +476,13 @@ NSString *const kCustomProvider = @"custom";
         // AF menu
         self.activitiesMenu = [MenuItem parentMenuItemWithTitle:@"Activity Feed"];
 
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed"
+                                                                       action:^{
+                                                                           [[GetSocialUI createGlobalActivityFeedView] show];
+                                                                       }]];
+
         [self.activitiesMenu
-            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed"
+            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed With Custom Handlers"
                                                       action:^{
                                                           GetSocialUIActivityFeedView *activityFeedView = [GetSocialUI createGlobalActivityFeedView];
                                                           [activityFeedView setActionButtonHandler:[self defaultActionButtonHandler]];
