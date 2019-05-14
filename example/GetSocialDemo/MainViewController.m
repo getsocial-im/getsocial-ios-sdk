@@ -609,6 +609,26 @@ NSString *const kCustomProvider = @"custom";
                                                                               [self showNotificationCenterUI];
                                                                           }]];
 
+        // Promo Codes
+        ParentMenuItem *promoCodes = [MenuItem parentMenuItemWithTitle:@"Promo Codes"];
+        [promoCodes addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My Promo Code"
+                                                              action:^{
+                                                                  [self showMyPromoCode];
+                                                              }]];
+        [promoCodes addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Create Promo Code"
+                                                              action:^{
+                                                                  [self createPromoCode];
+                                                              }]];
+        [promoCodes addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Claim Promo Code"
+                                                              action:^{
+                                                                  [self claimPromoCode];
+                                                              }]];
+        [promoCodes addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Promo Code Info"
+                                                              action:^{
+                                                                  [self getPromoCodeInfo];
+                                                              }]];
+        [self.menu addObject:promoCodes];
+
         // Send local notification Menu
         [self.menu addObject:[MenuItem actionableMenuItemWithTitle:@"Send local PN"
                                                             action:^{
@@ -1344,14 +1364,40 @@ NSString *const kCustomProvider = @"custom";
         else
         {
             NSMutableString *linkParams = [NSMutableString new];
-            [[referralData linkParams] enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
+            [referralData.referralLinkParams enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
                 [linkParams appendFormat:@"%@ = %@, ", key, obj];
             }];
-            GSLogInfo(YES, NO,
-                      @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i, isGuaranteedMatch: %i, "
-                      @"linkParams: %@.",
-                      [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch],
-                      [referralData isGuaranteedMatch], linkParams);
+            NSString *promoCode = referralData.referralLinkParams[GetSocial_PromoCode];
+            if (promoCode != nil)
+            {
+                [linkParams appendFormat:@"\n\n PROMO CODE:\n %@", promoCode];
+            }
+
+            NSString *message = [NSString
+                stringWithFormat:
+                    @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i, isGuaranteedMatch: %i, "
+                    @"linkParams: %@.",
+                    [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch],
+                    [referralData isGuaranteedMatch], linkParams];
+            [[ConsoleViewController sharedController] log:LogLevelInfo message:message context:@"checkReferralData: line 1379"];
+            UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Referral Data"
+                                                                                            message:message
+                                                                                  cancelButtonTitle:@"OK"
+                                                                                  otherButtonTitles:promoCode == nil ? @[] : @[ @"Claim" ]];
+            [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+                if (!didCancel)
+                {
+                    [GetSocial claimPromoCode:promoCode
+                        success:^(GetSocialPromoCode *_Nonnull promoCode) {
+                            [self hideActivityIndicatorView];
+                            [self showAlertWithTitle:@"Claimed Promo Code" andText:[MainViewController formatPromoCode:promoCode]];
+                        }
+                        failure:^(NSError *_Nonnull error) {
+                            [self hideActivityIndicatorView];
+                            GSLogError(YES, NO, @"Error claiming promo code: %@", error.localizedDescription);
+                        }];
+                }
+            }];
         }
     }
         failure:^(NSError *_Nonnull error) {
@@ -1516,6 +1562,189 @@ NSString *const kCustomProvider = @"custom";
                                                                    GSLogError(YES, NO, @"Sending PN failed, error: %@", [error description]);
                                                                }
                                                            }];
+}
+
+#pragma mark - Promo Codes
+
+- (void)showMyPromoCode
+{
+    if ([GetSocialUser hasPrivatePropertyForKey:@"my_promo_code"])
+    {
+        [self showPromoCodeInfo:[GetSocialUser privatePropertyValueForKey:@"my_promo_code"]];
+    }
+    else
+    {
+        [self showActivityIndicatorView];
+        GetSocialPromoCodeBuilder *builder = [GetSocialPromoCodeBuilder withRandomCode];
+        [builder addDataValue:@"true" forKey:@"my_promo_code"];
+        [GetSocial createPromoCode:builder
+            success:^(GetSocialPromoCode *_Nonnull promoCode) {
+                [GetSocialUser setPrivatePropertyValue:promoCode.code
+                    forKey:@"my_promo_code"
+                    success:^{
+                        [self hideActivityIndicatorView];
+                        [self showMyPromoCode];
+                    }
+                    failure:^(NSError *_Nonnull error) {
+                        [self hideActivityIndicatorView];
+                        GSLogError(YES, NO, @"Error setting custom property: %@", error.localizedDescription);
+                    }];
+            }
+            failure:^(NSError *_Nonnull error) {
+                [self hideActivityIndicatorView];
+                GSLogError(YES, NO, @"Error creating promo code: %@", error.localizedDescription);
+            }];
+    }
+}
+
+- (void)showPromoCodeInfo:(NSString *)code
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Promo Code"
+                                                                                    message:code
+                                                                          cancelButtonTitle:@"Dismiss"
+                                                                          otherButtonTitles:@[ @"Share", @"Copy", @"Info" ]];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            switch (selectedIndex)
+            {
+                case 0:
+                    [MainViewController sharePromoCode:code];
+                    break;
+
+                case 1:
+                    [MainViewController copyCode:code];
+                    break;
+
+                case 2:
+                    [self showActivityIndicatorView];
+                    [GetSocial getPromoCode:code
+                        success:^(GetSocialPromoCode *_Nonnull promoCode) {
+                            [self hideActivityIndicatorView];
+                            [MainViewController showPromoCodeFullInfo:promoCode];
+                        }
+                        failure:^(NSError *_Nonnull error) {
+                            [self hideActivityIndicatorView];
+                            GSLogError(YES, NO, @"Error getting promo code: %@", error.localizedDescription);
+                        }];
+                    break;
+            }
+        }
+    }];
+}
+
+- (void)createPromoCode
+{
+    UIViewController *viewController = [UIStoryboard viewControllerForName:@"create_promo_code" inStoryboard:GetSocialStoryboardPromoCodes];
+    [self.mainNavigationController pushViewController:viewController animated:YES];
+}
+
+- (void)claimPromoCode
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Claim Promo Code"
+                                                                                    message:@"Enter promo code to claim"
+                                                                          cancelButtonTitle:@"Dismiss"
+                                                                          otherButtonTitles:@[ @"Claim" ]];
+    [alert addTextFieldWithPlaceholder:@"Promo code..." defaultText:@"" isSecure:NO];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            [self showActivityIndicatorView];
+            NSString *promoCode = [alert contentOfTextFieldAtIndex:0];
+            [GetSocial claimPromoCode:promoCode
+                success:^(GetSocialPromoCode *_Nonnull promoCode) {
+                    [self hideActivityIndicatorView];
+                    [self showAlertWithTitle:@"Claimed Promo Code" andText:[MainViewController formatPromoCode:promoCode]];
+                }
+                failure:^(NSError *_Nonnull error) {
+                    [self hideActivityIndicatorView];
+                    GSLogError(YES, NO, @"Error claiming promo code: %@", error.localizedDescription);
+                }];
+        }
+    }];
+}
+
+- (void)getPromoCodeInfo
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Promo Code Info"
+                                                                                    message:@"Enter promo code"
+                                                                          cancelButtonTitle:@"Dismiss"
+                                                                          otherButtonTitles:@[ @"Info" ]];
+    [alert addTextFieldWithPlaceholder:@"Promo code..." defaultText:@"" isSecure:NO];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            [self showActivityIndicatorView];
+            NSString *promoCode = [alert contentOfTextFieldAtIndex:0];
+            [GetSocial getPromoCode:promoCode
+                success:^(GetSocialPromoCode *_Nonnull promoCode) {
+                    [self hideActivityIndicatorView];
+                    [self showAlertWithTitle:@"Promo Code" andText:[MainViewController formatPromoCode:promoCode]];
+                }
+                failure:^(NSError *_Nonnull error) {
+                    [self hideActivityIndicatorView];
+                    GSLogError(YES, NO, @"Error getting promo code: %@", error.localizedDescription);
+                }];
+        }
+    }];
+}
+
++ (void)sharePromoCode:(NSString *)code
+{
+    GetSocialUIInvitesView *invitesView = [GetSocialUI createInvitesView];
+    GetSocialMutableInviteContent *inviteContent = [GetSocialMutableInviteContent new];
+    inviteContent.text =
+        [NSString stringWithFormat:@"Use my Promo Code to get a personal discount %@ . %@", code, GetSocial_InviteContentPlaceholder_App_Invite_Url];
+    [invitesView setCustomInviteContent:inviteContent];
+    [invitesView setLinkParams:@{GetSocial_PromoCode : code}];
+    [invitesView show];
+}
+
++ (void)copyCode:(NSString *)code
+{
+    [UIPasteboard generalPasteboard].string = code;
+}
+
++ (void)showPromoCodeFullInfo:(GetSocialPromoCode *)promoCode
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Promo Code"
+                                                                                    message:[MainViewController formatPromoCode:promoCode]
+                                                                          cancelButtonTitle:@"Dismiss"
+                                                                          otherButtonTitles:@[ @"Share", @"Copy" ]];
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            switch (selectedIndex)
+            {
+                case 0:
+                    [self sharePromoCode:promoCode.code];
+                    break;
+
+                case 1:
+                    [self copyCode:promoCode.code];
+                    break;
+            }
+        }
+    }];
+}
+
++ (NSString *)formatPromoCode:(GetSocialPromoCode *)promoCode
+{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"HH:mm:ss, dd MMM yyy zzz"];
+    return [NSString stringWithFormat:
+                         @"code: %@"
+                          "\ndata: %@"
+                          "\nmaxClaim: %u"
+                          "\nclaimCount: %u"
+                          "\nstartDate: %@"
+                          "\nendDate: %@"
+                          "\nenabled: %@"
+                          "\nclaimable: %@"
+                          "\ncreator: %@",
+                         promoCode.code, promoCode.data, promoCode.maxClaimCount, promoCode.claimCount,
+                         [dateFormatter stringFromDate:promoCode.startDate], [dateFormatter stringFromDate:promoCode.endDate],
+                         promoCode.enabled ? @"true" : @"false", promoCode.claimable ? @"true" : @"false", promoCode.creator.displayName];
 }
 
 #pragma mark - Localization

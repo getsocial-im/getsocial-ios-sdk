@@ -19,6 +19,9 @@
 		213E3A753613B2971A89F4FE /* UIImageView+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */; };
 		213E3EF84029D5E4E4865B71 /* PushNotificationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 213E3B4404D851B304096807 /* PushNotificationView.h */; };
 		6278441E9B0A61A254DC1D09 /* GetSocialUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BD4EB5BEEA77D00A449CCA /* GetSocialUI.framework */; };
+		6F04D04A2282B07300D8E004 /* PromoCodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F04D0482282B07300D8E004 /* PromoCodes.storyboard */; };
+		6F04D0572282B23200D8E004 /* CreatePromoCodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F04D0552282B23200D8E004 /* CreatePromoCodeViewController.h */; };
+		6F04D0582282B23200D8E004 /* CreatePromoCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04D0562282B23200D8E004 /* CreatePromoCodeViewController.m */; };
 		6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */; };
 		6F2B83E01E1FCCB500C6FF88 /* PostActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */; };
 		6F3571E61E2E624700ABE22A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99A42E121C904FCD0041DDE3 /* QuartzCore.framework */; };
@@ -302,6 +305,9 @@
 		213E3B4404D851B304096807 /* PushNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationView.h; sourceTree = "<group>"; };
 		213E3F34621E037B8687B57D /* PushNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationView.m; sourceTree = "<group>"; };
 		213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetSocial.h"; sourceTree = "<group>"; };
+		6F04D0492282B07300D8E004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PromoCodes.storyboard; sourceTree = "<group>"; };
+		6F04D0552282B23200D8E004 /* CreatePromoCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePromoCodeViewController.h; sourceTree = "<group>"; };
+		6F04D0562282B23200D8E004 /* CreatePromoCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePromoCodeViewController.m; sourceTree = "<group>"; };
 		6F2B83DD1E1FCCB500C6FF88 /* PostActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityViewController.h; sourceTree = "<group>"; };
 		6F2B83DE1E1FCCB500C6FF88 /* PostActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityViewController.m; sourceTree = "<group>"; };
 		6F5CD6C420A095BE00693B85 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
@@ -648,6 +654,7 @@
 				6FA45A21214017790040D937 /* SocialGraph.storyboard */,
 				6FA45A25214017790040D937 /* UserManagement.storyboard */,
 				995D99B417EB064500F65204 /* Main.storyboard */,
+				6F04D0482282B07300D8E004 /* PromoCodes.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -797,6 +804,8 @@
 				BCD1E5211EE833C200E1F352 /* NewFriendViewController.h */,
 				995AC1E71BB15C95006424DF /* MenuItem.h */,
 				995AC1E81BB15C95006424DF /* MenuItem.m */,
+				6F04D0552282B23200D8E004 /* CreatePromoCodeViewController.h */,
+				6F04D0562282B23200D8E004 /* CreatePromoCodeViewController.m */,
 				991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */,
 				991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */,
 				995AC1D21BB06955006424DF /* MainViewController.h */,
@@ -1187,6 +1196,7 @@
 				BCD1E5231EE833C200E1F352 /* NewFriendViewController.h in Headers */,
 				BC680F2D2074D08600A3551E /* VKObject.h in Headers */,
 				BC680F2F2074D08600A3551E /* VKOperation.h in Headers */,
+				6F04D0572282B23200D8E004 /* CreatePromoCodeViewController.h in Headers */,
 				213E3390EB835D536BCA62C3 /* UIImage+GetSocial.h in Headers */,
 				BC680F572074D08700A3551E /* VKSdk.h in Headers */,
 				BC5C5A791F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.h in Headers */,
@@ -1307,6 +1317,7 @@
 				BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */,
 				99F26B1A19A65BE5006D3B1A /* Images.xcassets in Resources */,
 				99ABE3CC1BCEBC8600296F50 /* GetSocialDemo.entitlements in Resources */,
+				6F04D04A2282B07300D8E004 /* PromoCodes.storyboard in Resources */,
 				99F772E61BBAA96A00A4CD69 /* LICENSE in Resources */,
 				7A3B8E9E1FCEC82500481004 /* getsocial-default-landscape in Resources */,
 				BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
@@ -1435,6 +1446,7 @@
 				9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */,
 				6F8D5C061E57304E00A43DAD /* FriendsViewController.m in Sources */,
 				998876151C6D487C0071A436 /* Constants.m in Sources */,
+				6F04D0582282B23200D8E004 /* CreatePromoCodeViewController.m in Sources */,
 				BC680EF32074D08600A3551E /* VKApiDocs.m in Sources */,
 				BC680F322074D08600A3551E /* VKRequest.m in Sources */,
 				BC680F582074D08700A3551E /* VKSdk.m in Sources */,
@@ -1509,6 +1521,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6F04D0482282B07300D8E004 /* PromoCodes.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F04D0492282B07300D8E004 /* Base */,
+			);
+			name = PromoCodes.storyboard;
+			sourceTree = "<group>";
+		};
 		6F99AA17216E02F700B01C5D /* InAppPurchase.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

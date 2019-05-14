@@ -16,7 +16,8 @@ typedef NS_ENUM(NSUInteger, GetSocialStoryboard) {
     GetSocialStoryboardActivityFeed,
     GetSocialStoryboardSmartInvites,
     GetSocialStoryboardInAppPurchase,
-    GetSocialStoryboardMessages
+    GetSocialStoryboardMessages,
+    GetSocialStoryboardPromoCodes
 };
 
 @interface UIStoryboard (GetSocial)

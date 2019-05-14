@@ -35,4 +35,6 @@
 - (BOOL)handleAction:(GetSocialAction *)action;
 - (void)handleAction:(NSString *)action withPost:(GetSocialActivityPost *)post;
 
++ (void)showPromoCodeFullInfo:(GetSocialPromoCode *)promoCode;
+
 @end
