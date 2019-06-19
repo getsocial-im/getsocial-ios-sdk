@@ -1222,7 +1222,7 @@
 				BC283CC81E0B315200572390 /* Embed Frameworks */,
 				BC8FF8DA1E166F25000AFAEF /* ShellScript */,
 				BCD73B0F2195DEF900D4D5E4 /* Embed App Extensions */,
-				BDAC4FF8A6320F1993835DFA /* ShellScript */,
+				09404C4FA4E9576B9A9597BC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1356,6 +1356,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09404C4FA4E9576B9A9597BC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash ./strip_frameworks.sh";
+			showEnvVarsInLog = 0;
+		};
 		BC4439751FFE3BC200682226 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1381,20 +1395,6 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"$PROJECT_DIR/../GetSocialDemo/GetSocialDemo/Vendor/Fabric.framework/run\"\n";
-		};
-		BDAC4FF8A6320F1993835DFA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash ./strip_frameworks.sh";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
