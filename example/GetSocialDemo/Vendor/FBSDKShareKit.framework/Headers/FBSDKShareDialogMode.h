@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <FBSDKCoreKit/FBSDKMacros.h>
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  NS_ENUM(NSUInteger, FBSDKShareDialogMode)
@@ -57,9 +57,12 @@ typedef NS_ENUM(NSUInteger, FBSDKShareDialogMode)
    @Displays the feed dialog in a UIWebView within the app.
    */
   FBSDKShareDialogModeFeedWeb,
-};
+} NS_SWIFT_NAME(ShareDialog.Mode);
 
 /**
-  Converts an FBLikeControlObjectType to an NSString.
+  Converts an FBSDKShareDialogMode to an NSString.
  */
-FBSDK_EXTERN NSString *NSStringFromFBSDKShareDialogMode(FBSDKShareDialogMode dialogMode);
+FOUNDATION_EXPORT NSString *NSStringFromFBSDKShareDialogMode(FBSDKShareDialogMode dialogMode)
+NS_REFINED_FOR_SWIFT;
+
+NS_ASSUME_NONNULL_END

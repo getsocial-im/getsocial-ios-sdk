@@ -139,7 +139,10 @@
 {
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-        NSArray *tags = @[ GetSocial_InviteContentPlaceholder_App_Invite_Url ];
+        NSArray *tags = @[
+            GetSocial_InviteContentPlaceholder_App_Invite_Url, GetSocial_InviteContentPlaceholder_Promo_Code,
+            GetSocial_InviteContentPlaceholder_User_Name
+        ];
 
         UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Tag"
                                                                                         message:@"Choose the tag to add"

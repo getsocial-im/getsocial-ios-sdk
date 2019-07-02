@@ -53,6 +53,9 @@
 		6FA45A30214017790040D937 /* UIStoryboard+GetSocial.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA45A29214017790040D937 /* UIStoryboard+GetSocial.h */; };
 		6FA45A3A21413D2F0040D937 /* SendNotificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA45A3821413D2E0040D937 /* SendNotificationViewController.h */; };
 		6FA45A3B21413D2F0040D937 /* SendNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA45A3921413D2F0040D937 /* SendNotificationViewController.m */; };
+		6FC7213922C4CEA000D478A9 /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EB1BB95CB800325DAF /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FC7213A22C4CEA000D478A9 /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FC7213B22C4CEA000D478A9 /* FBSDKShareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71ED1BB95CB800325DAF /* FBSDKShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FD96C06206E4B7400C514A3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD96C05206E4B7400C514A3 /* UserNotifications.framework */; };
 		7A3B8E9B1FCEC82500481004 /* getsocial-dark-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E961FCEC82500481004 /* getsocial-dark-landscape */; };
 		7A3B8E9C1FCEC82500481004 /* getsocial-dark in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E971FCEC82500481004 /* getsocial-dark */; };
@@ -62,7 +65,6 @@
 		990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A617EB064500F65204 /* UIKit.framework */; };
 		990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */; };
 		991347B51AF240740044C2AD /* CustomSmartInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */; };
-		99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */; };
 		9929239C1BB2EEAD0010D481 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923991BB2EEAD0010D481 /* UserViewController.m */; };
 		992923A51BB411A00010D481 /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992923A21BB411A00010D481 /* MenuTableViewCell.m */; };
 		9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9942F9171A70F9C200FCC91B /* Launch Screen.xib */; };
@@ -276,6 +278,9 @@
 				6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */,
 				C3B9468C8578B9C78CB61377 /* GetSocial.framework in Embed Frameworks */,
 				B506466FBCE6F9308E5AB341 /* GetSocialUI.framework in Embed Frameworks */,
+				6FC7213922C4CEA000D478A9 /* FBSDKCoreKit.framework in Embed Frameworks */,
+				6FC7213A22C4CEA000D478A9 /* FBSDKLoginKit.framework in Embed Frameworks */,
+				6FC7213B22C4CEA000D478A9 /* FBSDKShareKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,8 +358,6 @@
 		991347B11AF240740044C2AD /* CustomSmartInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSmartInviteViewController.h; sourceTree = "<group>"; };
 		991347B21AF240740044C2AD /* CustomSmartInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CustomSmartInviteViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9916C6A51BE7BF0B00ABBCF0 /* libicucore.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFacebookInvitePlugin.h; path = Plugins/GetSocialFacebookInvitePlugin.h; sourceTree = "<group>"; };
-		99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFacebookInvitePlugin.m; path = Plugins/GetSocialFacebookInvitePlugin.m; sourceTree = "<group>"; };
 		992923981BB2EEAD0010D481 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UserViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		992923991BB2EEAD0010D481 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UserViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		992923A11BB411A00010D481 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MenuTableViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -847,8 +850,6 @@
 			children = (
 				BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */,
 				BC4439A62003C67800682226 /* GetSocialFacebookSharePlugin.m */,
-				99205C711A1AA237003DB88F /* GetSocialFacebookInvitePlugin.h */,
-				99205C721A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m */,
 				BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */,
 				BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */,
 			);
@@ -1222,7 +1223,7 @@
 				BC283CC81E0B315200572390 /* Embed Frameworks */,
 				BC8FF8DA1E166F25000AFAEF /* ShellScript */,
 				BCD73B0F2195DEF900D4D5E4 /* Embed App Extensions */,
-				665F4B899701607885614551 /* ShellScript */,
+				0CD340A48205790251FD05A8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1356,7 +1357,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		665F4B899701607885614551 /* ShellScript */ = {
+		0CD340A48205790251FD05A8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1381,7 +1382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.26.3\n";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.27.0\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1414,7 +1415,6 @@
 				BC680EFE2074D08600A3551E /* VKApiWall.m in Sources */,
 				BC680F042074D08600A3551E /* VKAudio.m in Sources */,
 				99FE1A801BB2A82100EF576A /* ConsoleViewController.m in Sources */,
-				99205C751A1AA237003DB88F /* GetSocialFacebookInvitePlugin.m in Sources */,
 				BC680F3E2074D08700A3551E /* OrderedDictionary.m in Sources */,
 				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
 				6F6979AC1EE8395C00ED08B5 /* SuggestedFriendTableViewCell.m in Sources */,

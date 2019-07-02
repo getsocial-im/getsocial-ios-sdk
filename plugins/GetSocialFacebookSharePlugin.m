@@ -44,6 +44,7 @@
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
+    content.quote = invitePackage.text;
 
     FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
     shareDialog.fromViewController = viewController;

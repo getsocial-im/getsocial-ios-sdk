@@ -20,18 +20,23 @@
 
 #import <FBSDKShareKit/FBSDKSharingContent.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
   The common interface for sharing buttons.
 
-- See:FBSDKSendButton
+ @see FBSDKSendButton
 
-- See:FBSDKShareButton
+ @see FBSDKShareButton
  */
+NS_SWIFT_NAME(SharingButton)
 @protocol FBSDKSharingButton <NSObject>
 
 /**
   The content to be shared.
  */
-@property (nonatomic, copy) id<FBSDKSharingContent> shareContent;
+@property (nonatomic, copy, nullable) id<FBSDKSharingContent> shareContent;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -78,7 +78,7 @@
             [PushNotificationView showNotificationWithTitle:@"Clipboard"
                                                  andMessage:[NSString stringWithFormat:@"Copy %@ to clipboard.", [GetSocialUser userId]]];
             self.isPressing = YES;
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            //            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         }
     }
 }

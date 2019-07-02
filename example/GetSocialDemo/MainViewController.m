@@ -34,7 +34,6 @@
 #import <GetSocialUI/GetSocialUI.h>
 
 #import "GetSocialFBMessengerInvitePlugin.h"
-#import "GetSocialFacebookInvitePlugin.h"
 #import "GetSocialFacebookSharePlugin.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
 #import "GetSocialVKInvitePlugin.h"
@@ -982,16 +981,16 @@ NSString *const kCustomProvider = @"custom";
     if (!_facebookSdkManager)
     {
         _facebookSdkManager = [FBSDKLoginManager new];
-        _facebookSdkManager.loginBehavior = FBSDKLoginBehaviorWeb;
+        _facebookSdkManager.loginBehavior = FBSDKLoginBehaviorBrowser;
     }
     return _facebookSdkManager;
 }
 
-- (void)loginWithFacebookWithHandler:(FBSDKLoginManagerRequestTokenHandler)handler
+- (void)loginWithFacebookWithHandler:(FBSDKLoginManagerLoginResultBlock)handler
 {
-    [self.facebookSdkManager logInWithReadPermissions:@[ @"email", @"user_friends", @"public_profile" ]
-                                   fromViewController:[UIApplication sharedApplication].keyWindow.rootViewController
-                                              handler:handler];
+    [self.facebookSdkManager logInWithPermissions:@[ @"email", @"user_friends", @"public_profile" ]
+                               fromViewController:[UIApplication sharedApplication].keyWindow.rootViewController
+                                          handler:handler];
 }
 
 - (void)changeUserAvatar
@@ -1693,8 +1692,8 @@ NSString *const kCustomProvider = @"custom";
 {
     GetSocialUIInvitesView *invitesView = [GetSocialUI createInvitesView];
     GetSocialMutableInviteContent *inviteContent = [GetSocialMutableInviteContent new];
-    inviteContent.text =
-        [NSString stringWithFormat:@"Use my Promo Code to get a personal discount %@ . %@", code, GetSocial_InviteContentPlaceholder_App_Invite_Url];
+    inviteContent.text = [NSString stringWithFormat:@"Use my Promo Code to get a personal discount %@ . %@",
+                                                    GetSocial_InviteContentPlaceholder_Promo_Code, GetSocial_InviteContentPlaceholder_App_Invite_Url];
     [invitesView setCustomInviteContent:inviteContent];
     [invitesView setLinkParams:@{GetSocial_PromoCode : code}];
     [invitesView show];
