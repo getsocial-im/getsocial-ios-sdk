@@ -20,6 +20,8 @@
 
 #define CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES 160
 
+typedef NS_ENUM(NSUInteger, ViewState) { Hidden, Selected, Visible };
+
 @interface SendNotificationViewController ()<UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 @property(weak, nonatomic) IBOutlet UIView *templateContainer;
 @property(weak, nonatomic) IBOutlet UIView *textContainer;
@@ -61,6 +63,10 @@
 @property(nonatomic, strong) NSMutableArray *recipients;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property(weak, nonatomic) IBOutlet UITextField *backgroundImage;
+@property(weak, nonatomic) IBOutlet UITextField *titleColor;
+@property(weak, nonatomic) IBOutlet UITextField *textColor;
+
 @end
 
 @implementation SendNotificationViewController
@@ -92,10 +98,9 @@ static NSInteger const DynamicRowHeight = 36;
     self.recipients = [NSMutableArray new];
 
     self.templateData.translatesAutoresizingMaskIntoConstraints = NO;
-    self.customImagePreview.hidden = YES;
-    self.buttonRemoveCustomImage.hidden = YES;
-    self.customVideoPreview.hidden = YES;
-    self.buttonRemoveCustomVideo.hidden = YES;
+
+    [self setVideoViewState:Visible];
+    [self setImageViewState:Visible];
 
     self.customImageSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
     self.customVideoSectionHeight.constant = CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES - IMAGE_HEIGHT;
@@ -434,6 +439,13 @@ static NSInteger const DynamicRowHeight = 36;
 
     [content setMediaAttachment:attachment];
 
+    // set customization
+    GetSocialNotificationCustomization *customization = [GetSocialNotificationCustomization new];
+    [customization setBackgroundImageConfiguration:self.backgroundImage.text];
+    [customization setTitleColor:self.titleColor.text];
+    [customization setTextColor:self.textColor.text];
+    [content setCustomization:customization];
+
     [self showActivityIndicatorView];
     [GetSocialUser sendNotification:[self createUserIds]
         withContent:content
@@ -562,17 +574,15 @@ static NSInteger const DynamicRowHeight = 36;
 
 - (IBAction)clearImage:(id)sender
 {
-    self.customImagePreview.image = nil;
-    self.customImagePreview.hidden = YES;
-    self.buttonRemoveCustomImage.hidden = YES;
+    [self setVideoViewState:Visible];
+    [self setImageViewState:Visible];
     self.customImageSectionHeight.constant -= IMAGE_HEIGHT;
 }
 
 - (IBAction)clearVideo:(id)sender
 {
-    self.customVideoPreview.image = nil;
-    self.customVideoPreview.hidden = YES;
-    self.buttonRemoveCustomVideo.hidden = YES;
+    [self setVideoViewState:Visible];
+    [self setImageViewState:Visible];
     self.customVideoContent = nil;
     self.customVideoSectionHeight.constant -= IMAGE_HEIGHT;
 }
@@ -609,8 +619,9 @@ static NSInteger const DynamicRowHeight = 36;
 
     self.customImagePreview.image = image;
     self.customImageSectionHeight.constant += IMAGE_HEIGHT;
-    self.customImagePreview.hidden = NO;
-    self.buttonRemoveCustomImage.hidden = NO;
+
+    [self setImageViewState:Selected];
+    [self setVideoViewState:Hidden];
 }
 
 - (void)useSelectedVideoWithInfo:(NSDictionary<NSString *, id> *)info
@@ -622,9 +633,31 @@ static NSInteger const DynamicRowHeight = 36;
     image = [image imageByResizeAndKeepRatio:CGSizeMake(maxWidth, (int)(maxWidth * 0.4))];
 
     self.customVideoPreview.image = image;
-    self.customVideoPreview.hidden = NO;
-    self.buttonRemoveCustomVideo.hidden = NO;
     self.customVideoSectionHeight.constant += IMAGE_HEIGHT;
+    [self setVideoViewState:Selected];
+    [self setImageViewState:Hidden];
+}
+
+- (void)setVideoViewState:(ViewState)state
+{
+    self.buttonChangeCustomVideo.hidden = state != Visible;
+    self.buttonRemoveCustomVideo.hidden = state != Selected;
+    self.customVideoPreview.hidden = state != Selected;
+    if (state != Selected)
+    {
+        self.customVideoPreview.image = nil;
+    }
+}
+
+- (void)setImageViewState:(ViewState)state
+{
+    self.buttonChangeCustomImage.hidden = state != Visible;
+    self.buttonRemoveCustomImage.hidden = state != Selected;
+    self.customImagePreview.hidden = state != Selected;
+    if (state != Selected)
+    {
+        self.customImagePreview.image = nil;
+    }
 }
 
 #pragma mark - UIImagePickerController
@@ -635,12 +668,10 @@ static NSInteger const DynamicRowHeight = 36;
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
     {
         [self useSelectedImageWithInfo:info];
-        [self clearVideo:nil];
     }
     else
     {
         [self useSelectedVideoWithInfo:info];
-        [self clearImage:nil];
     }
 
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];

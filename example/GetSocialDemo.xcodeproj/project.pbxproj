@@ -109,6 +109,8 @@
 		BC4637561E8D12F5008074E3 /* UISimpleAlertViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4637541E8D12F5008074E3 /* UISimpleAlertViewController.h */; };
 		BC537B2221358E86009D905A /* UITextField+DisableCopyAndPaste.h in Headers */ = {isa = PBXBuildFile; fileRef = BC537B2021358E85009D905A /* UITextField+DisableCopyAndPaste.h */; };
 		BC537B2321358E86009D905A /* UITextField+DisableCopyAndPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537B2121358E86009D905A /* UITextField+DisableCopyAndPaste.m */; };
+		BC5507B122DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5507AF22DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m */; };
+		BC5507B222DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = BC5507B022DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.h */; };
 		BC585E6C1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */; };
 		BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */; };
 		BC585E6F1E2FC5BA0057A73A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */; };
@@ -245,6 +247,8 @@
 		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
 		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
 		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
+		BCB4729422EF1455003F3F50 /* UITextFieldWithCopyPaste.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB4729222EF1455003F3F50 /* UITextFieldWithCopyPaste.h */; };
+		BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB4729322EF1455003F3F50 /* UITextFieldWithCopyPaste.m */; };
 		BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */; };
 		BCD040201D5DEEE800A8CE03 /* splashscreenBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */; };
 		BCD1E5221EE833C200E1F352 /* NewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */; };
@@ -263,7 +267,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 995D999717EB064500F65204 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BCD73B032195DEF900D4D5E4 /* GetSocialNotificationServiceExtension */;
+			remoteGlobalIDString = BCD73B032195DEF900D4D5E4;
 			remoteInfo = GetSocialNotificationServiceExtension;
 		};
 /* End PBXContainerItemProxy section */
@@ -427,6 +431,8 @@
 		BC4637541E8D12F5008074E3 /* UISimpleAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISimpleAlertViewController.h; sourceTree = "<group>"; };
 		BC537B2021358E85009D905A /* UITextField+DisableCopyAndPaste.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+DisableCopyAndPaste.h"; sourceTree = "<group>"; };
 		BC537B2121358E86009D905A /* UITextField+DisableCopyAndPaste.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+DisableCopyAndPaste.m"; sourceTree = "<group>"; };
+		BC5507AF22DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialInstagramStoriesInviteChannel.m; path = Plugins/GetSocialInstagramStoriesInviteChannel.m; sourceTree = "<group>"; };
+		BC5507B022DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialInstagramStoriesInviteChannel.h; path = Plugins/GetSocialInstagramStoriesInviteChannel.h; sourceTree = "<group>"; };
 		BC585E6A1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialKakaoTalkInvitePlugin.h; path = Plugins/GetSocialKakaoTalkInvitePlugin.h; sourceTree = "<group>"; };
 		BC585E6B1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialKakaoTalkInvitePlugin.m; path = Plugins/GetSocialKakaoTalkInvitePlugin.m; sourceTree = "<group>"; };
 		BC585E6E1E2FC5BA0057A73A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = GetSocialDemo/Vendor/KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -561,6 +567,8 @@
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
 		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BCB4729222EF1455003F3F50 /* UITextFieldWithCopyPaste.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextFieldWithCopyPaste.h; sourceTree = "<group>"; };
+		BCB4729322EF1455003F3F50 /* UITextFieldWithCopyPaste.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldWithCopyPaste.m; sourceTree = "<group>"; };
 		BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = getSocialLogoFullColorBlackBgIOS.png; path = Resources/getSocialLogoFullColorBlackBgIOS.png; sourceTree = "<group>"; };
 		BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreenBg.jpg; path = Resources/splashscreenBg.jpg; sourceTree = "<group>"; };
 		BCD1E5201EE833C200E1F352 /* NewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFriendViewController.m; sourceTree = "<group>"; };
@@ -677,6 +685,8 @@
 				213E32C3275989E92B17F58C /* UIImageView+GetSocial.h */,
 				213E3346F0B4508671FEAD89 /* UIImage+GetSocial.m */,
 				213E3F9CB8C36480EB7FB3AE /* UIImage+GetSocial.h */,
+				BCB4729222EF1455003F3F50 /* UITextFieldWithCopyPaste.h */,
+				BCB4729322EF1455003F3F50 /* UITextFieldWithCopyPaste.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -848,6 +858,8 @@
 		99FE1A821BB2B2FF00EF576A /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				BC5507B022DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.h */,
+				BC5507AF22DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m */,
 				BC4439A72003C67800682226 /* GetSocialFacebookSharePlugin.h */,
 				BC4439A62003C67800682226 /* GetSocialFacebookSharePlugin.m */,
 				BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */,
@@ -1152,6 +1164,7 @@
 				BC680F552074D08700A3551E /* VKPermissions.h in Headers */,
 				6F2B83DF1E1FCCB500C6FF88 /* PostActivityViewController.h in Headers */,
 				BC680F352074D08600A3551E /* VKResponse.h in Headers */,
+				BCB4729422EF1455003F3F50 /* UITextFieldWithCopyPaste.h in Headers */,
 				BC4637561E8D12F5008074E3 /* UISimpleAlertViewController.h in Headers */,
 				BC680F392074D08600A3551E /* VKUploadImage.h in Headers */,
 				BC680F092074D08600A3551E /* VKGroup.h in Headers */,
@@ -1167,6 +1180,7 @@
 				BC680F412074D08700A3551E /* VKActivity.h in Headers */,
 				BC680F172074D08600A3551E /* VKUser.h in Headers */,
 				6F8D5C091E57317700A43DAD /* FriendsTableViewCell.h in Headers */,
+				BC5507B222DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.h in Headers */,
 				BC680F332074D08600A3551E /* VKRequestsScheduler.h in Headers */,
 				BC680EF82074D08600A3551E /* VKApiModels.h in Headers */,
 				BC537B2221358E86009D905A /* UITextField+DisableCopyAndPaste.h in Headers */,
@@ -1223,7 +1237,7 @@
 				BC283CC81E0B315200572390 /* Embed Frameworks */,
 				BC8FF8DA1E166F25000AFAEF /* ShellScript */,
 				BCD73B0F2195DEF900D4D5E4 /* Embed App Extensions */,
-				0CD340A48205790251FD05A8 /* ShellScript */,
+				56C94E48B59D61C8215CEC1F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1262,7 +1276,7 @@
 				ORGANIZATIONNAME = GrambleWorld;
 				TargetAttributes = {
 					99F26AD019A65BE5006D3B1A = {
-						DevelopmentTeam = MPDNQL6523;
+						DevelopmentTeam = S2TQ8J2C2B;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1281,7 +1295,7 @@
 					};
 					BCD73B032195DEF900D4D5E4 = {
 						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = MPDNQL6523;
+						DevelopmentTeam = S2TQ8J2C2B;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -1357,7 +1371,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CD340A48205790251FD05A8 /* ShellScript */ = {
+		56C94E48B59D61C8215CEC1F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1368,7 +1382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash ./strip_frameworks.sh";
+			shellScript = "bash ./strip_frameworks.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		BC4439751FFE3BC200682226 /* ShellScript */ = {
@@ -1456,6 +1470,7 @@
 				BC680F2A2074D08600A3551E /* VKHTTPOperation.m in Sources */,
 				BC680F542074D08700A3551E /* VKBundle.m in Sources */,
 				99F26AF419A65BE5006D3B1A /* main.m in Sources */,
+				BC5507B122DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m in Sources */,
 				BC680F0C2074D08600A3551E /* VKLikes.m in Sources */,
 				BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */,
 				995AC1D61BB06955006424DF /* MainViewController.m in Sources */,
@@ -1467,6 +1482,7 @@
 				BC680F082074D08600A3551E /* VKDocs.m in Sources */,
 				BC680F222074D08600A3551E /* VKApi.m in Sources */,
 				99B68F171BB18FC500E1F252 /* UserIdentityViewController.m in Sources */,
+				BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */,
 				BC680F562074D08700A3551E /* VKPermissions.m in Sources */,
 				995AC1EB1BB15C95006424DF /* MenuItem.m in Sources */,
 				BC680F062074D08600A3551E /* VKCounters.m in Sources */,
@@ -1658,7 +1674,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetSocialDemo/GetSocialDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = MPDNQL6523;
+				DEVELOPMENT_TEAM = S2TQ8J2C2B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1686,7 +1702,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = im.getsocial.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "im.getsocial.demo - Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "im.getsocial.demo - AdHoc";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1708,7 +1724,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MPDNQL6523;
+				DEVELOPMENT_TEAM = S2TQ8J2C2B;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1723,7 +1739,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = im.getsocial.demo.GetSocialNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "GetSocialNotificationExtension - Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "GetSocialNotificationServiceExtension - AdHoc";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

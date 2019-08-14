@@ -161,6 +161,9 @@ static NSDateFormatter *dateFormatter;
     cell.text.text = notification.text;
     cell.date.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:notification.createdAt]];
     cell.readIndicator.hidden = wasRead;
+    cell.bgImageLabel.text = [NSString stringWithFormat:@"Bg image: %@", notification.customization.backgroundImageConfiguration];
+    cell.titleColorLabel.text = [NSString stringWithFormat:@"Title color: %@", notification.customization.titleColor];
+    cell.textColorLabel.text = [NSString stringWithFormat:@"Text color: %@", notification.customization.textColor];
     cell.backgroundColor = wasRead ? [UIColor whiteColor] : [UIColor lightGrayColor];
 
     if (notification.imageUrl != nil)
@@ -246,6 +249,11 @@ static NSDateFormatter *dateFormatter;
                     [builder setVideoUrl:selected.videoUrl];
                     [builder addActionButtons:selected.actionButtons];
                     [builder setNotificationType:selected.type];
+                    GetSocialNotificationCustomization *customization = [GetSocialNotificationCustomization new];
+                    customization.backgroundImageConfiguration = selected.customization.backgroundImageConfiguration;
+                    customization.titleColor = selected.customization.titleColor;
+                    customization.textColor = selected.customization.textColor;
+                    [builder setCustomization:customization];
                     self.notifications[i] = [builder build];
                 }
             }

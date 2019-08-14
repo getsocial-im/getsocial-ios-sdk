@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,13 +25,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1n-W8-ihn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1171"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1172"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Luw-Fp-OFp" userLabel="invite">
-                                                <rect key="frame" x="10" y="10" width="355" height="533"/>
+                                                <rect key="frame" x="10" y="10" width="355" height="534"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customize your invite subject and text (optional)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xW-BH-Rg7">
-                                                        <rect key="frame" x="10" y="10" width="335" height="19.5"/>
+                                                        <rect key="frame" x="10" y="10" width="335" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="QU1-Qu-ZA9"/>
                                                         </constraints>
@@ -41,7 +40,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long press on the text fields to easily insert placeholders" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTc-yo-fHR">
-                                                        <rect key="frame" x="10" y="39.5" width="335" height="13.5"/>
+                                                        <rect key="frame" x="10" y="40" width="335" height="14"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="Tl7-0u-PJH"/>
                                                         </constraints>
@@ -50,7 +49,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3e-7e-gff" userLabel="subjectandtitle">
-                                                        <rect key="frame" x="0.0" y="63" width="355" height="120"/>
+                                                        <rect key="frame" x="0.0" y="64" width="355" height="120"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkJ-Bx-4TN">
                                                                 <rect key="frame" x="10" y="10" width="70" height="24"/>
@@ -97,7 +96,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pdb-qL-zbs">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pdb-qL-zbs" customClass="UITextFieldWithCopyPaste">
                                                                 <rect key="frame" x="90" y="90" width="255" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -131,7 +130,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpf-kZ-GuZ" userLabel="image">
-                                                        <rect key="frame" x="0.0" y="193" width="355" height="160"/>
+                                                        <rect key="frame" x="0.0" y="194" width="355" height="160"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aph-VY-wPi">
                                                                 <rect key="frame" x="10" y="0.0" width="50" height="21"/>
@@ -166,7 +165,7 @@
                                                                 </connections>
                                                             </button>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xm3-j0-Fbi">
-                                                                <rect key="frame" x="57" y="32" width="240" height="128"/>
+                                                                <rect key="frame" x="57.5" y="32" width="240" height="128"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="240" id="8o7-ZB-ciI"/>
                                                                     <constraint firstAttribute="height" constant="128" id="fTl-Sd-yup"/>
@@ -186,7 +185,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-wY-bS9" userLabel="video">
-                                                        <rect key="frame" x="0.0" y="363" width="355" height="160"/>
+                                                        <rect key="frame" x="0.0" y="364" width="355" height="160"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEg-p8-FcA">
                                                                 <rect key="frame" x="10" y="0.0" width="50" height="21"/>
@@ -221,7 +220,7 @@
                                                                 </connections>
                                                             </button>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AGl-14-fYw">
-                                                                <rect key="frame" x="57" y="32" width="240" height="128"/>
+                                                                <rect key="frame" x="57.5" y="32" width="240" height="128"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="240" id="PCJ-5e-uSQ"/>
                                                                     <constraint firstAttribute="height" constant="128" id="rgP-Jb-IgY"/>
@@ -261,7 +260,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ueh-cN-TzX" userLabel="landingpage">
-                                                <rect key="frame" x="10" y="573" width="355" height="368"/>
+                                                <rect key="frame" x="10" y="574" width="355" height="368"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customize landing page (optional)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o91-li-6p6">
                                                         <rect key="frame" x="10" y="10" width="335" height="21"/>
@@ -303,25 +302,25 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G0-nn-evE">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G0-nn-evE" customClass="UI">
                                                         <rect key="frame" x="10" y="126" width="75" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zwx-x2-pJJ">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zwx-x2-pJJ" customClass="UITextFieldWithCopyPaste">
                                                         <rect key="frame" x="90" y="121" width="255" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMz-2n-Ir7">
-                                                        <rect key="frame" x="10" y="166" width="72.5" height="18"/>
+                                                        <rect key="frame" x="10" y="166" width="72" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vsv-o4-bXB">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vsv-o4-bXB" customClass="UITextFieldWithCopyPaste">
                                                         <rect key="frame" x="90" y="161" width="255" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -426,7 +425,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1b-Yn-hgl" userLabel="keyvalues">
-                                                <rect key="frame" x="10" y="951" width="355" height="170"/>
+                                                <rect key="frame" x="10" y="952" width="355" height="170"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attach some key/value pairs to your invite (optional)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLg-4b-iLA">
                                                         <rect key="frame" x="10" y="0.0" width="335" height="45"/>
@@ -504,7 +503,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IW2-Oj-Enu">
-                                                <rect key="frame" x="168.5" y="1131" width="38" height="30"/>
+                                                <rect key="frame" x="168.5" y="1132" width="38" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1q4-Hw-Vm4"/>
                                                 </constraints>

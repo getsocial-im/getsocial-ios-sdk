@@ -32,4 +32,8 @@
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *actionButtonsContainerHeight;
 @property(weak, nonatomic) IBOutlet UIStackView *actionButtons;
 
+@property(weak, nonatomic) IBOutlet UILabel *bgImageLabel;
+@property(weak, nonatomic) IBOutlet UILabel *titleColorLabel;
+@property(weak, nonatomic) IBOutlet UILabel *textColorLabel;
+
 @end

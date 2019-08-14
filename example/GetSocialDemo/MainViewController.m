@@ -35,6 +35,7 @@
 
 #import "GetSocialFBMessengerInvitePlugin.h"
 #import "GetSocialFacebookSharePlugin.h"
+#import "GetSocialInstagramStoriesInviteChannel.h"
 #import "GetSocialKakaoTalkInvitePlugin.h"
 #import "GetSocialVKInvitePlugin.h"
 #if DISABLE_TWITTER != 1
@@ -123,6 +124,11 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)setUpGetSocial
 {
+    [GetSocial setPushNotificationTokenHandler:^(NSString *_Nonnull deviceToken) {
+        [[ConsoleViewController sharedController] log:LogLevelInfo
+                                              message:[NSString stringWithFormat:@"Device Push Token: %@", deviceToken]
+                                              context:@"PushNotificationHandler"];
+    }];
     [GetSocial setNotificationHandler:^BOOL(GetSocialNotification *notification, BOOL wasClicked) {
         return [self handleNotification:notification withContext:@{ @"wasClicked" : @(wasClicked) }];
     }];
@@ -315,6 +321,10 @@ NSString *const kCustomProvider = @"custom";
     // Register VK Invite Plugin
     GetSocialVKInvitePlugin *vkInvitePlugin = [[GetSocialVKInvitePlugin alloc] init];
     [GetSocial registerInviteChannelPlugin:vkInvitePlugin forChannelId:GetSocial_InviteChannelPluginId_VK];
+
+    // Register Instagram Stories Plugin
+    GetSocialInstagramStoriesInviteChannel *igStoriesPlugin = [GetSocialInstagramStoriesInviteChannel new];
+    [GetSocial registerInviteChannelPlugin:igStoriesPlugin forChannelId:GetSocial_InviteChannelPluginId_Instagram_Stories];
 }
 
 - (void)updateFriendsCount
@@ -479,7 +489,6 @@ NSString *const kCustomProvider = @"custom";
                                                                        action:^{
                                                                            [[GetSocialUI createGlobalActivityFeedView] show];
                                                                        }]];
-
         [self.activitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed With Custom Handlers"
                                                       action:^{
@@ -588,6 +597,14 @@ NSString *const kCustomProvider = @"custom";
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post Activity"
                                                                        action:^{
                                                                            [self openPostActivityView];
+                                                                       }]];
+
+        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Chat feed (Only for testing)"
+                                                                       action:^{
+                                                                           NSString *chatId = @"chat_test";
+                                                                           GetSocialUIActivityFeedView *view =
+                                                                               [GetSocialUI createActivityFeedView:chatId];
+                                                                           [view show];
                                                                        }]];
 
         [self.menu addObject:self.activitiesMenu];

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.27.0-master-d66cee4</string>
+	<string>6.28.0-master-1c390b2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -213,7 +213,5 @@
 	<false/>
 	<key>im.getsocial.sdk.ShowNotificationInForeground</key>
 	<false/>
-	<key>im.getsocial.sdk.UiConfigurationFile</key>
-	<string>GetSocialDemo/Resources/getsocial-light/ui-config.json</string>
 </dict>
 </plist>
