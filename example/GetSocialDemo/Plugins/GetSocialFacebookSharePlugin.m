@@ -50,7 +50,15 @@
     shareDialog.fromViewController = viewController;
     shareDialog.shareContent = content;
     shareDialog.delegate = self;
-    shareDialog.mode = FBSDKShareDialogModeWeb;
+    // check if FB app is installed on the device
+    if ([UIApplication.sharedApplication canOpenURL:[NSURL URLWithString:@"fbauth2://"]])
+    {
+        shareDialog.mode = FBSDKShareDialogModeNative;
+    }
+    else
+    {
+        shareDialog.mode = FBSDKShareDialogModeWeb;
+    }
 
     [shareDialog show];
 }

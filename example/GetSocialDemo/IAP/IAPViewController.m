@@ -120,8 +120,8 @@
 
 - (void)loadProducts
 {
-    NSSet *productIds = [NSSet setWithObjects:@"im.getsocial.sdk.demo.internal.iap.consumable", @"im.getsocial.sdk.demo.internal.iap.nonconsumable",
-                                              @"im.getsocial.sdk.demo.internal.iap.subscription", nil];
+    NSSet *productIds = [NSSet setWithObjects:@"im.getsocial.demo.internal.iap.consumable", @"im.getsocial.demo.internal.iap.nonconsumable",
+                                              @"im.getsocial.demo.internal.iap.subscription", nil];
     SKProductsRequest *productRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIds];
     productRequest.delegate = self;
     [productRequest start];
