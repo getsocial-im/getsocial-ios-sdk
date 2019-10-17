@@ -14,9 +14,13 @@ static NSInteger const Padding = 10;
 
 + (void)showNotificationWithTitle:(NSString *)title andMessage:(NSString *)message
 {
+    CGFloat topPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        topPadding = UIApplication.sharedApplication.keyWindow.safeAreaInsets.top;
+    }
     UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
     PushNotificationView *notificationsView = [[PushNotificationView alloc]
-        initWithFrame:CGRectMake(HorizontalMargin, -Height * 2, root.view.frame.size.width - HorizontalMargin * 2, Height)];
+        initWithFrame:CGRectMake(HorizontalMargin, topPadding - Height * 2, root.view.frame.size.width - HorizontalMargin * 2, Height)];
 
     [notificationsView showWithTitle:title andMessage:message];
 
@@ -24,7 +28,7 @@ static NSInteger const Padding = 10;
     [UIView animateWithDuration:0.2f
                      animations:^{
                          notificationsView.frame =
-                             CGRectMake(HorizontalMargin, VerticalMargin, root.view.frame.size.width - HorizontalMargin * 2, Height);
+                             CGRectMake(HorizontalMargin, topPadding + VerticalMargin, root.view.frame.size.width - HorizontalMargin * 2, Height);
                      }];
 }
 

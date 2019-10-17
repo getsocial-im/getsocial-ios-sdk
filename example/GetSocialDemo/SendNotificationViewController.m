@@ -12,6 +12,7 @@
 #import "UIImage+GetSocial.h"
 #import "UISimpleAlertViewController.h"
 #import "UIViewController+GetSocial.h"
+#import "UITextFieldWithCopyPaste.h"
 
 #define MAX_WIDTH 1024.f
 #define MAX_HEIGHT 768.f
@@ -278,7 +279,7 @@ static NSInteger const DynamicRowHeight = 36;
     NSMutableDictionary *views = [@{} mutableCopy];
 
     [inputs enumerateObjectsUsingBlock:^(NSString *input, NSUInteger idx, BOOL *stop) {
-        UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 60, 21)];
+        UITextField *field = [[UITextFieldWithCopyPaste alloc] initWithFrame:CGRectMake(0, 0, 60, 21)];
 
         field.accessibilityIdentifier = input;
         field.enabled = YES;

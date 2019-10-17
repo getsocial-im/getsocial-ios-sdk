@@ -43,9 +43,7 @@
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [FBSDKMessageDialog showWithContent:content delegate:self];
-    });
+    [FBSDKMessageDialog showWithContent:content delegate:self];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results

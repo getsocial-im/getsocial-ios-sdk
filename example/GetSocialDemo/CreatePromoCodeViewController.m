@@ -123,8 +123,9 @@ static NSInteger const DynamicRowHeight = 36;
     [self.changeEndTimeButton setTitle:@"Change" forState:UIControlStateNormal];
 }
 
-- (IBAction)createPromoCode:(id)sender
+- (IBAction)createPromoCode:(UIButton *)sender
 {
+    sender.enabled = NO;
     GetSocialPromoCodeBuilder *promoCodeBuilder =
         self.promoCode.text.length > 0 ? [GetSocialPromoCodeBuilder withCode:self.promoCode.text] : [GetSocialPromoCodeBuilder withRandomCode];
 
@@ -134,9 +135,11 @@ static NSInteger const DynamicRowHeight = 36;
 
     [GetSocial createPromoCode:promoCodeBuilder
         success:^(GetSocialPromoCode *_Nonnull promoCode) {
+            sender.enabled = YES;
             [MainViewController showPromoCodeFullInfo:promoCode];
         }
         failure:^(NSError *_Nonnull error) {
+            sender.enabled = YES;
             [self showAlertWithTitle:@"Failed to create promo code" andText:error.localizedDescription];
         }];
 }

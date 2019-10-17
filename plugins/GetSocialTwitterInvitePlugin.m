@@ -15,7 +15,6 @@
  */
 
 #import "GetSocialTwitterInvitePlugin.h"
-#import <TwitterKit/TwitterKit.h>
 
 @interface GetSocialTwitterInvitePlugin ()
 

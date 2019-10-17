@@ -77,7 +77,9 @@
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             UIImage *image = [UIImage imageWithData:imageData];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.avatarImageView.image = image;
+                if ([imageURL isEqualToString:[GetSocialUser avatarUrl]]) {
+                    self.avatarImageView.image = image;
+                }
             });
         });
     }

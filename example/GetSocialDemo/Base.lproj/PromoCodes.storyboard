@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,13 +28,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Promo code..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Unb-EN-dma">
-                                                <rect key="frame" x="18" y="83" width="386" height="30"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="18" y="83" width="386" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQh-gn-NgZ">
-                                                <rect key="frame" x="16" y="123" width="100" height="21"/>
+                                                <rect key="frame" x="16" y="127" width="100" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="FZ7-1U-fWt"/>
                                                 </constraints>
@@ -45,7 +42,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3o-yT-BuQ">
-                                                <rect key="frame" x="376" y="118.5" width="30" height="30"/>
+                                                <rect key="frame" x="376" y="122.5" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="MID-cI-fDF"/>
                                                 </constraints>
@@ -55,55 +52,49 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05P-o3-bMQ">
-                                                <rect key="frame" x="17" y="147" width="389" height="1"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="17" y="151" width="389" height="1"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Gfu-KF-H6e"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Claim Count(0 for unlimited):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGe-y1-SGP">
-                                                <rect key="frame" x="16" y="173" width="388" height="21"/>
+                                                <rect key="frame" x="16" y="177" width="388" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max claim count" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qYZ-NY-AaD">
-                                                <rect key="frame" x="16" y="202" width="388" height="30"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="16" y="206" width="388" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time: (Start now)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH6-Zc-meh">
-                                                <rect key="frame" x="18" y="240" width="170.5" height="21"/>
+                                                <rect key="frame" x="18" y="248" width="170.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRx-F7-qTc">
-                                                <rect key="frame" x="259" y="235.5" width="53" height="30"/>
+                                                <rect key="frame" x="259" y="243.5" width="53" height="30"/>
                                                 <state key="normal" title="Change"/>
                                                 <connections>
                                                     <action selector="changeStartTime:" destination="I2V-rP-rfh" eventType="touchUpInside" id="lxB-ZQ-MEB"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="831-LE-Jxe">
-                                                <rect key="frame" x="338" y="235.5" width="66" height="30"/>
+                                                <rect key="frame" x="338" y="243.5" width="66" height="30"/>
                                                 <state key="normal" title="Start now"/>
                                                 <connections>
                                                     <action selector="resetStartTime:" destination="I2V-rP-rfh" eventType="touchUpInside" id="Ie8-Tv-RTb"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NoN-th-W4y">
-                                                <rect key="frame" x="0.0" y="271" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="279" width="414" height="0.0"/>
                                                 <subviews>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TUH-BD-sZc">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="578998836.76091194">
-                                                            <!--2019-05-08 09:00:36 +0000-->
-                                                        </date>
                                                     </datePicker>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="HR1-TY-dj0"/>
                                                     <constraint firstItem="TUH-BD-sZc" firstAttribute="width" secondItem="NoN-th-W4y" secondAttribute="width" id="WJr-Nf-7gh"/>
@@ -113,36 +104,32 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time: (Without limit)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUR-OA-l0g">
-                                                <rect key="frame" x="18" y="281" width="185" height="21"/>
+                                                <rect key="frame" x="18" y="289" width="185" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-HB-u1Z">
-                                                <rect key="frame" x="259" y="276.5" width="53" height="30"/>
+                                                <rect key="frame" x="259" y="284.5" width="53" height="30"/>
                                                 <state key="normal" title="Change"/>
                                                 <connections>
                                                     <action selector="changeEndTime:" destination="I2V-rP-rfh" eventType="touchUpInside" id="8lN-CT-dG8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P2-eY-IzL">
-                                                <rect key="frame" x="319" y="276.5" width="87" height="30"/>
+                                                <rect key="frame" x="319" y="284.5" width="87" height="30"/>
                                                 <state key="normal" title="Without limit"/>
                                                 <connections>
                                                     <action selector="resetEndTime:" destination="I2V-rP-rfh" eventType="touchUpInside" id="Ci4-76-hkf"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoP-0E-inb">
-                                                <rect key="frame" x="0.0" y="312" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="320" width="414" height="0.0"/>
                                                 <subviews>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="txx-uY-0xN">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="578998836.76091194">
-                                                            <!--2019-05-08 09:00:36 +0000-->
-                                                        </date>
                                                     </datePicker>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="txx-uY-0xN" firstAttribute="height" secondItem="qoP-0E-inb" secondAttribute="height" id="PP1-Mf-0VN"/>
                                                     <constraint firstItem="txx-uY-0xN" firstAttribute="centerY" secondItem="qoP-0E-inb" secondAttribute="centerY" id="dTV-Qe-fvw"/>
@@ -152,14 +139,13 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-jx-EAx">
-                                                <rect key="frame" x="184" y="322" width="46" height="30"/>
+                                                <rect key="frame" x="184" y="330" width="46" height="30"/>
                                                 <state key="normal" title="Create"/>
                                                 <connections>
                                                     <action selector="createPromoCode:" destination="I2V-rP-rfh" eventType="touchUpInside" id="Qor-U0-QfS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ZQh-gn-NgZ" firstAttribute="centerY" secondItem="f3o-yT-BuQ" secondAttribute="centerY" id="2SD-Vi-bAM"/>
                                             <constraint firstItem="NGe-y1-SGP" firstAttribute="leading" secondItem="U5F-ou-5Z6" secondAttribute="leading" constant="16" id="6Ev-Bo-sFu"/>
@@ -213,7 +199,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7fP-Mf-6pv" firstAttribute="top" secondItem="KqX-jC-MR5" secondAttribute="top" id="LTz-r5-AX6"/>
                             <constraint firstAttribute="bottom" secondItem="7fP-Mf-6pv" secondAttribute="bottom" id="Nw0-ZS-bz9"/>

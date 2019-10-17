@@ -1380,7 +1380,8 @@ NSString *const kCustomProvider = @"custom";
         else
         {
             NSMutableString *linkParams = [NSMutableString new];
-            [referralData.referralLinkParams enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
+            [referralData.referralLinkParams enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop)
+            {
                 [linkParams appendFormat:@"%@ = %@, ", key, obj];
             }];
             NSString *promoCode = referralData.referralLinkParams[GetSocial_PromoCode];
@@ -1389,17 +1390,15 @@ NSString *const kCustomProvider = @"custom";
                 [linkParams appendFormat:@"\n\n PROMO CODE:\n %@", promoCode];
             }
 
-            NSString *message = [NSString
-                stringWithFormat:
-                    @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i, isGuaranteedMatch: %i, "
-                    @"linkParams: %@.",
+            NSString *message = [NSString stringWithFormat: @"Referral data received: token: %@, referrerUserId: %@, referrerChannelId: %@, isFirstMatch: %i, isGuaranteedMatch: %i, linkParams: %@.",
                     [referralData token], [referralData referrerUserId], [referralData referrerChannelId], [referralData isFirstMatch],
                     [referralData isGuaranteedMatch], linkParams];
             [[ConsoleViewController sharedController] log:LogLevelInfo message:message context:@"checkReferralData: line 1379"];
             UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Referral Data"
                                                                                             message:message
                                                                                   cancelButtonTitle:@"OK"
-                                                                                  otherButtonTitles:promoCode == nil ? @[] : @[ @"Claim" ]];
+                                                                                  otherButtonTitles:promoCode == nil ? @[] : @[ @"Claim"
+                                                                                  ]];
             [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
                 if (!didCancel)
                 {
