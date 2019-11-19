@@ -27,6 +27,8 @@
 @interface MenuTableViewController ()
 
 @property(nonatomic) BOOL isPressing;
+@property(nonatomic) BOOL skipAnimations;
+
 @end
 
 @implementation MenuTableViewController
@@ -34,6 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+#ifdef SKIP_ANIMATIONS
+    self.skipAnimations = YES;
+#endif
 
     if (self.showUserIdentity)
     {
@@ -61,7 +66,7 @@
 - (void)openUserDetails:(UITapGestureRecognizer *)recognizer
 {
     UserViewController *userVC = [UIStoryboard viewControllerForName:@"UserDetails" inStoryboard:GetSocialStoryboardUserManagement];
-    [self.navigationController pushViewController:userVC animated:YES];
+    [self.navigationController pushViewController:userVC animated:!self.skipAnimations];
 }
 
 - (void)copyUserIdToClipboard:(UILongPressGestureRecognizer *)recognizer
@@ -85,7 +90,7 @@
 
 - (void)openConsole
 {
-    [self.navigationController pushViewController:[ConsoleViewController sharedController] animated:YES];
+    [self.navigationController pushViewController:[ConsoleViewController sharedController] animated:!self.skipAnimations];
 }
 
 #pragma mark - Table view data source
@@ -126,7 +131,7 @@
                 MenuTableViewController *subMenu = [UIStoryboard viewControllerForName:@"Menu" inStoryboard:GetSocialStoryboardMain];
                 subMenu.menu = parentMenuItem.subitems;
                 subMenu.title = currentMenuItem.title;
-                [self.navigationController pushViewController:subMenu animated:YES];
+                [self.navigationController pushViewController:subMenu animated:!self.skipAnimations];
             }
         }
         break;
@@ -158,7 +163,7 @@
             break;
     }
 
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:!self.skipAnimations];
 }
 
 @end

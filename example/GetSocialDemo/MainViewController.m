@@ -470,14 +470,29 @@ NSString *const kCustomProvider = @"custom";
                                                                              [self checkReferralData];
                                                                          }]];
 
+        [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referred Users(OLD)"
+                                                                         action:^{
+                                                                             [self checkReferredUsersOld];
+                                                                         }]];
+
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referred Users"
                                                                          action:^{
                                                                              [self checkReferredUsers];
                                                                          }]];
 
+        [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Check Referrer Users"
+                                                                         action:^{
+                                                                             [self checkReferrerUsers];
+                                                                         }]];
+
         [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Invite without UI"
                                                                          action:^{
                                                                              [self inviteWithoutUI];
+                                                                         }]];
+
+        [self.smartInvitesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Set Referrer"
+                                                                         action:^{
+                                                                             [self showSetReferrer];
                                                                          }]];
 
         [self.menu addObject:self.smartInvitesMenu];
@@ -1423,6 +1438,52 @@ NSString *const kCustomProvider = @"custom";
 
 - (void)checkReferredUsers
 {
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Get Referrer Users"
+                                                                                    message:@"Enter event name"
+                                                                          cancelButtonTitle:@"Cancel"
+                                                                          otherButtonTitles:@[ @"Ok" ]];
+
+    [alert addTextFieldWithPlaceholder:nil defaultText:@"" isSecure:NO];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel) {
+            [self showActivityIndicatorView];
+            NSString *eventName = [alert contentOfTextFieldAtIndex:0];
+            GetSocialReferralUsersQuery* query = nil;
+            if (eventName.length == 0) {
+                query = [GetSocialReferralUsersQuery allUsers];
+            } else {
+                query = [GetSocialReferralUsersQuery usersForEvent:eventName];
+            }
+            [GetSocial referredUsersWithQuery:query success:^(NSArray<GetSocialReferralUser *> *_Nonnull referredUsers) {
+                        [self hideActivityIndicatorView];
+                        __block NSString *messageContent = @"No referred users";
+                        if (referredUsers.count > 0)
+                        {
+                            messageContent = @"";
+                            [referredUsers enumerateObjectsUsingBlock:^(GetSocialReferralUser *_Nonnull referralUser, NSUInteger idx, BOOL *_Nonnull stop) {
+                                NSDateFormatter *formatter = [NSDateFormatter new];
+                                formatter.dateFormat = @"MM-dd-yyyy HH:mm";
+                                NSString *referredUserInfo = [NSString
+                                        stringWithFormat:@"%@(event=%@, date=%@, data=%@), ", referralUser.displayName, referralUser.event,
+                                                         [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:referralUser.eventDate]], referralUser.eventData];
+
+                                messageContent = [messageContent stringByAppendingString:referredUserInfo];
+                            }];
+                            messageContent = [messageContent substringToIndex:messageContent.length - 2];
+                        }
+                        GSLogInfo(YES, NO, @"%@", messageContent);
+                    }
+                                       failure:^(NSError *_Nonnull error) {
+                                           [self hideActivityIndicatorView];
+                                           GSLogInfo(YES, NO, @"Could not get list of referred users: %@", [error description]);
+                                       }];
+        }
+    }];
+}
+
+- (void)checkReferredUsersOld
+{
     [self showActivityIndicatorView];
     [GetSocial referredUsersWithSuccess:^(NSArray<GetSocialReferredUser *> *_Nonnull referredUsers) {
         [self hideActivityIndicatorView];
@@ -1450,6 +1511,52 @@ NSString *const kCustomProvider = @"custom";
         }];
 }
 
+- (void)checkReferrerUsers
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Get Referrer Users"
+                                                                                    message:@"Enter event name"
+                                                                          cancelButtonTitle:@"Cancel"
+                                                                          otherButtonTitles:@[ @"Ok" ]];
+
+    [alert addTextFieldWithPlaceholder:nil defaultText:@"" isSecure:NO];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel) {
+            [self showActivityIndicatorView];
+            NSString *eventName = [alert contentOfTextFieldAtIndex:0];
+            GetSocialReferralUsersQuery* query = nil;
+            if (eventName.length == 0) {
+                query = [GetSocialReferralUsersQuery allUsers];
+            } else {
+                query = [GetSocialReferralUsersQuery usersForEvent:eventName];
+            }
+            [GetSocial referrerUsersWithQuery:query success:^(NSArray<GetSocialReferralUser *> *_Nonnull referrerUsers) {
+                        [self hideActivityIndicatorView];
+                        __block NSString *messageContent = @"No referrer users";
+                        if (referrerUsers.count > 0)
+                        {
+                            messageContent = @"";
+                            [referrerUsers enumerateObjectsUsingBlock:^(GetSocialReferralUser *_Nonnull referralUser, NSUInteger idx, BOOL *_Nonnull stop) {
+                                NSDateFormatter *formatter = [NSDateFormatter new];
+                                formatter.dateFormat = @"MM-dd-yyyy HH:mm";
+                                NSString *referredUserInfo = [NSString
+                                        stringWithFormat:@"%@(event=%@, date=%@, data=%@), ", referralUser.displayName, referralUser.event,
+                                                         [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:referralUser.eventDate]], referralUser.eventData];
+
+                                messageContent = [messageContent stringByAppendingString:referredUserInfo];
+                            }];
+                            messageContent = [messageContent substringToIndex:messageContent.length - 2];
+                        }
+                        GSLogInfo(YES, NO, @"%@", messageContent);
+                    }
+                                       failure:^(NSError *_Nonnull error) {
+                                           [self hideActivityIndicatorView];
+                                           GSLogInfo(YES, NO, @"Could not get list of referrer users: %@", [error description]);
+                                       }];
+        }
+    }];
+}
+
 - (void)inviteWithoutUI
 {
     NSMutableArray *providerNames = [NSMutableArray array];
@@ -1475,6 +1582,12 @@ NSString *const kCustomProvider = @"custom";
             [self performSelector:@selector(callSendInviteWithProviderId:) withObject:selectedProviderId afterDelay:.5f];
         }
     }];
+}
+
+- (void)showSetReferrer {
+    [self.mainNavigationController
+        pushViewController:[UIStoryboard viewControllerForName:@"SetReferrer" inStoryboard:GetSocialStoryboardSmartInvites]
+                  animated:YES];
 }
 
 - (void)createInviteLink

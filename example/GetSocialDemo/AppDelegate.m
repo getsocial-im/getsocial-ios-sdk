@@ -44,6 +44,7 @@
 #endif
     [self setUpAdjust];
     [self setUpAppsFlyer];
+    
     VKSdk *sdkInstance = [VKSdk initializeWithAppId:@"6435876"];
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];

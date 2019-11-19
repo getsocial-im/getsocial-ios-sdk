@@ -200,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-yU-Dbd">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1153"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1225"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlh-wJ-ddn">
                                                 <rect key="frame" x="8" y="0.0" width="359" height="24"/>
@@ -665,7 +665,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXj-GF-XLA">
-                                                <rect key="frame" x="128" y="1098" width="119" height="30"/>
+                                                <rect key="frame" x="128" y="1170" width="119" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Q1V-2h-4sk"/>
                                                 </constraints>
@@ -674,20 +674,76 @@
                                                     <action selector="sendNotification:" destination="dg6-g3-nOD" eventType="touchUpInside" id="dtQ-71-JKD"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJp-kP-JMN" userLabel="BadgeContainer">
+                                                <rect key="frame" x="8" y="1089" width="359" height="73"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ng9-dU-QJW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="1UI-7V-XNo"/>
+                                                            <constraint firstAttribute="width" constant="49" id="MWZ-YM-X0u"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="didChangeBadgeCount:" destination="dg6-g3-nOD" eventType="valueChanged" id="hcz-Nh-LtZ"/>
+                                                        </connections>
+                                                    </switch>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Olb-4M-4UH">
+                                                        <rect key="frame" x="0.0" y="41" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="49" id="8u9-np-JPz"/>
+                                                            <constraint firstAttribute="height" constant="31" id="sC4-NK-gnd"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="didChangeBadgeIncrease:" destination="dg6-g3-nOD" eventType="valueChanged" id="JSj-gx-mh2"/>
+                                                        </connections>
+                                                    </switch>
+                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Badge Increase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2v-nk-Rpy">
+                                                        <rect key="frame" x="69" y="39" width="290" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="34" id="iTS-qY-WQK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Badge Count" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HcT-T1-vbH">
+                                                        <rect key="frame" x="69" y="-1" width="290" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="34" id="FEc-D0-4JJ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="x2v-nk-Rpy" secondAttribute="bottom" id="5kL-gd-i8g"/>
+                                                    <constraint firstItem="HcT-T1-vbH" firstAttribute="leading" secondItem="Ng9-dU-QJW" secondAttribute="trailing" constant="20" id="E4N-Qv-cyZ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="x2v-nk-Rpy" secondAttribute="trailing" id="RB4-rw-ITM"/>
+                                                    <constraint firstItem="Olb-4M-4UH" firstAttribute="top" secondItem="HcT-T1-vbH" secondAttribute="bottom" constant="8" id="Tsa-cd-TZ9"/>
+                                                    <constraint firstItem="HcT-T1-vbH" firstAttribute="top" secondItem="UJp-kP-JMN" secondAttribute="top" constant="-1" id="URB-WG-4r3"/>
+                                                    <constraint firstItem="Ng9-dU-QJW" firstAttribute="top" secondItem="UJp-kP-JMN" secondAttribute="top" id="VxC-2n-ase"/>
+                                                    <constraint firstItem="Ng9-dU-QJW" firstAttribute="leading" secondItem="UJp-kP-JMN" secondAttribute="leading" id="X4g-Lq-raO"/>
+                                                    <constraint firstItem="x2v-nk-Rpy" firstAttribute="top" secondItem="HcT-T1-vbH" secondAttribute="bottom" constant="6" id="XVa-46-h5K"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HcT-T1-vbH" secondAttribute="trailing" id="Xjd-fg-mae"/>
+                                                    <constraint firstItem="Olb-4M-4UH" firstAttribute="leading" secondItem="UJp-kP-JMN" secondAttribute="leading" id="gjt-uv-UAk"/>
+                                                    <constraint firstItem="x2v-nk-Rpy" firstAttribute="leading" secondItem="Olb-4M-4UH" secondAttribute="trailing" constant="20" id="xev-LS-07S"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="F69-Ju-SrD" firstAttribute="top" secondItem="B7b-fp-azV" secondAttribute="bottom" constant="16" id="29L-ZX-igo"/>
-                                            <constraint firstItem="YXj-GF-XLA" firstAttribute="top" secondItem="jId-pM-RAG" secondAttribute="bottom" constant="17" id="3T6-P8-Q5C"/>
+                                            <constraint firstAttribute="trailing" secondItem="UJp-kP-JMN" secondAttribute="trailing" constant="8" id="Dbf-Z8-YUs"/>
                                             <constraint firstAttribute="trailing" secondItem="B7b-fp-azV" secondAttribute="trailing" constant="8" id="E1g-QD-vZ9"/>
                                             <constraint firstAttribute="trailing" secondItem="F69-Ju-SrD" secondAttribute="trailing" constant="8" id="FYQ-xm-ECz"/>
                                             <constraint firstItem="dOa-2V-Y49" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" constant="8" id="Fk2-0r-7nF"/>
                                             <constraint firstItem="YXj-GF-XLA" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="HIz-XP-8CQ"/>
                                             <constraint firstItem="jId-pM-RAG" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" id="Hcc-5t-q8m"/>
                                             <constraint firstItem="dOa-2V-Y49" firstAttribute="top" secondItem="qlh-wJ-ddn" secondAttribute="bottom" constant="8" id="Kye-jV-Att"/>
+                                            <constraint firstItem="YXj-GF-XLA" firstAttribute="top" secondItem="UJp-kP-JMN" secondAttribute="bottom" constant="8" id="OeK-cP-1kj"/>
                                             <constraint firstItem="F69-Ju-SrD" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="Ohh-PP-nln"/>
                                             <constraint firstAttribute="bottom" secondItem="YXj-GF-XLA" secondAttribute="bottom" priority="998" constant="25" id="PfD-tM-lxl"/>
                                             <constraint firstItem="B7b-fp-azV" firstAttribute="top" secondItem="dOa-2V-Y49" secondAttribute="bottom" id="T8K-kS-vOF"/>
                                             <constraint firstItem="dOa-2V-Y49" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="Zfa-aT-fhL"/>
+                                            <constraint firstItem="UJp-kP-JMN" firstAttribute="top" secondItem="jId-pM-RAG" secondAttribute="bottom" constant="8" id="aNd-DC-X9T"/>
                                             <constraint firstItem="qlh-wJ-ddn" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" constant="8" id="dZT-4m-zbT"/>
                                             <constraint firstItem="B7b-fp-azV" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" constant="8" id="g4c-XN-otv"/>
                                             <constraint firstItem="qlh-wJ-ddn" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="i0k-do-5jR"/>
@@ -696,6 +752,7 @@
                                             <constraint firstItem="jId-pM-RAG" firstAttribute="top" secondItem="F69-Ju-SrD" secondAttribute="bottom" constant="8" id="mBV-1T-zGj"/>
                                             <constraint firstItem="B7b-fp-azV" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="mkp-YQ-Ocl"/>
                                             <constraint firstAttribute="trailing" secondItem="dOa-2V-Y49" secondAttribute="trailing" constant="8" id="plp-w2-IIJ"/>
+                                            <constraint firstItem="UJp-kP-JMN" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" constant="8" id="s4g-gc-jQp"/>
                                             <constraint firstItem="F69-Ju-SrD" firstAttribute="leading" secondItem="iMf-yU-Dbd" secondAttribute="leading" constant="8" id="vGy-4f-rR4"/>
                                             <constraint firstItem="jId-pM-RAG" firstAttribute="centerX" secondItem="iMf-yU-Dbd" secondAttribute="centerX" id="vUT-3Z-ecp"/>
                                             <constraint firstItem="qlh-wJ-ddn" firstAttribute="top" secondItem="iMf-yU-Dbd" secondAttribute="top" id="xNw-bg-s2F"/>
@@ -728,6 +785,8 @@
                         <outlet property="actionData" destination="a3u-AM-w7r" id="vGT-f9-kAJ"/>
                         <outlet property="actionDataHeight" destination="zfb-Cr-PFM" id="qFi-zx-PCJ"/>
                         <outlet property="backgroundImage" destination="i0F-fT-FLV" id="YEm-dW-4Dt"/>
+                        <outlet property="badgeCount" destination="HcT-T1-vbH" id="S13-cJ-N0q"/>
+                        <outlet property="badgeIncrease" destination="x2v-nk-Rpy" id="ahZ-oJ-bf1"/>
                         <outlet property="buttonChangeCustomImage" destination="Q4d-wJ-Y3B" id="qlL-ii-8Hk"/>
                         <outlet property="buttonChangeCustomVideo" destination="q1E-Ef-Te5" id="HQf-yr-BNT"/>
                         <outlet property="buttonRemoveCustomImage" destination="OIT-WR-Dli" id="7tx-9y-8uk"/>
@@ -740,6 +799,8 @@
                         <outlet property="customUserIdsHeight" destination="QhG-8R-hke" id="Zu5-zE-ibE"/>
                         <outlet property="customVideoPreview" destination="kvC-Wl-gd7" id="dAG-AI-4dw"/>
                         <outlet property="customVideoSectionHeight" destination="d0H-48-t1B" id="xHv-U1-eG3"/>
+                        <outlet property="enableBadgeCount" destination="Ng9-dU-QJW" id="LLa-EP-obG"/>
+                        <outlet property="enableBadgeIncrease" destination="Olb-4M-4UH" id="Jg8-gc-Rzp"/>
                         <outlet property="imageUrl" destination="6LM-3F-72N" id="bJ7-SS-8fb"/>
                         <outlet property="notificationAction" destination="1Zz-TC-zAu" id="jlp-Mn-JKa"/>
                         <outlet property="scrollView" destination="T2q-Nv-3UN" id="JUs-f7-VgN"/>
@@ -755,7 +816,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1b-93-GlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1277.5999999999999" y="118.29085457271366"/>
+            <point key="canvasLocation" x="1277.5999999999999" y="117.84107946026987"/>
         </scene>
         <!--Notifications Filter View Controller-->
         <scene sceneID="8Oi-Fy-aui">

@@ -21,18 +21,24 @@
 
 @interface MainNavigationController ()
 
+@property(nonatomic) BOOL skipAnimations;
+
 @end
 
 @implementation MainNavigationController
 
 - (void)viewDidLoad
 {
+#ifdef SKIP_ANIMATIONS
+    self.skipAnimations = YES;
+#endif
+
     [super viewDidLoad];
 
     MenuTableViewController *menuViewController = [UIStoryboard viewControllerForName:@"Menu" inStoryboard:GetSocialStoryboardMain];
     menuViewController.menu = self.menu;
     menuViewController.showUserIdentity = YES;
-    [self setViewControllers:@[ menuViewController ]];
+    [self setViewControllers:@[ menuViewController ] animated:!self.skipAnimations];
 }
 
 @end

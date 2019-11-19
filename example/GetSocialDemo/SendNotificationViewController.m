@@ -67,6 +67,10 @@ typedef NS_ENUM(NSUInteger, ViewState) { Hidden, Selected, Visible };
 @property(weak, nonatomic) IBOutlet UITextField *backgroundImage;
 @property(weak, nonatomic) IBOutlet UITextField *titleColor;
 @property(weak, nonatomic) IBOutlet UITextField *textColor;
+@property (weak, nonatomic) IBOutlet UISwitch *enableBadgeCount;
+@property (weak, nonatomic) IBOutlet UISwitch *enableBadgeIncrease;
+@property (weak, nonatomic) IBOutlet UITextField *badgeCount;
+@property (weak, nonatomic) IBOutlet UITextField *badgeIncrease;
 
 @end
 
@@ -115,7 +119,7 @@ static NSInteger const DynamicRowHeight = 36;
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     self.scrollView.contentInset =
-        UIEdgeInsetsMake(self.scrollView.contentInset.top, self.scrollView.contentInset.left, 0, self.scrollView.contentInset.bottom);
+        UIEdgeInsetsMake(self.scrollView.contentInset.top, self.scrollView.contentInset.left, 0, self.scrollView.contentInset.right);
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -125,7 +129,7 @@ static NSInteger const DynamicRowHeight = 36;
     CGSize keyboardSize = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
     self.scrollView.contentInset = UIEdgeInsetsMake(self.scrollView.contentInset.top, self.scrollView.contentInset.left, keyboardSize.height,
-                                                    self.scrollView.contentInset.bottom);
+                                                    self.scrollView.contentInset.right);
 }
 
 - (void)addPlaceholder:(UILongPressGestureRecognizer *)sender
@@ -442,10 +446,28 @@ static NSInteger const DynamicRowHeight = 36;
 
     // set customization
     GetSocialNotificationCustomization *customization = [GetSocialNotificationCustomization new];
-    [customization setBackgroundImageConfiguration:self.backgroundImage.text];
-    [customization setTitleColor:self.titleColor.text];
-    [customization setTextColor:self.textColor.text];
-    [content setCustomization:customization];
+    if (self.backgroundImage.text.length > 0)
+    {
+        [customization setBackgroundImageConfiguration:self.backgroundImage.text];
+    }
+    if (self.titleColor.text.length > 0)
+    {
+        [customization setTitleColor:self.titleColor.text];
+    }
+    if (self.textColor.text.length > 0)
+    {
+        [customization setTextColor:self.textColor.text];
+    }
+
+    if (self.enableBadgeCount.on) {
+        int value = self.badgeCount.text.intValue;
+        GetSocialNotificationBadge *badge = [GetSocialNotificationBadge setTo:value];
+        [content setBadge:badge];
+    } else if (self.enableBadgeIncrease.on) {
+        int value = self.badgeIncrease.text.intValue;
+        GetSocialNotificationBadge *badge = [GetSocialNotificationBadge increaseBy:value];
+        [content setBadge:badge];
+    }
 
     [self showActivityIndicatorView];
     [GetSocialUser sendNotification:[self createUserIds]
@@ -464,6 +486,32 @@ static NSInteger const DynamicRowHeight = 36;
                   message:[NSString stringWithFormat:@"Failed to send notification. Error: %@.", error]
                 showAlert:YES];
         }];
+}
+
+- (IBAction)didChangeBadgeCount:(UISwitch *)sender
+{
+    [self badgeCountEnable:sender.on];
+    [self badgeIncreaseEnable:NO];
+}
+
+- (IBAction)didChangeBadgeIncrease:(UISwitch *)sender
+{
+    [self badgeCountEnable:NO];
+    [self badgeIncreaseEnable:sender.on];
+}
+
+- (void)badgeCountEnable:(BOOL)enabled
+{
+    self.enableBadgeCount.on = enabled;
+    self.badgeCount.text = @"";
+    self.badgeCount.enabled = enabled;
+}
+
+- (void)badgeIncreaseEnable:(BOOL)enabled
+{
+    self.enableBadgeIncrease.on = enabled;
+    self.badgeIncrease.text = @"";
+    self.badgeIncrease.enabled = enabled;
 }
 
 - (NSArray *)createActionButtons

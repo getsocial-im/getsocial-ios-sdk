@@ -11,5 +11,9 @@
 		<string>applinks:getsocialdemosdk6-gsalt.testing.gsc.im</string>
 		<string>applinks:getsocialdemosdk6-gsalt.gsc.im</string>
 	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.im.getsocial.demo.getsocial_extension</string>
+	</array>
 </dict>
 </plist>
