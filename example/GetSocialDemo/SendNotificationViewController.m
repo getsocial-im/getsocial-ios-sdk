@@ -21,6 +21,8 @@
 
 #define CUSTOM_MEDIA_SECTION_HEIGHT_WITH_IMAGES 160
 
+#define DEFAULT_ACTION @"Default"
+
 typedef NS_ENUM(NSUInteger, ViewState) { Hidden, Selected, Visible };
 
 @interface SendNotificationViewController ()<UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
@@ -429,9 +431,12 @@ static NSInteger const DynamicRowHeight = 36;
         [content addTemplatePlaceholders:[self createTemplateData]];
     }
 
-    GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
-    [builder addActionData:[self createActionData]];
-    [content setAction:builder.build];
+    if (![DEFAULT_ACTION isEqualToString:selectedAction])
+    {
+        GetSocialActionBuilder *builder = [[GetSocialActionBuilder alloc] initWithType:selectedAction];
+        [builder addActionData:[self createActionData]];
+        [content setAction:builder.build];
+    }
     [content addActionButtons:[self createActionButtons]];
 
     GetSocialMediaAttachment *attachment =
@@ -457,6 +462,16 @@ static NSInteger const DynamicRowHeight = 36;
     if (self.textColor.text.length > 0)
     {
         [customization setTextColor:self.textColor.text];
+    }
+
+    if (self.enableBadgeCount.on) {
+        int value = self.badgeCount.text.intValue;
+        GetSocialNotificationBadge *badge = [GetSocialNotificationBadge setTo:value];
+        [content setBadge:badge];
+    } else if (self.enableBadgeIncrease.on) {
+        int value = self.badgeIncrease.text.intValue;
+        GetSocialNotificationBadge *badge = [GetSocialNotificationBadge increaseBy:value];
+        [content setBadge:badge];
     }
 
     if (self.enableBadgeCount.on) {
@@ -563,13 +578,14 @@ static NSInteger const DynamicRowHeight = 36;
 - (NSDictionary *)actions
 {
     return @{
-        @"Default" : @"DEFAULT",
-        @"Custom" : GetSocialActionCustom,
+        @"No Action" : DEFAULT_ACTION,
+        @"Default" : GetSocialActionCustom,
         @"Open Activity" : GetSocialActionOpenActivity,
         @"Open Invites" : GetSocialActionOpenInvites,
         @"Open Profile" : GetSocialActionOpenProfile,
         @"Open URL" : GetSocialActionOpenUrl,
-        @"Add Friend" : GetSocialActionAddFriend
+        @"Add Friend" : GetSocialActionAddFriend,
+        @"Custom Action" : @"my_custom_action"
     };
 }
 
