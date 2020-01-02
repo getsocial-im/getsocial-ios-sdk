@@ -783,6 +783,11 @@ NSString *const kCustomProvider = @"custom";
                                                                    return YES;
                                                                }];
         [self.settingsMenu addSubmenu:self.statusBarMenuItem];
+        [self.settingsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Copy IDFA" action:^{
+            NSString *idfa = [GetSocial deviceIdentifier];
+            NSLog(@"IDFA: %@", idfa);
+            [UIPasteboard generalPasteboard].string = idfa;
+        }]];
 
         [self.menu addObject:self.settingsMenu];
 

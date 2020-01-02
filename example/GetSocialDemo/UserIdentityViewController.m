@@ -16,6 +16,7 @@
 
 #import "UserIdentityViewController.h"
 #import <GetSocial/GetSocialUser.h>
+#import <GetSocial/GetSocial.h>
 #import "Constants.h"
 
 @interface UserIdentityViewController ()
@@ -23,6 +24,8 @@
 @property(weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property(weak, nonatomic) IBOutlet UILabel *displayNameLabel;
 @property(weak, nonatomic) IBOutlet UILabel *identitiesLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *testDevice;
+
 
 @end
 
@@ -51,7 +54,7 @@
 - (void)updateUserDetails
 {
     __block NSString *identities = @"";
-
+    self.testDevice.hidden = ![GetSocial isTestDevice];
     if (![GetSocialUser isAnonymous])
     {
         [[GetSocialUser authIdentities] enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSString *_Nonnull obj, BOOL *_Nonnull stop) {
