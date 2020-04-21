@@ -1,5 +1,5 @@
 /*
- *        Copyright 2015-2019 GetSocial B.V.
+ *        Copyright 2015-2020 GetSocial B.V.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,6 +20,10 @@
 
 @interface GetSocialFacebookSharePlugin ()<FBSDKSharingDelegate>
 
+@property(nonatomic, copy) void (^successCallback)(NSDictionary<NSString *,NSString *> *);
+@property(nonatomic, copy) void (^cancelCallback)(NSDictionary<NSString *,NSString *> *);
+@property(nonatomic, copy) void (^failureCallback)(NSError*, NSDictionary<NSString *,NSString *> *);
+
 @end
 
 @implementation GetSocialFacebookSharePlugin
@@ -30,11 +34,11 @@
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
-                         invitePackage:(GetSocialInvitePackage *)invitePackage
+                         invite:(GetSocialInvite *)invite
                       onViewController:(UIViewController *)viewController
-                               success:(GetSocialInviteSuccessCallback)successCallback
-                                cancel:(GetSocialInviteCancelCallback)cancelCallback
-                               failure:(GetSocialFailureCallback)failureCallback
+                               success:(void (^)(NSDictionary<NSString *,NSString *> *))successCallback
+                                cancel:(void (^)(NSDictionary<NSString *,NSString *> *))cancelCallback
+                               failure:(void (^)(NSError* error, NSDictionary<NSString *,NSString *> *))failureCallback
 {
     self.successCallback = successCallback;
     self.failureCallback = failureCallback;
@@ -43,8 +47,8 @@
     [GetSocialUI closeView:YES];
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:invitePackage.referralUrl];
-    content.quote = invitePackage.text;
+    content.contentURL = [NSURL URLWithString:invite.referralUrl];
+    content.quote = invite.text;
 
     FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
     shareDialog.fromViewController = viewController;
@@ -68,7 +72,7 @@
     [GetSocialUI restoreView];
     if (self.successCallback)
     {
-        self.successCallback();
+        self.successCallback(@{});
     }
 }
 
@@ -77,7 +81,7 @@
     [GetSocialUI restoreView];
     if (self.failureCallback)
     {
-        self.failureCallback(error);
+        self.failureCallback(error, @{});
     }
 }
 
@@ -86,7 +90,7 @@
     [GetSocialUI restoreView];
     if (self.cancelCallback)
     {
-        self.cancelCallback();
+        self.cancelCallback(@{});
     }
 }
 

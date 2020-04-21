@@ -1,6 +1,6 @@
 //
 //
-// Copyright (c) 2019 GetSocial BV. All rights reserved.
+// Copyright (c) 2020 GetSocial BV. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

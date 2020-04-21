@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2019 GetSocial B.V.
+ *    	Copyright 2015-2020 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -28,31 +28,27 @@
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
-                         invitePackage:(GetSocialInvitePackage *)invitePackage
+                         invite:(GetSocialInvite *)invite
                       onViewController:(UIViewController *)viewController
-                               success:(GetSocialInviteSuccessCallback)successCallback
-                                cancel:(GetSocialInviteCancelCallback)cancelCallback
-                               failure:(GetSocialFailureCallback)failureCallback
+                               success:(void (^)(NSDictionary<NSString *,NSString *> *))successCallback
+                                cancel:(void (^)(NSDictionary<NSString *,NSString *> *))cancelCallback
+                               failure:(void (^)(NSError* error, NSDictionary<NSString *,NSString *> *))failureCallback
 {
-    self.successCallback = successCallback;
-    self.failureCallback = failureCallback;
-    self.cancelCallback = cancelCallback;
-
     KMTContentObject *contentObject = [KMTContentObject new];
-    contentObject.title = invitePackage.text;
+    contentObject.title = invite.text;
 
     KMTLinkObject *linkObject = [KMTLinkObject new];
-    linkObject.mobileWebURL = [NSURL URLWithString:invitePackage.referralUrl];
+    linkObject.mobileWebURL = [NSURL URLWithString:invite.referralUrl];
     contentObject.link = linkObject;
 
-    if (invitePackage.imageUrl && invitePackage.image)
+    if (invite.imageUrl && invite.image)
     {
         CGFloat sharedImageWidth = 300;
-        UIImage *image = invitePackage.image;
+        UIImage *image = invite.image;
         CGFloat ratio = image.size.height / image.size.width;
         CGFloat height = ratio * sharedImageWidth;
 
-        contentObject.imageURL = [NSURL URLWithString:invitePackage.imageUrl];
+        contentObject.imageURL = [NSURL URLWithString:invite.imageUrl];
         contentObject.imageWidth = @(sharedImageWidth);
         contentObject.imageHeight = @(height);
     }
@@ -61,13 +57,13 @@
         success:^(NSDictionary<NSString *, NSString *> *_Nullable warningMsg, NSDictionary<NSString *, NSString *> *_Nullable argumentMsg) {
             if (successCallback)
             {
-                successCallback();
+                successCallback(@{});
             }
         }
         failure:^(NSError *_Nonnull error) {
             if (failureCallback)
             {
-                failureCallback(error);
+                failureCallback(error, @{});
             }
         }];
 }

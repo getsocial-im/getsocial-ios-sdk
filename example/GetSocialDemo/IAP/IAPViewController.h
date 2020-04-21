@@ -2,7 +2,7 @@
 //  IAPViewController.h
 //  GetSocialInternalDemo
 //
-//  Copyright © 2019 GetSocial BV. All rights reserved.
+//  Copyright © 2020 GetSocial BV. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

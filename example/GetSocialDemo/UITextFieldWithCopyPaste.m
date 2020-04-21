@@ -2,7 +2,7 @@
 //  UITextFieldWithCopyPaste.m
 //  GetSocialDemo
 //
-//  Copyright © 2019 GrambleWorld. All rights reserved.
+//  Copyright © 2020 GetSocial BV. All rights reserved.
 //
 
 #import "UITextFieldWithCopyPaste.h"

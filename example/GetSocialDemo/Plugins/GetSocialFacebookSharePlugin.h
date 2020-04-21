@@ -1,5 +1,5 @@
 /*
- *        Copyright 2015-2019 GetSocial B.V.
+ *        Copyright 2015-2020 GetSocial B.V.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <GetSocial/GetSocialInviteChannelPlugin.h>
+#import <GetSocial/GetSocial.h>
 
-@interface GetSocialFacebookSharePlugin : GetSocialInviteChannelPlugin
+@interface GetSocialFacebookSharePlugin : NSObject<GetSocialInviteChannelPluginProtocol>
 
 @end

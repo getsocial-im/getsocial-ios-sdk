@@ -11,19 +11,15 @@
 }
 
 - (void)presentPluginWithInviteChannel:(__unused GetSocialInviteChannel *)inviteChannel
-                         invitePackage:(GetSocialInvitePackage *)invitePackage
+                         invite:(GetSocialInvite *)invite
                       onViewController:(__unused UIViewController *)viewController
-                               success:(GetSocialInviteSuccessCallback)successCallback
-                                cancel:(GetSocialInviteCancelCallback)cancelCallback
-                               failure:(GetSocialFailureCallback)failureCallback
+                               success:(void (^)(NSDictionary<NSString *,NSString *> *))successCallback
+                                cancel:(void (^)(NSDictionary<NSString *,NSString *> *))cancelCallback
+                               failure:(void (^)(NSError* error, NSDictionary<NSString *,NSString *> *))failureCallback
 {
-    self.successCallback = successCallback;
-    self.cancelCallback = cancelCallback;
-    self.failureCallback = failureCallback;
-
-    UIImage *image = invitePackage.image;
-    NSString *videoUrl = invitePackage.videoUrl;
-    NSString *inviteUrl = invitePackage.referralUrl;
+    UIImage *image = invite.image;
+    NSString *videoUrl = invite.videoUrl;
+    NSString *inviteUrl = invite.referralUrl;
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         if (videoUrl != nil)
@@ -34,7 +30,8 @@
                 [self openUrlSchemeForContentType:@"com.instagram.sharedSticker.backgroundVideo"
                                           content:videoData
                                         inviteUrl:inviteUrl
-                                      stickerText:invitePackage.text];
+                                      stickerText:invite.text
+                                          success:successCallback];
                 return;
             }
         }
@@ -45,14 +42,17 @@
             [self openUrlSchemeForContentType:@"com.instagram.sharedSticker.backgroundImage"
                                       content:imageData
                                     inviteUrl:inviteUrl
-                                  stickerText:invitePackage.text];
+                                  stickerText:invite.text
+                                      success:successCallback];
+
         }
         else
         {
             [self openUrlSchemeForContentType:@"com.instagram.sharedSticker.backgroundTopColor"
                                       content:@"#000000"
                                     inviteUrl:inviteUrl
-                                  stickerText:invitePackage.text];
+                                  stickerText:invite.text
+                                      success:successCallback];
         }
     });
 }
@@ -61,6 +61,7 @@
                             content:(NSObject *)content
                           inviteUrl:(NSString *)inviteUrl
                         stickerText:(NSString *)stickerText
+                        success:(void (^)(NSDictionary<NSString *,NSString *> *))success
 {
     NSURL *urlScheme = [NSURL URLWithString:@"instagram-stories://share"];
     NSData *sticker = [self createStickerFromText:stickerText];
@@ -82,7 +83,7 @@
             [UIPasteboard generalPasteboard].items = pasteboardItems;
             [[UIApplication sharedApplication] openURL:urlScheme];
         }
-        self.successCallback();
+        success(@{});
     });
 }
 
