@@ -3,7 +3,7 @@
 //  GetSocialInternalDemo
 //
 //
-//  Copyright © 2020 GetSocial BV. All rights reserved.
+//  Copyright © 2019 GetSocial BV. All rights reserved.
 //
 
 #import "ManualIAPViewController.h"
@@ -34,14 +34,14 @@
 {
     GetSocialPurchaseData *purchaseData = [GetSocialPurchaseData new];
     purchaseData.productId = self.productId.text;
-    purchaseData.productType = GetSocialProductTypeItem;
+    purchaseData.productType = Item;
     purchaseData.productTitle = self.productTitle.text;
     purchaseData.price = [self.price.text floatValue];
     purchaseData.priceCurrency = self.currencyCode.text;
     purchaseData.purchaseDate = [NSDate date];
     purchaseData.transactionIdentifier = [[NSUUID UUID] UUIDString];
 
-    if ([GetSocialAnalytics trackPurchase: purchaseData])
+    if ([GetSocial trackPurchaseEvent:purchaseData])
     {
         [self log:LogLevelInfo context:NSStringFromSelector(_cmd) message:@"Purchase was tracked" showAlert:YES];
     }

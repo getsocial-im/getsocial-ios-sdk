@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -92,27 +92,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-mobile" translatesAutoresizingMaskIntoConstraints="NO" id="cPR-NZ-cLZ">
-                                <rect key="frame" x="288" y="2" width="32" height="40"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-mobile" translatesAutoresizingMaskIntoConstraints="NO" id="aXs-7P-7FH">
+                                <rect key="frame" x="286" y="2" width="32" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="KmV-DR-3S8"/>
+                                    <constraint firstAttribute="width" constant="32" id="8mS-ow-kgT"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="aXs-7P-7FH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H20-oO-wGx" secondAttribute="trailing" constant="5" id="2OZ-WL-aTM"/>
+                            <constraint firstItem="aXs-7P-7FH" firstAttribute="height" secondItem="wPN-3k-tc7" secondAttribute="height" id="3a7-3k-WwT"/>
+                            <constraint firstItem="aXs-7P-7FH" firstAttribute="centerY" secondItem="xzb-mk-8p3" secondAttribute="centerY" id="9Wz-2F-6Pu"/>
                             <constraint firstAttribute="trailing" secondItem="5pa-TA-tBU" secondAttribute="trailing" id="F4g-LR-wYW"/>
                             <constraint firstItem="wPN-3k-tc7" firstAttribute="bottom" secondItem="M3r-TG-jXW" secondAttribute="top" constant="-2" id="GEk-Ht-GYL"/>
                             <constraint firstItem="H20-oO-wGx" firstAttribute="leading" secondItem="5pa-TA-tBU" secondAttribute="leading" id="Lee-B6-WVg"/>
                             <constraint firstItem="H20-oO-wGx" firstAttribute="top" secondItem="cEA-Sk-5Bs" secondAttribute="bottom" id="Nn9-u2-UZE"/>
-                            <constraint firstItem="cPR-NZ-cLZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H20-oO-wGx" secondAttribute="trailing" constant="5" id="TpO-B3-hyH"/>
                             <constraint firstItem="wPN-3k-tc7" firstAttribute="top" secondItem="cEA-Sk-5Bs" secondAttribute="bottom" constant="2" id="WaS-CR-Vx8"/>
-                            <constraint firstItem="cPR-NZ-cLZ" firstAttribute="centerY" secondItem="xzb-mk-8p3" secondAttribute="centerY" id="YAj-G8-yPu"/>
                             <constraint firstItem="H20-oO-wGx" firstAttribute="leading" secondItem="wPN-3k-tc7" secondAttribute="trailing" constant="8" symbolic="YES" id="gL2-aC-gP6"/>
                             <constraint firstItem="wPN-3k-tc7" firstAttribute="leading" secondItem="xzb-mk-8p3" secondAttribute="leading" id="hlv-ad-czm"/>
                             <constraint firstItem="5pa-TA-tBU" firstAttribute="top" secondItem="H20-oO-wGx" secondAttribute="bottom" id="l9c-6X-zGu"/>
-                            <constraint firstItem="5DN-hB-MMX" firstAttribute="trailing" secondItem="cPR-NZ-cLZ" secondAttribute="trailing" id="mVO-lK-NaR"/>
-                            <constraint firstItem="cPR-NZ-cLZ" firstAttribute="height" secondItem="wPN-3k-tc7" secondAttribute="height" id="up2-mG-YZw"/>
                             <constraint firstItem="M3r-TG-jXW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5pa-TA-tBU" secondAttribute="bottom" id="uyC-aq-u3V"/>
+                            <constraint firstItem="5DN-hB-MMX" firstAttribute="trailing" secondItem="aXs-7P-7FH" secondAttribute="trailing" constant="2" id="zqq-Rv-vX7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5DN-hB-MMX"/>
                     </view>
@@ -125,7 +125,7 @@
                         <outlet property="avatarImageView" destination="wPN-3k-tc7" id="5tC-fY-nGx"/>
                         <outlet property="displayNameLabel" destination="H20-oO-wGx" id="aG7-J4-Phu"/>
                         <outlet property="identitiesLabel" destination="5pa-TA-tBU" id="fqJ-rA-0p2"/>
-                        <outlet property="testDevice" destination="cPR-NZ-cLZ" id="8uP-ZP-b1C"/>
+                        <outlet property="testDevice" destination="aXs-7P-7FH" id="0vU-f5-krC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5a-eY-NLL" userLabel="First Responder" sceneMemberID="firstResponder"/>

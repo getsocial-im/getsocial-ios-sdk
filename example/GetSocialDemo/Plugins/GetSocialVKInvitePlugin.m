@@ -1,5 +1,5 @@
 /*
- *        Copyright 2015-2020 GetSocial B.V.
+ *        Copyright 2015-2019 GetSocial B.V.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,30 +25,30 @@
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
-                         invite:(GetSocialInvite *)invite
+                         invitePackage:(GetSocialInvitePackage *)invitePackage
                       onViewController:(UIViewController *)viewController
-                               success:(void (^)(NSDictionary<NSString *,NSString *> *))successCallback
-                                cancel:(void (^)(NSDictionary<NSString *,NSString *> *))cancelCallback
-                               failure:(void (^)(NSError* error, NSDictionary<NSString *,NSString *> *))failureCallback
+                               success:(GetSocialInviteSuccessCallback)successCallback
+                                cancel:(GetSocialInviteCancelCallback)cancelCallback
+                               failure:(GetSocialFailureCallback)failureCallback
 {
     VKShareDialogController *shareDialog = [VKShareDialogController new];
     shareDialog.dismissAutomatically = YES;
-    shareDialog.text = invite.text;
+    shareDialog.text = invitePackage.text;
 
-    if (invite.image)
+    if (invitePackage.image)
     {
-        VKUploadImage *uploadImage = [VKUploadImage uploadImageWithImage:invite.image andParams:[VKImageParameters pngImage]];
+        VKUploadImage *uploadImage = [VKUploadImage uploadImageWithImage:invitePackage.image andParams:[VKImageParameters pngImage]];
         shareDialog.uploadImages = @[ uploadImage ];
     }
 
     shareDialog.completionHandler = ^(VKShareDialogController *dialog, VKShareDialogControllerResult result) {
         if (result == VKShareDialogControllerResultDone)
         {
-            successCallback(@{});
+            successCallback();
         }
         else
         {
-            cancelCallback(@{});
+            cancelCallback();
         }
     };
     [viewController presentViewController:shareDialog animated:YES completion:nil];

@@ -1,5 +1,5 @@
 /*
- *    	Copyright 2015-2020 GetSocial B.V.
+ *    	Copyright 2015-2019 GetSocial B.V.
  *
  *	Licensed under the Apache License, Version 2.0 (the "License");
  *	you may not use this file except in compliance with the License.
@@ -18,11 +18,8 @@
 
 @interface GetSocialTwitterInvitePlugin ()
 
-@property(nonatomic) GetSocialInvite *invite;
+@property(nonatomic) GetSocialInvitePackage *invitePackage;
 @property(nonatomic) UIViewController *viewController;
-@property(nonatomic, copy) void (^successCallback)(NSDictionary<NSString *,NSString *> *);
-@property(nonatomic, copy) void (^cancelCallback)(NSDictionary<NSString *,NSString *> *);
-@property(nonatomic, copy) void (^failureCallback)(NSError*, NSDictionary<NSString *,NSString *> *);
 
 @end
 
@@ -34,17 +31,17 @@
 }
 
 - (void)presentPluginWithInviteChannel:(GetSocialInviteChannel *)inviteChannel
-                         invite:(GetSocialInvite *)invite
+                         invitePackage:(GetSocialInvitePackage *)invitePackage
                       onViewController:(UIViewController *)viewController
-                               success:(void (^)(NSDictionary<NSString *,NSString *> *))successCallback
-                                cancel:(void (^)(NSDictionary<NSString *,NSString *> *))cancelCallback
-                               failure:(void (^)(NSError* error, NSDictionary<NSString *,NSString *> *))failureCallback
+                               success:(GetSocialInviteSuccessCallback)successCallback
+                                cancel:(GetSocialInviteCancelCallback)cancelCallback
+                               failure:(GetSocialFailureCallback)failureCallback
 {
     self.successCallback = successCallback;
     self.failureCallback = failureCallback;
     self.cancelCallback = cancelCallback;
 
-    self.invite = invite;
+    self.invitePackage = invitePackage;
     self.viewController = viewController;
 
     [self checkAvailableTwitterSession];
@@ -53,19 +50,19 @@
 - (void)presentTweetComposer
 {
     NSURL *videoUrl = nil;
-    if (self.invite.videoUrl != nil)
+    if (self.invitePackage.videoUrl != nil)
     {
-        videoUrl = [NSURL URLWithString:self.invite.videoUrl];
+        videoUrl = [NSURL URLWithString:self.invitePackage.videoUrl];
     }
 
     TWTRComposerViewController *composer = nil;
     if (videoUrl != nil)
     {
-        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invite.text image:nil videoURL:videoUrl];
+        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:nil videoURL:videoUrl];
     }
     else
     {
-        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invite.text image:self.invite.image videoURL:nil];
+        composer = [[TWTRComposerViewController alloc] initWithInitialText:self.invitePackage.text image:self.invitePackage.image videoURL:nil];
     }
     composer.delegate = self;
     [self.viewController presentViewController:composer animated:YES completion:nil];
@@ -87,7 +84,7 @@
                                                    }
                                                    else
                                                    {
-                                                       self.cancelCallback(@{});
+                                                       self.cancelCallback();
                                                    }
                                                }];
     }
@@ -100,7 +97,7 @@
  */
 - (void)composerDidCancel:(TWTRComposerViewController *)controller
 {
-    self.cancelCallback(@{});
+    self.cancelCallback();
 }
 
 /**
@@ -110,7 +107,7 @@
  */
 - (void)composerDidSucceed:(TWTRComposerViewController *)controller withTweet:(TWTRTweet *)tweet
 {
-    self.successCallback(@{});
+    self.successCallback();
 }
 
 /**
@@ -119,7 +116,7 @@
  */
 - (void)composerDidFail:(TWTRComposerViewController *)controller withError:(NSError *)error
 {
-    self.failureCallback(error, @{});
+    self.failureCallback(error);
 }
 
 @end

@@ -2,7 +2,7 @@
 //  UIStoryboard+GetSocial.m
 //  GetSocialInternalDemo
 //
-//  Copyright © 2020 GetSocial BV. All rights reserved.
+//  Copyright © 2019 GetSocial BV. All rights reserved.
 //
 
 #import "UIStoryboard+GetSocial.h"

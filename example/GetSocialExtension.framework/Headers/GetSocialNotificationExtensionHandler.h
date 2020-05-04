@@ -1,5 +1,6 @@
 //
-// Copyright (c) 2020 GetSocial BV. All rights reserved.
+// Created by Orest Savchak on 04.11.2019.
+// Copyright (c) 2019 GetSocial BV. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
