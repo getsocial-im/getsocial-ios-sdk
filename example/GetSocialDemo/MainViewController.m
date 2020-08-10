@@ -431,10 +431,32 @@ NSString *const kCustomProvider = @"custom";
                                                                                action:^{
                                                                                    [self removeCustomUserIdentity];
                                                                                }]];
-
+        
         [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Logout"
                                                                                action:^{
                                                                                    [self logOut];
+                                                                               }]];
+        
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Reset without init"
+                                                                               action:^{
+            [self resetWithoutInit];
+                                                                               }]];
+        
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Init with anonymous user"
+                                                                               action:^{
+            if ([GetSocial isInitialized]) {
+                GSLogInfo(YES, NO, @"Already initialized, call resetWithoutInit first");
+                return;
+            }
+            [GetSocial init];
+            [GetSocial executeWhenInitialized:^{
+                GSLogInfo(YES, NO, @"Anonymous user logged in");
+            }];
+                                                                               }]];
+        
+        [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Init with..."
+                                                                               action:^{
+            [self initWithIdentity];
                                                                                }]];
 
         [self.menu addObject:self.userAuthenticationMenu];
@@ -1275,6 +1297,101 @@ NSString *const kCustomProvider = @"custom";
             GSLogError(YES, NO, @"Failed to log out user, error: %@", [error localizedDescription]);
         }];
 }
+
+- (void)resetWithoutInit
+{
+    [self showActivityIndicatorView];
+    [GetSocial resetWithSuccess:^{
+        [self hideActivityIndicatorView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+
+        GSLogInfo(YES, NO, @"User was successfully logged out.");
+    } failure:^(NSError * _Nonnull error) {
+        [self hideActivityIndicatorView];
+         GSLogError(YES, NO, @"Failed to log out user, error: %@", [error localizedDescription]);
+    }];
+}
+     
+- (void)initWithIdentity
+{
+    if ([GetSocial isInitialized]) {
+        GSLogInfo(YES, NO, @"Already initialized, call resetWithoutInit first");
+        return;
+    }
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc]
+        initWithTitle:@"Init with..."
+              message:@"Init with custom identity of FB"
+    cancelButtonTitle:@"Cancel"
+    otherButtonTitles:@[ @"FB", @"Custom" ]];
+    
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (didCancel) {
+            return;
+        }
+        if (selectedIndex == 1) {
+            [self initWithCustom];
+        } else {
+            [self initWithFB];
+        }
+    }];
+}
+
+- (void)initWithCustom
+{
+    UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Custom User identity"
+                                                                                    message:@"Enter UserId and Token"
+                                                                          cancelButtonTitle:@"Cancel"
+                                                                          otherButtonTitles:@[ @"Ok" ]];
+
+    [alert addTextFieldWithPlaceholder:@"UserId" defaultText:nil isSecure:NO];
+    [alert addTextFieldWithPlaceholder:@"Token" defaultText:nil isSecure:YES];
+
+    [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+        if (!didCancel)
+        {
+            [self showActivityIndicatorView];
+            NSString *providerId = kCustomProvider;
+            NSString *providerUserId = [alert contentOfTextFieldAtIndex:0];
+            NSString *accessToken = [alert contentOfTextFieldAtIndex:1];
+
+            GetSocialAuthIdentity *identity =
+                [GetSocialAuthIdentity customIdentityForProvider:providerId userId:providerUserId accessToken:accessToken];
+
+            [GetSocial initWithIdentity:identity
+                      success:^{
+                          [self hideActivityIndicatorView];
+                          GSLogInfo(YES, NO, @"User %@ logged in", identity);
+                      }
+                                failure:^(NSError * _Nonnull error) {
+                [self hideActivityIndicatorView];
+                GSLogError(YES, NO, @"Error init with identity: %@", error.localizedDescription);
+            }];
+        }
+    }];
+}
+
+- (void)initWithFB
+{
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    [self loginWithFacebookWithHandler:^(FBSDKLoginManagerLoginResult *result, NSError *loginError) {
+        if (!loginError && !result.isCancelled)
+        {
+            [self showActivityIndicatorView];
+            [GetSocial initWithIdentity:[GetSocialAuthIdentity facebookIdentityWithAccessToken:result.token.tokenString]
+                      success:^{
+                          [self setFacebookDisplayName];
+                          [self setFacebookAvatar];
+                          [self hideActivityIndicatorView];
+                          GSLogInfo(YES, NO, @"User FB identity logged in");
+                      }
+                                failure:^(NSError * _Nonnull error) {
+                [self hideActivityIndicatorView];
+                GSLogError(YES, NO, @"Error init with identity: %@", error.localizedDescription);
+            }];
+        }
+    }];
+}
+
 
 - (void)addIdentity:(GetSocialAuthIdentity *)identity success:(void (^)(void))success failure:(void (^)(void))failure
 {

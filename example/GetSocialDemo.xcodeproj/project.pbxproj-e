@@ -1413,7 +1413,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.33.0\n";
+			shellScript = "./getsocial.sh --app-id=LGa80P9790g4 --framework-version=6.34.0\n";
 		};
 		BC8FF8DA1E166F25000AFAEF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1691,8 +1691,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = GetSocialDemo/GetSocialDemo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = S2TQ8J2C2B;
 				ENABLE_BITCODE = NO;
@@ -1723,7 +1723,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = im.getsocial.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "im.getsocial.demo - Development";
+				PROVISIONING_PROFILE_SPECIFIER = "im.getsocial.demo - Distribution";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1742,8 +1742,8 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = GetSocialNotificationServiceExtension/GetSocialNotificationServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = S2TQ8J2C2B;
@@ -1762,7 +1762,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = im.getsocial.demo.GetSocialNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "GetSocialNotificationServiceExtension - Develop";
+				PROVISIONING_PROFILE_SPECIFIER = "GetSocialNotificationServiceExtension - AdHoc";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

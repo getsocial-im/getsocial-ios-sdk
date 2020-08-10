@@ -267,7 +267,11 @@
     GetSocialFailureCallback onFailure = ^(NSError *error) {
         typeof(weakSelf) strongSelf = self;
         [strongSelf hideActivityIndicatorView];
-        [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        if (error.code == GetSocial_ErrorCode_ActivityRejected) {
+            [strongSelf showAlertWithTitle:@"Error" andText:[NSString stringWithFormat:@"Your activity was rejected during the moderation: %@", error.localizedDescription]];
+        } else {
+            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+        }
     };
 
     if (globalFeed)
