@@ -101,6 +101,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, assign) BOOL statusBarHidden;
 @property(nonatomic, strong) NSString *chatIdToShow;
 @property(nonatomic, strong) NSString *userIdToShow;
+@property(nonatomic, assign) BOOL showCustomErrorMessages;
 
 @end
 
@@ -524,7 +525,17 @@ NSString *const kCustomProvider = @"custom";
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed"
                                                                        action:^{
-                                                                           [[GetSocialUI createGlobalActivityFeedView] show];
+            GetSocialUIActivityFeedView* view = [GetSocialUI createGlobalActivityFeedView];
+            if (self.showCustomErrorMessages) {
+                    [view setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                        if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                            return @"Be careful what you say :)";
+                        } else {
+                            return errorMessage;
+                        }
+                    }];
+                }
+            [view show];
                                                                        }]];
         [self.activitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Global Activity Feed With Custom Handlers"
@@ -579,6 +590,15 @@ NSString *const kCustomProvider = @"custom";
                                                                       pendingAction();
                                                               }
                                                           }];
+                                                          if (self.showCustomErrorMessages) {
+                                                                  [activityFeedView setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                                                                      if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                                                                          return @"Be careful what you say :)";
+                                                                      } else {
+                                                                          return errorMessage;
+                                                                      }
+                                                                  }];
+                                                              }
                                                           [activityFeedView show];
                                                       }]];
 
@@ -589,6 +609,16 @@ NSString *const kCustomProvider = @"custom";
                                                                            [activityFeedView
                                                                                setActionButtonHandler:[self defaultActionButtonHandler]];
                                                                            [activityFeedView setActionHandler:[self defaultActionHandler]];
+            if (self.showCustomErrorMessages) {
+                    [activityFeedView setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                        if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                            return @"Be careful what you say :)";
+                        } else {
+                            return errorMessage;
+                        }
+                    }];
+                }
+
                                                                            [activityFeedView show];
                                                                        }]];
 
@@ -605,6 +635,15 @@ NSString *const kCustomProvider = @"custom";
                                                           [activityFeedView setActionButtonHandler:[self defaultActionButtonHandler]];
                                                           [activityFeedView setActionHandler:[self defaultActionHandler]];
                                                           [activityFeedView setShowFriendsFeed:YES];
+                                                          if (self.showCustomErrorMessages) {
+                                                                  [activityFeedView setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                                                                      if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                                                                          return @"Be careful what you say :)";
+                                                                      } else {
+                                                                          return errorMessage;
+                                                                      }
+                                                                  }];
+                                                              }
                                                           [activityFeedView show];
                                                       }]];
 
@@ -618,6 +657,15 @@ NSString *const kCustomProvider = @"custom";
                                                                            [activityFeedView setWindowTitle:@"My Custom Activity Feed"];
                                                                            [activityFeedView setReadOnly:NO];
                                                                            [activityFeedView setFilterByUser:[GetSocialUser userId]];
+                                                                           if (self.showCustomErrorMessages) {
+                                                                                   [activityFeedView setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                                                                                       if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                                                                                           return @"Be careful what you say :)";
+                                                                                       } else {
+                                                                                           return errorMessage;
+                                                                                       }
+                                                                                   }];
+                                                                               }
                                                                            [activityFeedView show];
                                                                        }]];
 
@@ -758,7 +806,16 @@ NSString *const kCustomProvider = @"custom";
             [menuItem setDetail:[NSString stringWithFormat:@"Language code: %@", key]];
             [self.languageMenu addSubmenu:menuItem];
         }
+        [self.settingsMenu addSubmenu:self.languageMenu];
 
+        // Enable/Disable custom errors
+        [self.settingsMenu addSubmenu: [MenuItem checkableMenuItemWithTitle:@"Enable Custom Errors"
+        isChecked:NO
+                                                                     action:^BOOL(BOOL isChecked) {
+            self.showCustomErrorMessages = !self.showCustomErrorMessages;
+            return YES;
+
+        }]];
         __weak typeof(self) weakSelf = self;
         [[NSNotificationCenter defaultCenter] addObserverForName:UserWasUpdatedNotification
                                                           object:nil
@@ -781,7 +838,6 @@ NSString *const kCustomProvider = @"custom";
                                                           });
                                                       }];
 
-        [self.settingsMenu addSubmenu:self.languageMenu];
         self.pushNotificationsEnabledMenu =
             [MenuItem checkableMenuItemWithTitle:@"Enable Push Notifications"
                                        isChecked:YES
@@ -871,6 +927,15 @@ NSString *const kCustomProvider = @"custom";
     [activityFeedView setWindowTitle:title];
     [activityFeedView setReadOnly:YES];
     [activityFeedView setFilterByUser:userId];
+    if (self.showCustomErrorMessages) {
+            [activityFeedView setCustomErrorMessageProvider:^NSString *(NSInteger errorCode, NSString *errorMessage) {
+                if (errorCode == GetSocial_ErrorCode_ActivityRejected) {
+                    return @"Be careful what you say :)";
+                } else {
+                    return errorMessage;
+                }
+            }];
+        }
     [activityFeedView show];
 }
 
