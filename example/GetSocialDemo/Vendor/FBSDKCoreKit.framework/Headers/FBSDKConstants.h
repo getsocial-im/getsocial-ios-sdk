@@ -243,10 +243,10 @@ enum __attribute__((ns_error_domain(_domain))) _name: NSInteger
 #endif
 
 /**
- FBSDKError
+ FBSDKCoreError
  Error codes for FBSDKErrorDomain.
  */
-typedef NS_ERROR_ENUM(FBSDKErrorDomain, FBSDKError)
+typedef NS_ERROR_ENUM(FBSDKErrorDomain, FBSDKCoreError)
 {
   /**
    Reserved.
@@ -323,6 +323,11 @@ typedef NS_ERROR_ENUM(FBSDKErrorDomain, FBSDKError)
    Indicates an app switch to the browser (typically for a dialog) failed.
    */
   FBSDKErrorBrowserUnavailable,
+
+  /**
+   Indicates that a bridge api interaction was interrupted.
+   */
+  FBSDKErrorBridgeAPIInterruption,
 } NS_SWIFT_NAME(CoreError);
 
 /**

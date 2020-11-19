@@ -1105,7 +1105,6 @@ NSString *const kCustomProvider = @"custom";
     if (!_facebookSdkManager)
     {
         _facebookSdkManager = [FBSDKLoginManager new];
-        _facebookSdkManager.loginBehavior = FBSDKLoginBehaviorBrowser;
     }
     return _facebookSdkManager;
 }
@@ -1868,14 +1867,16 @@ NSString *const kCustomProvider = @"custom";
 
     [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request
                                                            withCompletionHandler:^(NSError *_Nullable error) {
-                                                               if (error == nil)
-                                                               {
-                                                                   GSLogInfo(YES, NO, @"PN was sent, it arrives in 5 seconds");
-                                                               }
-                                                               else
-                                                               {
-                                                                   GSLogError(YES, NO, @"Sending PN failed, error: %@", [error description]);
-                                                               }
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                if (error == nil)
+                                                                {
+                                                                    GSLogInfo(YES, NO, @"PN was sent, it arrives in 5 seconds");
+                                                                }
+                                                                else
+                                                                {
+                                                                    GSLogError(YES, NO, @"Sending PN failed, error: %@", [error description]);
+                                                                }
+                                                            });
                                                            }];
 }
 

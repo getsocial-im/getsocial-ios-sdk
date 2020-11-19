@@ -126,14 +126,14 @@ NS_SWIFT_NAME(jpegCompressionQuality);
 
  If not explicitly set, the default will be read from the application's plist (FacebookAppID).
  */
-@property (class, nonatomic, copy, null_resettable) NSString *appID;
+@property (class, nonatomic, copy, nullable) NSString *appID;
 
 /**
   The default url scheme suffix used for sessions.
 
  If not explicitly set, the default will be read from the application's plist (FacebookUrlSchemeSuffix).
  */
-@property (class, nonatomic, copy, null_resettable) NSString *appURLSchemeSuffix;
+@property (class, nonatomic, copy, nullable) NSString *appURLSchemeSuffix;
 
 /**
   The Client Token that has been set via [FBSDKSettings setClientToken].
@@ -144,7 +144,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
 
  If not explicitly set, the default will be read from the application's plist (FacebookClientToken).
  */
-@property (class, nonatomic, copy, null_resettable) NSString *clientToken;
+@property (class, nonatomic, copy, nullable) NSString *clientToken;
 
 /**
   The Facebook Display Name used by the SDK.
@@ -154,7 +154,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
 
  If not explicitly set, the default will be read from the application's plist (FacebookDisplayName).
  */
-@property (class, nonatomic, copy, null_resettable) NSString *displayName;
+@property (class, nonatomic, copy, nullable) NSString *displayName;
 
 /**
  The Facebook domain part. This can be used to change the Facebook domain
@@ -162,7 +162,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
 
  If not explicitly set, the default will be read from the application's plist (FacebookDomainPart).
  */
-@property (class, nonatomic, copy, null_resettable) NSString *facebookDomainPart;
+@property (class, nonatomic, copy, nullable) NSString *facebookDomainPart;
 
 /**
   The current Facebook SDK logging behavior. This should consist of strings
@@ -186,6 +186,24 @@ NS_REFINED_FOR_SWIFT;
  Defaults to `FBSDK_TARGET_PLATFORM_VERSION`.
 */
 @property (class, nonatomic, copy, null_resettable) NSString *graphAPIVersion;
+
+/**
+Set the data processing options.
+
+@param options list of options
+*/
++ (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options;
+
+/**
+Set the data processing options.
+
+@param options list of the options
+@param country code of the country
+@param state code of the state
+*/
++ (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options
+                         country:(int)country
+                           state:(int)state;
 
 /**
  Enable a particular Facebook SDK logging behavior.

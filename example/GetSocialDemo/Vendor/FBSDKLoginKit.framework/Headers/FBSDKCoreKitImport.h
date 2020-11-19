@@ -16,31 +16,15 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+// Importing FBSDKCoreKit is tricky due to build variants.
+// SPM require that it is imported as <FBSDKCoreKit.h> while CocoaPods,
+// Carthage, Buck, and xcodebuild require <FBSDKCoreKit/FBSDKCoreKit.h>
+// This file is not exposed via SPM so non SPM users will use <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import <FBSDKShareKit/FBSDKShareMessengerActionButton.h>
-#import <FBSDKShareKit/FBSDKSharingContent.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-/**
- This share content allows sharing a bubble that plays songs with Open Graph music.
- See https://developers.facebook.com/docs/messenger-platform/send-messages/template/open-graph
- for details. Passing <FBSDKSharingContent> property pageID is required for this type of share.
- */
-NS_SWIFT_NAME(ShareMessengerOpenGraphMusicTemplateContent)
-@interface FBSDKShareMessengerOpenGraphMusicTemplateContent : NSObject <FBSDKSharingContent>
-
-/**
- This must be an Open Graph music url. Required.
- */
-@property (nonatomic, copy) NSURL *url;
-
-/**
- This specifies what action button to show below the open graph music bubble. Optional.
- */
-@property (nonatomic, copy, nullable) id<FBSDKShareMessengerActionButton> button;
-
-@end
-
-NS_ASSUME_NONNULL_END
+// Even though this file is not available from projects using SPM,
+// it is available when building the packages themselves so we need to include this check.
+#if FBSDK_SWIFT_PACKAGE
+#import <FBSDKCoreKit.h>
+#else
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#endif
