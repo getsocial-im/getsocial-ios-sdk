@@ -39,9 +39,6 @@
 {
     [FIRApp configure];
 
-#if DISABLE_TWITTER != 1
-    [[Twitter sharedInstance] startWithConsumerKey:@"fiCw1nyiio9pdkim79jgnG7gB" consumerSecret:@"p5F4GHGQcv4faqGBGL3xBsXwD2GNkxvEF8pMcbvaa0LALWw02v"];
-#endif
     [self setUpAdjust];
     [self setUpAppsFlyer];
     
