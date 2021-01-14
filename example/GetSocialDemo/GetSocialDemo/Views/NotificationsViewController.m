@@ -270,11 +270,17 @@ static NSDateFormatter *dateFormatter;
 
 - (void)actionButton:(NSString *)action notification:(GetSocialNotification *)selected
 {
-    MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
-    [mainVC handleNotification:selected withContext:@{ @"wasClicked" : @(YES), @"actionId" : action }];
-
-    NSString* newStatus =
-        [action isEqualToString:GetSocialNotificationButton.actionIdIgnore] ? GetSocialNotificationStatus.ignored : GetSocialNotificationStatus.consumed;
+    NSString* newStatus = GetSocialNotificationStatus.ignored;
+    if ([action isEqualToString:GetSocialNotificationButton.actionIdIgnore]) {
+        MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
+        [mainVC handleAction: selected.notificationAction];
+        newStatus = GetSocialNotificationStatus.consumed;
+    }
+    [GetSocialNotifications setStatusTo: newStatus notificationIds:@[selected.notificationId] success:^{
+        // status updated, great
+        } failure:^(NSError * error) {
+            // do nothing here
+        }];
 
     GetSocialNotification* updatedNotification = [GetSocialPrivateNotificationBuilder updateNotification:selected newStatus:newStatus];
     self.notifications[[self.notifications indexOfObject:selected]] = updatedNotification;

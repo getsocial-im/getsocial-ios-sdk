@@ -138,9 +138,7 @@ NSString *const kCustomProvider = @"custom";
                                               context:@"PushNotificationHandler"];
     }];
     [GetSocialNotifications setOnNotificationClickedListener:^(GetSocialNotification *notification, GetSocialNotificationContext* context) {
-        if (![self handleNotification:notification withContext:@{ @"wasClicked" : @(YES) }]) {
-            [GetSocial handleAction:notification.notificationAction];
-        }
+        [self handleNotification:notification withContext:context];
     }];
     [GetSocial addOnCurrentUserChangedListener:^(GetSocialCurrentUser* newUser) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
@@ -168,92 +166,14 @@ NSString *const kCustomProvider = @"custom";
     [self registerInviteChannelPlugins];
 }
 
-- (void)handleNotification:(GetSocialNotification *)notification withContext:(NSDictionary *)context
-{
-    if (context[@"actionId"])
-    {
-        [self handleNotification:notification withAction:context[@"actionId"]];
-        return;
-    }
-    if ([notification.notificationAction.type isEqualToString:GetSocialActionType.addFriend])
-    {
-        NSMutableArray<NSString *> *buttons = @[].mutableCopy;
-        for (GetSocialNotificationButton *button in notification.actionButtons)
-        {
-            [buttons addObject:button.title];
-        }
-        UISimpleAlertViewController *alertViewController = [[UISimpleAlertViewController alloc] initWithTitle:notification.title
-                                                                                                      message:notification.text
-                                                                                            cancelButtonTitle:@"Dismiss"
-                                                                                            otherButtonTitles:buttons];
-        [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
-            if (didCancel)
-            {
-                return;
-            }
-            [self handleNotification:notification withAction:notification.actionButtons[selectedIndex].actionId];
-        }];
-        return;
-    }
-    // TODO: REMOVED UNTIL BACKEND IS READY
-//    if ([notification.notificationAction.type isEqualToString:@"open_chat_message"])
-//    {
-//        self.chatIdToShow = notification.notificationAction.data[@"open_messages_for_id"];
-//        if (GetSocial.isInitialized)
-//        {
-//            [self showChatView];
-//        }
-//        return YES;
-//    }
-    if (![context[@"wasClicked"] boolValue])
-    {
-        NSString *title = notification.title.length > 0 ? notification.title : @"Push Notification Received";
-        [PushNotificationView showNotificationWithTitle:title andMessage:notification.text];
-        return;
-    }
-
-    [self handleAction:notification.notificationAction];
-}
-// TODO: REMOVED UNTIL BACKEND IS READY
-//
-//- (void)showChatView
-//{
-//    __block MessagesController *mc = nil;
-//    GetSocialUsersQuery* query = [GetSocialUsersQuery usersWithUserIdList: [GetSocialUserIdList usersWithIdList:@[self.chatIdToShow]]];
-//    GetSocialUsersPagingQuery* pagingQuery = [[GetSocialUsersPagingQuery alloc] initWithQuery:query];
-//
-//    [GetSocialCommunities usersWithQuery: pagingQuery
-//                  success:^(GetSocialUsersPagingResult *result) {
-//                      if ([self.mainNavigationController.topViewController isKindOfClass:[MessagesController class]])
-//                      {
-//                          mc = (MessagesController *)self.mainNavigationController.topViewController;
-//                      }
-//                      else
-//                      {
-//                          mc = [UIStoryboard viewControllerForName:@"Messages" inStoryboard:GetSocialStoryboardMessages];
-//                      }
-//                      if ([mc.receiver.userId isEqualToString:result.users.firstObject.userId])
-//                      {
-//                          [mc updateMessages];
-//                      }
-//                      else
-//                      {
-//                          [mc setReceiver:result.users.firstObject];
-//                          [self.mainNavigationController pushViewController:mc animated:YES];
-//                      }
-//                      self.chatIdToShow = nil;
-//                  }
-//                  failure:^(NSError *error){
-//
-//                  }];
-//}
-
-- (void)handleNotification:(GetSocialNotification *)notification withAction:(NSString *)actionId
+- (void)handleNotification:(GetSocialNotification *)notification withContext:(GetSocialNotificationContext *)context
 {
     GetSocialAction *action = notification.notificationAction;
-    NSString* status = GetSocialNotificationStatus.consumed;
+    NSString* status = GetSocialNotificationStatus.read;
 
-    if ([actionId isEqualToString:GetSocialNotificationButton.actionIdConsume])
+    if (context.action == nil) {
+        [self handleAction:action];
+    } else if ([context.action isEqualToString:GetSocialNotificationButton.actionIdConsume])
     {
         [GetSocial handleAction:action];
         if ([action.type isEqualToString:GetSocialActionType.addFriend])
@@ -262,7 +182,7 @@ NSString *const kCustomProvider = @"custom";
             [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", userName]];
         }
     }
-    else if ([actionId isEqualToString:GetSocialNotificationButton.actionIdIgnore])
+    else if ([context.action isEqualToString:GetSocialNotificationButton.actionIdIgnore])
     {
         status = GetSocialNotificationStatus.ignored;
     }
@@ -313,6 +233,10 @@ NSString *const kCustomProvider = @"custom";
     if ([action.type isEqualToString:@"DEFAULT"] || [action.type isEqualToString:@"default"])
     {
         [self showAlertWithText:@"DEFAULT action was handled"];
+        return;
+    }
+    if ([action.type isEqualToString:GetSocialActionType.openChat]) {
+        [self openChatWithId:action.data[GetSocialActionDataKey.openChat_ChatId]];
         return;
     }
     [GetSocial handleAction:action];
@@ -624,6 +548,11 @@ NSString *const kCustomProvider = @"custom";
                                                                               [self showNotificationCenterUI];
                                                                           }]];
 
+        [self.notificationsMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Notification Center UI with Click Handler"
+                                                                          action:^{
+                                                                              [self showNotificationCenterUIWithHandlers];
+                                                                          }]];
+
         // Topics
         MenuItem *topicsMenu = [MenuItem actionableMenuItemWithTitle:@"Topics"
                                                               action:^{
@@ -651,6 +580,14 @@ NSString *const kCustomProvider = @"custom";
         [groupsMenu addSubmenu:myGroups];
 
         [self.menu addObject:groupsMenu];
+
+        // Chats
+
+        MenuItem *chatsList = [MenuItem actionableMenuItemWithTitle:@"Chats"
+                                                              action:^{
+                                                                  [self showChats];
+                                                              }];
+        [self.menu addObject: chatsList];
 
 
         // Users
@@ -970,14 +907,14 @@ NSString *const kCustomProvider = @"custom";
         [[UISimpleAlertViewController alloc] initWithTitle:[NSString stringWithFormat:@"User [%@]", user.displayName]
                                                    message:[NSString stringWithFormat:@"Choose one of possible actions"]
                                          cancelButtonTitle:@"Cancel"
-                                         otherButtonTitles:@[ @"Remove from Friends" ]];
+                                         otherButtonTitles:@[ @"Remove from Friends", @"Open Chat"]];
 
     [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
         {
             switch (selectedIndex)
             {
-                case 0:
+                case 0: {
                     [GetSocialCommunities removeFriendsWithIds:[GetSocialUserIdList create: @[user.userId]]
                         success:^(NSInteger friendsCount) {
                             [self showAlertWithText:[NSString stringWithFormat:@"%@ removed from friends.", user.displayName]];
@@ -986,6 +923,11 @@ NSString *const kCustomProvider = @"custom";
                             NSLog(@"Failed to remove friend, error: %@", error.localizedDescription);
                         }];
                     break;
+                }
+                case 1: {
+                    [self openChatWithUser: user.userId];
+                    break;
+                }
             }
         }
     }];
@@ -997,14 +939,14 @@ NSString *const kCustomProvider = @"custom";
         [[UISimpleAlertViewController alloc] initWithTitle:[NSString stringWithFormat:@"User [%@]", user.displayName]
                                                    message:[NSString stringWithFormat:@"Choose one of possible actions"]
                                          cancelButtonTitle:@"Cancel"
-                                         otherButtonTitles:@[ @"Add to Friends" ]];
+                                         otherButtonTitles:@[ @"Add to Friends", @"Open Chat" ]];
 
     [alertViewController showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
         {
             switch (selectedIndex)
             {
-                case 0:
+                case 0: {
                     [GetSocialCommunities addFriendsWithIds:[GetSocialUserIdList create: @[user.userId]]
                         success:^(NSInteger friendsCount) {
                             [self showAlertWithText:[NSString stringWithFormat:@"%@ added to friends.", user.displayName]];
@@ -1013,6 +955,11 @@ NSString *const kCustomProvider = @"custom";
                             NSLog(@"Failed to add friend, error: %@", error.localizedDescription);
                         }];
                     break;
+                }
+                case 1: {
+                    [self openChatWithUser: user.userId];
+                    break;
+                }
             }
         }
     }];
@@ -1811,6 +1758,26 @@ NSString *const kCustomProvider = @"custom";
     [CommunitiesHelper showMyGroupsWithNavigationController:self.mainNavigationController];
 }
 
+#pragma mark - Chats
+
+- (void)showChats
+{
+    [GetSocialUI closeView:NO];
+    [CommunitiesHelper showChatsWithNavigationController: self.mainNavigationController];
+}
+
+- (void)openChatWithId:(NSString*)chatId
+{
+    [CommunitiesHelper showChatMessagesWithNavigationController: self.mainNavigationController chatId:chatId];
+}
+
+- (void)openChatWithUser:(NSString*)userId
+{
+    [GetSocialUI closeView:NO];
+    [CommunitiesHelper showChatMessagesWithNavigationController: self.mainNavigationController userId:[GetSocialUserId create: userId]];
+}
+
+
 #pragma mark - Users
 
 - (void)showUsers
@@ -1862,8 +1829,14 @@ NSString *const kCustomProvider = @"custom";
 - (void)showNotificationCenterUI
 {
     GetSocialUINotificationCenterView *ncView = [GetSocialUINotificationCenterView viewForQuery:[GetSocialNotificationsQuery withAllStatuses]];
+    [ncView show];
+}
+
+- (void)showNotificationCenterUIWithHandlers
+{
+    GetSocialUINotificationCenterView *ncView = [GetSocialUINotificationCenterView viewForQuery:[GetSocialNotificationsQuery withAllStatuses]];
     [ncView setClickHandler:^void(GetSocialNotification *notification, GetSocialNotificationContext* context) {
-        [self handleAction:notification.notificationAction];
+        [self handleNotification: notification withContext: context];
     }];
     [ncView show];
 }

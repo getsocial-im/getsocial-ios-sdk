@@ -31,6 +31,7 @@
 		6FC7213A22C4CEA000D478A9 /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FC7213B22C4CEA000D478A9 /* FBSDKShareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71ED1BB95CB800325DAF /* FBSDKShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FD96C06206E4B7400C514A3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD96C05206E4B7400C514A3 /* UserNotifications.framework */; };
+		6FF21E472384341000F6F3D5 /* GetSocialNotificationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF21E462384341000F6F3D5 /* GetSocialNotificationExtension.framework */; };
 		7A3B8E9B1FCEC82500481004 /* getsocial-dark-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E961FCEC82500481004 /* getsocial-dark-landscape */; };
 		7A3B8E9C1FCEC82500481004 /* getsocial-dark in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E971FCEC82500481004 /* getsocial-dark */; };
 		7A3B8E9D1FCEC82500481004 /* getsocial-light-landscape in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B8E981FCEC82500481004 /* getsocial-light-landscape */; };
@@ -163,6 +164,9 @@
 		BC66931E24B765160094479F /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931A24B765160094479F /* TagsViewController.swift */; };
 		BC66931F24B765160094479F /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931B24B765160094479F /* TagsView.swift */; };
 		BC66932024B765160094479F /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931C24B765160094479F /* TagTableViewCell.swift */; };
+		BC66932124B767850094479F /* GetSocialNotificationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC06DCC2243FAF7A001D2366 /* GetSocialNotificationExtension.framework */; };
+		BC66932424B767A60094479F /* GetSocialNotificationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC06DCC2243FAF7A001D2366 /* GetSocialNotificationExtension.framework */; };
+		BC66932524B767A60094479F /* GetSocialNotificationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC06DCC2243FAF7A001D2366 /* GetSocialNotificationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC680EEA2074D08600A3551E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC680E6D2074D08600A3551E /* Localizable.strings */; };
 		BC680EEB2074D08600A3551E /* SdkAssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC680E702074D08600A3551E /* SdkAssetCatalog.xcassets */; };
 		BC680EEC2074D08600A3551E /* VKApiBase.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680E742074D08600A3551E /* VKApiBase.h */; };
@@ -284,10 +288,15 @@
 		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
 		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
 		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
-		BCA57E8A25A8625B00071B8E /* GetSocialNotificationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA57E8925A8625B00071B8E /* GetSocialNotificationExtension.framework */; };
-		BCA57E8B25A8626400071B8E /* GetSocialNotificationExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BCA57E8925A8625B00071B8E /* GetSocialNotificationExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BCA57E8C25A8626D00071B8E /* GetSocialNotificationExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA57E8925A8625B00071B8E /* GetSocialNotificationExtension.framework */; };
-		BCA57E9125A862F000071B8E /* UIDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA57E9025A862F000071B8E /* UIDesign.swift */; };
+		BCA07114258B869100288BC1 /* giphy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCA07113258B869100288BC1 /* giphy.mp4 */; };
+		BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C932562E0CD00495B49 /* ChatsModel.swift */; };
+		BCAF6C982562E0CD00495B49 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C942562E0CD00495B49 /* ChatsView.swift */; };
+		BCAF6C992562E0CD00495B49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C952562E0CD00495B49 /* ChatCell.swift */; };
+		BCAF6C9A2562E0CD00495B49 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C962562E0CD00495B49 /* ChatsViewController.swift */; };
+		BCAF6C9F2562E0DC00495B49 /* ChatMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C9B2562E0DC00495B49 /* ChatMessagesViewController.swift */; };
+		BCAF6CA02562E0DC00495B49 /* ChatMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C9C2562E0DC00495B49 /* ChatMessagesModel.swift */; };
+		BCAF6CA12562E0DC00495B49 /* ChatMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C9D2562E0DC00495B49 /* ChatMessagesView.swift */; };
+		BCAF6CA22562E0DC00495B49 /* ChatMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C9E2562E0DC00495B49 /* ChatMessageViewCell.swift */; };
 		BCB4729422EF1455003F3F50 /* UITextFieldWithCopyPaste.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB4729222EF1455003F3F50 /* UITextFieldWithCopyPaste.h */; };
 		BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB4729322EF1455003F3F50 /* UITextFieldWithCopyPaste.m */; };
 		BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */ = {isa = PBXBuildFile; fileRef = BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */; };
@@ -334,9 +343,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6F3DCEA01FFE84B200F65784 /* AdjustSdk.framework in Embed Frameworks */,
-				BCA57E8B25A8626400071B8E /* GetSocialNotificationExtension.framework in Embed Frameworks */,
 				C3B9468C8578B9C78CB61377 /* GetSocialSDK.framework in Embed Frameworks */,
 				B506466FBCE6F9308E5AB341 /* GetSocialUI.framework in Embed Frameworks */,
+				BC66932524B767A60094479F /* GetSocialNotificationExtension.framework in Embed Frameworks */,
 				6FC7213922C4CEA000D478A9 /* FBSDKCoreKit.framework in Embed Frameworks */,
 				6FC7213A22C4CEA000D478A9 /* FBSDKLoginKit.framework in Embed Frameworks */,
 				6FC7213B22C4CEA000D478A9 /* FBSDKShareKit.framework in Embed Frameworks */,
@@ -428,6 +437,7 @@
 		99F772E51BBAA96A00A4CD69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BC012E161CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialFBMessengerInvitePlugin.m; path = Plugins/GetSocialFBMessengerInvitePlugin.m; sourceTree = "<group>"; };
 		BC012E171CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialFBMessengerInvitePlugin.h; path = Plugins/GetSocialFBMessengerInvitePlugin.h; sourceTree = "<group>"; };
+		BC06DCC2243FAF7A001D2366 /* GetSocialNotificationExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GetSocialNotificationExtension.framework; path = GetSocial/GetSocialNotificationExtension.framework; sourceTree = "<group>"; };
 		BC12D77E215CD27B001F45AE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BC14378D24320A2500472329 /* UsersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersModel.swift; path = Views/Communities/Users/UsersModel.swift; sourceTree = "<group>"; };
 		BC14378E24320A2500472329 /* UsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersView.swift; path = Views/Communities/Users/UsersView.swift; sourceTree = "<group>"; };
@@ -650,8 +660,15 @@
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
 		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BCA57E8925A8625B00071B8E /* GetSocialNotificationExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GetSocialNotificationExtension.framework; sourceTree = "<group>"; };
-		BCA57E9025A862F000071B8E /* UIDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIDesign.swift; path = Views/Communities/UIDesign.swift; sourceTree = "<group>"; };
+		BCA07113258B869100288BC1 /* giphy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = giphy.mp4; sourceTree = "<group>"; };
+		BCAF6C932562E0CD00495B49 /* ChatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsModel.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsModel.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C942562E0CD00495B49 /* ChatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsView.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsView.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C952562E0CD00495B49 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatCell.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C962562E0CD00495B49 /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsViewController.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsViewController.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C9B2562E0DC00495B49 /* ChatMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessagesViewController.swift; path = GetSocialDemo/Views/Communities/Chats/ChatMessages/ChatMessagesViewController.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C9C2562E0DC00495B49 /* ChatMessagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessagesModel.swift; path = GetSocialDemo/Views/Communities/Chats/ChatMessages/ChatMessagesModel.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C9D2562E0DC00495B49 /* ChatMessagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessagesView.swift; path = GetSocialDemo/Views/Communities/Chats/ChatMessages/ChatMessagesView.swift; sourceTree = SOURCE_ROOT; };
+		BCAF6C9E2562E0DC00495B49 /* ChatMessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageViewCell.swift; path = GetSocialDemo/Views/Communities/Chats/ChatMessages/ChatMessageViewCell.swift; sourceTree = SOURCE_ROOT; };
 		BCB4729222EF1455003F3F50 /* UITextFieldWithCopyPaste.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextFieldWithCopyPaste.h; sourceTree = "<group>"; };
 		BCB4729322EF1455003F3F50 /* UITextFieldWithCopyPaste.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldWithCopyPaste.m; sourceTree = "<group>"; };
 		BCBCBA542419174E0005172F /* GetSocialDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetSocialDemo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -718,8 +735,9 @@
 				BC5C5A801F4DCBE800533C43 /* TwitterKit.framework in Frameworks */,
 				990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */,
 				CE034BC78A05907AE3B68DD7 /* GetSocialSDK.framework in Frameworks */,
-				BCA57E8A25A8625B00071B8E /* GetSocialNotificationExtension.framework in Frameworks */,
+				BC66932424B767A60094479F /* GetSocialNotificationExtension.framework in Frameworks */,
 				6278441E9B0A61A254DC1D09 /* GetSocialUI.framework in Frameworks */,
+				6FF21E472384341000F6F3D5 /* GetSocialNotificationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +745,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCA57E8C25A8626D00071B8E /* GetSocialNotificationExtension.framework in Frameworks */,
+				BC66932124B767850094479F /* GetSocialNotificationExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +760,7 @@
 				7A3B8E991FCEC82500481004 /* getsocial-default-landscape */,
 				7A3B8E9A1FCEC82500481004 /* getsocial-light */,
 				7A3B8E981FCEC82500481004 /* getsocial-light-landscape */,
+				BCA07113258B869100288BC1 /* giphy.mp4 */,
 				BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */,
 				BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */,
 				99F3E7FE1AB32CA900033238 /* activityImage.png */,
@@ -796,7 +815,7 @@
 		995D999617EB064500F65204 = {
 			isa = PBXGroup;
 			children = (
-				BCA57E8925A8625B00071B8E /* GetSocialNotificationExtension.framework */,
+				BC06DCC2243FAF7A001D2366 /* GetSocialNotificationExtension.framework */,
 				BC9286481FD82A0200306B6E /* GoogleService-Info.plist */,
 				995D99A817EB064500F65204 /* GetSocialDemo */,
 				BCD73B052195DEF900D4D5E4 /* GetSocialNotificationServiceExtension */,
@@ -1282,10 +1301,41 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		BCAF6C552562B1FC00495B49 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				BCAF6C922562E0B700495B49 /* ChatMessages */,
+				BCAF6C912562E0AD00495B49 /* Chats */,
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		BCAF6C912562E0AD00495B49 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				BCAF6C952562E0CD00495B49 /* ChatCell.swift */,
+				BCAF6C932562E0CD00495B49 /* ChatsModel.swift */,
+				BCAF6C942562E0CD00495B49 /* ChatsView.swift */,
+				BCAF6C962562E0CD00495B49 /* ChatsViewController.swift */,
+			);
+			name = Chats;
+			sourceTree = "<group>";
+		};
+		BCAF6C922562E0B700495B49 /* ChatMessages */ = {
+			isa = PBXGroup;
+			children = (
+				BCAF6C9C2562E0DC00495B49 /* ChatMessagesModel.swift */,
+				BCAF6C9D2562E0DC00495B49 /* ChatMessagesView.swift */,
+				BCAF6C9B2562E0DC00495B49 /* ChatMessagesViewController.swift */,
+				BCAF6C9E2562E0DC00495B49 /* ChatMessageViewCell.swift */,
+			);
+			name = ChatMessages;
+			sourceTree = "<group>";
+		};
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
-				BCA57E9025A862F000071B8E /* UIDesign.swift */,
+				BCAF6C552562B1FC00495B49 /* Chats */,
 				BCEA4165254AE14A00BDF883 /* Groups */,
 				BC66931824B765160094479F /* Tags */,
 				BC2E23E2243E0FC900558930 /* UsersById */,
@@ -1588,6 +1638,7 @@
 				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
 				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,
 				BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
+				BCA07114258B869100288BC1 /* giphy.mp4 in Resources */,
 				99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */,
 				99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */,
 				99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */,
@@ -1720,12 +1771,14 @@
 				BC680F2C2074D08600A3551E /* VKJSONOperation.m in Sources */,
 				BC680F522074D08700A3551E /* VKBatchRequest.m in Sources */,
 				BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */,
+				BCAF6CA02562E0DC00495B49 /* ChatMessagesModel.swift in Sources */,
 				BC680F382074D08600A3551E /* VKImageParameters.m in Sources */,
 				BCEA4172254AE34F00BDF883 /* GroupsView.swift in Sources */,
 				BC2E23E8243E0FC900558930 /* UsersByIdViewController.swift in Sources */,
 				BC680F182074D08600A3551E /* VKUser.m in Sources */,
 				BC54CE9C242382BC00FE539F /* NotificationsFilterViewController.m in Sources */,
 				BC680F4A2074D08700A3551E /* VKShareDialogController.m in Sources */,
+				BCAF6C982562E0CD00495B49 /* ChatsView.swift in Sources */,
 				BC680F202074D08600A3551E /* VKUploadWallPhotoRequest.m in Sources */,
 				BC680F0A2074D08600A3551E /* VKGroup.m in Sources */,
 				BC54CE2E2423818A00FE539F /* TopicsViewController.swift in Sources */,
@@ -1756,9 +1809,9 @@
 				BC680F0C2074D08600A3551E /* VKLikes.m in Sources */,
 				BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */,
 				BC14379124320A2600472329 /* UsersView.swift in Sources */,
+				BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */,
 				BC680F422074D08700A3551E /* VKActivity.m in Sources */,
 				BC680F002074D08600A3551E /* VKApiObject.m in Sources */,
-				BCA57E9125A862F000071B8E /* UIDesign.swift in Sources */,
 				BCEA4189254AE38300BDF883 /* CreateGroupViewController.swift in Sources */,
 				BC54CE7E242382BC00FE539F /* UserIdentityView.m in Sources */,
 				BC54CE7C242382BC00FE539F /* CustomSmartInviteViewController.m in Sources */,
@@ -1769,6 +1822,7 @@
 				BC54CE392423819800FE539F /* CommunitiesObjCHelper.swift in Sources */,
 				BC680F222074D08600A3551E /* VKApi.m in Sources */,
 				BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */,
+				BCAF6CA12562E0DC00495B49 /* ChatMessagesView.swift in Sources */,
 				BC680F562074D08700A3551E /* VKPermissions.m in Sources */,
 				BC680F062074D08600A3551E /* VKCounters.m in Sources */,
 				BC54CEA6242382BC00FE539F /* NotificationTableViewCell.m in Sources */,
@@ -1777,6 +1831,7 @@
 				BC54CE79242382BC00FE539F /* MenuTableViewController.m in Sources */,
 				BC2A18A021400E9900ADB0C6 /* ManualIAPViewController.m in Sources */,
 				BC2A18A121400E9900ADB0C6 /* IAPViewController.m in Sources */,
+				BCAF6C992562E0CD00495B49 /* ChatCell.swift in Sources */,
 				BC680F022074D08600A3551E /* VKApiObjectArray.m in Sources */,
 				BCEA4171254AE34F00BDF883 /* GroupsModel.swift in Sources */,
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
@@ -1788,6 +1843,7 @@
 				BC54CE99242382BC00FE539F /* SendNotificationViewController.m in Sources */,
 				BC680F242074D08600A3551E /* NSError+VKError.m in Sources */,
 				BC54CE86242382BC00FE539F /* MainNavigationController.m in Sources */,
+				BCAF6CA22562E0DC00495B49 /* ChatMessageViewCell.swift in Sources */,
 				BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */,
 				BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */,
 				BC680F1C2074D08600A3551E /* VKUploadPhotoBase.m in Sources */,
@@ -1807,10 +1863,12 @@
 				213E37035794BC972349DCDF /* UIImageView+GetSocial.m in Sources */,
 				BC680EED2074D08600A3551E /* VKApiBase.m in Sources */,
 				213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */,
+				BCAF6C9F2562E0DC00495B49 /* ChatMessagesViewController.swift in Sources */,
 				BC680F362074D08600A3551E /* VKResponse.m in Sources */,
 				BC54CE75242382BC00FE539F /* FriendsTableViewCell.m in Sources */,
 				BC680EF72074D08600A3551E /* VKApiGroups.m in Sources */,
 				BC680F282074D08600A3551E /* VKHTTPClient.m in Sources */,
+				BCAF6C9A2562E0CD00495B49 /* ChatsViewController.swift in Sources */,
 				BC54CE9B242382BC00FE539F /* MenuTableViewCell.m in Sources */,
 				BC4439A82003C67800682226 /* GetSocialFacebookSharePlugin.m in Sources */,
 			);
@@ -1996,7 +2054,6 @@
 					"$(SRCROOT)/GetSocialDemo/Vendor/**",
 					"$(SRCROOT)/",
 				);
-				MARKETING_VERSION = v7.3.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2009,7 +2066,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "GetSocialDemo/GetSocialDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-				VALIDATE_WORKSPACE = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2044,7 +2100,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/";
-				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

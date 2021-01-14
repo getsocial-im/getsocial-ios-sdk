@@ -33,7 +33,7 @@
 
 - (void)showAlertToChooseAuthorizationOptionToPerform:(void (^)(void))pendingUiAction;
 
-- (BOOL)handleNotification:(GetSocialNotification *)notification withContext:(NSDictionary *)context;
+- (void)handleNotification:(GetSocialNotification *)notification withContext:(GetSocialNotificationContext*)context;
 
 - (void)handleAction:(GetSocialAction *)action;
 - (void)handleAction:(NSString *)action withPost:(GetSocialActivity *)post;

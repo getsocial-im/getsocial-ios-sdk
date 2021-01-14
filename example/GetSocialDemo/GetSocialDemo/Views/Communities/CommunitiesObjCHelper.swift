@@ -102,4 +102,28 @@ public class CommunitiesHelper: NSObject {
         navigationController.pushViewController(myGroups.viewController, animated: true)
     }
 
+    public static func showChatMessages(navigationController: UINavigationController, chatId: String) {
+        GetSocialUI.closeView(false)
+        Communities.chat(ChatId.create(chatId), success: { chat in
+            let chatMessagesView = ChatMessagesView(chat)
+            navigationController.pushViewController(chatMessagesView.viewController, animated: true)
+        }, failure: { error in
+            print("Failed to get chat, error: \(error)")
+        })
+    }
+
+    public static func showChatMessages(navigationController: UINavigationController, userId: UserId) {
+        let chatMessagesView = ChatMessagesView(userId)
+        navigationController.pushViewController(chatMessagesView.viewController, animated: true)
+    }
+
+    public static func showChats(navigationController: UINavigationController) {
+        let chatsView = ChatsView()
+        chatsView.onShowChat = { chatId in
+            let chatMessagesView = ChatMessagesView(chatId)
+            navigationController.pushViewController(chatMessagesView.viewController, animated: true)
+        }
+        navigationController.pushViewController(chatsView.viewController, animated: true)
+    }
+
 }

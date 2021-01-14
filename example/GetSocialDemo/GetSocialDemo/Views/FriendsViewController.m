@@ -21,6 +21,15 @@
 #import "SuggestedFriendsViewController.h"
 #import "UIStoryboard+GetSocial.h"
 #import "UIViewController+GetSocial.h"
+#if ANALYTICS_DEMO == 1
+#import "GetSocialAnalyticsApp-Swift.h"
+#elif AUTOMATION_TEST == 1
+#import "GetSocialAutomationTests-Swift.h"
+#elif INTERNAL_DEMO == 1
+#import "GetSocialInternalDemo-Swift.h"
+#else
+#import "GetSocialDemo-Swift.h"
+#endif
 
 @interface FriendsViewController ()<UITableViewDelegate, UITableViewDataSource, FriendsTableViewCellDelegate>
 
@@ -158,10 +167,8 @@
 
 - (void)didClickMessageButton:(GetSocialUser *)user
 {
-    MessagesController *mc = [UIStoryboard viewControllerForName:@"Messages" inStoryboard:GetSocialStoryboardMessages];
-    [mc setReceiver:user];
-
-    [self.navigationController pushViewController:mc animated:YES];
+    GetSocialUserId* userId = [GetSocialUserId create: user.userId];
+    [CommunitiesHelper showChatMessagesWithNavigationController:self.navigationController userId: userId];
 }
 
 #pragma mark - UITableViewDataSource
