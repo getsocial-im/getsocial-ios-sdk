@@ -282,13 +282,14 @@
 		BC680F5B2074D08700A3551E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BC680EE92074D08600A3551E /* README.md */; };
 		BC680F5E2074D09000A3551E /* GetSocialVKInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */; };
 		BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		BC6D8B5625B09E2E00BEEFEF /* UIDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6D8B5525B09E2E00BEEFEF /* UIDesign.swift */; };
+		BC6D8B5825B09ED300BEEFEF /* giphy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BC6D8B5725B09ED300BEEFEF /* giphy.mp4 */; };
 		BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC92863F1FD8282400306B6E /* Crashlytics.framework */; };
 		BC9286431FD8282500306B6E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286401FD8282500306B6E /* FirebaseCore.framework */; };
 		BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286411FD8282500306B6E /* Fabric.framework */; };
 		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
 		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
 		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
-		BCA07114258B869100288BC1 /* giphy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCA07113258B869100288BC1 /* giphy.mp4 */; };
 		BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C932562E0CD00495B49 /* ChatsModel.swift */; };
 		BCAF6C982562E0CD00495B49 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C942562E0CD00495B49 /* ChatsView.swift */; };
 		BCAF6C992562E0CD00495B49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C952562E0CD00495B49 /* ChatCell.swift */; };
@@ -655,12 +656,13 @@
 		BC680EE92074D08600A3551E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialVKInvitePlugin.h; path = Plugins/GetSocialVKInvitePlugin.h; sourceTree = "<group>"; };
 		BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialVKInvitePlugin.m; path = Plugins/GetSocialVKInvitePlugin.m; sourceTree = "<group>"; };
+		BC6D8B5525B09E2E00BEEFEF /* UIDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIDesign.swift; path = Views/Communities/UIDesign.swift; sourceTree = "<group>"; };
+		BC6D8B5725B09ED300BEEFEF /* giphy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = giphy.mp4; path = Resources/giphy.mp4; sourceTree = "<group>"; };
 		BC92863F1FD8282400306B6E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = GetSocialDemo/Vendor/Crashlytics.framework; sourceTree = "<group>"; };
 		BC9286401FD8282500306B6E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = GetSocialDemo/Vendor/FirebaseCore.framework; sourceTree = "<group>"; };
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
 		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BCA07113258B869100288BC1 /* giphy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = giphy.mp4; sourceTree = "<group>"; };
 		BCAF6C932562E0CD00495B49 /* ChatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsModel.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsModel.swift; sourceTree = SOURCE_ROOT; };
 		BCAF6C942562E0CD00495B49 /* ChatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsView.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsView.swift; sourceTree = SOURCE_ROOT; };
 		BCAF6C952562E0CD00495B49 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatCell.swift; sourceTree = SOURCE_ROOT; };
@@ -760,7 +762,7 @@
 				7A3B8E991FCEC82500481004 /* getsocial-default-landscape */,
 				7A3B8E9A1FCEC82500481004 /* getsocial-light */,
 				7A3B8E981FCEC82500481004 /* getsocial-light-landscape */,
-				BCA07113258B869100288BC1 /* giphy.mp4 */,
+				BC6D8B5725B09ED300BEEFEF /* giphy.mp4 */,
 				BCD0401D1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png */,
 				BCD0401E1D5DEEE800A8CE03 /* splashscreenBg.jpg */,
 				99F3E7FE1AB32CA900033238 /* activityImage.png */,
@@ -1335,6 +1337,7 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
+				BC6D8B5525B09E2E00BEEFEF /* UIDesign.swift */,
 				BCAF6C552562B1FC00495B49 /* Chats */,
 				BCEA4165254AE14A00BDF883 /* Groups */,
 				BC66931824B765160094479F /* Tags */,
@@ -1638,7 +1641,7 @@
 				99F3E8011AB32CA900033238 /* activityImage.png in Resources */,
 				99C086991BB92F4200C706DD /* defaultAvatar.png in Resources */,
 				BCD0401F1D5DEEE800A8CE03 /* getSocialLogoFullColorBlackBgIOS.png in Resources */,
-				BCA07114258B869100288BC1 /* giphy.mp4 in Resources */,
+				BC6D8B5825B09ED300BEEFEF /* giphy.mp4 in Resources */,
 				99F3E7EB1AB205C400033238 /* activityCallToActionButtonPressed.png in Resources */,
 				99EB88001AB7611600357E60 /* activityImageWithButton.png in Resources */,
 				99F3E7F31AB31DC100033238 /* activityImageWithAction.png in Resources */,
@@ -1745,6 +1748,7 @@
 				BC54CE9D242382BC00FE539F /* ActivityIndicatorViewController.m in Sources */,
 				BC54CE8E242382BC00FE539F /* NewFriendViewController.m in Sources */,
 				BC66931E24B765160094479F /* TagsViewController.swift in Sources */,
+				BC6D8B5625B09E2E00BEEFEF /* UIDesign.swift in Sources */,
 				BC54CE7A242382BC00FE539F /* MessagesController.m in Sources */,
 				BCEA418A254AE38300BDF883 /* CreateGroupModel.swift in Sources */,
 				BC54CE362423819100FE539F /* FollowersViewController.swift in Sources */,
