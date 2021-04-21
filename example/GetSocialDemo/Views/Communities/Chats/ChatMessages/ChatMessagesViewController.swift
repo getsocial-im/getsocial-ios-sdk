@@ -394,7 +394,7 @@ extension ChatMessagesViewController: UITableViewDataSource {
 
 extension ChatMessagesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+		if (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) != nil {
             //self.attachedImage = uiImage
         }
         self.imagePicker.dismiss(animated: true, completion: nil)

@@ -532,17 +532,11 @@ NSString *const kCustomProvider = @"custom";
                                                             [self showChooseActivityAlert];
                                                       }]];
 
-                // TODO: put this back later
-        //        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details"
-        //                                                                       action:^{
-        //                                                                           [self showChooseActivityAlert:YES];
-        //                                                                       }]];
-        //
-        //        [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Activity Details(without activity feed)"
-        //                                                                       action:^{
-        //                                                                           [self showChooseActivityAlert:NO];
-        //                                                                       }]];
-
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Reactions"
+												   action:^{
+			[self showReactions];
+		}]];
 
         [self.menu addObject:self.activitiesMenu];
 
@@ -1823,6 +1817,12 @@ NSString *const kCustomProvider = @"custom";
     [CommunitiesHelper showTagsWithNavigationController:self.mainNavigationController];
 }
 
+#pragma mark - Reactions
+
+- (void)showReactions
+{
+	[CommunitiesHelper showReactionsWithNavigationController:self.mainNavigationController];
+}
 
 #pragma mark - Topics
 

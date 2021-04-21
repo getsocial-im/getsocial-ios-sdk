@@ -280,6 +280,10 @@
 		BC680F5B2074D08700A3551E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BC680EE92074D08600A3551E /* README.md */; };
 		BC680F5E2074D09000A3551E /* GetSocialVKInvitePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */; };
 		BC680F5F2074D09000A3551E /* GetSocialVKInvitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		BC7217FA260CBE30000E840F /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F6260CBE30000E840F /* FeedView.swift */; };
+		BC7217FB260CBE30000E840F /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F7260CBE30000E840F /* FeedModel.swift */; };
+		BC7217FC260CBE30000E840F /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */; };
+		BC7217FD260CBE30000E840F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F9260CBE30000E840F /* FeedViewController.swift */; };
 		BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC92863F1FD8282400306B6E /* Crashlytics.framework */; };
 		BC9286431FD8282500306B6E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286401FD8282500306B6E /* FirebaseCore.framework */; };
 		BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286411FD8282500306B6E /* Fabric.framework */; };
@@ -654,6 +658,10 @@
 		BC680EE92074D08600A3551E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialVKInvitePlugin.h; path = Plugins/GetSocialVKInvitePlugin.h; sourceTree = "<group>"; };
 		BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialVKInvitePlugin.m; path = Plugins/GetSocialVKInvitePlugin.m; sourceTree = "<group>"; };
+		BC7217F6260CBE30000E840F /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedView.swift; path = Views/Communities/Feed/FeedView.swift; sourceTree = "<group>"; };
+		BC7217F7260CBE30000E840F /* FeedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedModel.swift; path = Views/Communities/Feed/FeedModel.swift; sourceTree = "<group>"; };
+		BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityTableViewCell.swift; path = Views/Communities/Feed/ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		BC7217F9260CBE30000E840F /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = Views/Communities/Feed/FeedViewController.swift; sourceTree = "<group>"; };
 		BC92863F1FD8282400306B6E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = GetSocialDemo/Vendor/Crashlytics.framework; sourceTree = "<group>"; };
 		BC9286401FD8282500306B6E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = GetSocialDemo/Vendor/FirebaseCore.framework; sourceTree = "<group>"; };
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
@@ -1302,6 +1310,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		BC7217F5260CBE23000E840F /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */,
+				BC7217F7260CBE30000E840F /* FeedModel.swift */,
+				BC7217F6260CBE30000E840F /* FeedView.swift */,
+				BC7217F9260CBE30000E840F /* FeedViewController.swift */,
+			);
+			name = Feed;
+			sourceTree = "<group>";
+		};
 		BCAF6C552562B1FC00495B49 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -1336,6 +1355,7 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
+				BC7217F5260CBE23000E840F /* Feed */,
 				BCAF6C552562B1FC00495B49 /* Chats */,
 				BCEA4165254AE14A00BDF883 /* Groups */,
 				BC66931824B765160094479F /* Tags */,
@@ -1740,7 +1760,9 @@
 				BC012E181CA29AFF00D68064 /* GetSocialFBMessengerInvitePlugin.m in Sources */,
 				BC680F502074D08700A3551E /* VKAuthorizationResult.m in Sources */,
 				BCEA4186254AE37600BDF883 /* AddGroupMemberViewController.swift in Sources */,
+				BC7217FD260CBE30000E840F /* FeedViewController.swift in Sources */,
 				BC66931D24B765160094479F /* TagsModel.swift in Sources */,
+				BC7217FC260CBE30000E840F /* ActivityTableViewCell.swift in Sources */,
 				BC54CE9D242382BC00FE539F /* ActivityIndicatorViewController.m in Sources */,
 				BC54CE8E242382BC00FE539F /* NewFriendViewController.m in Sources */,
 				BC66931E24B765160094479F /* TagsViewController.swift in Sources */,
@@ -1845,6 +1867,7 @@
 				BC54CE86242382BC00FE539F /* MainNavigationController.m in Sources */,
 				BCAF6CA22562E0DC00495B49 /* ChatMessageViewCell.swift in Sources */,
 				BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */,
+				BC7217FB260CBE30000E840F /* FeedModel.swift in Sources */,
 				BC585E6D1E2FC4E00057A73A /* GetSocialKakaoTalkInvitePlugin.m in Sources */,
 				BC680F1C2074D08600A3551E /* VKUploadPhotoBase.m in Sources */,
 				BC680F462074D08700A3551E /* VKCaptchaView.m in Sources */,
@@ -1864,6 +1887,7 @@
 				BC680EED2074D08600A3551E /* VKApiBase.m in Sources */,
 				213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */,
 				BCAF6C9F2562E0DC00495B49 /* ChatMessagesViewController.swift in Sources */,
+				BC7217FA260CBE30000E840F /* FeedView.swift in Sources */,
 				BC680F362074D08600A3551E /* VKResponse.m in Sources */,
 				BC54CE75242382BC00FE539F /* FriendsTableViewCell.m in Sources */,
 				BC680EF72074D08600A3551E /* VKApiGroups.m in Sources */,

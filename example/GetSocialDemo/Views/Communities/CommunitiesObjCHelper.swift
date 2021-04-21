@@ -79,7 +79,12 @@ public class CommunitiesHelper: NSObject {
         let tagsView = TagsView()
         navigationController.pushViewController(tagsView.viewController, animated: true)
     }
-    
+
+	public static func showReactions(navigationController: UINavigationController) {
+		let feedView = FeedView()
+		navigationController.pushViewController(feedView.viewController, animated: true)
+	}
+
     public static func showCreateGroup(navigationController: UINavigationController) {
         let createGroupView = CreateGroupViewController()
         navigationController.pushViewController(createGroupView, animated: true)
