@@ -9,7 +9,7 @@ import UIKit
 
 protocol TopicTableViewControllerDelegate {
     func onShowFollowers(_ ofTopic: String)
-    func onShowFeed(_ ofTopic: String)
+	func onShowFeed(_ ofTopic: String, byCurrentUser: Bool)
     func onPostActivity(_ topic: String)
 }
 
@@ -154,8 +154,11 @@ extension TopicsViewController: TopicTableViewCellDelegate {
             }
         }))
         actionSheet.addAction(UIAlertAction.init(title: "Feed", style: .default, handler: { _ in
-            self.delegate?.onShowFeed(topicId)
+			self.delegate?.onShowFeed(topicId, byCurrentUser: false)
         }))
+		actionSheet.addAction(UIAlertAction.init(title: "Activities created by Me", style: .default, handler: { _ in
+			self.delegate?.onShowFeed(topicId, byCurrentUser: true)
+		}))
         actionSheet.addAction(UIAlertAction.init(title: isFollowed ? "Unfollow" : "Follow", style: .default, handler: { _ in
             self.viewModel.followTopic(topicId)
         }))

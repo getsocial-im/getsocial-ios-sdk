@@ -25,8 +25,11 @@ extension GroupsView: GroupTableViewControllerDelegate {
         self.viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func onShowFeed(_ ofGroupId: String) {
-        let query = ActivitiesQuery.inGroup(ofGroupId)
+	func onShowFeed(_ ofGroupId: String, byCurrentUser: Bool) {
+        var query = ActivitiesQuery.inGroup(ofGroupId)
+		if byCurrentUser {
+			query = query.byUser(UserId.currentUser())
+		}
         let activitiesView = GetSocialUIActivityFeedView.init(for: query)
         activitiesView.setAvatarClickHandler { user in
             let mainVC = self.viewController.parent?.parent as? MainViewController

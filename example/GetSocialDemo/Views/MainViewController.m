@@ -492,12 +492,28 @@ NSString *const kCustomProvider = @"custom";
                                                       }]];
 
         [self.activitiesMenu
-            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All my posts"
+            addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All my posts everywhere"
                                                       action:^{
             GetSocialActivitiesQuery* query = [[GetSocialActivitiesQuery everywhere] byUserWithId: GetSocialUserId.currentUser];
             [self showActivitiesViewWithQuery:query];
 
                                                       }]];
+
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All my posts in all topics"
+												   action:^{
+			GetSocialActivitiesQuery* query = [[GetSocialActivitiesQuery inAllTopics] byUserWithId: GetSocialUserId.currentUser];
+			[self showActivitiesViewWithQuery:query];
+
+		}]];
+
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All my posts in all groups"
+												   action:^{
+			GetSocialActivitiesQuery* query = [[GetSocialActivitiesQuery inAllGroups] byUserWithId: GetSocialUserId.currentUser];
+			[self showActivitiesViewWithQuery:query];
+
+		}]];
 
         [self.activitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My feed"

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GroupTableViewControllerDelegate {
-    func onShowFeed(_ ofGroupId: String)
+	func onShowFeed(_ ofGroupId: String, byCurrentUser: Bool)
     func onShowGroupMembers(_ ofGroupId: String, role: Role)
     func onPostActivity(_ groupId: String)
     func onEditGroup(_ group: Group)
@@ -190,8 +190,11 @@ extension GroupsViewController: GroupTableViewCellDelegate {
             }))
             if !group.settings.isPrivate || status == .member {
                 actionSheet.addAction(UIAlertAction.init(title: "Show Feed", style: .default, handler: { _ in
-                    self.delegate?.onShowFeed(groupId)
+					self.delegate?.onShowFeed(groupId, byCurrentUser: false)
                 }))
+				actionSheet.addAction(UIAlertAction.init(title: "Activities created by Me", style: .default, handler: { _ in
+					self.delegate?.onShowFeed(groupId, byCurrentUser: true)
+				}))
             }
             if status == .member {
                 if let role = role {
