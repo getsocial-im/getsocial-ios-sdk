@@ -554,6 +554,18 @@ NSString *const kCustomProvider = @"custom";
 			[self showReactions];
 		}]];
 
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Topic Activity Details (569141942483009835)"
+												   action:^{
+			[self showActivityDetailsView_Topic];
+		}]];
+
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Group Activity Details (504205474833540031)"
+												   action:^{
+			[self showActivityDetailsView_Group];
+		}]];
+
         [self.menu addObject:self.activitiesMenu];
 
         // Notifications Menu
@@ -1831,6 +1843,18 @@ NSString *const kCustomProvider = @"custom";
 - (void)showTags
 {
     [CommunitiesHelper showTagsWithNavigationController:self.mainNavigationController];
+}
+
+- (void)showActivityDetailsView_Topic
+{
+	GetSocialUIActivityDetailsView* view = [GetSocialUIActivityDetailsView viewForActivityId:@"569141942483009835"];
+	[view show];
+}
+
+- (void)showActivityDetailsView_Group
+{
+	GetSocialUIActivityDetailsView* view = [GetSocialUIActivityDetailsView viewForActivityId:@"504205474833540031"];
+	[view show];
 }
 
 #pragma mark - Reactions

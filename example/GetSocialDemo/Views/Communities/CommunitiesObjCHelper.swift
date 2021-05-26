@@ -122,8 +122,9 @@ public class CommunitiesHelper: NSObject {
         navigationController.pushViewController(chatMessagesView.viewController, animated: true)
     }
 
+
     public static func showChats(navigationController: UINavigationController) {
-        let chatsView = ChatsView()
+		let chatsView = ChatsView()
         chatsView.onShowChat = { chatId in
             let chatMessagesView = ChatMessagesView(chatId)
             navigationController.pushViewController(chatMessagesView.viewController, animated: true)
