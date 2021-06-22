@@ -25,6 +25,10 @@ public class CommunitiesHelper: NSObject {
             }
             navigationController.pushViewController(followersView.viewController, animated: true)
         }
+		topicsView.showFeed = { topicId in
+			let view = ActivitiesView(ActivitiesQuery.inTopic(topicId))
+			navigationController.pushViewController(view.viewController, animated: true)
+		}
     }
 
     public static func showGroups(navigationController: UINavigationController) {

@@ -290,6 +290,10 @@
 		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
 		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
 		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
+		BC961ACB267A134400DDE945 /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */; };
+		BC961ACC267A134400DDE945 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC8267A134400DDE945 /* ActivitiesView.swift */; };
+		BC961ACD267A134400DDE945 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */; };
+		BC961ACE267A134400DDE945 /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961ACA267A134400DDE945 /* ActivitiesModel.swift */; };
 		BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C932562E0CD00495B49 /* ChatsModel.swift */; };
 		BCAF6C982562E0CD00495B49 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C942562E0CD00495B49 /* ChatsView.swift */; };
 		BCAF6C992562E0CD00495B49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C952562E0CD00495B49 /* ChatCell.swift */; };
@@ -667,6 +671,10 @@
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
 		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesTableViewCell.swift; path = Views/Communities/Activities/ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
+		BC961AC8267A134400DDE945 /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesView.swift; path = Views/Communities/Activities/ActivitiesView.swift; sourceTree = "<group>"; };
+		BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesViewController.swift; path = Views/Communities/Activities/ActivitiesViewController.swift; sourceTree = "<group>"; };
+		BC961ACA267A134400DDE945 /* ActivitiesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesModel.swift; path = Views/Communities/Activities/ActivitiesModel.swift; sourceTree = "<group>"; };
 		BCA07113258B869100288BC1 /* giphy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = giphy.mp4; path = Resources/giphy.mp4; sourceTree = "<group>"; };
 		BCAF6C932562E0CD00495B49 /* ChatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsModel.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsModel.swift; sourceTree = SOURCE_ROOT; };
 		BCAF6C942562E0CD00495B49 /* ChatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsView.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsView.swift; sourceTree = SOURCE_ROOT; };
@@ -1321,6 +1329,17 @@
 			name = Feed;
 			sourceTree = "<group>";
 		};
+		BC961AC6267A133500DDE945 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				BC961ACA267A134400DDE945 /* ActivitiesModel.swift */,
+				BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */,
+				BC961AC8267A134400DDE945 /* ActivitiesView.swift */,
+				BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */,
+			);
+			name = Activities;
+			sourceTree = "<group>";
+		};
 		BCAF6C552562B1FC00495B49 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,6 +1374,7 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
+				BC961AC6267A133500DDE945 /* Activities */,
 				BC7217F5260CBE23000E840F /* Feed */,
 				BCAF6C552562B1FC00495B49 /* Chats */,
 				BCEA4165254AE14A00BDF883 /* Groups */,
@@ -1761,6 +1781,7 @@
 				BC680F502074D08700A3551E /* VKAuthorizationResult.m in Sources */,
 				BCEA4186254AE37600BDF883 /* AddGroupMemberViewController.swift in Sources */,
 				BC7217FD260CBE30000E840F /* FeedViewController.swift in Sources */,
+				BC961ACE267A134400DDE945 /* ActivitiesModel.swift in Sources */,
 				BC66931D24B765160094479F /* TagsModel.swift in Sources */,
 				BC7217FC260CBE30000E840F /* ActivityTableViewCell.swift in Sources */,
 				BC54CE9D242382BC00FE539F /* ActivityIndicatorViewController.m in Sources */,
@@ -1816,6 +1837,7 @@
 				BC14379024320A2600472329 /* UsersModel.swift in Sources */,
 				BC680EF32074D08600A3551E /* VKApiDocs.m in Sources */,
 				BC54CE372423819100FE539F /* UserTableViewCell.swift in Sources */,
+				BC961ACC267A134400DDE945 /* ActivitiesView.swift in Sources */,
 				BC680F322074D08600A3551E /* VKRequest.m in Sources */,
 				BC66932024B765160094479F /* TagTableViewCell.swift in Sources */,
 				BC54CE78242382BC00FE539F /* UserIdentityViewController.m in Sources */,
@@ -1825,7 +1847,9 @@
 				BC680F3C2074D08700A3551E /* NSString+MD5.m in Sources */,
 				BC680F2A2074D08600A3551E /* VKHTTPOperation.m in Sources */,
 				BC680F542074D08700A3551E /* VKBundle.m in Sources */,
+				BC961ACD267A134400DDE945 /* ActivitiesViewController.swift in Sources */,
 				BCEA4173254AE34F00BDF883 /* GroupsViewController.swift in Sources */,
+				BC961ACB267A134400DDE945 /* ActivitiesTableViewCell.swift in Sources */,
 				99F26AF419A65BE5006D3B1A /* main.m in Sources */,
 				BC5507B122DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m in Sources */,
 				BC680F0C2074D08600A3551E /* VKLikes.m in Sources */,

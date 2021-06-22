@@ -12,6 +12,7 @@ class TopicsView {
 
     var viewController: TopicsViewController
     var showFollowersOfTopic: ((String) -> Void)?
+	var showFeed: ((String) -> Void)?
 
     init() {
         self.viewController = TopicsViewController()
@@ -24,7 +25,11 @@ extension TopicsView: TopicTableViewControllerDelegate {
         self.showFollowersOfTopic?(ofTopic)
     }
 
-    func onShowFeed(_ ofTopic: String) {
+	func onShowPlainFeed(_ ofTopic: String) {
+		self.showFeed?(ofTopic)
+	}
+
+    func onShowFeedUI(_ ofTopic: String) {
         let query = ActivitiesQuery.inTopic(ofTopic)
         let activitiesView = GetSocialUIActivityFeedView.init(for: query)
         activitiesView.setActionHandler { action in

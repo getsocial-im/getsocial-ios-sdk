@@ -11,6 +11,7 @@ protocol TopicTableViewControllerDelegate {
     func onShowFollowers(_ ofTopic: String)
 	func onShowFeed(_ ofTopic: String, byCurrentUser: Bool)
     func onPostActivity(_ topic: String)
+	func onShowPlainFeed(_ ofTopic: String)
 }
 
 class TopicsViewController: UIViewController {
@@ -153,9 +154,12 @@ extension TopicsViewController: TopicTableViewCellDelegate {
                 self.showAlert(withText: topic.description)
             }
         }))
-        actionSheet.addAction(UIAlertAction.init(title: "Feed", style: .default, handler: { _ in
+        actionSheet.addAction(UIAlertAction.init(title: "Feed UI", style: .default, handler: { _ in
 			self.delegate?.onShowFeed(topicId, byCurrentUser: false)
         }))
+		actionSheet.addAction(UIAlertAction.init(title: "Feed", style: .default, handler: { _ in
+			self.delegate?.onShowPlainFeed(topicId)
+		}))
 		actionSheet.addAction(UIAlertAction.init(title: "Activities created by Me", style: .default, handler: { _ in
 			self.delegate?.onShowFeed(topicId, byCurrentUser: true)
 		}))
