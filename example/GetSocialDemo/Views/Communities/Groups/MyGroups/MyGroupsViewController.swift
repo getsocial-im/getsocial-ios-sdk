@@ -9,8 +9,11 @@ import UIKit
 
 protocol MyGroupTableViewControllerDelegate {
     func onShowFeed(_ ofGroupId: String)
+	func onShowPolls(_ ofGroupId: String)
+	func onShowAnnouncementsPolls(_ ofGroupId: String)
     func onShowGroupMembers(_ ofGroupId: String, role: Role)
     func onPostActivity(_ groupId: String)
+	func onCreatePoll(_ groupId: String)
     func onEditGroup(_ group: Group)
 }
 
@@ -156,6 +159,12 @@ extension MyGroupsViewController: GroupTableViewCellDelegate {
                 actionSheet.addAction(UIAlertAction.init(title: "Show Feed", style: .default, handler: { _ in
                     self.delegate?.onShowFeed(groupId)
                 }))
+				actionSheet.addAction(UIAlertAction.init(title: "Activities with Polls", style: .default, handler: { _ in
+					self.delegate?.onShowPolls(groupId)
+				}))
+				actionSheet.addAction(UIAlertAction.init(title: "Announcements with Polls", style: .default, handler: { _ in
+					self.delegate?.onShowAnnouncementsPolls(groupId)
+				}))
             }
             if status == .member {
                 if let role = role {
@@ -168,6 +177,11 @@ extension MyGroupsViewController: GroupTableViewCellDelegate {
                         self.delegate?.onPostActivity(groupId)
                     }))
                 }
+				if group.settings.isActionAllowed(action: .post) {
+					actionSheet.addAction(UIAlertAction.init(title: "Create Poll", style: .default, handler: { _ in
+						self.delegate?.onCreatePoll(groupId)
+					}))
+				}
                 if role == .admin || role == .owner {
                     actionSheet.addAction(UIAlertAction.init(title: "Edit", style: .default, handler: { _ in
                         self.delegate?.onEditGroup(group)

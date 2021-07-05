@@ -96,6 +96,7 @@ NSString *const kCustomProvider = @"custom";
 @property(nonatomic, strong) ParentMenuItem *languageMenu;
 @property(nonatomic, strong) ParentMenuItem *smartInvitesMenu;
 @property(nonatomic, strong) ParentMenuItem *activitiesMenu;
+@property(nonatomic, strong) ParentMenuItem *pollsMenu;
 @property(nonatomic, strong) ParentMenuItem *settingsMenu;
 @property(nonatomic, strong) ParentMenuItem *userAuthenticationMenu;
 
@@ -1004,6 +1005,7 @@ NSString *const kCustomProvider = @"custom";
 - (void)showChooseActivityAlert
 {
     GetSocialActivitiesQuery *query = [[GetSocialActivitiesQuery everywhere] byUserWithId:[GetSocialUserId currentUser]];
+	query = [query withPollStatus:GetSocialPollStatusWithoutPoll];
     GetSocialActivitiesPagingQuery* pagingQuery = [[GetSocialActivitiesPagingQuery alloc] initWithQuery:query];
 
     [GetSocialCommunities activitiesWithQuery:pagingQuery success:^(GetSocialActivitiesPagingResult * result) {
@@ -1012,9 +1014,9 @@ NSString *const kCustomProvider = @"custom";
         for (GetSocialActivity *activity in result.activities)
         {
             if ([activity.author.userId isEqualToString:GetSocial.currentUser.userId]) {
-                [activities addObject:activity];
-                NSString* text = activity.text != nil ? activity.text : activity.activityId;
-                [activityContents addObject:text];
+				[activities addObject:activity];
+				NSString* text = activity.text != nil ? activity.text : activity.activityId;
+				[activityContents addObject:text];
             }
         }
         UISimpleAlertViewController *alertViewController =

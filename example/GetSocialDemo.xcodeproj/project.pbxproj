@@ -284,16 +284,31 @@
 		BC7217FB260CBE30000E840F /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F7260CBE30000E840F /* FeedModel.swift */; };
 		BC7217FC260CBE30000E840F /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */; };
 		BC7217FD260CBE30000E840F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7217F9260CBE30000E840F /* FeedViewController.swift */; };
+		BC77E89B263FF35000F06273 /* PollOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E898263FF34F00F06273 /* PollOptionView.swift */; };
+		BC77E89C263FF35000F06273 /* CreatePollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E899263FF34F00F06273 /* CreatePollViewModel.swift */; };
+		BC77E89D263FF35000F06273 /* CreatePollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E89A263FF35000F06273 /* CreatePollView.swift */; };
+		BC77E8AF263FF3F400F06273 /* PollsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8AB263FF3F400F06273 /* PollsModel.swift */; };
+		BC77E8B0263FF3F400F06273 /* PollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8AC263FF3F400F06273 /* PollTableViewCell.swift */; };
+		BC77E8B1263FF3F400F06273 /* PollsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8AD263FF3F400F06273 /* PollsViewController.swift */; };
+		BC77E8B2263FF3F400F06273 /* PollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8AE263FF3F400F06273 /* PollsView.swift */; };
+		BC77E8E1263FF4F100F06273 /* VoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8E0263FF4F100F06273 /* VoteViewModel.swift */; };
+		BC77E8E8263FF50E00F06273 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8E7263FF50E00F06273 /* VoteViewController.swift */; };
+		BC77E8FA263FF5E000F06273 /* VoteOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E8F9263FF5E000F06273 /* VoteOptionTableViewCell.swift */; };
+		BC77E9432645827300F06273 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E9412645827200F06273 /* GenericTableViewCell.swift */; };
+		BC77E9442645827300F06273 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E9422645827200F06273 /* GenericTableViewController.swift */; };
+		BC77E955264583E800F06273 /* VotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E954264583E800F06273 /* VotesListViewController.swift */; };
+		BC77E95B264583F500F06273 /* VotesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E95A264583F500F06273 /* VotesListModel.swift */; };
+		BC77E9652645858100F06273 /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77E9642645858100F06273 /* VoteView.swift */; };
 		BC9286421FD8282500306B6E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC92863F1FD8282400306B6E /* Crashlytics.framework */; };
 		BC9286431FD8282500306B6E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286401FD8282500306B6E /* FirebaseCore.framework */; };
 		BC9286441FD8282500306B6E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286411FD8282500306B6E /* Fabric.framework */; };
 		BC9286461FD828C800306B6E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9286451FD828C800306B6E /* libstdc++.tbd */; };
 		BC9286471FD828EA00306B6E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1DE1F21E2CD633007AE67F /* libz.tbd */; };
 		BC9286491FD82A0300306B6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9286481FD82A0200306B6E /* GoogleService-Info.plist */; };
-		BC961ACB267A134400DDE945 /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */; };
-		BC961ACC267A134400DDE945 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC8267A134400DDE945 /* ActivitiesView.swift */; };
-		BC961ACD267A134400DDE945 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */; };
-		BC961ACE267A134400DDE945 /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961ACA267A134400DDE945 /* ActivitiesModel.swift */; };
+		BC961B92267B3C8F00DDE945 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961B8E267B3C8F00DDE945 /* ActivitiesView.swift */; };
+		BC961B93267B3C8F00DDE945 /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961B8F267B3C8F00DDE945 /* ActivitiesTableViewCell.swift */; };
+		BC961B94267B3C8F00DDE945 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961B90267B3C8F00DDE945 /* ActivitiesViewController.swift */; };
+		BC961B95267B3C8F00DDE945 /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC961B91267B3C8F00DDE945 /* ActivitiesModel.swift */; };
 		BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C932562E0CD00495B49 /* ChatsModel.swift */; };
 		BCAF6C982562E0CD00495B49 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C942562E0CD00495B49 /* ChatsView.swift */; };
 		BCAF6C992562E0CD00495B49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAF6C952562E0CD00495B49 /* ChatCell.swift */; };
@@ -666,15 +681,30 @@
 		BC7217F7260CBE30000E840F /* FeedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedModel.swift; path = Views/Communities/Feed/FeedModel.swift; sourceTree = "<group>"; };
 		BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityTableViewCell.swift; path = Views/Communities/Feed/ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		BC7217F9260CBE30000E840F /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = Views/Communities/Feed/FeedViewController.swift; sourceTree = "<group>"; };
+		BC77E898263FF34F00F06273 /* PollOptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollOptionView.swift; sourceTree = "<group>"; };
+		BC77E899263FF34F00F06273 /* CreatePollViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePollViewModel.swift; sourceTree = "<group>"; };
+		BC77E89A263FF35000F06273 /* CreatePollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePollView.swift; sourceTree = "<group>"; };
+		BC77E8AB263FF3F400F06273 /* PollsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsModel.swift; sourceTree = "<group>"; };
+		BC77E8AC263FF3F400F06273 /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
+		BC77E8AD263FF3F400F06273 /* PollsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsViewController.swift; sourceTree = "<group>"; };
+		BC77E8AE263FF3F400F06273 /* PollsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsView.swift; sourceTree = "<group>"; };
+		BC77E8E0263FF4F100F06273 /* VoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewModel.swift; sourceTree = "<group>"; };
+		BC77E8E7263FF50E00F06273 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		BC77E8F9263FF5E000F06273 /* VoteOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteOptionTableViewCell.swift; sourceTree = "<group>"; };
+		BC77E9412645827200F06273 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericTableViewCell.swift; path = Views/Communities/Generic/GenericTableViewCell.swift; sourceTree = "<group>"; };
+		BC77E9422645827200F06273 /* GenericTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericTableViewController.swift; path = Views/Communities/Generic/GenericTableViewController.swift; sourceTree = "<group>"; };
+		BC77E954264583E800F06273 /* VotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesListViewController.swift; sourceTree = "<group>"; };
+		BC77E95A264583F500F06273 /* VotesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesListModel.swift; sourceTree = "<group>"; };
+		BC77E9642645858100F06273 /* VoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 		BC92863F1FD8282400306B6E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = GetSocialDemo/Vendor/Crashlytics.framework; sourceTree = "<group>"; };
 		BC9286401FD8282500306B6E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = GetSocialDemo/Vendor/FirebaseCore.framework; sourceTree = "<group>"; };
 		BC9286411FD8282500306B6E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = GetSocialDemo/Vendor/Fabric.framework; sourceTree = "<group>"; };
 		BC9286451FD828C800306B6E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		BC9286481FD82A0200306B6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesTableViewCell.swift; path = Views/Communities/Activities/ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
-		BC961AC8267A134400DDE945 /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesView.swift; path = Views/Communities/Activities/ActivitiesView.swift; sourceTree = "<group>"; };
-		BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesViewController.swift; path = Views/Communities/Activities/ActivitiesViewController.swift; sourceTree = "<group>"; };
-		BC961ACA267A134400DDE945 /* ActivitiesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesModel.swift; path = Views/Communities/Activities/ActivitiesModel.swift; sourceTree = "<group>"; };
+		BC961B8E267B3C8F00DDE945 /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesView.swift; path = Views/Communities/Activities/ActivitiesView.swift; sourceTree = "<group>"; };
+		BC961B8F267B3C8F00DDE945 /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesTableViewCell.swift; path = Views/Communities/Activities/ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
+		BC961B90267B3C8F00DDE945 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesViewController.swift; path = Views/Communities/Activities/ActivitiesViewController.swift; sourceTree = "<group>"; };
+		BC961B91267B3C8F00DDE945 /* ActivitiesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesModel.swift; path = Views/Communities/Activities/ActivitiesModel.swift; sourceTree = "<group>"; };
 		BCA07113258B869100288BC1 /* giphy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = giphy.mp4; path = Resources/giphy.mp4; sourceTree = "<group>"; };
 		BCAF6C932562E0CD00495B49 /* ChatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsModel.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsModel.swift; sourceTree = SOURCE_ROOT; };
 		BCAF6C942562E0CD00495B49 /* ChatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsView.swift; path = GetSocialDemo/Views/Communities/Chats/Chats/ChatsView.swift; sourceTree = SOURCE_ROOT; };
@@ -1037,6 +1067,29 @@
 			path = Views/Communities/UsersById;
 			sourceTree = "<group>";
 		};
+		BC39AD112636EA3200F34C35 /* PollsList */ = {
+			isa = PBXGroup;
+			children = (
+				BC77E8AB263FF3F400F06273 /* PollsModel.swift */,
+				BC77E8AE263FF3F400F06273 /* PollsView.swift */,
+				BC77E8AD263FF3F400F06273 /* PollsViewController.swift */,
+				BC77E8AC263FF3F400F06273 /* PollTableViewCell.swift */,
+			);
+			name = PollsList;
+			path = Views/Communities/Polls/PollsList;
+			sourceTree = "<group>";
+		};
+		BC39AD7C263ACB6E00F34C35 /* CreatePoll */ = {
+			isa = PBXGroup;
+			children = (
+				BC77E89A263FF35000F06273 /* CreatePollView.swift */,
+				BC77E899263FF34F00F06273 /* CreatePollViewModel.swift */,
+				BC77E898263FF34F00F06273 /* PollOptionView.swift */,
+			);
+			name = CreatePoll;
+			path = Views/Communities/Polls/CreatePoll;
+			sourceTree = "<group>";
+		};
 		BC54CE262423817800FE539F /* Topics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1329,13 +1382,55 @@
 			name = Feed;
 			sourceTree = "<group>";
 		};
-		BC961AC6267A133500DDE945 /* Activities */ = {
+		BC77E8AA263FF36B00F06273 /* Polls */ = {
 			isa = PBXGroup;
 			children = (
-				BC961ACA267A134400DDE945 /* ActivitiesModel.swift */,
-				BC961AC7267A134400DDE945 /* ActivitiesTableViewCell.swift */,
-				BC961AC8267A134400DDE945 /* ActivitiesView.swift */,
-				BC961AC9267A134400DDE945 /* ActivitiesViewController.swift */,
+				BC77E93F2645820200F06273 /* VotesList */,
+				BC77E8DF263FF4CB00F06273 /* Vote */,
+				BC39AD112636EA3200F34C35 /* PollsList */,
+				BC39AD7C263ACB6E00F34C35 /* CreatePoll */,
+			);
+			name = Polls;
+			sourceTree = "<group>";
+		};
+		BC77E8DF263FF4CB00F06273 /* Vote */ = {
+			isa = PBXGroup;
+			children = (
+				BC77E8E0263FF4F100F06273 /* VoteViewModel.swift */,
+				BC77E8E7263FF50E00F06273 /* VoteViewController.swift */,
+				BC77E8F9263FF5E000F06273 /* VoteOptionTableViewCell.swift */,
+			);
+			name = Vote;
+			path = Views/Communities/Polls/Vote;
+			sourceTree = "<group>";
+		};
+		BC77E93F2645820200F06273 /* VotesList */ = {
+			isa = PBXGroup;
+			children = (
+				BC77E954264583E800F06273 /* VotesListViewController.swift */,
+				BC77E95A264583F500F06273 /* VotesListModel.swift */,
+				BC77E9642645858100F06273 /* VoteView.swift */,
+			);
+			name = VotesList;
+			path = Views/Communities/Polls/VotesList;
+			sourceTree = "<group>";
+		};
+		BC77E9402645825E00F06273 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				BC77E9412645827200F06273 /* GenericTableViewCell.swift */,
+				BC77E9422645827200F06273 /* GenericTableViewController.swift */,
+			);
+			name = Generic;
+			sourceTree = "<group>";
+		};
+		BC961B8C267B3C8000DDE945 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				BC961B91267B3C8F00DDE945 /* ActivitiesModel.swift */,
+				BC961B8F267B3C8F00DDE945 /* ActivitiesTableViewCell.swift */,
+				BC961B8E267B3C8F00DDE945 /* ActivitiesView.swift */,
+				BC961B90267B3C8F00DDE945 /* ActivitiesViewController.swift */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -1374,7 +1469,9 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
-				BC961AC6267A133500DDE945 /* Activities */,
+				BC961B8C267B3C8000DDE945 /* Activities */,
+				BC77E9402645825E00F06273 /* Generic */,
+				BC77E8AA263FF36B00F06273 /* Polls */,
 				BC7217F5260CBE23000E840F /* Feed */,
 				BCAF6C552562B1FC00495B49 /* Chats */,
 				BCEA4165254AE14A00BDF883 /* Groups */,
@@ -1781,7 +1878,6 @@
 				BC680F502074D08700A3551E /* VKAuthorizationResult.m in Sources */,
 				BCEA4186254AE37600BDF883 /* AddGroupMemberViewController.swift in Sources */,
 				BC7217FD260CBE30000E840F /* FeedViewController.swift in Sources */,
-				BC961ACE267A134400DDE945 /* ActivitiesModel.swift in Sources */,
 				BC66931D24B765160094479F /* TagsModel.swift in Sources */,
 				BC7217FC260CBE30000E840F /* ActivityTableViewCell.swift in Sources */,
 				BC54CE9D242382BC00FE539F /* ActivityIndicatorViewController.m in Sources */,
@@ -1798,6 +1894,7 @@
 				BC54CE96242382BC00FE539F /* UserViewController.m in Sources */,
 				BC680EF12074D08600A3551E /* VKApiConst.m in Sources */,
 				BCEA4178254AE35F00BDF883 /* MyGroupsView.swift in Sources */,
+				BC77E9442645827300F06273 /* GenericTableViewController.swift in Sources */,
 				BC66931F24B765160094479F /* TagsView.swift in Sources */,
 				BCEA417A254AE35F00BDF883 /* MyGroupsViewController.swift in Sources */,
 				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
@@ -1806,6 +1903,8 @@
 				BC54CEA5242382BC00FE539F /* UrlSchemeTesterViewController.m in Sources */,
 				BC54CE82242382BC00FE539F /* MessageTableViewCell.m in Sources */,
 				BC54CE2F2423818A00FE539F /* TopicTableViewCell.swift in Sources */,
+				BC77E8AF263FF3F400F06273 /* PollsModel.swift in Sources */,
+				BC77E9432645827300F06273 /* GenericTableViewCell.swift in Sources */,
 				6FA45A2B214017790040D937 /* UIStoryboard+GetSocial.m in Sources */,
 				BC537B2321358E86009D905A /* UITextField+DisableCopyAndPaste.m in Sources */,
 				BC54CE72242382BC00FE539F /* CreatePromoCodeViewController.m in Sources */,
@@ -1829,6 +1928,7 @@
 				BCEA4174254AE34F00BDF883 /* GroupTableViewCell.swift in Sources */,
 				BC54CE98242382BC00FE539F /* ConsoleViewController.m in Sources */,
 				BC680F0E2074D08600A3551E /* VKPhoto.m in Sources */,
+				BC77E8E8263FF50E00F06273 /* VoteViewController.swift in Sources */,
 				BC680EFC2074D08600A3551E /* VKApiUsers.m in Sources */,
 				BC680F122074D08600A3551E /* VKRelative.m in Sources */,
 				998876151C6D487C0071A436 /* Constants.m in Sources */,
@@ -1837,7 +1937,6 @@
 				BC14379024320A2600472329 /* UsersModel.swift in Sources */,
 				BC680EF32074D08600A3551E /* VKApiDocs.m in Sources */,
 				BC54CE372423819100FE539F /* UserTableViewCell.swift in Sources */,
-				BC961ACC267A134400DDE945 /* ActivitiesView.swift in Sources */,
 				BC680F322074D08600A3551E /* VKRequest.m in Sources */,
 				BC66932024B765160094479F /* TagTableViewCell.swift in Sources */,
 				BC54CE78242382BC00FE539F /* UserIdentityViewController.m in Sources */,
@@ -1845,14 +1944,16 @@
 				BC680F2E2074D08600A3551E /* VKObject.m in Sources */,
 				BC2E23E7243E0FC900558930 /* UsersByIdModel.swift in Sources */,
 				BC680F3C2074D08700A3551E /* NSString+MD5.m in Sources */,
+				BC77E8E1263FF4F100F06273 /* VoteViewModel.swift in Sources */,
 				BC680F2A2074D08600A3551E /* VKHTTPOperation.m in Sources */,
 				BC680F542074D08700A3551E /* VKBundle.m in Sources */,
-				BC961ACD267A134400DDE945 /* ActivitiesViewController.swift in Sources */,
 				BCEA4173254AE34F00BDF883 /* GroupsViewController.swift in Sources */,
-				BC961ACB267A134400DDE945 /* ActivitiesTableViewCell.swift in Sources */,
 				99F26AF419A65BE5006D3B1A /* main.m in Sources */,
+				BC77E8B2263FF3F400F06273 /* PollsView.swift in Sources */,
 				BC5507B122DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m in Sources */,
+				BC961B92267B3C8F00DDE945 /* ActivitiesView.swift in Sources */,
 				BC680F0C2074D08600A3551E /* VKLikes.m in Sources */,
+				BC77E8FA263FF5E000F06273 /* VoteOptionTableViewCell.swift in Sources */,
 				BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */,
 				BC14379124320A2600472329 /* UsersView.swift in Sources */,
 				BCAF6C972562E0CD00495B49 /* ChatsModel.swift in Sources */,
@@ -1861,17 +1962,23 @@
 				BCEA4189254AE38300BDF883 /* CreateGroupViewController.swift in Sources */,
 				BC54CE7E242382BC00FE539F /* UserIdentityView.m in Sources */,
 				BC54CE7C242382BC00FE539F /* CustomSmartInviteViewController.m in Sources */,
+				BC77E9652645858100F06273 /* VoteView.swift in Sources */,
+				BC77E89B263FF35000F06273 /* PollOptionView.swift in Sources */,
 				BC54CE8F242382BC00FE539F /* SetReferrerViewController.m in Sources */,
+				BC77E89C263FF35000F06273 /* CreatePollViewModel.swift in Sources */,
 				BC680F4E2074D08700A3551E /* VKAccessToken.m in Sources */,
 				BC680EF52074D08600A3551E /* VKApiFriends.m in Sources */,
 				BC680F082074D08600A3551E /* VKDocs.m in Sources */,
+				BC961B94267B3C8F00DDE945 /* ActivitiesViewController.swift in Sources */,
 				BC54CE392423819800FE539F /* CommunitiesObjCHelper.swift in Sources */,
+				BC961B95267B3C8F00DDE945 /* ActivitiesModel.swift in Sources */,
 				BC680F222074D08600A3551E /* VKApi.m in Sources */,
 				BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */,
 				BCAF6CA12562E0DC00495B49 /* ChatMessagesView.swift in Sources */,
 				BC680F562074D08700A3551E /* VKPermissions.m in Sources */,
 				BC680F062074D08600A3551E /* VKCounters.m in Sources */,
 				BC54CEA6242382BC00FE539F /* NotificationTableViewCell.m in Sources */,
+				BC961B93267B3C8F00DDE945 /* ActivitiesTableViewCell.swift in Sources */,
 				BC2E23EA243E0FC900558930 /* UsersByIdView.swift in Sources */,
 				BC54CE8A242382BC00FE539F /* MainViewController.m in Sources */,
 				BC54CE79242382BC00FE539F /* MenuTableViewController.m in Sources */,
@@ -1883,11 +1990,13 @@
 				99ABE3C41BCE7E8A00296F50 /* UserIdentityUtils.m in Sources */,
 				BCEA4185254AE37600BDF883 /* AddGroupMemberModel.swift in Sources */,
 				BC2E23E9243E0FC900558930 /* UserIdCellView.swift in Sources */,
+				BC77E8B1263FF3F400F06273 /* PollsViewController.swift in Sources */,
 				BC54CE7B242382BC00FE539F /* NotificationsViewController.m in Sources */,
 				BC680F342074D08600A3551E /* VKRequestsScheduler.m in Sources */,
 				BC54CE89242382BC00FE539F /* PostActivityViewController.m in Sources */,
 				BC54CE99242382BC00FE539F /* SendNotificationViewController.m in Sources */,
 				BC680F242074D08600A3551E /* NSError+VKError.m in Sources */,
+				BC77E95B264583F500F06273 /* VotesListModel.swift in Sources */,
 				BC54CE86242382BC00FE539F /* MainNavigationController.m in Sources */,
 				BCAF6CA22562E0DC00495B49 /* ChatMessageViewCell.swift in Sources */,
 				BC680F1E2074D08600A3551E /* VKUploadPhotoRequest.m in Sources */,
@@ -1896,6 +2005,7 @@
 				BC680F1C2074D08600A3551E /* VKUploadPhotoBase.m in Sources */,
 				BC680F462074D08700A3551E /* VKCaptchaView.m in Sources */,
 				BC680F4C2074D08700A3551E /* VKSharedTransitioningObject.m in Sources */,
+				BC77E955264583E800F06273 /* VotesListViewController.swift in Sources */,
 				BC217B171E55E22400426793 /* UIViewController+GetSocial.m in Sources */,
 				BC54CE73242382BC00FE539F /* FriendsViewController.m in Sources */,
 				BCEA4180254AE36A00BDF883 /* GroupMembersView.swift in Sources */,
@@ -1911,8 +2021,10 @@
 				BC680EED2074D08600A3551E /* VKApiBase.m in Sources */,
 				213E342349F0CE688C466F2B /* UIImage+GetSocial.m in Sources */,
 				BCAF6C9F2562E0DC00495B49 /* ChatMessagesViewController.swift in Sources */,
+				BC77E89D263FF35000F06273 /* CreatePollView.swift in Sources */,
 				BC7217FA260CBE30000E840F /* FeedView.swift in Sources */,
 				BC680F362074D08600A3551E /* VKResponse.m in Sources */,
+				BC77E8B0263FF3F400F06273 /* PollTableViewCell.swift in Sources */,
 				BC54CE75242382BC00FE539F /* FriendsTableViewCell.m in Sources */,
 				BC680EF72074D08600A3551E /* VKApiGroups.m in Sources */,
 				BC680F282074D08600A3551E /* VKHTTPClient.m in Sources */,

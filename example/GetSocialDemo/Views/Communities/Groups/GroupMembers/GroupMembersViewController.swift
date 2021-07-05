@@ -13,12 +13,14 @@ class GroupMembersViewController: UIViewController {
 
     private let model: GroupMembersModel
     private let tableView: UITableView
+	private let statusControl: UISegmentedControl
     var groupId: String?
     var currentUserRole: Role?
 
     required init(_ model: GroupMembersModel) {
         self.model = model
         self.tableView = UITableView()
+		self.statusControl = UISegmentedControl()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,9 +43,16 @@ class GroupMembersViewController: UIViewController {
     }
 
     internal func layoutTableView() {
+		self.statusControl.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			self.statusControl.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor),
+			self.statusControl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+			self.statusControl.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+			self.statusControl.heightAnchor.constraint(equalToConstant: 30)
+		])
 
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        let top = tableView.topAnchor.constraint(equalTo: self.view.topAnchor)
+		let top = tableView.topAnchor.constraint(equalTo: self.statusControl.bottomAnchor)
         let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -52,6 +61,7 @@ class GroupMembersViewController: UIViewController {
     }
 
     private func setup() {
+		self.view.backgroundColor = UIDesign.Colors.viewBackground
         self.setupTableView()
         if self.currentUserRole == .admin || self.currentUserRole == .owner {
             let addMemberButton = UIBarButtonItem.init(title: "Add", style: .plain, target: self, action: #selector(addGroupMember(sender:)))
@@ -68,6 +78,15 @@ class GroupMembersViewController: UIViewController {
         self.tableView.delegate = self
 
         self.view.addSubview(self.tableView)
+
+		self.statusControl.insertSegment(withTitle: "All", at: 0, animated: false)
+		self.statusControl.insertSegment(withTitle: "Approved", at: 1, animated: false)
+		self.statusControl.insertSegment(withTitle: "Approval pending", at: 2, animated: false)
+		self.statusControl.insertSegment(withTitle: "Invite pending", at: 3, animated: false)
+		self.statusControl.selectedSegmentIndex = 0
+		self.statusControl.addTarget(self, action: #selector(statusControlValueChanged), for: .valueChanged)
+
+		self.view.addSubview(self.statusControl)
     }
     
     private func setupModel() {
@@ -91,11 +110,29 @@ class GroupMembersViewController: UIViewController {
         }
     }
     
-    private func executeQuery() {
+	private func executeQuery(_ status: MemberStatus? = nil) {
         self.showActivityIndicatorView()
-        self.model.loadMembers(MembersQuery.ofGroup(self.groupId!))
+		var query = MembersQuery.ofGroup(self.groupId!)
+		if let status = status {
+			query = query.withStatus(status)
+		}
+		self.model.loadMembers(query)
     }
-    
+
+	@objc
+	func statusControlValueChanged() {
+		switch self.statusControl.selectedSegmentIndex {
+			case 1:
+				executeQuery(.member)
+			case 2:
+				executeQuery(.approvalPending)
+			case 3:
+				executeQuery(.invitationPending)
+			default:
+				executeQuery()
+		}
+	}
+
     @objc
     func addGroupMember(sender: Any) {
         let vc = AddGroupMemberViewController(self.groupId!)

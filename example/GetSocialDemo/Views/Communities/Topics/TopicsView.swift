@@ -12,7 +12,10 @@ class TopicsView {
 
     var viewController: TopicsViewController
     var showFollowersOfTopic: ((String) -> Void)?
+	var showPolls: ((String) -> Void)?
+	var showAnnouncementsPolls: ((String) -> Void)?
 	var showFeed: ((String) -> Void)?
+	var showPlainFeed: ((String) -> Void)?
 
     init() {
         self.viewController = TopicsViewController()
@@ -24,6 +27,18 @@ extension TopicsView: TopicTableViewControllerDelegate {
     func onShowFollowers(_ ofTopic: String) {
         self.showFollowersOfTopic?(ofTopic)
     }
+
+	func onShowPolls(_ inTopic: String) {
+		self.showPolls?(inTopic)
+	}
+
+	func onShowAnnouncementsPolls(_ inTopic: String) {
+		self.showAnnouncementsPolls?(inTopic)
+	}
+
+    func onShowFeed(_ ofTopic: String) {
+		self.onShowFeedUI(ofTopic)
+	}
 
 	func onShowPlainFeed(_ ofTopic: String) {
 		self.showFeed?(ofTopic)
@@ -70,4 +85,10 @@ extension TopicsView: TopicTableViewControllerDelegate {
         vc.postTarget = target
         self.viewController.navigationController?.pushViewController(vc, animated: true)
     }
+
+	func onCreatePoll(_ topic: String) {
+		let target = PostActivityTarget.topic(topic)
+		let vc = CreatePollView(target)
+		self.viewController.navigationController?.pushViewController(vc, animated: true)
+	}
 }

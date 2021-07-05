@@ -462,12 +462,14 @@ class CreateGroupViewController: UIViewController {
             showAlert(withText: "Group ID is mandatory!")
             return
         }
-        guard let groupTitle = self.titleLabel.text, groupTitle.count > 0 else {
-            showAlert(withText: "Name is mandatory!")
-            return
-        }
+		if self.oldGroup == nil {
+			guard let groupTitle = self.titleText.text, groupTitle.count > 0 else {
+				showAlert(withText: "Name is mandatory!")
+				return
+			}
+		}
         let groupContent = GroupContent(groupId: groupId)
-        groupContent.title = self.titleText.text
+		groupContent.title = self.titleText.text?.count == 0 ? nil : self.titleText.text
         groupContent.groupDescription = self.descriptionText.text
         if let avatarImage = self.avatarImage.image {
             groupContent.avatar = MediaAttachment.image(avatarImage)

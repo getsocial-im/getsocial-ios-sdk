@@ -71,9 +71,9 @@
     NSString* event = self.eventTF.text;
     NSMutableDictionary<NSString*, NSString*>* customData = [NSMutableDictionary new];
     [self.customDataKeyFields enumerateObjectsUsingBlock:^(UITextField* keyField, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (keyField.text != nil) {
+        if (keyField.text != nil && keyField.text.length > 0) {
             NSString* value = self.customDataValueFields[idx].text;
-            if (value != nil) {
+            if (value != nil && value.length > 0) {
                 customData[keyField.text] = value;
             }
         }

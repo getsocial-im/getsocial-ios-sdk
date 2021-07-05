@@ -12,6 +12,8 @@ class MyGroupsView {
 
     var viewController: MyGroupsViewController
     var showGroupMembersOfGroup: ((String, Role) -> Void)?
+	var showPolls: ((String) -> Void)?
+	var showAnnouncementsPolls: ((String) -> Void)?
 
     init() {
         self.viewController = MyGroupsViewController()
@@ -67,6 +69,14 @@ extension MyGroupsView: MyGroupTableViewControllerDelegate {
         GetSocialUI.show(activitiesView)
     }
 
+	func onShowPolls(_ inGroup: String) {
+		self.showPolls?(inGroup)
+	}
+
+	func onShowAnnouncementsPolls(_ inGroup: String) {
+		self.showAnnouncementsPolls?(inGroup)
+	}
+
     func onPostActivity(_ groupId: String) {
         let target = PostActivityTarget.group(groupId)
         let vc = UIStoryboard.viewController(forName: "PostActivity", in: .activityFeed) as! PostActivityViewController
@@ -77,5 +87,11 @@ extension MyGroupsView: MyGroupTableViewControllerDelegate {
     func onShowGroupMembers(_ ofGroupId: String, role: Role) {
         self.showGroupMembersOfGroup?(ofGroupId, role)
     }
+
+	func onCreatePoll(_ groupId: String) {
+		let target = PostActivityTarget.group(groupId)
+		let vc = CreatePollView(target)
+		self.viewController.navigationController?.pushViewController(vc, animated: true)
+	}
 
 }

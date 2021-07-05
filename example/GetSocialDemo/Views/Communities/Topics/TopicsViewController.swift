@@ -9,8 +9,11 @@ import UIKit
 
 protocol TopicTableViewControllerDelegate {
     func onShowFollowers(_ ofTopic: String)
+	func onShowPolls(_ inTopic: String)
+	func onShowAnnouncementsPolls(_ inTopic: String)
 	func onShowFeed(_ ofTopic: String, byCurrentUser: Bool)
     func onPostActivity(_ topic: String)
+	func onCreatePoll(_ topic: String)
 	func onShowPlainFeed(_ ofTopic: String)
 }
 
@@ -160,6 +163,12 @@ extension TopicsViewController: TopicTableViewCellDelegate {
 		actionSheet.addAction(UIAlertAction.init(title: "Feed", style: .default, handler: { _ in
 			self.delegate?.onShowPlainFeed(topicId)
 		}))
+		actionSheet.addAction(UIAlertAction.init(title: "Activities with Polls", style: .default, handler: { _ in
+			self.delegate?.onShowPolls(topicId)
+		}))
+		actionSheet.addAction(UIAlertAction.init(title: "Announcements with Polls", style: .default, handler: { _ in
+			self.delegate?.onShowAnnouncementsPolls(topicId)
+		}))
 		actionSheet.addAction(UIAlertAction.init(title: "Activities created by Me", style: .default, handler: { _ in
 			self.delegate?.onShowFeed(topicId, byCurrentUser: true)
 		}))
@@ -173,8 +182,11 @@ extension TopicsViewController: TopicTableViewCellDelegate {
             actionSheet.addAction(UIAlertAction.init(title: "Post", style: .default, handler: { _ in
                 self.delegate?.onPostActivity(topicId)
             }))
+			actionSheet.addAction(UIAlertAction.init(title: "Create Poll", style: .default, handler: { _ in
+				self.delegate?.onCreatePoll(topicId)
+			}))
         }
         actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        self.present(actionSheet, animated: true, completion: nil)
+		self.present(actionSheet, animated: true, completion: nil)
     }
 }

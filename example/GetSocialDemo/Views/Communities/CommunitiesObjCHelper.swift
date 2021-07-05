@@ -25,9 +25,15 @@ public class CommunitiesHelper: NSObject {
             }
             navigationController.pushViewController(followersView.viewController, animated: true)
         }
+		topicsView.showPolls = { topicId in
+			self.showPolls(navigationController: navigationController, query: ActivitiesQuery.inTopic(topicId))
+		}
 		topicsView.showFeed = { topicId in
 			let view = ActivitiesView(ActivitiesQuery.inTopic(topicId))
 			navigationController.pushViewController(view.viewController, animated: true)
+		}
+		topicsView.showAnnouncementsPolls = { topicId in
+			self.showAnnouncementPolls(navigationController: navigationController, query: AnnouncementsQuery.inTopic(topicId))
 		}
     }
 
@@ -42,6 +48,12 @@ public class CommunitiesHelper: NSObject {
             
             navigationController.pushViewController(groupMembersView.viewController, animated: true)
         }
+		groupsView.showPolls = { groupId in
+			self.showPolls(navigationController: navigationController, query: ActivitiesQuery.inGroup(groupId))
+		}
+		groupsView.showAnnouncementsPolls = { groupId in
+			self.showAnnouncementPolls(navigationController: navigationController, query: AnnouncementsQuery.inGroup(groupId))
+		}
     }
 
     public static func showFollowers(navigationController: UINavigationController) {
@@ -108,6 +120,12 @@ public class CommunitiesHelper: NSObject {
             
             navigationController.pushViewController(groupMembersView.viewController, animated: true)
         }
+		myGroups.showPolls = { groupId in
+			self.showPolls(navigationController: navigationController, query: ActivitiesQuery.inGroup(groupId))
+		}
+		myGroups.showAnnouncementsPolls = { groupId in
+			self.showAnnouncementPolls(navigationController: navigationController, query: AnnouncementsQuery.inGroup(groupId))
+		}
         navigationController.pushViewController(myGroups.viewController, animated: true)
     }
 
@@ -136,4 +154,45 @@ public class CommunitiesHelper: NSObject {
         navigationController.pushViewController(chatsView.viewController, animated: true)
     }
 
+	public static func showCreatePoll(navigationController: UINavigationController, target: PostActivityTarget) {
+		let createPollView = CreatePollView(target)
+		navigationController.pushViewController(createPollView, animated: true)
+	}
+
+	public static func showAnnouncementPolls(navigationController: UINavigationController, query: AnnouncementsQuery) {
+		let pollsView = PollsView(query)
+		pollsView.showVote = { activity in
+			self.showVote(navigationController: navigationController, activity: activity)
+		}
+		pollsView.showAllVotes = { activity in
+			self.showAllVotes(navigationController: navigationController, activity: activity)
+		}
+		navigationController.pushViewController(pollsView.viewController, animated: true)
+	}
+
+	public static func showPolls(navigationController: UINavigationController, query: ActivitiesQuery) {
+		let pollsView = PollsView(query)
+		pollsView.showVote = { activity in
+			self.showVote(navigationController: navigationController, activity: activity)
+		}
+		pollsView.showAllVotes = { activity in
+			self.showAllVotes(navigationController: navigationController, activity: activity)
+		}
+		navigationController.pushViewController(pollsView.viewController, animated: true)
+	}
+
+	public static func showVote(navigationController: UINavigationController, activity: Activity) {
+		let voteView = VoteViewController(activity.id)
+		navigationController.pushViewController(voteView, animated: true)
+	}
+
+	public static func showAllVotes(navigationController: UINavigationController, activity: Activity) {
+		let voteView = VoteListViewController(activity.id)
+		navigationController.pushViewController(voteView, animated: true)
+	}
+
+}
+
+enum GetSocialDemoError: Error {
+	case missingParameter(String)
 }
