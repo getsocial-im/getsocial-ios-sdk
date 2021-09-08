@@ -108,6 +108,14 @@
         [details appendString:@"\n\n"];
     }];
 
+	[details appendString:@"\n\nBan Info\n\n"];
+	NSString* isBanned = GetSocial.currentUser.isBanned ? @"YES": @"NO";
+	[details appendFormat:@"Is banned: %@\n", isBanned];
+	if (GetSocial.currentUser.isBanned) {
+		[details appendFormat:@"Expiry: %lld\n", GetSocial.currentUser.banInfo.expiration];
+		[details appendFormat:@"Reason: %@\n", GetSocial.currentUser.banInfo.reason];
+	}
+
     [details appendString:@"\n\nJSON\n\n"];
 
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userDetails options:NSJSONWritingPrettyPrinted error:nil];
