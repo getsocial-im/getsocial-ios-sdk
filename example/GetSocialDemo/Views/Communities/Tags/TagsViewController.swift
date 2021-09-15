@@ -11,15 +11,24 @@ class TagsViewController: UIViewController {
 
     var viewModel: TagsModel = TagsModel()
     var loadingOlders: Bool = false
+	var sortBy: String?
+	var sortOrder: String?
+	var showOnlyTrending = false
 
     var searchBar: UISearchBar = UISearchBar()
     var tableView: UITableView = UITableView()
+	var sortButton: UIBarButtonItem!
+	var trendingButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = .white
         self.tableView.register(TagTableViewCell.self, forCellReuseIdentifier: "tagtableviewcell")
         self.tableView.allowsSelection = false
+
+		self.sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSort))
+		self.trendingButton = UIBarButtonItem(title: "Only Trending", style: .plain, target: self, action: #selector(showTrending))
+		self.navigationItem.rightBarButtonItems = [trendingButton]
 
         self.viewModel.onInitialDataLoaded = {
             self.hideActivityIndicatorView()
@@ -46,13 +55,44 @@ class TagsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.executeQuery(searchTerm: nil)
+		self.executeQuery(searchTerm: self.searchBar.text)
     }
 
     override func viewWillLayoutSubviews() {
         layoutSearchBar()
         layoutTableView()
     }
+
+	@objc
+	func showTrending(sender: Any?) {
+		self.showOnlyTrending.toggle()
+		self.sortButton.isEnabled = !self.showOnlyTrending
+		self.trendingButton.title = self.showOnlyTrending ? "All": "Only Trending"
+		// use default sorting after changing isTrending
+		self.sortBy = nil
+		self.sortOrder = nil
+		self.executeQuery(searchTerm: self.searchBar.text)
+	}
+
+	@objc
+	func showSort(sender: Any?) {
+		var sortOptions: [(String, String)] = []
+		if self.showOnlyTrending {
+			sortOptions = []
+		} else {
+			sortOptions = [
+				("name",""),
+				("name","-")
+			]
+		}
+		let vc = SortOrderDialog(sortOptions, selectedOptionIndex: 3)
+		vc.onOptionSelected = { selectedIndex in
+			self.sortBy = sortOptions[selectedIndex].0
+			self.sortOrder = sortOptions[selectedIndex].1
+			self.navigationController?.popViewController(animated: true)
+		}
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 
     internal func layoutSearchBar() {
 
@@ -81,7 +121,8 @@ class TagsViewController: UIViewController {
 
     private func executeQuery(searchTerm: String?) {
         self.showActivityIndicatorView()
-        let query = TagsQuery.find(searchTerm ?? "")
+        var query = TagsQuery.find(searchTerm ?? "")
+		query = query.onlyTrending(self.showOnlyTrending)
         self.viewModel.loadEntries(query: query)
     }
 }

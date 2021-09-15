@@ -13,9 +13,18 @@ class ActivitiesViewController: UIViewController {
     let viewModel: ActivitiesModel
 
     var tableView: UITableView = UITableView()
+	var sortBy: String?
+	var sortOrder: String?
+	var showOnlyTrending = false
+
+	var sortButton: UIBarButtonItem!
+	var trendingButton: UIBarButtonItem!
+
+	let initialQuery: ActivitiesQuery
 
 	init(_ query: ActivitiesQuery) {
-		self.viewModel = ActivitiesModel(query)
+		self.initialQuery = query
+		self.viewModel = ActivitiesModel()
 		super.init(nibName: nil, bundle: nil)
 	}
 
@@ -28,6 +37,10 @@ class ActivitiesViewController: UIViewController {
         self.tableView.backgroundColor = .white
         self.tableView.register(ActivitiesTableViewCell.self, forCellReuseIdentifier: "activitiestableviewcell")
         self.tableView.allowsSelection = false
+
+		self.sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSort))
+		self.trendingButton = UIBarButtonItem(title: "Only Trending", style: .plain, target: self, action: #selector(showTrending))
+		self.navigationItem.rightBarButtonItems = [trendingButton]
 
         self.viewModel.onInitialDataLoaded = {
             self.hideActivityIndicatorView()
@@ -54,7 +67,9 @@ class ActivitiesViewController: UIViewController {
 
 	internal func executeQuery() {
 		self.showActivityIndicatorView()
-		self.viewModel.loadEntries()
+		var query = self.initialQuery.copy() as! ActivitiesQuery
+		query = query.onlyTrending(self.showOnlyTrending)
+		self.viewModel.loadEntries(query)
 	}
 
     internal func layoutTableView() {
@@ -69,11 +84,41 @@ class ActivitiesViewController: UIViewController {
         NSLayoutConstraint.activate([left, top, right, bottom])
     }
 
+	@objc
+	func showTrending(sender: Any?) {
+		self.showOnlyTrending.toggle()
+		self.sortButton.isEnabled = !self.showOnlyTrending
+		self.trendingButton.title = self.showOnlyTrending ? "All": "Only Trending"
+		// use default sorting after changing isTrending
+		self.sortBy = "nil"
+		self.sortOrder = nil
+		self.executeQuery()
+	}
+
+	@objc
+	func showSort(sender: Any?) {
+		var sortOptions: [(String, String)] = []
+		if self.showOnlyTrending {
+			sortOptions = []
+		} else {
+			sortOptions = [
+				("createdAt",""),
+				("createdAt","-")]
+		}
+		let vc = SortOrderDialog(sortOptions, selectedOptionIndex: 3)
+		vc.onOptionSelected = { selectedIndex in
+			self.sortBy = sortOptions[selectedIndex].0
+			self.sortOrder = sortOptions[selectedIndex].1
+			self.navigationController?.popViewController(animated: true)
+		}
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+
 }
 
 extension ActivitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 90
     }
 }
 

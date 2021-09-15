@@ -340,6 +340,7 @@
 		BCEA418A254AE38300BDF883 /* CreateGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEA4188254AE38200BDF883 /* CreateGroupModel.swift */; };
 		BCF0A9D7260506F10006B632 /* UIDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0A9D6260506F10006B632 /* UIDesign.swift */; };
 		BCF0A9DF260508350006B632 /* giphy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCA07113258B869100288BC1 /* giphy.mp4 */; };
+		BCF26F8126C2B97C00706113 /* SortDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF26F8026C2B97C00706113 /* SortDialogViewController.swift */; };
 		BCF8DE7620EE4E58006DDB45 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */; };
 		BCF8DE7820EE504A006DDB45 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */; };
 		BCF8DE7A20EE5654006DDB45 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */; };
@@ -739,6 +740,7 @@
 		BCEA4187254AE38200BDF883 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = Views/Communities/Groups/CreateGroups/CreateGroupViewController.swift; sourceTree = "<group>"; };
 		BCEA4188254AE38200BDF883 /* CreateGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupModel.swift; path = Views/Communities/Groups/CreateGroups/CreateGroupModel.swift; sourceTree = "<group>"; };
 		BCF0A9D6260506F10006B632 /* UIDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIDesign.swift; path = Views/UIDesign.swift; sourceTree = "<group>"; };
+		BCF26F8026C2B97C00706113 /* SortDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDialogViewController.swift; sourceTree = "<group>"; };
 		BCF8DE7520EE4E58006DDB45 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoMessageTemplate.framework; path = GetSocialDemo/Vendor/KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoLink.framework; path = GetSocialDemo/Vendor/KakaoLink.framework; sourceTree = "<group>"; };
 		BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoCommon.framework; path = GetSocialDemo/Vendor/KakaoCommon.framework; sourceTree = "<group>"; };
@@ -1469,6 +1471,7 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
+				BCF26F7F26C2B93800706113 /* SortDialog */,
 				BC961B8C267B3C8000DDE945 /* Activities */,
 				BC77E9402645825E00F06273 /* Generic */,
 				BC77E8AA263FF36B00F06273 /* Polls */,
@@ -1557,6 +1560,15 @@
 				BCEA4170254AE34F00BDF883 /* GroupTableViewCell.swift */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		BCF26F7F26C2B93800706113 /* SortDialog */ = {
+			isa = PBXGroup;
+			children = (
+				BCF26F8026C2B97C00706113 /* SortDialogViewController.swift */,
+			);
+			name = SortDialog;
+			path = Views/Communities/SortDialog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1976,6 +1988,7 @@
 				BCB4729522EF1455003F3F50 /* UITextFieldWithCopyPaste.m in Sources */,
 				BCAF6CA12562E0DC00495B49 /* ChatMessagesView.swift in Sources */,
 				BC680F562074D08700A3551E /* VKPermissions.m in Sources */,
+				BCF26F8126C2B97C00706113 /* SortDialogViewController.swift in Sources */,
 				BC680F062074D08600A3551E /* VKCounters.m in Sources */,
 				BC54CEA6242382BC00FE539F /* NotificationTableViewCell.m in Sources */,
 				BC961B93267B3C8F00DDE945 /* ActivitiesTableViewCell.swift in Sources */,

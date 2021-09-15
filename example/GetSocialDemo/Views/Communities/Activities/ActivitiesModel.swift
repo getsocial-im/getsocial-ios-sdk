@@ -13,17 +13,14 @@ class ActivitiesModel {
     var onInitialDataLoaded: (() -> Void)?
     var onError: ((Error) -> Void)?
 
-	let query: ActivitiesQuery
-
-	init(_ query: ActivitiesQuery) {
-		self.query = query
+	init() {
 	}
 
     var activities: [Activity] = []
 
-    func loadEntries() {
+	func loadEntries(_ query: ActivitiesQuery) {
         self.activities.removeAll()
-        executeQuery(success: {
+        executeQuery(query, success: {
             self.onInitialDataLoaded?()
         }, failure: onError)
     }
@@ -56,8 +53,8 @@ class ActivitiesModel {
 		return index
 	}
 
-    private func executeQuery(success: (() -> Void)?, failure: ((Error) -> Void)?) {
-		let pagingQuery = ActivitiesPagingQuery(self.query)
+	private func executeQuery(_ query: ActivitiesQuery, success: (() -> Void)?, failure: ((Error) -> Void)?) {
+		let pagingQuery = ActivitiesPagingQuery(query)
         Communities.activities(pagingQuery, success: { result in
             self.activities.append(contentsOf: result.activities)
             success?()

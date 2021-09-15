@@ -10,19 +10,33 @@ import UIKit
 
 class ActivitiesTableViewCell: UITableViewCell {
 
+	static var dateFormatter: DateFormatter?
+
     var internalActivityId: String?
 
     var activityAuthor: UILabel = UILabel()
     var activityText: UILabel = UILabel()
+	var createdAtText: UILabel = UILabel()
+	var scoreText: UILabel = UILabel()
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+
+		if ActivitiesTableViewCell.dateFormatter == nil {
+			ActivitiesTableViewCell.dateFormatter = DateFormatter()
+			ActivitiesTableViewCell.dateFormatter?.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		}
 
         addUIElements()
     }
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+		if ActivitiesTableViewCell.dateFormatter == nil {
+			ActivitiesTableViewCell.dateFormatter = DateFormatter()
+			ActivitiesTableViewCell.dateFormatter?.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		}
 
 		addUIElements()
 	}
@@ -32,6 +46,11 @@ class ActivitiesTableViewCell: UITableViewCell {
 		self.internalActivityId = activity.id
 		self.activityAuthor.text = "Author: \(activity.author.displayName)"
 		self.activityText.text = "Text: \(activity.text ?? "")"
+
+		let createdAtDate = Date.init(timeIntervalSince1970: TimeInterval(activity.createdAt))
+		self.createdAtText.text = "Created: \(ActivitiesTableViewCell.dateFormatter?.string(from: createdAtDate) ?? "")"
+
+		self.scoreText.text = "Popularity: \(activity.popularity)"
     }
 
     private func addUIElements() {
@@ -52,5 +71,23 @@ class ActivitiesTableViewCell: UITableViewCell {
             self.activityText.topAnchor.constraint(equalTo: self.activityAuthor.bottomAnchor, constant: 4)
         ]
         NSLayoutConstraint.activate(activityTextConstraints)
-    }
+
+		self.createdAtText.translatesAutoresizingMaskIntoConstraints = false
+		self.createdAtText.font = self.createdAtText.font.withSize(12)
+		self.contentView.addSubview(self.createdAtText)
+		let activityCreatedAtConstraints = [
+			self.createdAtText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.createdAtText.topAnchor.constraint(equalTo: self.activityText.bottomAnchor, constant: 4)
+		]
+		NSLayoutConstraint.activate(activityCreatedAtConstraints)
+
+		self.scoreText.translatesAutoresizingMaskIntoConstraints = false
+		self.scoreText.font = self.scoreText.font.withSize(12)
+		self.contentView.addSubview(self.scoreText)
+		let activityScoreConstraints = [
+			self.scoreText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.scoreText.topAnchor.constraint(equalTo: self.createdAtText.bottomAnchor, constant: 4)
+		]
+		NSLayoutConstraint.activate(activityScoreConstraints)
+}
 }

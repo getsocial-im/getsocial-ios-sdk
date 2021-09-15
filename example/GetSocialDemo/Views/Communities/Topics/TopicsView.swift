@@ -76,6 +76,11 @@ extension TopicsView: TopicTableViewControllerDelegate {
 			}
 			return message
 		}
+		activitiesView.setHandlerForViewOpen({
+			// do nothing here
+		}, close: {
+			self.viewController.viewDidAppear(true)
+		})
 		GetSocialUI.show(activitiesView)
 	}
 

@@ -54,6 +54,11 @@ public class CommunitiesHelper: NSObject {
 		groupsView.showAnnouncementsPolls = { groupId in
 			self.showAnnouncementPolls(navigationController: navigationController, query: AnnouncementsQuery.inGroup(groupId))
 		}
+		groupsView.showPlainFeed = { groupId in
+			let view = ActivitiesView(ActivitiesQuery.inGroup(groupId))
+			navigationController.pushViewController(view.viewController, animated: true)
+		}
+
     }
 
     public static func showFollowers(navigationController: UINavigationController) {

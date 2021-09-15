@@ -65,6 +65,11 @@ extension MyGroupsView: MyGroupTableViewControllerDelegate {
                 }
             }
         }
+		activitiesView.setHandlerForViewOpen({
+			// do nothing here
+		}, close: {
+			self.viewController.viewDidAppear(true)
+		})
 
         GetSocialUI.show(activitiesView)
     }

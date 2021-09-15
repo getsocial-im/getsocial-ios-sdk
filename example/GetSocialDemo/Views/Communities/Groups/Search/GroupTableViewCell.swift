@@ -21,6 +21,7 @@ class GroupTableViewCell: UITableViewCell {
     var groupDescription: UILabel = UILabel()
     var groupCreatedAt: UILabel = UILabel()
     var groupUpdatedAt: UILabel = UILabel()
+	var groupScore: UILabel = UILabel()
     var memberStatus: UILabel = UILabel()
     var memberRole: UILabel = UILabel()
     var actionButton: UIButton = UIButton.init(type: .roundedRect)
@@ -51,6 +52,7 @@ class GroupTableViewCell: UITableViewCell {
         let updatedAtDate = Date.init(timeIntervalSince1970: TimeInterval(group.updatedAt))
         self.groupCreatedAt.text = "Created: \(GroupTableViewCell.dateFormatter?.string(from: createdAtDate) ?? "")"
         self.groupUpdatedAt.text = "Updated: \(GroupTableViewCell.dateFormatter?.string(from: updatedAtDate) ?? "")"
+		self.groupScore.text = "Popularity: \(group.popularity)"
         var status = ""
         switch group.membership?.status {
         case .approvalPending:
@@ -133,12 +135,22 @@ class GroupTableViewCell: UITableViewCell {
             self.groupUpdatedAt.heightAnchor.constraint(equalToConstant: 20)
         ])
 
+		self.groupScore.translatesAutoresizingMaskIntoConstraints = false
+		self.groupScore.font = self.groupScore.font.withSize(14)
+		self.contentView.addSubview(self.groupScore)
+		NSLayoutConstraint.activate([
+			self.groupScore.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.groupScore.topAnchor.constraint(equalTo: self.groupUpdatedAt.bottomAnchor, constant: 4),
+			self.groupScore.widthAnchor.constraint(equalToConstant: 200),
+			self.groupScore.heightAnchor.constraint(equalToConstant: 20)
+		])
+
         self.memberStatus.translatesAutoresizingMaskIntoConstraints = false
         self.memberStatus.font = self.memberStatus.font.withSize(14)
         self.contentView.addSubview(self.memberStatus)
         NSLayoutConstraint.activate([
             self.memberStatus.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.memberStatus.topAnchor.constraint(equalTo: self.groupUpdatedAt.bottomAnchor, constant: 4),
+            self.memberStatus.topAnchor.constraint(equalTo: self.groupScore.bottomAnchor, constant: 4),
             self.memberStatus.widthAnchor.constraint(equalToConstant: 200),
             self.memberStatus.heightAnchor.constraint(equalToConstant: 20)
         ])

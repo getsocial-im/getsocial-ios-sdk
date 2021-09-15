@@ -14,6 +14,7 @@ class GroupsView {
     var showGroupMembersOfGroup: ((String, Role) -> Void)?
 	var showPolls: ((String) -> Void)?
 	var showAnnouncementsPolls: ((String) -> Void)?
+	var showPlainFeed: ((String) -> Void)?
 
     init() {
         self.viewController = GroupsViewController()
@@ -68,6 +69,11 @@ extension GroupsView: GroupTableViewControllerDelegate {
                 }
             }
         }
+		activitiesView.setHandlerForViewOpen({
+			// do nothing here
+		}, close: {
+			self.viewController.viewDidAppear(true)
+		})
 
         GetSocialUI.show(activitiesView)
     }
@@ -97,4 +103,7 @@ extension GroupsView: GroupTableViewControllerDelegate {
 		self.viewController.navigationController?.pushViewController(vc, animated: true)
 	}
 
+	func onShowPlainFeed(_ ofGroup: String) {
+		self.showPlainFeed?(ofGroup)
+	}
 }

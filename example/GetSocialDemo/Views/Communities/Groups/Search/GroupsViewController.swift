@@ -15,6 +15,7 @@ protocol GroupTableViewControllerDelegate {
     func onPostActivity(_ groupId: String)
 	func onCreatePoll(_ groupId: String)
     func onEditGroup(_ group: Group)
+	func onShowPlainFeed(_ ofTopic: String)
 }
 
 class GroupsViewController: UIViewController {
@@ -26,12 +27,23 @@ class GroupsViewController: UIViewController {
     var searchBar: UISearchBar = UISearchBar()
     var tableView: UITableView = UITableView()
 
+	var sortBy: String?
+	var sortOrder: String?
+	var showOnlyTrending = false
+
+	var sortButton: UIBarButtonItem!
+	var trendingButton: UIBarButtonItem!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIDesign.Colors.viewBackground
         self.tableView.register(GroupTableViewCell.self, forCellReuseIdentifier: "grouptableviewcell")
         self.tableView.allowsSelection = false
         self.title = "Groups"
+
+		self.sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSort))
+		self.trendingButton = UIBarButtonItem(title: "Only Trending", style: .plain, target: self, action: #selector(showTrending))
+		self.navigationItem.rightBarButtonItems = [trendingButton]
 
         self.viewModel.onInitialDataLoaded = {
             self.hideActivityIndicatorView()
@@ -101,13 +113,45 @@ class GroupsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.executeQuery(searchTerm: nil)
+		self.executeQuery(searchTerm: self.searchBar.text)
     }
 
     override func viewWillLayoutSubviews() {
         layoutSearchBar()
         layoutTableView()
     }
+
+	@objc
+	func showTrending(sender: Any?) {
+		self.showOnlyTrending.toggle()
+		self.sortButton.isEnabled = !self.showOnlyTrending
+		self.trendingButton.title = self.showOnlyTrending ? "All": "Only Trending"
+		// use default sorting after changing isTrending
+		self.sortBy = nil
+		self.sortOrder = nil
+		self.executeQuery(searchTerm: self.searchBar.text)
+	}
+
+	@objc
+	func showSort(sender: Any?) {
+		var sortOptions: [(String, String)] = []
+		if self.showOnlyTrending {
+			sortOptions = []
+		} else {
+			sortOptions = [
+				("id",""),
+				("id","-"),
+				("createdAt",""),
+				("createdAt","-")]
+		}
+		let vc = SortOrderDialog(sortOptions, selectedOptionIndex: 3)
+		vc.onOptionSelected = { selectedIndex in
+			self.sortBy = sortOptions[selectedIndex].0
+			self.sortOrder = sortOptions[selectedIndex].1
+			self.navigationController?.popViewController(animated: true)
+		}
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
 
     internal func layoutSearchBar() {
 
@@ -136,7 +180,8 @@ class GroupsViewController: UIViewController {
 
     private func executeQuery(searchTerm: String?) {
         self.showActivityIndicatorView()
-        let query = GroupsQuery.find(searchTerm ?? "")
+        var query = GroupsQuery.find(searchTerm ?? "")
+		query = query.onlyTrending(self.showOnlyTrending)
         self.viewModel.loadEntries(query: query)
     }
 
@@ -160,7 +205,7 @@ extension GroupsViewController: UISearchBarDelegate {
 
 extension GroupsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 175
     }
 }
 
@@ -192,9 +237,12 @@ extension GroupsViewController: GroupTableViewCellDelegate {
                 self.showAlert(withText: group.description)
             }))
             if !group.settings.isPrivate || status == .member {
-                actionSheet.addAction(UIAlertAction.init(title: "Show Feed", style: .default, handler: { _ in
+                actionSheet.addAction(UIAlertAction.init(title: "Feed UI", style: .default, handler: { _ in
 					self.delegate?.onShowFeed(groupId, byCurrentUser: false)
                 }))
+				actionSheet.addAction(UIAlertAction.init(title: "Activities", style: .default, handler: { _ in
+					self.delegate?.onShowPlainFeed(groupId)
+				}))
 				actionSheet.addAction(UIAlertAction.init(title: "Activities with Polls", style: .default, handler: { _ in
 					self.delegate?.onShowPolls(groupId)
 				}))
