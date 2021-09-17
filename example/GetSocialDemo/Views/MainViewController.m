@@ -384,6 +384,11 @@ NSString *const kCustomProvider = @"custom";
                                                                                    [self addCustomUserIdentityWithSuccess:nil failure:nil];
                                                                                }]];
 
+		[self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Add Trusted user identity"
+																			   action:^{
+			[self addTrustedIdentityWithSuccess:nil failure:nil];
+		}]];
+
         [self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Remove Facebook user identity"
                                                                                action:^{
                                                                                    [self removeFBUserIdentity];
@@ -393,6 +398,10 @@ NSString *const kCustomProvider = @"custom";
                                                                                action:^{
                                                                                    [self removeCustomUserIdentity];
                                                                                }]];
+		[self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Remove Trusted user identity"
+																			   action:^{
+			[self removeTrustedUserIdentity];
+		}]];
 		[self.userAuthenticationMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Refresh"
 																			   action:^{
 			[self refreshCurrentUser];
@@ -1043,7 +1052,7 @@ NSString *const kCustomProvider = @"custom";
     UISimpleAlertViewController *authorizationChooser = [[UISimpleAlertViewController alloc] initWithTitle:@"Authorize to perform an action"
                                                                                                    message:@"Choose authorization option"
                                                                                          cancelButtonTitle:@"Cancel"
-                                                                                         otherButtonTitles:@[ @"Facebook", @"Custom" ]];
+                                                                                         otherButtonTitles:@[ @"Facebook", @"Custom", @"Trusted"]];
     [authorizationChooser showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (didCancel)
         {
@@ -1051,25 +1060,34 @@ NSString *const kCustomProvider = @"custom";
         }
         else
         {
-            if (selectedIndex == 0)
-            {
-                [GetSocialUI closeView:YES];
-                [self addFBUserIdentityWithSuccess:^{
-                    [GetSocialUI restoreView];
-                    pendingUiAction();
-                }
-                    failure:^{
-                        [GetSocialUI restoreView];
-                        GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
-                    }];
-            }
-            else if (selectedIndex == 1)
-            {
-                [self addCustomUserIdentityWithSuccess:pendingUiAction
-                                               failure:^{
-                                                   GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
-                                               }];
-            }
+			switch (selectedIndex) {
+				case 0: {
+					[GetSocialUI closeView:YES];
+					[self addFBUserIdentityWithSuccess:^{
+						[GetSocialUI restoreView];
+						pendingUiAction();
+					}
+											   failure:^{
+						[GetSocialUI restoreView];
+						GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
+					}];
+					break;
+				}
+				case 1: {
+					[self addCustomUserIdentityWithSuccess:pendingUiAction
+												   failure:^{
+						GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
+					}];
+					break;
+				}
+				case 2: {
+					[self addTrustedIdentityWithSuccess:pendingUiAction
+												   failure:^{
+						GSLogInfo(YES, NO, @"Can not perform action because of authorization error");
+					}];
+					break;
+				}
+			}
         }
     }];
 }
@@ -1363,6 +1381,30 @@ NSString *const kCustomProvider = @"custom";
     }
 }
 
+- (void)addTrustedIdentityWithSuccess:(void (^)(void))success failure:(void (^)(void))failure
+{
+	UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Trusted User identity"
+																					message:@"Enter ProviderId and Token"
+																		  cancelButtonTitle:@"Cancel"
+																		  otherButtonTitles:@[ @"Ok" ]];
+
+	[alert addTextFieldWithPlaceholder:@"ProviderId" defaultText:nil isSecure:NO];
+	[alert addTextFieldWithPlaceholder:@"Token" defaultText:nil isSecure:YES];
+
+	[alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+		if (!didCancel)
+		{
+			NSString *providerId = [alert contentOfTextFieldAtIndex:0];
+			NSString *accessToken = [alert contentOfTextFieldAtIndex:1];
+
+			GetSocialIdentity *identity =
+			[GetSocialIdentity trustedIdentityWithProviderId:providerId accessToken:accessToken];
+
+			[self addIdentity:identity success:success failure:failure];
+		}
+	}];
+}
+
 - (void)addCustomUserIdentityWithSuccess:(void (^)(void))success failure:(void (^)(void))failure
 {
     UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Custom User identity"
@@ -1386,6 +1428,41 @@ NSString *const kCustomProvider = @"custom";
             [self addIdentity:identity success:success failure:failure];
         }
     }];
+}
+
+- (void)removeTrustedUserIdentity
+{
+	UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Remove Trusted User identity"
+																					message:@"Enter Trusted Provider Id"
+																		  cancelButtonTitle:@"Cancel"
+																		  otherButtonTitles:@[ @"Ok" ]];
+
+	[alert addTextFieldWithPlaceholder:@"Provider Id" defaultText:nil isSecure:NO];
+
+	[alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+		if (!didCancel)
+		{
+			NSString *providerId = [alert contentOfTextFieldAtIndex:0];
+			if ([GetSocial.currentUser identities][providerId])
+			{
+				[self showActivityIndicatorView];
+				[GetSocial.currentUser removeIdentityByProviderId:providerId
+														  success:^{
+					[self hideActivityIndicatorView];
+					GSLogInfo(YES, NO, @"Trusted identity removed for Provider '%@'", providerId);
+					[[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
+				}
+														  failure:^(NSError *error) {
+					[self hideActivityIndicatorView];
+					GSLogError(YES, NO, @"Failed to remove trusted identity for Provider '%@', error: %@", providerId, [error localizedDescription]);
+				}];
+			}
+			else
+			{
+				GSLogWarning(YES, NO, @"User doesn't have trusted identity for Provider '%@'", providerId);
+			}
+		}
+	}];
 }
 
 - (void)removeCustomUserIdentity
@@ -1449,17 +1526,26 @@ NSString *const kCustomProvider = @"custom";
         initWithTitle:@"Init with..."
               message:@"Init with custom identity of FB"
     cancelButtonTitle:@"Cancel"
-    otherButtonTitles:@[ @"FB", @"Custom" ]];
+    otherButtonTitles:@[ @"FB", @"Custom", @"Trusted" ]];
     
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (didCancel) {
             return;
         }
-        if (selectedIndex == 1) {
-            [self initWithCustom];
-        } else {
-            [self initWithFB];
-        }
+		switch (selectedIndex) {
+			case 0: {
+				[self initWithFB];
+				break;
+			}
+			case 1: {
+				[self initWithCustom];
+				break;
+			}
+			case 2: {
+				[self initWithTrusted];
+				break;
+			}
+		}
     }];
 }
 
@@ -1519,6 +1605,38 @@ NSString *const kCustomProvider = @"custom";
     }];
 }
 
+- (void)initWithTrusted
+{
+	UISimpleAlertViewController *alert = [[UISimpleAlertViewController alloc] initWithTitle:@"Add Trusted User identity"
+																					message:@"Enter Provider Id and Token"
+																		  cancelButtonTitle:@"Cancel"
+																		  otherButtonTitles:@[ @"Ok" ]];
+
+	[alert addTextFieldWithPlaceholder:@"ProviderId" defaultText:nil isSecure:NO];
+	[alert addTextFieldWithPlaceholder:@"Token" defaultText:nil isSecure:YES];
+
+	[alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+		if (!didCancel)
+		{
+			[self showActivityIndicatorView];
+			NSString *providerId = [alert contentOfTextFieldAtIndex:0];
+			NSString *accessToken = [alert contentOfTextFieldAtIndex:1];
+
+			GetSocialIdentity *identity =
+			[GetSocialIdentity trustedIdentityWithProviderId:providerId accessToken:accessToken];
+
+			[GetSocial initSdkWithIdentity:identity
+								   success:^{
+				[self hideActivityIndicatorView];
+				GSLogInfo(YES, NO, @"User %@ logged in", identity);
+			}
+								   failure:^(NSError * _Nonnull error) {
+				[self hideActivityIndicatorView];
+				GSLogError(YES, NO, @"Error init with identity: %@", error.localizedDescription);
+			}];
+		}
+	}];
+}
 
 - (void)addIdentity:(GetSocialIdentity *)identity success:(void (^)(void))success failure:(void (^)(void))failure
 {
