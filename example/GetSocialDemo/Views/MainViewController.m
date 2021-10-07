@@ -540,6 +540,13 @@ NSString *const kCustomProvider = @"custom";
             [self openPostActivityView:target];
 
                                                       }]];
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Create Poll in User's feed"
+												   action:^{
+			[CommunitiesHelper showCreatePollWithNavigationController:self.mainNavigationController target: GetSocialPostActivityTarget.timeline];
+
+		}]];
+
 
         [self.activitiesMenu addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Topic Activity Feed (DemoFeed)"
                                                                        action:^{
