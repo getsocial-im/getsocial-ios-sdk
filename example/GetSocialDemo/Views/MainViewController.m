@@ -1419,15 +1419,16 @@ NSString *const kCustomProvider = @"custom";
                                                                           cancelButtonTitle:@"Cancel"
                                                                           otherButtonTitles:@[ @"Ok" ]];
 
+	[alert addTextFieldWithPlaceholder:@"ProviderId" defaultText:kCustomProvider isSecure:NO];
     [alert addTextFieldWithPlaceholder:@"UserId" defaultText:nil isSecure:NO];
     [alert addTextFieldWithPlaceholder:@"Token" defaultText:nil isSecure:YES];
 
     [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
         if (!didCancel)
         {
-            NSString *providerId = kCustomProvider;
-            NSString *providerUserId = [alert contentOfTextFieldAtIndex:0];
-            NSString *accessToken = [alert contentOfTextFieldAtIndex:1];
+			NSString *providerId = [alert contentOfTextFieldAtIndex:0];
+            NSString *providerUserId = [alert contentOfTextFieldAtIndex:1];
+            NSString *accessToken = [alert contentOfTextFieldAtIndex:2];
 
             GetSocialIdentity *identity =
                 [GetSocialIdentity customIdentityWithProviderId:providerId userId:providerUserId accessToken:accessToken];
