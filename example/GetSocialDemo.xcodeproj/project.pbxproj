@@ -678,6 +678,7 @@
 		BC680EE92074D08600A3551E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BC680F5C2074D09000A3551E /* GetSocialVKInvitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetSocialVKInvitePlugin.h; path = Plugins/GetSocialVKInvitePlugin.h; sourceTree = "<group>"; };
 		BC680F5D2074D09000A3551E /* GetSocialVKInvitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSocialVKInvitePlugin.m; path = Plugins/GetSocialVKInvitePlugin.m; sourceTree = "<group>"; };
+		BC6826972721630600716CA8 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		BC7217F6260CBE30000E840F /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedView.swift; path = Views/Communities/Feed/FeedView.swift; sourceTree = "<group>"; };
 		BC7217F7260CBE30000E840F /* FeedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedModel.swift; path = Views/Communities/Feed/FeedModel.swift; sourceTree = "<group>"; };
 		BC7217F8260CBE30000E840F /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityTableViewCell.swift; path = Views/Communities/Feed/ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -885,6 +886,7 @@
 		995D99A117EB064500F65204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC6826972721630600716CA8 /* AppTrackingTransparency.framework */,
 				BC12D77E215CD27B001F45AE /* StoreKit.framework */,
 				BCF8DE7920EE5653006DDB45 /* KakaoCommon.framework */,
 				BCF8DE7720EE504A006DDB45 /* KakaoLink.framework */,

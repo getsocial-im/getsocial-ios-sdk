@@ -28,6 +28,7 @@
 #import <Fabric/Fabric.h>
 #import <FirebaseCore/FIRApp.h>
 #import "VKSdk.h"
+//#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @interface AppDelegate ()
 
@@ -37,6 +38,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+//	if (@available(iOS 14, *)) {
+//		[ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+//			[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Tracking status: %d", status] context:nil];
+//		}];
+//	}
     [FIRApp configure];
 
 #if DISABLE_TWITTER != 1

@@ -50,6 +50,9 @@ class CreateGroupViewController: UIViewController {
     private let isPrivateLabel = UILabel()
     private let isPrivateSwitch = UISwitch()
 
+	private let labelsLabel = UILabel()
+	private let labelsValueText = UITextFieldWithCopyPaste()
+
     private let createButton = UIButton(type: .roundedRect)
     
     private var isKeyboardShown = false
@@ -116,6 +119,7 @@ class CreateGroupViewController: UIViewController {
         setupProperty1ValueRow()
         setupIsDiscoverableRow()
         setupIsPrivateRow()
+		setupLabelsRow()
         setupCreateButton()
     }
     
@@ -439,7 +443,33 @@ class CreateGroupViewController: UIViewController {
             self.isPrivateSwitch.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
-    
+
+	private func setupLabelsRow() {
+		self.labelsLabel.translatesAutoresizingMaskIntoConstraints = false
+		self.labelsLabel.text = "Labels"
+		self.labelsLabel.textColor = UIDesign.Colors.label
+		self.scrollView.addSubview(self.labelsLabel)
+
+		NSLayoutConstraint.activate([
+			self.labelsLabel.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 8),
+			self.labelsLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
+			self.labelsLabel.topAnchor.constraint(equalTo: self.isPrivateLabel.bottomAnchor, constant: 8),
+			self.labelsLabel.heightAnchor.constraint(equalToConstant: 20)
+		])
+
+		self.labelsValueText.translatesAutoresizingMaskIntoConstraints = false
+		self.labelsValueText.borderStyle = .roundedRect
+		self.labelsValueText.text = self.oldGroup?.settings.labels.joined(separator: ",")
+		self.labelsValueText.placeholder = "label1,label2"
+		self.scrollView.addSubview(self.labelsValueText)
+		NSLayoutConstraint.activate([
+			self.labelsValueText.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 8),
+			self.labelsValueText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
+			self.labelsValueText.topAnchor.constraint(equalTo: self.labelsLabel.bottomAnchor, constant: 4),
+			self.labelsValueText.heightAnchor.constraint(equalToConstant: 30)
+		])
+	}
+
     private func setupCreateButton() {
         self.createButton.translatesAutoresizingMaskIntoConstraints = false
         self.createButton.setTitle(self.oldGroup == nil ? "Create": "Update", for: .normal)
@@ -447,7 +477,7 @@ class CreateGroupViewController: UIViewController {
         self.scrollView.addSubview(self.createButton)
         
         NSLayoutConstraint.activate([
-            self.createButton.topAnchor.constraint(equalTo: self.isPrivateLabel.bottomAnchor, constant: 8),
+            self.createButton.topAnchor.constraint(equalTo: self.labelsValueText.bottomAnchor, constant: 8),
             self.createButton.heightAnchor.constraint(equalToConstant: 40),
             self.createButton.widthAnchor.constraint(equalToConstant: 100),
             self.createButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -515,7 +545,10 @@ class CreateGroupViewController: UIViewController {
 
         groupContent.isDiscoverable = self.isDiscoverableSwitch.isOn
         groupContent.isPrivate = self.isPrivateSwitch.isOn
-        
+		if let labelsText = self.labelsValueText.text {
+			groupContent.labels = labelsText.components(separatedBy: ",")
+		}
+
         self.showActivityIndicatorView()
         self.model.createGroup(groupContent)
     }

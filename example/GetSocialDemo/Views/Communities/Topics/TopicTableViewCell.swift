@@ -25,6 +25,8 @@ class TopicTableViewCell: UITableViewCell {
     var topicUpdatedAt: UILabel = UILabel()
     var topicFollowers: UILabel = UILabel()
 	var topicScore: UILabel = UILabel()
+	var topicLabels: UILabel = UILabel()
+	var topicProperties: UILabel = UILabel()
     var actionButton: UIButton = UIButton.init(type: .roundedRect)
 
     var delegate: TopicTableViewCellDelegate?
@@ -64,6 +66,8 @@ class TopicTableViewCell: UITableViewCell {
         self.topicFollowers.text = "\(topic.followersCount) follower\(topic.followersCount > 1 ? "s" : "")"
         self.topicFollowers.isUserInteractionEnabled = true
 		self.topicScore.text = "Popularity: \(topic.popularity)"
+		self.topicLabels.text = "Labels: \(topic.settings.labels.joined(separator: ","))"
+		self.topicProperties.text = "Properties: \(topic.settings.properties.map { "\($0)=\($1)" }.joined(separator: ","))"
 
         self.actionButton.setTitle("Actions", for: .normal)
         self.actionButton.addTarget(self, action: #selector(showActions(sender:)), for: .touchUpInside)
@@ -123,13 +127,33 @@ class TopicTableViewCell: UITableViewCell {
 		]
 		NSLayoutConstraint.activate(topicScoreConstraints)
 
+		self.topicLabels.translatesAutoresizingMaskIntoConstraints = false
+		self.topicLabels.font = self.topicLabels.font.withSize(14)
+		self.contentView.addSubview(self.topicLabels)
+
+		let topicLabelsConstraints = [
+			self.topicLabels.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.topicLabels.topAnchor.constraint(equalTo: self.topicScore.bottomAnchor, constant: 8)
+		]
+		NSLayoutConstraint.activate(topicLabelsConstraints)
+
+		self.topicProperties.translatesAutoresizingMaskIntoConstraints = false
+		self.topicProperties.font = self.topicProperties.font.withSize(14)
+		self.contentView.addSubview(self.topicProperties)
+
+		let topicPropertiesConstraints = [
+			self.topicProperties.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.topicProperties.topAnchor.constraint(equalTo: self.topicLabels.bottomAnchor, constant: 8)
+		]
+		NSLayoutConstraint.activate(topicPropertiesConstraints)
+
         self.topicFollowers.translatesAutoresizingMaskIntoConstraints = false
         self.topicFollowers.font = self.topicFollowers.font.withSize(18)
         self.contentView.addSubview(self.topicFollowers)
 
         let topicFollowersConstraints = [
             self.topicFollowers.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.topicFollowers.topAnchor.constraint(equalTo: self.topicScore.bottomAnchor, constant: 8)
+            self.topicFollowers.topAnchor.constraint(equalTo: self.topicProperties.bottomAnchor, constant: 8)
         ]
         NSLayoutConstraint.activate(topicFollowersConstraints)
 

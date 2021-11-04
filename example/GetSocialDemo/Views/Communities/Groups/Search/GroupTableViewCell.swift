@@ -22,6 +22,8 @@ class GroupTableViewCell: UITableViewCell {
     var groupCreatedAt: UILabel = UILabel()
     var groupUpdatedAt: UILabel = UILabel()
 	var groupScore: UILabel = UILabel()
+	var groupLabels: UILabel = UILabel()
+	var groupProperties: UILabel = UILabel()
     var memberStatus: UILabel = UILabel()
     var memberRole: UILabel = UILabel()
     var actionButton: UIButton = UIButton.init(type: .roundedRect)
@@ -53,6 +55,8 @@ class GroupTableViewCell: UITableViewCell {
         self.groupCreatedAt.text = "Created: \(GroupTableViewCell.dateFormatter?.string(from: createdAtDate) ?? "")"
         self.groupUpdatedAt.text = "Updated: \(GroupTableViewCell.dateFormatter?.string(from: updatedAtDate) ?? "")"
 		self.groupScore.text = "Popularity: \(group.popularity)"
+		self.groupLabels.text = "Labels: \(group.settings.labels.joined(separator: ","))"
+		self.groupProperties.text = "Properties: \(group.settings.properties.map { "\($0)=\($1)" }.joined(separator: ","))"
         var status = ""
         switch group.membership?.status {
         case .approvalPending:
@@ -145,12 +149,32 @@ class GroupTableViewCell: UITableViewCell {
 			self.groupScore.heightAnchor.constraint(equalToConstant: 20)
 		])
 
+		self.groupLabels.translatesAutoresizingMaskIntoConstraints = false
+		self.groupLabels.font = self.groupLabels.font.withSize(14)
+		self.contentView.addSubview(self.groupLabels)
+		NSLayoutConstraint.activate([
+			self.groupLabels.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.groupLabels.topAnchor.constraint(equalTo: self.groupScore.bottomAnchor, constant: 4),
+			self.groupLabels.widthAnchor.constraint(equalToConstant: 200),
+			self.groupLabels.heightAnchor.constraint(equalToConstant: 20)
+		])
+
+		self.groupProperties.translatesAutoresizingMaskIntoConstraints = false
+		self.groupProperties.font = self.groupProperties.font.withSize(14)
+		self.contentView.addSubview(self.groupProperties)
+		NSLayoutConstraint.activate([
+			self.groupProperties.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+			self.groupProperties.topAnchor.constraint(equalTo: self.groupLabels.bottomAnchor, constant: 4),
+			self.groupProperties.widthAnchor.constraint(equalToConstant: 200),
+			self.groupProperties.heightAnchor.constraint(equalToConstant: 20)
+		])
+
         self.memberStatus.translatesAutoresizingMaskIntoConstraints = false
         self.memberStatus.font = self.memberStatus.font.withSize(14)
         self.contentView.addSubview(self.memberStatus)
         NSLayoutConstraint.activate([
             self.memberStatus.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.memberStatus.topAnchor.constraint(equalTo: self.groupScore.bottomAnchor, constant: 4),
+            self.memberStatus.topAnchor.constraint(equalTo: self.groupProperties.bottomAnchor, constant: 4),
             self.memberStatus.widthAnchor.constraint(equalToConstant: 200),
             self.memberStatus.heightAnchor.constraint(equalToConstant: 20)
         ])

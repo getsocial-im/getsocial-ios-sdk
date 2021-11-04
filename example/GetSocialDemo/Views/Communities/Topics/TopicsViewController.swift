@@ -27,7 +27,10 @@ class TopicsViewController: UIViewController {
 	var showOnlyTrending = false
 
     var searchBar: UISearchBar = UISearchBar()
-    var tableView: UITableView = UITableView()
+	var labelSearchBar = UISearchBar()
+	var propertySearchBar = UISearchBar()
+
+	var tableView: UITableView = UITableView()
 
 	var sortButton: UIBarButtonItem!
 	var trendingButton: UIBarButtonItem!
@@ -74,8 +77,9 @@ class TopicsViewController: UIViewController {
         self.tableView.delegate = self
 
         self.view.addSubview(self.searchBar)
+		self.view.addSubview(self.labelSearchBar)
+		self.view.addSubview(self.propertySearchBar)
         self.view.addSubview(self.tableView)
-
     }
 
 	@objc
@@ -86,7 +90,7 @@ class TopicsViewController: UIViewController {
 		// use default sorting after changing isTrending
 		self.sortBy = nil
 		self.sortOrder = nil
-		self.executeQuery(searchTerm: self.searchBar.text)
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
 	}
 
 	@objc
@@ -112,15 +116,15 @@ class TopicsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-		self.executeQuery(searchTerm: self.searchBar.text)
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
     }
 
     override func viewWillLayoutSubviews() {
-        layoutSearchBar()
+        layoutSearchFields()
         layoutTableView()
     }
 
-    internal func layoutSearchBar() {
+    internal func layoutSearchFields() {
 
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         let top = searchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
@@ -132,12 +136,31 @@ class TopicsViewController: UIViewController {
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = self
 
+		labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
+		labelSearchBar.placeholder = "label1,label2"
+		NSLayoutConstraint.activate([
+			self.labelSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+			self.labelSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+			self.labelSearchBar.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+		])
+		labelSearchBar.enablesReturnKeyAutomatically = false
+		labelSearchBar.delegate = self
+
+		propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
+		propertySearchBar.placeholder = "key:value,key1:value1"
+		NSLayoutConstraint.activate([
+			self.propertySearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+			self.propertySearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+			self.propertySearchBar.topAnchor.constraint(equalTo: self.labelSearchBar.bottomAnchor),
+		])
+		propertySearchBar.enablesReturnKeyAutomatically = false
+		propertySearchBar.delegate = self
     }
 
     internal func layoutTableView() {
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        let top = tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor)
+        let top = tableView.topAnchor.constraint(equalTo: self.propertySearchBar.bottomAnchor)
         let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -145,9 +168,25 @@ class TopicsViewController: UIViewController {
         NSLayoutConstraint.activate([left, top, right, bottom])
     }
 
-    private func executeQuery(searchTerm: String?) {
+    private func executeQuery(searchTerm: String?, label: String?, property: String?) {
         self.showActivityIndicatorView()
         var query = TopicsQuery.find(searchTerm ?? "")
+		if let searchLabel = label {
+			query = query.withLabels(searchLabel.components(separatedBy: ","))
+		}
+		if let searchProperties = property {
+			var propertyDictionary: [String: String] = [:]
+			let dictElements = searchProperties.components(separatedBy: ",")
+			dictElements.forEach {
+				let components = $0.components(separatedBy: ":")
+				if let key = components.first, let value = components.last {
+					propertyDictionary[key] = value
+				}
+			}
+			if !propertyDictionary.isEmpty {
+				query = query.withProperties(propertyDictionary)
+			}
+		}
 		query = query.onlyTrending(self.showOnlyTrending)
         self.viewModel.loadEntries(query: query)
     }
@@ -166,13 +205,13 @@ class TopicsViewController: UIViewController {
 extension TopicsViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.executeQuery(searchTerm: searchBar.text)
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
     }
 }
 
 extension TopicsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 200
     }
 }
 
