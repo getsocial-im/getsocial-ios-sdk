@@ -213,7 +213,7 @@ class GroupsViewController: UIViewController {
 			var propertyDictionary: [String: String] = [:]
 			let dictElements = searchProperties.components(separatedBy: ",")
 			dictElements.forEach {
-				let components = $0.components(separatedBy: ":")
+				let components = $0.components(separatedBy: "=")
 				if let key = components.first, let value = components.last {
 					propertyDictionary[key] = value
 				}

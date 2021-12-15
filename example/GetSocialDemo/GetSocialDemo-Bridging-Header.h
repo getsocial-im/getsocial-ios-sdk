@@ -10,4 +10,3 @@
 #import "MainViewController.h"
 #import "UITextFieldWithCopyPaste.h"
 #import "UIImageView+GetSocial.h"
-#import "UISimpleAlertViewController.h"

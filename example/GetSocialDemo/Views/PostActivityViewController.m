@@ -44,6 +44,8 @@
 @property(weak, nonatomic) IBOutlet UIView *actionDataContainer;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *actionDataHeight;
 @property(weak, nonatomic) IBOutlet UIPickerView *actionTypePicker;
+@property (weak, nonatomic) IBOutlet UITextField *labels;
+@property (weak, nonatomic) IBOutlet UITextField *properties;
 
 @property(nonatomic, strong) UIToolbar *keyboardToolbar;
 @property(nonatomic) NSData *contentVideo;
@@ -116,6 +118,12 @@
             self.contentImage.hidden = NO;
             self.clearImageButton.hidden = NO;
         }
+		self.labels.text = [self.activityToUpdate.labels componentsJoinedByString:@","];
+		__block NSString* properties = [NSString new];
+		[self.activityToUpdate.properties enumerateKeysAndObjectsUsingBlock:^(NSString * key, NSString * value, BOOL * stop __unused) {
+			properties = [properties stringByAppendingFormat:@"%@=%@,", key, value];
+		}];
+		self.properties.text = properties;
     }
     [super viewWillAppear:animated];
 }
@@ -266,11 +274,18 @@
         content.attachments = @[[GetSocialMediaAttachment withVideo:_contentVideo]];
     }
 
-    // set some properties
-    NSMutableDictionary* properties = [NSMutableDictionary new];
-    [properties setObject:@"value1" forKey:@"key1"];
-    [properties setObject:@"value2" forKey:@"key2"];
-    [content setProperties:properties];
+	NSArray<NSString*>* labelsArray = [self.labels.text componentsSeparatedByString:@","];
+	[content setLabels: labelsArray];
+
+	NSMutableDictionary<NSString*, NSString*>* properties = [NSMutableDictionary new];
+	NSArray<NSString*>* parts = [self.properties.text componentsSeparatedByString:@","];
+	[parts enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx __unused, BOOL * stop __unused) {
+		NSArray<NSString*>* elements = [obj componentsSeparatedByString:@"="];
+		if (elements.count == 2) {
+			[properties setObject:elements[1] forKey:elements[0]];
+		}
+	}];
+	[content setProperties: properties];
     return content;
 }
 

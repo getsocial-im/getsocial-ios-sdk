@@ -501,6 +501,12 @@ NSString *const kCustomProvider = @"custom";
 
                                                       }]];
 
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Timeline without UI"
+												   action:^{
+			[CommunitiesHelper showTimelineWithNavigationController: self.mainNavigationController];
+		}]];
+
         [self.activitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All my posts everywhere"
                                                       action:^{
@@ -532,6 +538,12 @@ NSString *const kCustomProvider = @"custom";
             [self showActivitiesViewWithQuery:query];
 
                                                       }]];
+
+		[self.activitiesMenu
+		 addSubmenu:[MenuItem actionableMenuItemWithTitle:@"My feed without UI"
+												   action:^{
+			[CommunitiesHelper showUserFeedWithNavigationController: self.mainNavigationController];
+		}]];
 
         [self.activitiesMenu
             addSubmenu:[MenuItem actionableMenuItemWithTitle:@"Post to timeline"

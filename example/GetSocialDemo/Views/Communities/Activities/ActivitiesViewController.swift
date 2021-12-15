@@ -22,6 +22,10 @@ class ActivitiesViewController: UIViewController {
 
 	let initialQuery: ActivitiesQuery
 
+	var searchBar: UISearchBar = UISearchBar()
+	var labelSearchBar = UISearchBar()
+	var propertySearchBar = UISearchBar()
+
 	init(_ query: ActivitiesQuery) {
 		self.initialQuery = query
 		self.viewModel = ActivitiesModel()
@@ -54,29 +58,87 @@ class ActivitiesViewController: UIViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
-    }
+
+		self.view.addSubview(self.searchBar)
+		self.view.addSubview(self.labelSearchBar)
+		self.view.addSubview(self.propertySearchBar)
+	}
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.executeQuery()
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
     }
 
     override func viewWillLayoutSubviews() {
-        layoutTableView()
+		layoutSearchFields()
+		layoutTableView()
     }
 
-	internal func executeQuery() {
+	private func executeQuery(searchTerm: String?, label: String?, property: String?) {
 		self.showActivityIndicatorView()
 		var query = self.initialQuery.copy() as! ActivitiesQuery
+		if let searchTerm = searchTerm {
+			query = query.withText(searchTerm)
+		}
+		if let searchLabel = label, !searchLabel.isEmpty {
+			query = query.withLabels(searchLabel.components(separatedBy: ","))
+		}
+		if let searchProperties = property, !searchProperties.isEmpty {
+			var propertyDictionary: [String: String] = [:]
+			let dictElements = searchProperties.components(separatedBy: ",")
+			dictElements.forEach {
+				let components = $0.components(separatedBy: "=")
+				if let key = components.first, let value = components.last {
+					propertyDictionary[key] = value
+				}
+			}
+			if !propertyDictionary.isEmpty {
+				query = query.withProperties(propertyDictionary)
+			}
+		}
+
 		query = query.onlyTrending(self.showOnlyTrending)
 		self.viewModel.loadEntries(query)
+	}
+
+	internal func layoutSearchFields() {
+
+		searchBar.translatesAutoresizingMaskIntoConstraints = false
+		let top = searchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
+		let left = searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+		let right = searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+
+		NSLayoutConstraint.activate([left, top, right])
+
+		searchBar.enablesReturnKeyAutomatically = false
+		searchBar.delegate = self
+
+		labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
+		labelSearchBar.placeholder = "label1,label2"
+		NSLayoutConstraint.activate([
+			self.labelSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+			self.labelSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+			self.labelSearchBar.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+		])
+		labelSearchBar.enablesReturnKeyAutomatically = false
+		labelSearchBar.delegate = self
+
+		propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
+		propertySearchBar.placeholder = "key:value,key1:value1"
+		NSLayoutConstraint.activate([
+			self.propertySearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+			self.propertySearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+			self.propertySearchBar.topAnchor.constraint(equalTo: self.labelSearchBar.bottomAnchor),
+		])
+		propertySearchBar.enablesReturnKeyAutomatically = false
+		propertySearchBar.delegate = self
 	}
 
     internal func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addSubview(self.tableView)
 
-        let top = tableView.topAnchor.constraint(equalTo: self.view.topAnchor)
+        let top = tableView.topAnchor.constraint(equalTo: self.propertySearchBar.bottomAnchor)
         let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -92,7 +154,7 @@ class ActivitiesViewController: UIViewController {
 		// use default sorting after changing isTrending
 		self.sortBy = "nil"
 		self.sortOrder = nil
-		self.executeQuery()
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
 	}
 
 	@objc
@@ -116,9 +178,16 @@ class ActivitiesViewController: UIViewController {
 
 }
 
+extension ActivitiesViewController: UISearchBarDelegate {
+
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		self.executeQuery(searchTerm: self.searchBar.text, label: self.labelSearchBar.text, property: self.propertySearchBar.text)
+	}
+}
+
 extension ActivitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 120
     }
 }
 

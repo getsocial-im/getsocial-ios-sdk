@@ -196,6 +196,16 @@ public class CommunitiesHelper: NSObject {
 		navigationController.pushViewController(voteView, animated: true)
 	}
 
+	public static func showTimeline(navigationController: UINavigationController) {
+		let view = ActivitiesView(ActivitiesQuery.timeline())
+		navigationController.pushViewController(view.viewController, animated: true)
+	}
+
+	public static func showUserFeed(navigationController: UINavigationController) {
+		let view = ActivitiesView(ActivitiesQuery.feedOf(UserId.currentUser()))
+		navigationController.pushViewController(view.viewController, animated: true)
+	}
+
 }
 
 enum GetSocialDemoError: Error {

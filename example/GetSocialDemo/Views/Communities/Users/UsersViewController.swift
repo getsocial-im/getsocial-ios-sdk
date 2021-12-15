@@ -61,9 +61,7 @@ class UsersViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if self.query != nil {
-            self.executeQuery()
-        }
+        self.executeQuery()
     }
 
     override func viewWillLayoutSubviews() {
@@ -98,13 +96,24 @@ class UsersViewController: UIViewController {
 
     private func executeQuery(searchTerm: String?) {
         self.showActivityIndicatorView()
-        let query = UsersQuery.find(searchTerm ?? "")
+        var query: UsersQuery
+        
+        if (searchTerm != nil && searchTerm != "") {
+            query = UsersQuery.find(searchTerm ?? "")
+        } else {
+            query = UsersQuery.suggested()
+        }
+        
         self.viewModel.loadEntries(query: query)
     }
 
     private func executeQuery() {
-        self.showActivityIndicatorView()
-        self.viewModel.loadEntries(query: self.query!)
+        if (self.query == nil) {
+            executeQuery(searchTerm: nil)
+        } else {
+            self.showActivityIndicatorView()
+            self.viewModel.loadEntries(query: self.query!)
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -1,30 +1,34 @@
 //
 //  NotificationService.m
-//  GetSocialNotificationServiceExtension
+//  NotificationExtension
 //
-//  Copyright © 2020 GetSocial. All rights reserved.
+//  Created by Gábor Vass on 19/03/2021.
 //
 
-#import <GetSocialNotificationExtension/GetSocialNotificationExtension.h>
 #import "NotificationService.h"
+#if !TARGET_IPHONE_SIMULATOR
+#import <GetSocialNotificationExtension/GetSocialNotificationExtension.h>
+#endif
+@interface NotificationService ()
 
-@interface NotificationService()
-
+#if !TARGET_IPHONE_SIMULATOR
 @property (nonatomic, strong) GetSocialNotificationRequestHandler *handler;
-
+#endif
 @end
 
 @implementation NotificationService
 
-- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler
-{
-    self.handler = [GetSocialNotificationRequestHandler new];
-    [self.handler handleNotificationRequest:request withContentHandler:contentHandler];
+- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
+#if !TARGET_IPHONE_SIMULATOR
+	self.handler = [GetSocialNotificationRequestHandler new];
+	[self.handler handleNotificationRequest:request withContentHandler:contentHandler];
+#endif
 }
 
-- (void)serviceExtensionTimeWillExpire
-{
-    [self.handler serviceExtensionTimeWillExpire];
+- (void)serviceExtensionTimeWillExpire {
+#if !TARGET_IPHONE_SIMULATOR
+	[self.handler serviceExtensionTimeWillExpire];
+#endif
 }
 
 @end

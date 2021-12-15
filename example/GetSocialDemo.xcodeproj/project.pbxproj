@@ -158,6 +158,8 @@
 		BC5C5A841F4DCC0300533C43 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A831F4DCC0300533C43 /* CoreMedia.framework */; };
 		BC5C5A861F4DCC0900533C43 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5C5A851F4DCC0900533C43 /* SafariServices.framework */; };
 		BC5C5A871F4DCC1B00533C43 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9908FAA91A9B4C7800F39657 /* AVFoundation.framework */; };
+		BC63860327550B8B00ADB4FD /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC6826972721630600716CA8 /* AppTrackingTransparency.framework */; };
+		BC63860827555F6D00ADB4FD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990BC5B71AF265D6003A0B96 /* AdSupport.framework */; };
 		BC66931D24B765160094479F /* TagsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931924B765160094479F /* TagsModel.swift */; };
 		BC66931E24B765160094479F /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931A24B765160094479F /* TagsViewController.swift */; };
 		BC66931F24B765160094479F /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC66931B24B765160094479F /* TagsView.swift */; };
@@ -756,6 +758,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC63860827555F6D00ADB4FD /* AdSupport.framework in Frameworks */,
+				BC63860327550B8B00ADB4FD /* AppTrackingTransparency.framework in Frameworks */,
 				BC12D77F215CD27B001F45AE /* StoreKit.framework in Frameworks */,
 				BCF8DE7A20EE5654006DDB45 /* KakaoCommon.framework in Frameworks */,
 				BCF8DE7820EE504A006DDB45 /* KakaoLink.framework in Frameworks */,

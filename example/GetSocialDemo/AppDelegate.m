@@ -28,7 +28,8 @@
 #import <Fabric/Fabric.h>
 #import <FirebaseCore/FIRApp.h>
 #import "VKSdk.h"
-//#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
 
@@ -38,12 +39,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	if (@available(iOS 14, *)) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+			[ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+				[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Tracking status: %d", status] context:nil];
 
-//	if (@available(iOS 14, *)) {
-//		[ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-//			[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Tracking status: %d", status] context:nil];
-//		}];
-//	}
+				NSString* idfa = [ASIdentifierManager sharedManager].advertisingIdentifier.UUIDString;
+				[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"IDFA: %@", idfa] context:nil];
+			}];
+		});
+	}
     [FIRApp configure];
 
 #if DISABLE_TWITTER != 1
