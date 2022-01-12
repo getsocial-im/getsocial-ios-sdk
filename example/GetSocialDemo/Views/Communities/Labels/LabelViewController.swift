@@ -7,16 +7,17 @@
 
 import UIKit
 
-protocol TagsViewControllerDelegate {
-	func onShowFollowers(_ ofTag: String)
+protocol LabelsViewControllerDelegate {
+	func onShowFollowers(_ ofLabel: String)
 }
 
-class TagsViewController: UIViewController {
+class LabelsViewController: UIViewController {
 
 	var followedByCurrentUser: Bool = false
-	var delegate: TagsViewControllerDelegate?
 
-    var viewModel: TagsModel = TagsModel()
+	var delegate: LabelsViewControllerDelegate?
+
+    var viewModel: LabelsModel = LabelsModel()
     var loadingOlders: Bool = false
 	var sortBy: String?
 	var sortOrder: String?
@@ -30,7 +31,7 @@ class TagsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = .white
-        self.tableView.register(TagTableViewCell.self, forCellReuseIdentifier: "tagtableviewcell")
+        self.tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: "labeltableviewcell")
         self.tableView.allowsSelection = false
 
 		self.sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSort))
@@ -50,19 +51,19 @@ class TagsViewController: UIViewController {
             }
         }
 
-		self.viewModel.tagFollowed = { itemIndex in
+		self.viewModel.labelFollowed = { itemIndex in
 			let indexToReload = IndexPath.init(row: itemIndex, section: 0)
 			self.tableView.reloadRows(at: [indexToReload], with: .automatic)
-			self.showAlert(withText: "Tag followed")
+			self.showAlert(withText: "Label followed")
 		}
-		self.viewModel.tagUnfollowed = { itemIndex in
+		self.viewModel.labelUnfollowed = { itemIndex in
 			let indexToReload = IndexPath.init(row: itemIndex, section: 0)
 			if self.followedByCurrentUser {
 				self.tableView.deleteRows(at: [indexToReload], with: .automatic)
 			} else {
 				self.tableView.reloadRows(at: [indexToReload], with: .automatic)
 			}
-			self.showAlert(withText: "Tag unfollowed")
+			self.showAlert(withText: "Label unfollowed")
 		}
 
         self.viewModel.onError = { error in
@@ -146,7 +147,7 @@ class TagsViewController: UIViewController {
 
     private func executeQuery(searchTerm: String?) {
         self.showActivityIndicatorView()
-		var query = TagsQuery.find(searchTerm ?? "")
+        var query = LabelsQuery.find(searchTerm ?? "")
 		if self.followedByCurrentUser {
 			query = query.followedBy(UserId.currentUser())
 		}
@@ -155,50 +156,50 @@ class TagsViewController: UIViewController {
     }
 }
 
-extension TagsViewController: UITableViewDelegate {
+extension LabelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 104
     }
 }
 
-extension TagsViewController: UISearchBarDelegate {
+extension LabelsViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.executeQuery(searchTerm: searchBar.text)
     }
 }
 
-extension TagsViewController: UITableViewDataSource {
+extension LabelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.numberOfEntries()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tagtableviewcell") as? TagTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "labeltableviewcell") as? LabelTableViewCell
         let item = self.viewModel.entry(at: indexPath.row)
 
-        cell?.update(tag: item)
+        cell?.update(label: item)
         cell?.delegate = self
 
         return cell ?? UITableViewCell()
     }
 }
 
-extension TagsViewController: TagTableViewCellDelegate {
-    func onShowActions(_ tag: Tag, isFollowed: Bool) {
+extension LabelsViewController: LabelTableViewCellDelegate {
+	func onShowActions(_ label: Label, isFollowed: Bool) {
         let actionSheet = UIAlertController.init(title: "Available actions", message: nil, preferredStyle: .actionSheet)
 		actionSheet.addAction(UIAlertAction.init(title: "Details", style: .default, handler: { _ in
-			self.showAlert(withText: tag.description)
+			self.showAlert(withText: label.description)
 		}))
         actionSheet.addAction(UIAlertAction.init(title: "Show feed", style: .default, handler: { _ in
-			let query = ActivitiesQuery.everywhere().withTag(tag.name)
+			let query = ActivitiesQuery.everywhere().withLabels([label.name])
             GetSocialUIActivityFeedView(for: query).show()
         }))
 		actionSheet.addAction(UIAlertAction.init(title: isFollowed ? "Unfollow" : "Follow", style: .default, handler: { _ in
-			self.viewModel.followTag(tag.name, remove: self.followedByCurrentUser)
+			self.viewModel.followLabel(label.name, remove: self.followedByCurrentUser)
 		}))
 		actionSheet.addAction(UIAlertAction.init(title: "Followers", style: .default, handler: { _ in
-			self.delegate?.onShowFollowers(tag.name)
+			self.delegate?.onShowFollowers(label.name)
 		}))
         actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)

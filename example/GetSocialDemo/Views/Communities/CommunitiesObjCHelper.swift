@@ -96,9 +96,35 @@ public class CommunitiesHelper: NSObject {
         navigationController.pushViewController(usersByIdView.viewController, animated: true)
     }
 
-    public static func showTags(navigationController: UINavigationController) {
-        let tagsView = TagsView()
+	public static func showTags(followedByCurrentUser: Bool, navigationController: UINavigationController) {
+        let tagsView = TagsView(followedByCurrentUser: followedByCurrentUser)
+		tagsView.showFollowersOfTag = { tag in
+			let followersView = FollowersView()
+			followersView.query = FollowersQuery.ofTag(tag)
+			followersView.showFollowersOfUser = { user, count in
+				let followersView = FollowersView()
+				followersView.query = FollowersQuery.ofUser(user)
+				navigationController.pushViewController(followersView.viewController, animated: true)
+			}
+			navigationController.pushViewController(followersView.viewController, animated: true)
+		}
         navigationController.pushViewController(tagsView.viewController, animated: true)
+    }
+    
+    public static func showLabels(followedByCurrentUser: Bool, navigationController: UINavigationController) {
+        let labelsView = LabelsView(followedByCurrentUser: followedByCurrentUser)
+		labelsView.showFollowersOfLabel = { label in
+			let followersView = FollowersView()
+			followersView.query = FollowersQuery.ofLabel(label)
+			followersView.showFollowersOfUser = { user, count in
+				let followersView = FollowersView()
+				followersView.query = FollowersQuery.ofUser(user)
+				navigationController.pushViewController(followersView.viewController, animated: true)
+			}
+			navigationController.pushViewController(followersView.viewController, animated: true)
+		}
+
+        navigationController.pushViewController(labelsView.viewController, animated: true)
     }
 
 	public static func showReactions(navigationController: UINavigationController) {

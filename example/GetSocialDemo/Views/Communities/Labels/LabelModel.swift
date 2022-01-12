@@ -7,24 +7,24 @@
 
 import Foundation
 
-class TagsModel {
+class LabelsModel {
 
     var onInitialDataLoaded: (() -> Void)?
     var onDidOlderLoad: ((Bool) -> Void)?
     var onError: ((Error) -> Void)?
-    var tagFollowed: ((Int) -> Void)?
-    var tagUnfollowed: ((Int) -> Void)?
+    var labelFollowed: ((Int) -> Void)?
+    var labelUnfollowed: ((Int) -> Void)?
 
-    var pagingQuery: TagsPagingQuery?
-    var query: TagsQuery?
+    var pagingQuery: LabelsPagingQuery?
+    var query: LabelsQuery?
 
-    var tags: [Tag] = []
+    var labels: [Label] = []
     var nextCursor: String = ""
 
-    func loadEntries(query: TagsQuery) {
+    func loadEntries(query: LabelsQuery) {
         self.query = query
-        self.pagingQuery = TagsPagingQuery.init(query)
-        self.tags.removeAll()
+        self.pagingQuery = LabelsPagingQuery.init(query)
+        self.labels.removeAll()
         executeQuery(success: {
             self.onInitialDataLoaded?()
         }, failure: onError)
@@ -32,7 +32,7 @@ class TagsModel {
     
     func loadNewer() {
         self.pagingQuery?.nextCursor = ""
-        self.tags.removeAll()
+        self.labels.removeAll()
         executeQuery(success: {
             self.onInitialDataLoaded?()
         }, failure: onError)
@@ -50,38 +50,38 @@ class TagsModel {
     }
 
     func numberOfEntries() -> Int {
-        return self.tags.count
+        return self.labels.count
     }
 
-    func entry(at: Int) -> Tag {
-        return self.tags[at]
+    func entry(at: Int) -> Label {
+        return self.labels[at]
     }
     
-    func findTag(_ name: String) -> Tag? {
-        return self.tags.filter {
+    func findLabel(_ name: String) -> Label? {
+        return self.labels.filter {
             return $0.name == name
         }.first
     }
 
-	func followTag(_ name: String, remove: Bool = false) {
-        if let tag = findTag(name), let tagIndex = self.tags.firstIndex(of: tag) {
-            let query = FollowQuery.tags([name])
-            if tag.isFollowedByMe {
+	func followLabel(_ name: String, remove: Bool = false) {
+        if let label = findLabel(name), let labelIndex = self.labels.firstIndex(of: label) {
+            let query = FollowQuery.labels([name])
+            if label.isFollowedByMe {
                 Communities.unfollow(query, success: { _ in
 					if remove {
-						self.tags.remove(at: tagIndex)
+						self.labels.remove(at: labelIndex)
 					} else {
-						PrivateTagBuilder.updateTag(tag: tag, isFollowed: false)
+						PrivateLabelBuilder.updateLabel(label: label, isFollowed: false)
 					}
-                    self.tagUnfollowed?(tagIndex)
+                    self.labelUnfollowed?(labelIndex)
                 }) { error in
                     self.onError?(error)
                 }
 
             } else {
                 Communities.follow(query, success: { _ in
-                    PrivateTagBuilder.updateTag(tag: tag, isFollowed: true)
-                    self.tagFollowed?(tagIndex)
+                    PrivateLabelBuilder.updateLabel(label: label, isFollowed: true)
+                    self.labelFollowed?(labelIndex)
                 }) { error in
                     self.onError?(error)
                 }
@@ -91,9 +91,9 @@ class TagsModel {
     }
     
     private func executeQuery(success: (() -> Void)?, failure: ((Error) -> Void)?) {
-        Communities.tags(self.pagingQuery!, success: { result in
+        Communities.labels(self.pagingQuery!, success: { result in
             self.nextCursor = result.nextCursor
-            self.tags.append(contentsOf: result.tags)
+            self.labels.append(contentsOf: result.labels)
             success?()
         }) { error in
             failure?(error)

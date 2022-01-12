@@ -40,6 +40,10 @@
 		990CFDF21BAA173E008872CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D99A617EB064500F65204 /* UIKit.framework */; };
 		990CFDF91BAA173E008872CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BF2FC118129DCC00B9A6B5 /* SystemConfiguration.framework */; };
 		9942F91A1A70F9C200FCC91B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9942F9171A70F9C200FCC91B /* Launch Screen.xib */; };
+		99675B11276B8C6B003B2075 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675B0D276B8C6B003B2075 /* LabelTableViewCell.swift */; };
+		99675B12276B8C6B003B2075 /* LabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675B0E276B8C6B003B2075 /* LabelModel.swift */; };
+		99675B13276B8C6B003B2075 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675B0F276B8C6B003B2075 /* LabelViewController.swift */; };
+		99675B14276B8C6B003B2075 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675B10276B8C6B003B2075 /* LabelView.swift */; };
 		998876151C6D487C0071A436 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 998876141C6D487C0071A436 /* Constants.m */; };
 		998B71EE1BB95CB800325DAF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EB1BB95CB800325DAF /* FBSDKCoreKit.framework */; };
 		998B71EF1BB95CB800325DAF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998B71EC1BB95CB800325DAF /* FBSDKLoginKit.framework */; };
@@ -434,6 +438,10 @@
 		995D99B117EB064500F65204 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		995D99B217EB064500F65204 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		995D99BD17EB064500F65204 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		99675B0D276B8C6B003B2075 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		99675B0E276B8C6B003B2075 /* LabelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelModel.swift; sourceTree = "<group>"; };
+		99675B0F276B8C6B003B2075 /* LabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		99675B10276B8C6B003B2075 /* LabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		998298D7181C2BFF0028113B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		998876131C6D487C0071A436 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		998876141C6D487C0071A436 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -974,6 +982,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		99675B0C276B8C6B003B2075 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				99675B0D276B8C6B003B2075 /* LabelTableViewCell.swift */,
+				99675B0E276B8C6B003B2075 /* LabelModel.swift */,
+				99675B0F276B8C6B003B2075 /* LabelViewController.swift */,
+				99675B10276B8C6B003B2075 /* LabelView.swift */,
+			);
+			name = Labels;
+			path = Views/Communities/Labels;
+			sourceTree = "<group>";
+		};
 		99FE1A811BB2B2EC00EF576A /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1477,6 +1497,7 @@
 		BCBCBA452417D2170005172F /* Communities */ = {
 			isa = PBXGroup;
 			children = (
+				99675B0C276B8C6B003B2075 /* Labels */,
 				BCF26F7F26C2B93800706113 /* SortDialog */,
 				BC961B8C267B3C8000DDE945 /* Activities */,
 				BC77E9402645825E00F06273 /* Generic */,
@@ -1915,6 +1936,7 @@
 				BC77E9442645827300F06273 /* GenericTableViewController.swift in Sources */,
 				BC66931F24B765160094479F /* TagsView.swift in Sources */,
 				BCEA417A254AE35F00BDF883 /* MyGroupsViewController.swift in Sources */,
+				99675B14276B8C6B003B2075 /* LabelView.swift in Sources */,
 				BC5C5A7A1F4DCBB100533C43 /* GetSocialTwitterInvitePlugin.m in Sources */,
 				BC4637551E8D12F5008074E3 /* UISimpleAlertViewController.m in Sources */,
 				BC54CE2D2423818A00FE539F /* TopicsModel.swift in Sources */,
@@ -1944,6 +1966,7 @@
 				BC54CE2E2423818A00FE539F /* TopicsViewController.swift in Sources */,
 				99F26AEB19A65BE5006D3B1A /* AppDelegate.m in Sources */,
 				BCEA4174254AE34F00BDF883 /* GroupTableViewCell.swift in Sources */,
+				99675B12276B8C6B003B2075 /* LabelModel.swift in Sources */,
 				BC54CE98242382BC00FE539F /* ConsoleViewController.m in Sources */,
 				BC680F0E2074D08600A3551E /* VKPhoto.m in Sources */,
 				BC77E8E8263FF50E00F06273 /* VoteViewController.swift in Sources */,
@@ -1970,6 +1993,7 @@
 				BC77E8B2263FF3F400F06273 /* PollsView.swift in Sources */,
 				BC5507B122DDC79D008591FB /* GetSocialInstagramStoriesInviteChannel.m in Sources */,
 				BC961B92267B3C8F00DDE945 /* ActivitiesView.swift in Sources */,
+				99675B11276B8C6B003B2075 /* LabelTableViewCell.swift in Sources */,
 				BC680F0C2074D08600A3551E /* VKLikes.m in Sources */,
 				BC77E8FA263FF5E000F06273 /* VoteOptionTableViewCell.swift in Sources */,
 				BC680EEF2074D08600A3551E /* VKApiCaptcha.m in Sources */,
@@ -1984,6 +2008,7 @@
 				BC77E89B263FF35000F06273 /* PollOptionView.swift in Sources */,
 				BC54CE8F242382BC00FE539F /* SetReferrerViewController.m in Sources */,
 				BC77E89C263FF35000F06273 /* CreatePollViewModel.swift in Sources */,
+				99675B13276B8C6B003B2075 /* LabelViewController.swift in Sources */,
 				BC680F4E2074D08700A3551E /* VKAccessToken.m in Sources */,
 				BC680EF52074D08600A3551E /* VKApiFriends.m in Sources */,
 				BC680F082074D08600A3551E /* VKDocs.m in Sources */,

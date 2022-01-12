@@ -670,11 +670,28 @@ NSString *const kCustomProvider = @"custom";
         [self.menu addObject:usersByIdMenu];
 
         // Tags
-        MenuItem *tagsMenu = [MenuItem actionableMenuItemWithTitle:@"Tags"
-                                                              action:^{
-                                                                  [self showTags];
-                                                              }];
+		ParentMenuItem *tagsMenu = [MenuItem parentMenuItemWithTitle:@"Tags"];
+		[tagsMenu addSubmenu: [MenuItem actionableMenuItemWithTitle:@"All"
+															 action:^{
+			[self showAllTags];
+		}]];
+		[tagsMenu addSubmenu: [MenuItem actionableMenuItemWithTitle:@"Followed by Current User"
+															 action:^{
+			[self showTagsFollowedByCurrentUser];
+		}]];
         [self.menu addObject:tagsMenu];
+        
+        // Labels
+		ParentMenuItem *labelsMenu = [MenuItem parentMenuItemWithTitle:@"Labels"];
+        [labelsMenu addSubmenu: [MenuItem actionableMenuItemWithTitle:@"All"
+                                                              action:^{
+                                                                  [self showAllLabels];
+                                                              }]];
+		[labelsMenu addSubmenu: [MenuItem actionableMenuItemWithTitle:@"Followed by Current User"
+															   action:^{
+			[self showLabelsFollowedByCurrentUser];
+		}]];
+        [self.menu addObject:labelsMenu];
 
         // Promo Codes
         ParentMenuItem *promoCodes = [MenuItem parentMenuItemWithTitle:@"Promo Codes"];
@@ -1978,11 +1995,28 @@ NSString *const kCustomProvider = @"custom";
     [self.mainNavigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Labels
+
+- (void)showAllLabels
+{
+    [CommunitiesHelper showLabelsWithFollowedByCurrentUser:NO navigationController:self.mainNavigationController];
+}
+
+- (void)showLabelsFollowedByCurrentUser
+{
+	[CommunitiesHelper showLabelsWithFollowedByCurrentUser:YES navigationController:self.mainNavigationController];
+}
+
 #pragma mark - Tags
 
-- (void)showTags
+- (void)showAllTags
 {
-    [CommunitiesHelper showTagsWithNavigationController:self.mainNavigationController];
+    [CommunitiesHelper showTagsWithFollowedByCurrentUser:NO navigationController:self.mainNavigationController];
+}
+
+- (void)showTagsFollowedByCurrentUser
+{
+	[CommunitiesHelper showTagsWithFollowedByCurrentUser:YES navigationController:self.mainNavigationController];
 }
 
 - (void)showActivityDetailsView_Topic
