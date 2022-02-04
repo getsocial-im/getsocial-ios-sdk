@@ -129,8 +129,33 @@ public class CommunitiesHelper: NSObject {
 
 	public static func showReactions(navigationController: UINavigationController) {
 		let feedView = FeedView()
+        feedView.query = ActivitiesQuery.inTopic("DemoFeed")
 		navigationController.pushViewController(feedView.viewController, animated: true)
 	}
+    
+    public static func showBookmarkedActivities(navigationController: UINavigationController) {
+        let feedView = FeedView()
+        feedView.query = ActivitiesQuery.bookmarkedActivities()
+        navigationController.pushViewController(feedView.viewController, animated: true)
+    }
+    
+    public static func showReactedActivities(navigationController: UINavigationController) {
+        let feedView = FeedView()
+        feedView.query = ActivitiesQuery.reactedActivities(nil)
+        navigationController.pushViewController(feedView.viewController, animated: true)
+    }
+    
+    public static func showLikedActivities(navigationController: UINavigationController) {
+        let feedView = FeedView()
+        feedView.query = ActivitiesQuery.reactedActivities(["like"])
+        navigationController.pushViewController(feedView.viewController, animated: true)
+    }
+    
+    public static func showVotedActivities(navigationController: UINavigationController) {
+        let feedView = FeedView()
+        feedView.query = ActivitiesQuery.votedActivities(nil)
+        navigationController.pushViewController(feedView.viewController, animated: true)
+    }
 
     public static func showCreateGroup(navigationController: UINavigationController) {
         let createGroupView = CreateGroupViewController()

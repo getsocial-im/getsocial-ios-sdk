@@ -141,6 +141,10 @@ NSString *const kCustomProvider = @"custom";
     [GetSocialNotifications setOnNotificationClickedListener:^(GetSocialNotification *notification, GetSocialNotificationContext* context) {
         [self handleNotification:notification withContext:context];
     }];
+    [GetSocialNotifications setOnNotificationReceivedListener:^(GetSocialNotification * notification) {
+        GSLogInfo(NO, NO, @"Notification Received: %@.", notification);
+    }];
+
     [GetSocial addOnCurrentUserChangedListener:^(GetSocialCurrentUser* newUser) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UserWasUpdatedNotification object:nil];
         [self updateFriendsCount];
@@ -594,6 +598,39 @@ NSString *const kCustomProvider = @"custom";
 												   action:^{
 			[self showActivityDetailsView_Group];
 		}]];
+        
+        [self.activitiesMenu
+         addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All App mentions"
+                                                   action:^{
+            GetSocialActivitiesQuery* query = [[GetSocialActivitiesQuery everywhere] withMentions:[NSArray arrayWithObject: [GetSocialUserId createForApp]]];
+            [self showActivitiesViewWithQuery:query];
+        }]];
+        
+        [self.activitiesMenu
+         addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All bookmarks"
+                                                   action:^{
+            [self showBookmarks];
+        }]];
+
+        
+        [self.activitiesMenu
+         addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All reacted activities"
+                                                   action:^{
+            [self showReactedActivities];
+        }]];
+
+        [self.activitiesMenu
+         addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All liked activities"
+                                                   action:^{
+            [self showLikedActivities];
+        }]];
+
+        
+        [self.activitiesMenu
+         addSubmenu:[MenuItem actionableMenuItemWithTitle:@"All voted activities"
+                                                   action:^{
+            [self showVotedActivities];
+        }]];
 
         [self.menu addObject:self.activitiesMenu];
 
@@ -2036,6 +2073,26 @@ NSString *const kCustomProvider = @"custom";
 - (void)showReactions
 {
 	[CommunitiesHelper showReactionsWithNavigationController:self.mainNavigationController];
+}
+
+- (void)showBookmarks
+{
+    [CommunitiesHelper showBookmarkedActivitiesWithNavigationController:self.mainNavigationController];
+}
+
+- (void)showReactedActivities
+{
+    [CommunitiesHelper showReactedActivitiesWithNavigationController:self.mainNavigationController];
+}
+
+- (void)showLikedActivities
+{
+    [CommunitiesHelper showLikedActivitiesWithNavigationController:self.mainNavigationController];
+}
+
+- (void)showVotedActivities
+{
+    [CommunitiesHelper showVotedActivitiesWithNavigationController:self.mainNavigationController];
 }
 
 #pragma mark - Topics

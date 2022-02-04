@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import GetSocialSDK
 
 protocol ActivityTableViewCellDelegate {
     func onShowActions(_ ofActivity: String)
@@ -19,6 +20,8 @@ class ActivityTableViewCell: UITableViewCell {
     var activityAuthor: UILabel = UILabel()
     var activityText: UILabel = UILabel()
     var reactions: UILabel = UILabel()
+    var isBookmarked: UILabel = UILabel()
+    var bookmarksCount: UILabel = UILabel()
 
 	var actionButton: UIButton = UIButton.init(type: .roundedRect)
 
@@ -41,12 +44,12 @@ class ActivityTableViewCell: UITableViewCell {
 		self.internalActivityId = activity.id
 		self.activityAuthor.text = "Author: \(activity.author.displayName)"
 		self.activityText.text = "Text: \(activity.text ?? "")"
-		self.reactions.text = "My reactions: \(activity.myReactions.joined(separator: ", "))"
+        self.reactions.text = "My reactions: \(activity.myReactions.joined(separator: ", "))"
+        self.isBookmarked.text = "IsBookmarked: \(activity.isBookmarked)"
+        self.bookmarksCount.text = "BookmarksCount: \(activity.bookmarksCount)"
 
         self.actionButton.setTitle("Actions", for: .normal)
         self.actionButton.addTarget(self, action: #selector(showActions(sender:)), for: .touchUpInside)
-
-
     }
 
     @objc
@@ -81,6 +84,25 @@ class ActivityTableViewCell: UITableViewCell {
 			self.reactions.topAnchor.constraint(equalTo: self.activityText.bottomAnchor, constant: 4)
 		]
 		NSLayoutConstraint.activate(reactionsConstraints)
+        
+        self.isBookmarked.translatesAutoresizingMaskIntoConstraints = false
+        self.isBookmarked.font = self.isBookmarked.font.withSize(12)
+        self.contentView.addSubview(self.isBookmarked)
+        let isBookmarkedConstraints = [
+            self.isBookmarked.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            self.isBookmarked.topAnchor.constraint(equalTo: self.reactions.bottomAnchor, constant: 4)
+        ]
+        NSLayoutConstraint.activate(isBookmarkedConstraints)
+        
+        self.bookmarksCount.translatesAutoresizingMaskIntoConstraints = false
+        self.bookmarksCount.font = self.bookmarksCount.font.withSize(12)
+        self.contentView.addSubview(self.bookmarksCount)
+        let bookmarkedCountConstraints = [
+            self.bookmarksCount.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            self.bookmarksCount.topAnchor.constraint(equalTo: self.isBookmarked.bottomAnchor, constant: 4)
+        ]
+        NSLayoutConstraint.activate(bookmarkedCountConstraints)
+        
 
         self.actionButton.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
         self.actionButton.setTitleColor(.black, for: .normal)

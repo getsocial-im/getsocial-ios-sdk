@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GetSocialSDK
 
 protocol FeedTableViewControllerDelegate {
 }
@@ -13,8 +14,10 @@ protocol FeedTableViewControllerDelegate {
 class FeedViewController: UIViewController {
 
     var viewModel: FeedModel = FeedModel()
+    var query: ActivitiesQuery?
+    var loadingOlders: Bool = false
     var delegate: FeedTableViewControllerDelegate?
-
+    
     var tableView: UITableView = UITableView()
 
     override func viewDidLoad() {
@@ -28,7 +31,11 @@ class FeedViewController: UIViewController {
             self.hideActivityIndicatorView()
             self.tableView.reloadData()
         }
-
+        self.viewModel.onDidOlderLoad = {
+            self.hideActivityIndicatorView()
+            self.tableView.reloadData()
+            self.loadingOlders = false
+        }
 		self.viewModel.reactionUpdated = { index in
 			self.hideActivityIndicatorView()
 			let indexToReload = IndexPath.init(row: index, section: 0)
@@ -52,11 +59,21 @@ class FeedViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         layoutTableView()
     }
-
-	internal func executeQuery() {
-		self.showActivityIndicatorView()
-		self.viewModel.loadEntries()
-	}
+    
+    private func executeQuery() {
+        self.showActivityIndicatorView()
+        self.viewModel.loadEntries(query: self.query ?? ActivitiesQuery.timeline())
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let actualPosition = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height - scrollView.frame.size.height
+        if actualPosition > 0 && self.viewModel.numberOfEntries() > 0 && actualPosition > contentHeight && !self.loadingOlders && self.viewModel.nextCursor.count != 0 {
+            self.loadingOlders = true
+            self.showActivityIndicatorView()
+            self.viewModel.loadOlder()
+        }
+    }
 
     internal func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +91,7 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 110
     }
 }
 
@@ -99,7 +116,7 @@ extension FeedViewController: ActivityTableViewCellDelegate {
         let actionSheet = UIAlertController.init(title: "Available actions", message: nil, preferredStyle: .actionSheet)
 		actionSheet.addAction(UIAlertAction.init(title: "Reaction details", style: .default, handler: { _ in
 			if let activity = self.viewModel.findActivity(ofActivity) {
-				let description = "Known reactors: \(activity.reactions), my reactions: \(activity.myReactions), reactions count: \(activity.reactionsCount)"
+                let description = "Known reactors: \(activity.reactions), my reactions: \(activity.myReactions), reactions count: \(activity.reactionsCount), bookmarks count: \(activity.bookmarksCount), is Bookmarked: \(activity.isBookmarked)"
 				self.showAlert(withText: description)
 			}
 		}))
@@ -127,7 +144,21 @@ extension FeedViewController: ActivityTableViewCellDelegate {
 				self.viewModel.removeReaction(reaction, activityId: ofActivity)
 			}
 		}))
-
+        
+        if let activity = self.viewModel.findActivity(ofActivity) {
+            if !activity.isBookmarked {
+                actionSheet.addAction(UIAlertAction.init(title: "Bookmark", style: .default, handler: { _ in
+                    self.showActivityIndicatorView()
+                    self.viewModel.bookmark(ofActivity)
+                }))
+            } else {
+                actionSheet.addAction(UIAlertAction.init(title: "Remove Bookmark", style: .default, handler: { _ in
+                    self.showActivityIndicatorView()
+                    self.viewModel.removeBookmark(ofActivity)
+                }))
+            }
+        }
+        
 		actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
     }

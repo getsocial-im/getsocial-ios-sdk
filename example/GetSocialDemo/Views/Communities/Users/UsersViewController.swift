@@ -191,6 +191,10 @@ extension UsersViewController: UserTableViewCellDelegate {
             let query = ActivitiesQuery.feedOf(UserId.create(id))
             GetSocialUIActivityFeedView(for: query).show()
         }))
+        actionSheet.addAction(UIAlertAction.init(title: "User's mentions", style: .default, handler: { _ in
+            let query = ActivitiesQuery.everywhere().withMentions([UserId.create(id)])
+            GetSocialUIActivityFeedView(for: query).show()
+        }))
         actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
     }

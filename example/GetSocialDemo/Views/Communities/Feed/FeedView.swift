@@ -12,10 +12,17 @@ class FeedView {
 
     var viewController: FeedViewController
 
-    init() {
+    public init() {
         self.viewController = FeedViewController()
         self.viewController.delegate = self
     }
+    
+    var query: ActivitiesQuery? {
+        didSet {
+            self.viewController.query = self.query
+        }
+    }
+
 }
 
 extension FeedView: FeedTableViewControllerDelegate {

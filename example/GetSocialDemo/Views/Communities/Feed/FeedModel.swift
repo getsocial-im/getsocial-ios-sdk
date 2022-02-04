@@ -11,20 +11,32 @@ import GetSocialSDK
 class FeedModel {
 
     var onInitialDataLoaded: (() -> Void)?
+    var onDidOlderLoad: (() -> Void)?
     var onError: ((Error) -> Void)?
     var reactionUpdated: ((Int) -> Void)?
-
-	let query = ActivitiesQuery.timeline()
+    
+    var pagingQuery: ActivitiesPagingQuery?
+    var query: ActivitiesQuery?
 
     var activities: [Activity] = []
-
-    func loadEntries() {
-        self.activities.removeAll()
-        executeQuery(success: {
-            self.onInitialDataLoaded?()
-        }, failure: onError)
+    var nextCursor: String = ""
+    
+    func loadEntries(query: ActivitiesQuery) {
+        self.query = query
+        self.pagingQuery = ActivitiesPagingQuery.init(query)
+        executeQuery(success: onInitialDataLoaded, failure: onError)
     }
-
+    
+    func loadNewer() {
+        self.pagingQuery?.nextCursor = ""
+        self.activities.removeAll()
+        executeQuery(success: onInitialDataLoaded, failure: onError)
+    }
+    
+    func loadOlder() {
+        self.pagingQuery?.nextCursor = self.nextCursor
+        executeQuery(success: onDidOlderLoad, failure: onError)
+    }
 
     func numberOfEntries() -> Int {
         return self.activities.count
@@ -76,6 +88,23 @@ class FeedModel {
 			self.onError?(error)
 		})
 	}
+    
+    func bookmark(_ activityId: String) {
+        Communities.bookmark(activityId, success: {
+            self.refreshActivity(activityId)
+        }, failure: { error in
+            self.onError?(error)
+        })
+    }
+    
+    func removeBookmark(_ activityId: String) {
+        Communities.removeBookmark(activityId, success: {
+            self.refreshActivity(activityId)
+        }, failure: { error in
+            self.onError?(error)
+        })
+    }
+
 
 	private func refreshActivity(_ activityId: String) {
 		Communities.activity(activityId, success: { activity in
@@ -87,10 +116,10 @@ class FeedModel {
 			self.onError?(error)
 		})
 	}
-
+    
     private func executeQuery(success: (() -> Void)?, failure: ((Error) -> Void)?) {
-		let pagingQuery = ActivitiesPagingQuery(ActivitiesQuery.inTopic("DemoFeed"))
-        Communities.activities(pagingQuery, success: { result in
+        Communities.activities(self.pagingQuery!, success: { result in
+            self.nextCursor = result.nextCursor
             self.activities.append(contentsOf: result.activities)
             success?()
         }) { error in
