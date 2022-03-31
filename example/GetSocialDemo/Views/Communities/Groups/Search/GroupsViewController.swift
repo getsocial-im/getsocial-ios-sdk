@@ -170,6 +170,7 @@ class GroupsViewController: UIViewController {
 
 		textSearchBar.enablesReturnKeyAutomatically = false
 		textSearchBar.delegate = self
+        textSearchBar.autocapitalizationType = .none
 
 		labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
 		labelSearchBar.placeholder = "label1,label2"
@@ -180,6 +181,7 @@ class GroupsViewController: UIViewController {
 		])
 		labelSearchBar.enablesReturnKeyAutomatically = false
 		labelSearchBar.delegate = self
+        labelSearchBar.autocapitalizationType = .none
 
 		propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
 		propertySearchBar.placeholder = "key:value,key1:value1"
@@ -190,6 +192,7 @@ class GroupsViewController: UIViewController {
 		])
 		propertySearchBar.enablesReturnKeyAutomatically = false
 		propertySearchBar.delegate = self
+        propertySearchBar.autocapitalizationType = .none
     }
 
     internal func layoutTableView() {

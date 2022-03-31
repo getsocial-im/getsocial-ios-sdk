@@ -11,6 +11,11 @@ import UIKit
 @objcMembers
 public class CommunitiesHelper: NSObject {
     
+    public static func showSearch(navigationController: UINavigationController) {
+        let searchView = SearchView()
+        navigationController.pushViewController(searchView.viewController, animated: true)
+    }
+    
     public static func showTopics(navigationController: UINavigationController) {
         let topicsView = TopicsView()
         navigationController.pushViewController(topicsView.viewController, animated: true)

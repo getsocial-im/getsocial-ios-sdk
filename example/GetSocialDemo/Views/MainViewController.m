@@ -654,6 +654,13 @@ NSString *const kCustomProvider = @"custom";
                                                                           action:^{
                                                                               [self showNotificationCenterUIWithHandlers];
                                                                           }]];
+        
+        // Searcg
+        MenuItem *searchMenu = [MenuItem actionableMenuItemWithTitle:@"Search"
+                                                              action:^{
+                                                                  [self showSearch];
+                                                              }];
+        [self.menu addObject:searchMenu];
 
         // Topics
         MenuItem *topicsMenu = [MenuItem actionableMenuItemWithTitle:@"Topics"
@@ -2094,6 +2101,14 @@ NSString *const kCustomProvider = @"custom";
 {
     [CommunitiesHelper showVotedActivitiesWithNavigationController:self.mainNavigationController];
 }
+
+#pragma mark - Search
+
+- (void)showSearch
+{
+    [CommunitiesHelper showSearchWithNavigationController:self.mainNavigationController];
+}
+
 
 #pragma mark - Topics
 

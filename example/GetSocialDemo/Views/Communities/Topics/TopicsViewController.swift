@@ -135,6 +135,7 @@ class TopicsViewController: UIViewController {
 
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = self
+        searchBar.autocapitalizationType = .none
 
 		labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
 		labelSearchBar.placeholder = "label1,label2"
@@ -145,9 +146,10 @@ class TopicsViewController: UIViewController {
 		])
 		labelSearchBar.enablesReturnKeyAutomatically = false
 		labelSearchBar.delegate = self
+        labelSearchBar.autocapitalizationType = .none
 
 		propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
-		propertySearchBar.placeholder = "key:value,key1:value1"
+		propertySearchBar.placeholder = "key=value,key1=value1"
 		NSLayoutConstraint.activate([
 			self.propertySearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
 			self.propertySearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -155,6 +157,7 @@ class TopicsViewController: UIViewController {
 		])
 		propertySearchBar.enablesReturnKeyAutomatically = false
 		propertySearchBar.delegate = self
+        propertySearchBar.autocapitalizationType = .none
     }
 
     internal func layoutTableView() {
