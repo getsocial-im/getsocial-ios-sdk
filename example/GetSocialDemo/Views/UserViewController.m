@@ -115,6 +115,10 @@
 		[details appendFormat:@"Expiry: %lld\n", GetSocial.currentUser.banInfo.expiration];
 		[details appendFormat:@"Reason: %@\n", GetSocial.currentUser.banInfo.reason];
 	}
+    
+    NSString* isVerified = GetSocial.currentUser.isVerified ? @"YES": @"NO";
+    [details appendFormat:@"\n\nIs Verified: %@\n", isVerified];
+    userDetails[@"Is Verified"] = GetSocial.currentUser.isVerified ? @YES: @NO;
 
     [details appendString:@"\n\nJSON\n\n"];
 
