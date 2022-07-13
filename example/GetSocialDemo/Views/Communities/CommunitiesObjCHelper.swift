@@ -100,6 +100,11 @@ public class CommunitiesHelper: NSObject {
         let usersByIdView = UsersByIdView()
         navigationController.pushViewController(usersByIdView.viewController, animated: true)
     }
+    
+    public static func showBlockedUsers(navigationController: UINavigationController) {
+        let blockedUsersView = BlockedUsersView()
+        navigationController.pushViewController(blockedUsersView.viewController, animated: true)
+    }
 
 	public static func showTags(followedByCurrentUser: Bool, navigationController: UINavigationController) {
         let tagsView = TagsView(followedByCurrentUser: followedByCurrentUser)

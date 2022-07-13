@@ -712,6 +712,13 @@ NSString *const kCustomProvider = @"custom";
                                                                   [self showUsersById];
                                                               }];
         [self.menu addObject:usersByIdMenu];
+        
+        // Blocked Users
+        MenuItem *blockedUsersMenu = [MenuItem actionableMenuItemWithTitle:@"Blocked Users"
+                                                              action:^{
+                                                                  [self blockedUsers];
+                                                              }];
+        [self.menu addObject:blockedUsersMenu];
 
         // Tags
 		ParentMenuItem *tagsMenu = [MenuItem parentMenuItemWithTitle:@"Tags"];
@@ -2166,6 +2173,13 @@ NSString *const kCustomProvider = @"custom";
 - (void)showUsersById
 {
     [CommunitiesHelper showUsersByIdWithNavigationController:self.mainNavigationController];
+}
+
+#pragma mark - Blocked Users
+
+- (void)blockedUsers
+{
+    [CommunitiesHelper showBlockedUsersWithNavigationController:self.mainNavigationController];
 }
 
 #pragma mark - Activities

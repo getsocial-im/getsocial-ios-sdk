@@ -202,5 +202,29 @@ class UsersModel {
             }
         }
     }
+    
+    func blockUser(id userId: String) {
+        if let user = find(userId), let userIndex = self.users.firstIndex(of: user) {
+            let userIdList = UserIdList.create([userId])
+            
+            Communities.blockUsers(userIdList, success: {
+                self.onFollowStatusUpdated?(userIndex)
+            }, failure: { error in
+                self.onError?(error)
+            })
+        }
+    }
+    
+    func unblockUser(id userId: String) {
+        if let user = find(userId), let userIndex = self.users.firstIndex(of: user) {
+            let userIdList = UserIdList.create([userId])
+            
+            Communities.unblockUsers(userIdList, success: {
+                self.onFollowStatusUpdated?(userIndex)
+            }, failure: { error in
+                self.onError?(error)
+            })
+        }
+    }
 
 }

@@ -176,6 +176,14 @@ extension UsersViewController: UserTableViewCellDelegate {
                 self.showActivityIndicatorView()
                 self.viewModel.updateFollowStatus(of: id, newStatus: !isFollowed)
             }))
+            actionSheet.addAction(UIAlertAction.init(title: "Block", style: .default, handler: { _ in
+                self.showActivityIndicatorView()
+                self.viewModel.blockUser(id: id)
+            }))
+            actionSheet.addAction(UIAlertAction.init(title: "Unblock", style: .default, handler: { _ in
+                self.showActivityIndicatorView()
+                self.viewModel.unblockUser(id: id)
+            }))
         }
         actionSheet.addAction(UIAlertAction.init(title: "Followers", style: .default, handler: { _ in
             self.delegate?.onFollowersClicked(ofUser: UserId.create(id), followersCount: followersCount)

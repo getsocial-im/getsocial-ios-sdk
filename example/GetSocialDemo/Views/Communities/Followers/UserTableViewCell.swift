@@ -49,6 +49,15 @@ class UserTableViewCell: UITableViewCell {
         self.displayName.text = user.displayName
         self.actionButton.setTitle("Actions", for: .normal)
     }
+    
+    func update(user: User) {
+        self.internalUserId = user.userId
+
+        self.userFollowers.isHidden = true
+
+        self.displayName.text = user.displayName
+        self.actionButton.setTitle("Actions", for: .normal)
+    }
 
     @objc
     func showActions(sender: Any?) {
