@@ -20,6 +20,7 @@ class FollowersViewController: UIViewController {
     var followersCount: Int = 0
 
     var tableView: UITableView = UITableView()
+    var textSearchBar: UISearchBar = UISearchBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,7 @@ class FollowersViewController: UIViewController {
         self.title = "\(followersCount) follower" + (followersCount > 1 ? "s" : "")
 
         self.view.addSubview(self.tableView)
+        self.view.addSubview(self.textSearchBar)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,18 +70,40 @@ class FollowersViewController: UIViewController {
 
     internal func layoutTableView() {
 
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        let top = tableView.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
-        let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        textSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        let top = textSearchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
+        let left = textSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let right = textSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
 
-        NSLayoutConstraint.activate([left, top, right, bottom])
+        NSLayoutConstraint.activate([left, top, right])
+
+        textSearchBar.enablesReturnKeyAutomatically = false
+        textSearchBar.delegate = self
+        textSearchBar.autocapitalizationType = .none
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: self.textSearchBar.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
 
     private func executeQuery() {
         self.showActivityIndicatorView()
-        self.viewModel.loadEntries(query: self.query ?? FollowersQuery.ofTopic("global"))
+        
+        var fq = self.query ?? FollowersQuery.ofTopic("global")
+        
+        if let name = self.textSearchBar.text {
+            fq = fq.withName(name)
+        } else {
+            fq = fq.withName("")
+        }
+    
+        
+        self.viewModel.loadEntries(query: fq)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -90,6 +114,13 @@ class FollowersViewController: UIViewController {
             self.showActivityIndicatorView()
             self.viewModel.loadOlder()
         }
+    }
+}
+
+extension FollowersViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.executeQuery()
     }
 }
 

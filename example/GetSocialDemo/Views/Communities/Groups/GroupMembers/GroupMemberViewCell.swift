@@ -43,6 +43,9 @@ class GroupMemberViewCell: UITableViewCell {
         case .invitationPending:
             status = "INVITATION_PENDING"
             break
+        case .rejected:
+                status = "REJECTED"
+                break
         default:
             status = "APPROVED"
             break

@@ -27,6 +27,7 @@ class FollowersModel {
 
     func loadEntries(query: FollowersQuery) {
         self.query = query
+        self.users.removeAll()
         self.pagingQuery = FollowersPagingQuery.init(query)
         executeQuery(success: onInitialDataLoaded, failure: onError)
     }

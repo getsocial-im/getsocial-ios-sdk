@@ -68,6 +68,9 @@ class GroupTableViewCell: UITableViewCell {
         case .member:
             status = "APPROVED"
             break
+        case .rejected:
+            status = "REJECTED"
+            break
         default:
             status = "UNKNOWN"
             break

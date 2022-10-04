@@ -16,6 +16,9 @@ class GroupMembersViewController: UIViewController {
 	private let statusControl: UISegmentedControl
     var groupId: String?
     var currentUserRole: Role?
+    var memberStatus: MemberStatus?
+    
+    var textSearchBar: UISearchBar = UISearchBar()
 
     required init(_ model: GroupMembersModel) {
         self.model = model
@@ -43,21 +46,35 @@ class GroupMembersViewController: UIViewController {
     }
 
     internal func layoutTableView() {
+        
+        textSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        let top = textSearchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
+        let left = textSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let right = textSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+
+        NSLayoutConstraint.activate([left, top, right])
+
+        textSearchBar.enablesReturnKeyAutomatically = false
+        textSearchBar.delegate = self
+        textSearchBar.autocapitalizationType = .none
+    
 		self.statusControl.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-			self.statusControl.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor),
+			self.statusControl.topAnchor.constraint(equalTo: self.textSearchBar.bottomAnchor),
 			self.statusControl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
 			self.statusControl.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
 			self.statusControl.heightAnchor.constraint(equalToConstant: 30)
 		])
 
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
-		let top = tableView.topAnchor.constraint(equalTo: self.statusControl.bottomAnchor)
-        let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: self.statusControl.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
 
-        NSLayoutConstraint.activate([left, top, right, bottom])
+        ])
     }
 
     private func setup() {
@@ -75,18 +92,20 @@ class GroupMembersViewController: UIViewController {
         self.tableView.allowsSelection = false
 
         self.tableView.dataSource = self
-        self.tableView.delegate = self
-
-        self.view.addSubview(self.tableView)
+        self.tableView.delegate = self        
 
 		self.statusControl.insertSegment(withTitle: "All", at: 0, animated: false)
 		self.statusControl.insertSegment(withTitle: "Approved", at: 1, animated: false)
 		self.statusControl.insertSegment(withTitle: "Approval pending", at: 2, animated: false)
 		self.statusControl.insertSegment(withTitle: "Invite pending", at: 3, animated: false)
+        self.statusControl.insertSegment(withTitle: "Rejected", at: 4, animated: false)
 		self.statusControl.selectedSegmentIndex = 0
 		self.statusControl.addTarget(self, action: #selector(statusControlValueChanged), for: .valueChanged)
 
+        self.view.addSubview(self.tableView)
 		self.view.addSubview(self.statusControl)
+        self.view.addSubview(self.textSearchBar)
+        
     }
     
     private func setupModel() {
@@ -104,18 +123,27 @@ class GroupMembersViewController: UIViewController {
             self?.executeQuery()
             self?.showAlert(withText: "Member approved")
         }
+        self.model.onMemberRejected = { [weak self] in
+            self?.hideActivityIndicatorView()
+            self?.executeQuery()
+            self?.showAlert(withText: "Member rejected")
+        }
         self.model.onError = { [weak self] error in
             self?.hideActivityIndicatorView()
             self?.showAlert(withText: error.localizedDescription)
         }
     }
     
-	private func executeQuery(_ status: MemberStatus? = nil) {
+	private func executeQuery() {
         self.showActivityIndicatorView()
 		var query = MembersQuery.ofGroup(self.groupId!)
-		if let status = status {
-			query = query.withStatus(status)
+        if let memberStatus = memberStatus {
+			query = query.withStatus(memberStatus)
 		}
+        
+        if let name = self.textSearchBar.text {
+            query = query.withName(name)
+        }
 		self.model.loadMembers(query)
     }
 
@@ -123,14 +151,17 @@ class GroupMembersViewController: UIViewController {
 	func statusControlValueChanged() {
 		switch self.statusControl.selectedSegmentIndex {
 			case 1:
-				executeQuery(.member)
+                memberStatus = .member
 			case 2:
-				executeQuery(.approvalPending)
+                memberStatus = .approvalPending
 			case 3:
-				executeQuery(.invitationPending)
+                memberStatus = .invitationPending
+            case 4:
+                memberStatus = .rejected
 			default:
-				executeQuery()
+                memberStatus = nil
 		}
+        executeQuery()
 	}
 
     @objc
@@ -143,6 +174,14 @@ class GroupMembersViewController: UIViewController {
     }
     
 }
+
+extension GroupMembersViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.executeQuery()
+    }
+}
+
 
 extension GroupMembersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -178,7 +217,14 @@ extension GroupMembersViewController: GroupMemberViewCellDelegate {
                     self.showActivityIndicatorView()
                     self.model.removeMember(groupMember, groupId: self.groupId!)
                 }))
-                if groupMember.membership.status == .approvalPending {
+                if groupMember.membership.status == .approvalPending || groupMember.membership.status == .member {
+                    actionSheet.addAction(UIAlertAction.init(title: "Reject", style: .default, handler: { _ in
+                        self.showActivityIndicatorView()
+                        self.model.rejectMember(groupMember, groupId: self.groupId!)
+                    }))
+                }
+                
+                if groupMember.membership.status == .approvalPending || groupMember.membership.status == .rejected {
                     actionSheet.addAction(UIAlertAction.init(title: "Approve", style: .default, handler: { _ in
                         self.showActivityIndicatorView()
                         self.model.approveMember(groupMember, groupId: self.groupId!)

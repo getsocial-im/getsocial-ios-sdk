@@ -123,6 +123,7 @@ class AddGroupMemberViewController: UIViewController {
             self.providerIdLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
+        self.providerIdText.autocapitalizationType = UITextAutocapitalizationType.none
         self.providerIdText.translatesAutoresizingMaskIntoConstraints = false
         self.providerIdText.borderStyle = .roundedRect
         self.scrollView.addSubview(self.providerIdText)
@@ -178,6 +179,7 @@ class AddGroupMemberViewController: UIViewController {
         self.statusSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.statusSegmentedControl.insertSegment(withTitle: "Invite", at: 0, animated: false)
         self.statusSegmentedControl.insertSegment(withTitle: "Member", at: 1, animated: false)
+        self.statusSegmentedControl.insertSegment(withTitle: "Rejected", at: 2, animated: false)
         self.statusSegmentedControl.selectedSegmentIndex = 0
         self.scrollView.addSubview(self.statusSegmentedControl)
         
@@ -211,7 +213,19 @@ class AddGroupMemberViewController: UIViewController {
             self.showAlert(withText: "UserId cannot be empty")
             return
         }
-        let status = self.statusSegmentedControl.selectedSegmentIndex == 0 ? MemberStatus.invitationPending : MemberStatus.member
+        
+        var status:MemberStatus
+        switch self.statusSegmentedControl.selectedSegmentIndex {
+        case 0:
+            status = MemberStatus.invitationPending
+        case 1:
+            status = MemberStatus.member
+        case 2:
+            status = MemberStatus.rejected
+        default:
+            status = MemberStatus.member
+        }
+ 
         let role = self.roleSegmentedControl.selectedSegmentIndex == 0 ? Role.admin : Role.member
         self.showActivityIndicatorView()
         self.model.addMember(userId: userId,

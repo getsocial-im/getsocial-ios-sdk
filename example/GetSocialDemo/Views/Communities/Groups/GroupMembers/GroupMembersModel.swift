@@ -12,6 +12,7 @@ class GroupMembersModel {
     var groupMembers: [GroupMember] = []
     
     var onMemberApproved: (() -> Void)?
+    var onMemberRejected: (() -> Void)?
     var onMembersRetrieved: (() -> Void)?
     var onMemberRemoved: (() -> Void)?
     var onError: ((Error) -> Void)?
@@ -34,11 +35,23 @@ class GroupMembersModel {
 
     func approveMember(_ groupMember: GroupMember, groupId: String) {
         let query = UpdateGroupMembersQuery.init(id: groupId, userIds: UserIdList.create([groupMember.userId]))
-            .withRole(.member)
+            .withRole(groupMember.membership.role)
             .withMemberStatus(.member)
 
         Communities.updateGroupMembers(query, success: { [weak self] members in
             self?.onMemberApproved?()
+        }, failure: { [weak self] error in
+            self?.onError?(error)
+        })
+    }
+    
+    func rejectMember(_ groupMember: GroupMember, groupId: String) {
+        let query = UpdateGroupMembersQuery.init(id: groupId, userIds: UserIdList.create([groupMember.userId]))
+            .withRole(groupMember.membership.role)
+            .withMemberStatus(.rejected)
+
+        Communities.updateGroupMembers(query, success: { [weak self] members in
+            self?.onMemberRejected?()
         }, failure: { [weak self] error in
             self?.onError?(error)
         })
