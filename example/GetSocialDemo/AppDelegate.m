@@ -39,18 +39,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	if (@available(iOS 14, *)) {
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-			[ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-				[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Tracking status: %d", status] context:nil];
-
-				NSString* idfa = [ASIdentifierManager sharedManager].advertisingIdentifier.UUIDString;
-				[[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"IDFA: %@", idfa] context:nil];
-			}];
-		});
-	}
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didFinishLaunchingWithOptions: %@", launchOptions]);
+    
+    if (@available(iOS 14, *)) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+                [[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Tracking status: %d", status] context:nil];
+                
+                NSString* idfa = [ASIdentifierManager sharedManager].advertisingIdentifier.UUIDString;
+                [[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"IDFA: %@", idfa] context:nil];
+            }];
+        });
+    }
     [FIRApp configure];
-
+    
 #if DISABLE_TWITTER != 1
     [[Twitter sharedInstance] startWithConsumerKey:@"fiCw1nyiio9pdkim79jgnG7gB" consumerSecret:@"p5F4GHGQcv4faqGBGL3xBsXwD2GNkxvEF8pMcbvaa0LALWw02v"];
 #endif
@@ -58,12 +60,13 @@
     [self setUpAppsFlyer];
     
     VKSdk *sdkInstance = [VKSdk initializeWithAppId:@"6435876"];
-
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:openURL:sourceApplication: %@, %@, %@", url, sourceApplication, annotation]);
     [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
     [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
@@ -71,9 +74,11 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:openURL: %@, %@", url, options]);
+    
     [[AppsFlyerTracker sharedTracker] handleOpenUrl:url options:options];
     [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
-
+    
 #if DISABLE_TWITTER != 1
     return [[Twitter sharedInstance] application:app openURL:url options:options];
 #else
@@ -85,6 +90,8 @@
 {
     [FBSDKAppEvents activateApp];
     [AppsFlyerTracker.sharedTracker trackAppLaunch];
+    
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:applicationDidBecomeActive"]);
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -101,7 +108,7 @@
     }
     NSString *environment = ADJEnvironmentProduction;
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:appToken environment:environment];
-
+    
     [Adjust appDidLaunch:adjustConfig];
 }
 
@@ -117,10 +124,35 @@
 }
 
 - (BOOL)application:(UIApplication *)application
-    continueUserActivity:(NSUserActivity *)userActivity
-      restorationHandler:(void (^)(NSArray *_Nullable))restorationHandler
+continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray *_Nullable))restorationHandler
 {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:continueUserActivity: %@, %@", userActivity, restorationHandler]);
     return [[AppsFlyerTracker sharedTracker] continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
+    
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didRegisterForRemoteNotificationsWithDeviceToken: %@", deviceToken]);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didReceiveRemoteNotification:fetchCompletionHandler: %@, %@", userInfo, completionHandler]);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didReceiveRemoteNotification: %@", userInfo]);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)err {
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didFailToRegisterForRemoteNotificationsWithError: %@", err]);
+}
+
+
+- (void)applicationWillResignActive:(UIApplication *)application{
+    NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:applicationWillResignActive"]);
+}
+
+
 
 @end
