@@ -31,6 +31,10 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import <AdSupport/AdSupport.h>
 
+@import FirebaseCore;
+@import FirebaseDynamicLinks;
+@import FirebaseMessaging;
+
 @interface AppDelegate ()
 
 @end
@@ -123,17 +127,26 @@
     AppsFlyerTracker.sharedTracker.appleAppID = appToken;
 }
 
-- (BOOL)application:(UIApplication *)application
-continueUserActivity:(NSUserActivity *)userActivity
- restorationHandler:(void (^)(NSArray *_Nullable))restorationHandler
-{
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
     NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:continueUserActivity: %@, %@", userActivity, restorationHandler]);
+    
+    BOOL handled = [[FIRDynamicLinks dynamicLinks] handleUniversalLink:userActivity.webpageURL
+                                                              completion:^(FIRDynamicLink * _Nullable dynamicLink,
+                                                                           NSError * _Nullable error) {
+                                                                
+        [[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"Firebase DynamicLink: %@", dynamicLink] context:nil];
+    }];
+
     return [[AppsFlyerTracker sharedTracker] continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
     
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"%@", [NSString stringWithFormat: @"Swizzle:didRegisterForRemoteNotificationsWithDeviceToken: %@", deviceToken]);
+    
+    [[ConsoleViewController sharedController] log:LogLevelInfo message:[NSString stringWithFormat: @"PN Token: %@", deviceToken] context:nil];
+    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {

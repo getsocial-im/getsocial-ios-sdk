@@ -99,7 +99,12 @@ class UsersViewController: UIViewController {
         var query: UsersQuery
         
         if (searchTerm != nil && searchTerm != "") {
-            query = UsersQuery.find(searchTerm ?? "")
+            if (self.query != nil) {
+                query = self.query!
+            } else {
+                query = UsersQuery.find(searchTerm ?? "")
+            }
+            
         } else {
             query = UsersQuery.suggested()
         }

@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol ActivitiesTableViewCellDelegate {
+    func onShowActions(_ ofActivty: Activity)
+}
+
 class ActivitiesTableViewCell: UITableViewCell {
 
 	static var dateFormatter: DateFormatter?
@@ -20,6 +24,10 @@ class ActivitiesTableViewCell: UITableViewCell {
 	var scoreText: UILabel = UILabel()
 	var labels: UILabel = UILabel()
 	var properties: UILabel = UILabel()
+    var comments: UILabel = UILabel()
+    var actionButton: UIButton = UIButton.init(type: .roundedRect)
+    var activity: Activity = Activity()
+    var delegate: ActivitiesTableViewCellDelegate?
 
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
@@ -45,6 +53,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
 
 	func update(activity: Activity) {
+        self.activity = activity
 		self.internalActivityId = activity.id
 		self.activityAuthor.text = "Author: \(activity.author.displayName)"
 		self.activityText.text = "Text: \(activity.text ?? "")"
@@ -55,7 +64,16 @@ class ActivitiesTableViewCell: UITableViewCell {
 		self.scoreText.text = "Popularity: \(activity.popularity)"
 		self.labels.text = "Labels: \(activity.labels.joined(separator: ","))"
 		self.properties.text = "Properties: \(activity.properties.map { "\($0)=\($1)" }.joined(separator: ","))"
+        self.comments.text = "Comments: \(activity.commentsCount)"
+        
+        self.actionButton.setTitle("Actions", for: .normal)
+        self.actionButton.addTarget(self, action: #selector(showActions(sender:)), for: .touchUpInside)
 	}
+    
+    @objc
+    func showActions(sender: Any?) {
+        self.delegate?.onShowActions(self.activity)
+    }
 
 	private func addUIElements() {
 		self.activityAuthor.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +131,28 @@ class ActivitiesTableViewCell: UITableViewCell {
 			self.properties.topAnchor.constraint(equalTo: self.labels.bottomAnchor, constant: 4)
 		]
 		NSLayoutConstraint.activate(propertiesConstraints)
+        
+        self.comments.translatesAutoresizingMaskIntoConstraints = false
+        self.comments.font = self.comments.font.withSize(12)
+        self.contentView.addSubview(self.comments)
+
+        let commentsConstraints = [
+            self.comments.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            self.comments.topAnchor.constraint(equalTo: self.properties.bottomAnchor, constant: 4)
+        ]
+        NSLayoutConstraint.activate(commentsConstraints)
+        
+        self.actionButton.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
+        self.actionButton.setTitleColor(.black, for: .normal)
+        self.actionButton.backgroundColor = .lightGray
+        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(self.actionButton)
+
+        let actionButtonConstraints = [
+            self.actionButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            self.actionButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(actionButtonConstraints)
 
 	}
 }

@@ -20,7 +20,8 @@ class ActivitiesViewController: UIViewController {
 	var sortButton: UIBarButtonItem!
 	var trendingButton: UIBarButtonItem!
 
-	let initialQuery: ActivitiesQuery
+	let initialQuery: ActivitiesQuery?
+    let initialActivities: [Activity]
 
 	var searchBar: UISearchBar = UISearchBar()
 	var labelSearchBar = UISearchBar()
@@ -28,9 +29,17 @@ class ActivitiesViewController: UIViewController {
 
 	init(_ query: ActivitiesQuery) {
 		self.initialQuery = query
+        self.initialActivities = []
 		self.viewModel = ActivitiesModel()
 		super.init(nibName: nil, bundle: nil)
 	}
+    
+    init(_ activities: [Activity]) {
+        self.initialQuery = nil
+        self.initialActivities = activities
+        self.viewModel = ActivitiesModel()
+        super.init(nibName: nil, bundle: nil)
+    }
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -44,8 +53,16 @@ class ActivitiesViewController: UIViewController {
 
 		self.sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSort))
 		self.trendingButton = UIBarButtonItem(title: "Only Trending", style: .plain, target: self, action: #selector(showTrending))
-		self.navigationItem.rightBarButtonItems = [trendingButton]
+		
 
+        if self.initialQuery != nil {
+            self.navigationItem.rightBarButtonItems = [trendingButton]
+            self.view.addSubview(self.searchBar)
+            self.view.addSubview(self.labelSearchBar)
+            self.view.addSubview(self.propertySearchBar)
+        }
+        
+        
         self.viewModel.onInitialDataLoaded = {
             self.hideActivityIndicatorView()
             self.tableView.reloadData()
@@ -59,9 +76,7 @@ class ActivitiesViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
-		self.view.addSubview(self.searchBar)
-		self.view.addSubview(self.labelSearchBar)
-		self.view.addSubview(self.propertySearchBar)
+       
 	}
 
     override func viewDidAppear(_ animated: Bool) {
@@ -76,69 +91,86 @@ class ActivitiesViewController: UIViewController {
 
 	private func executeQuery(searchTerm: String?, label: String?, property: String?) {
 		self.showActivityIndicatorView()
-		var query = self.initialQuery.copy() as! ActivitiesQuery
-		if let searchTerm = searchTerm {
-			query = query.withText(searchTerm)
-		}
-		if let searchLabel = label, !searchLabel.isEmpty {
-			query = query.withLabels(searchLabel.components(separatedBy: ","))
-		}
-		if let searchProperties = property, !searchProperties.isEmpty {
-			var propertyDictionary: [String: String] = [:]
-			let dictElements = searchProperties.components(separatedBy: ",")
-			dictElements.forEach {
-				let components = $0.components(separatedBy: "=")
-				if let key = components.first, let value = components.last {
-					propertyDictionary[key] = value
-				}
-			}
-			if !propertyDictionary.isEmpty {
-				query = query.withProperties(propertyDictionary)
-			}
-		}
+        
+        if let q = self.initialQuery {
+            var query = q.copy() as! ActivitiesQuery
+            if let searchTerm = searchTerm {
+                query = query.withText(searchTerm)
+            }
+            if let searchLabel = label, !searchLabel.isEmpty {
+                query = query.withLabels(searchLabel.components(separatedBy: ","))
+            }
+            if let searchProperties = property, !searchProperties.isEmpty {
+                var propertyDictionary: [String: String] = [:]
+                let dictElements = searchProperties.components(separatedBy: ",")
+                dictElements.forEach {
+                    let components = $0.components(separatedBy: "=")
+                    if let key = components.first, let value = components.last {
+                        propertyDictionary[key] = value
+                    }
+                }
+                if !propertyDictionary.isEmpty {
+                    query = query.withProperties(propertyDictionary)
+                }
+            }
 
-		query = query.onlyTrending(self.showOnlyTrending)
-		self.viewModel.loadEntries(query)
+            query = query.onlyTrending(self.showOnlyTrending)
+            
+            query = query.includeComments(3)
+            self.viewModel.loadEntries(query)
+        } else if !self.initialActivities.isEmpty {
+            self.viewModel.loadEntries(self.initialActivities)
+        }
 	}
 
 	internal func layoutSearchFields() {
 
-		searchBar.translatesAutoresizingMaskIntoConstraints = false
-		let top = searchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
-		let left = searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-		let right = searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-
-		NSLayoutConstraint.activate([left, top, right])
-
-		searchBar.enablesReturnKeyAutomatically = false
-		searchBar.delegate = self
-
-		labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
-		labelSearchBar.placeholder = "label1,label2"
-		NSLayoutConstraint.activate([
-			self.labelSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-			self.labelSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-			self.labelSearchBar.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
-		])
-		labelSearchBar.enablesReturnKeyAutomatically = false
-		labelSearchBar.delegate = self
-
-		propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
-		propertySearchBar.placeholder = "key:value,key1:value1"
-		NSLayoutConstraint.activate([
-			self.propertySearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-			self.propertySearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-			self.propertySearchBar.topAnchor.constraint(equalTo: self.labelSearchBar.bottomAnchor),
-		])
-		propertySearchBar.enablesReturnKeyAutomatically = false
-		propertySearchBar.delegate = self
+        if self.initialQuery != nil {
+            searchBar.translatesAutoresizingMaskIntoConstraints = false
+            let top = searchBar.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
+            let left = searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+            let right = searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            
+            NSLayoutConstraint.activate([left, top, right])
+            
+            searchBar.enablesReturnKeyAutomatically = false
+            searchBar.delegate = self
+            
+            labelSearchBar.translatesAutoresizingMaskIntoConstraints = false
+            labelSearchBar.placeholder = "label1,label2"
+            NSLayoutConstraint.activate([
+                self.labelSearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.labelSearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                self.labelSearchBar.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+            ])
+            labelSearchBar.enablesReturnKeyAutomatically = false
+            labelSearchBar.delegate = self
+            
+            propertySearchBar.translatesAutoresizingMaskIntoConstraints = false
+            propertySearchBar.placeholder = "key:value,key1:value1"
+            NSLayoutConstraint.activate([
+                self.propertySearchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.propertySearchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                self.propertySearchBar.topAnchor.constraint(equalTo: self.labelSearchBar.bottomAnchor),
+            ])
+            propertySearchBar.enablesReturnKeyAutomatically = false
+            propertySearchBar.delegate = self
+        }
 	}
 
     internal func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 		self.view.addSubview(self.tableView)
 
-        let top = tableView.topAnchor.constraint(equalTo: self.propertySearchBar.bottomAnchor)
+        var top: NSLayoutConstraint
+        
+        if self.initialQuery != nil {
+            top = tableView.topAnchor.constraint(equalTo: self.propertySearchBar.bottomAnchor)
+        } else {
+            top = tableView.topAnchor.constraint(equalTo: self.navigationController?.navigationBar.bottomAnchor ?? self.view.topAnchor)
+        }
+        
+        //let top = tableView.topAnchor.constraint(equalTo: self.propertySearchBar.bottomAnchor)
         let left = tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let right = tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottom = tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -187,7 +219,7 @@ extension ActivitiesViewController: UISearchBarDelegate {
 
 extension ActivitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 140
     }
 }
 
@@ -201,7 +233,73 @@ extension ActivitiesViewController: UITableViewDataSource {
         let item = self.viewModel.entry(at: indexPath.row)
 
         cell?.update(activity: item)
+        cell?.delegate = self
 
         return cell ?? UITableViewCell()
+    }
+}
+
+extension ActivitiesViewController: ActivitiesTableViewCellDelegate {
+    func onShowActions(_ activity: Activity) {
+        let actionSheet = UIAlertController.init(title: "Available actions", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction.init(title: "Details", style: .default, handler: { _ in
+            self.showAlert(withText: activity.description)
+        }))
+        
+        if self.initialQuery != nil {
+            actionSheet.addAction(UIAlertAction.init(title: "View Included Comments", style: .default, handler: { _ in
+                let view = ActivitiesView(activity.comments)
+                self.navigationController?.pushViewController(view.viewController, animated: true)
+            }))
+            actionSheet.addAction(UIAlertAction.init(title: "View All Comments", style: .default, handler: { _ in
+                let view = ActivitiesView(ActivitiesQuery.commentsToActivity(activity.id))
+                self.navigationController?.pushViewController(view.viewController, animated: true)
+            }))
+            actionSheet.addAction(UIAlertAction.init(title: "Comment", style: .default, handler: { _ in
+                let target = PostActivityTarget.comment(to: activity.id)
+                let vc = UIStoryboard.viewController(forName: "PostActivity", in: .activityFeed) as! PostActivityViewController
+                vc.postTarget = target
+                self.navigationController?.pushViewController(vc, animated: true)
+            }))
+            actionSheet.addAction(UIAlertAction.init(title: "Remove", style: .default, handler: { _ in
+                let removeQuery = RemoveActivitiesQuery.activityIds([activity.id])
+                GetSocialSDK.Communities.removeActivities(removeQuery, success: {
+                    self.showAlert(withText: "Activity Removed")
+                }, failure: { error in
+                    self.showAlert(withText: error.localizedDescription)
+                })
+            }))
+            
+            if activity.myReactions.isEmpty {
+                actionSheet.addAction(UIAlertAction.init(title: "React (like)", style: .default, handler: { _ in
+                    let removeQuery = RemoveActivitiesQuery.activityIds([activity.id])
+                    GetSocialSDK.Communities.setReaction("like", activityId: activity.id, success: {
+                        self.showAlert(withText: "Activity Reacted")
+                    }, failure: { error in
+                        self.showAlert(withText: error.localizedDescription)
+                    })
+                }))
+            } else {
+                actionSheet.addAction(UIAlertAction.init(title: "Unreact (like)", style: .default, handler: { _ in
+                    let removeQuery = RemoveActivitiesQuery.activityIds([activity.id])
+                    GetSocialSDK.Communities.removeReaction("like", activityId: activity.id, success: {
+                        self.showAlert(withText: "Activity Reaction Removed")
+                    }, failure: { error in
+                        self.showAlert(withText: error.localizedDescription)
+                    })
+                }))
+            }
+            
+            actionSheet.addAction(UIAlertAction.init(title: "Report", style: .default, handler: { _ in
+                GetSocialSDK.Communities.reportActivity(activity.id, reason: ReportingReason.inappropriateContent, explanation: "Testing from SDK", success: {
+                    self.showAlert(withText: "Activity Reported")
+                }, failure: { error in
+                    self.showAlert(withText: error.localizedDescription)
+                })
+            }))
+            
+        }
+        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }

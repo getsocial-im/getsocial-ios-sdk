@@ -24,6 +24,13 @@ class ActivitiesModel {
             self.onInitialDataLoaded?()
         }, failure: onError)
     }
+    
+    func loadEntries(_ activities: [Activity]) {
+        self.activities.removeAll()
+        
+        self.activities.append(contentsOf: activities)
+        self.onInitialDataLoaded?()
+    }
 
 
     func numberOfEntries() -> Int {

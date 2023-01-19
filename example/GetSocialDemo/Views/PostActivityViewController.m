@@ -310,40 +310,71 @@
     if (self.postTarget.type == GetSocialCommunitiesEntityTypeGroup) {
         query = [GetSocialActivitiesQuery inGroupWithId:self.postTarget.targetId];
     }
-    GetSocialUIActivityFeedView *view = [GetSocialUIActivityFeedView viewForQuery: query];
-    __weak typeof(self) weakSelf = self;
+    if (self.postTarget.type != GetSocialCommunitiesEntityTypeActivity) {
+        GetSocialUIActivityFeedView *view = [GetSocialUIActivityFeedView viewForQuery: query];
+        __weak typeof(self) weakSelf = self;
 
-    [view setActionHandler:^void(GetSocialAction *_Nonnull action) {
-        typeof(weakSelf) strongSelf = weakSelf;
-        MainViewController *mainVC = (MainViewController *)strongSelf.parentViewController.parentViewController;
-        [mainVC handleAction: action];
-    }];
+        [view setActionHandler:^void(GetSocialAction *_Nonnull action) {
+            typeof(weakSelf) strongSelf = weakSelf;
+            MainViewController *mainVC = (MainViewController *)strongSelf.parentViewController.parentViewController;
+            [mainVC handleAction: action];
+        }];
 
-    id onSuccess = ^(id result) {
-        typeof(weakSelf) strongSelf = self;
-        [strongSelf hideActivityIndicatorView];
-        [view show];
-    };
-    id onFailure = ^(NSError *error) {
-        typeof(weakSelf) strongSelf = self;
-        [strongSelf hideActivityIndicatorView];
-        if (error.code == GetSocialErrorCode.ActivityRejected) {
-            [strongSelf showAlertWithTitle:@"Error" andText:[NSString stringWithFormat:@"Your activity was rejected during the moderation: %@", error.localizedDescription]];
+        id onSuccess = ^(id result) {
+            typeof(weakSelf) strongSelf = self;
+            [strongSelf hideActivityIndicatorView];
+            [view show];
+        };
+        id onFailure = ^(NSError *error) {
+            typeof(weakSelf) strongSelf = self;
+            [strongSelf hideActivityIndicatorView];
+            if (error.code == GetSocialErrorCode.ActivityRejected) {
+                [strongSelf showAlertWithTitle:@"Error" andText:[NSString stringWithFormat:@"Your activity was rejected during the moderation: %@", error.localizedDescription]];
+            } else {
+                [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+            }
+        };
+        
+        if (GetSocial.currentUser.isAnonymous) {
+            MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
+            [mainVC showAlertToChooseAuthorizationOptionToPerform:^{
+                [self showActivityIndicatorView];
+                [GetSocialCommunities postActivityContent: content target:self.postTarget success: onSuccess failure: onFailure];
+            }];
         } else {
-            [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
-        }
-    };
-
-    if (GetSocial.currentUser.isAnonymous) {
-        MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
-        [mainVC showAlertToChooseAuthorizationOptionToPerform:^{
             [self showActivityIndicatorView];
             [GetSocialCommunities postActivityContent: content target:self.postTarget success: onSuccess failure: onFailure];
-        }];
+        }
     } else {
-        [self showActivityIndicatorView];
-        [GetSocialCommunities postActivityContent: content target:self.postTarget success: onSuccess failure: onFailure];
+        __weak typeof(self) weakSelf = self;
+        
+        id onSuccess = ^(id result) {
+            typeof(weakSelf) strongSelf = self;
+            [strongSelf hideActivityIndicatorView];
+        };
+        id onFailure = ^(NSError *error) {
+            typeof(weakSelf) strongSelf = self;
+            [strongSelf hideActivityIndicatorView];
+            if (error.code == GetSocialErrorCode.ActivityRejected) {
+                [strongSelf showAlertWithTitle:@"Error" andText:[NSString stringWithFormat:@"Your activity was rejected during the moderation: %@", error.localizedDescription]];
+            } else {
+                [strongSelf showAlertWithTitle:@"Error" andText:error.localizedDescription];
+            }
+        };
+        
+        if (GetSocial.currentUser.isAnonymous) {
+            MainViewController *mainVC = (MainViewController *)self.parentViewController.parentViewController;
+            [mainVC showAlertToChooseAuthorizationOptionToPerform:^{
+                [self showActivityIndicatorView];
+                [GetSocialCommunities postActivityContent: content target:self.postTarget success: onSuccess failure: onFailure];
+            }];
+        } else {
+            [self showActivityIndicatorView];
+            [GetSocialCommunities postActivityContent: content target:self.postTarget success: onSuccess failure: onFailure];
+        }
     }
+
+    
 
 }
 - (IBAction)changeVideo:(id)sender

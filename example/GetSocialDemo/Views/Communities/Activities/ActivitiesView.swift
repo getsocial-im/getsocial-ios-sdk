@@ -15,4 +15,8 @@ class ActivitiesView {
 	init(_ query: ActivitiesQuery) {
         self.viewController = ActivitiesViewController(query)
     }
+    
+    init(_ activities: [Activity]) {
+        self.viewController = ActivitiesViewController(activities)
+    }
 }
