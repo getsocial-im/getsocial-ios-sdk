@@ -344,6 +344,7 @@ class ChatMessagesViewController: UIViewController {
         }
         let content = ChatMessageContent()
         content.text = self.messageView.text
+        content.setProperty(value: "test value", forKey: "property1")
         if self.imageSwitch.isOn {
             if let path = Bundle.main.path(forResource: "activityImage", ofType: "png") {
                 if let image = UIImage.init(contentsOfFile: path) {

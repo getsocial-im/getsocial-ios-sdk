@@ -280,6 +280,21 @@ extension GroupsViewController: GroupTableViewCellDelegate {
             actionSheet.addAction(UIAlertAction.init(title: "Details", style: .default, handler: { _ in
                 self.showAlert(withText: group.description)
             }))
+            
+            
+            actionSheet.addAction(UIAlertAction.init(title: "Show Followers Count", style: .default, handler: { _ in
+                
+                let query = FollowersQuery.ofGroup(groupId)
+      
+                Communities.followersCount(query) { result in
+                    self.showAlert(withText: String(result))
+                } failure: { err in
+                    self.showAlert(withText: err.localizedDescription)
+                }
+
+            }))
+            
+            
             if !group.settings.isPrivate || status == .member {
                 actionSheet.addAction(UIAlertAction.init(title: "Feed UI", style: .default, handler: { _ in
 					self.delegate?.onShowFeed(groupId, byCurrentUser: false)
